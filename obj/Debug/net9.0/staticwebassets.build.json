@@ -1,0 +1,3422 @@
+{
+  "Version": 1,
+  "Hash": "3tZVTynr+G5gV7t69DFlFgdsnVxX3ys2BmhQa0vyEiE=",
+  "Source": "Application",
+  "BasePath": "_content/Application",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Application\\wwwroot",
+      "Source": "Application",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "favicon#[.{fingerprint=61n19gt1b8}]?.ico.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\favicon.ico",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "nezsohjtde",
+      "Integrity": "wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/site#[.{fingerprint=xtxxf3hu2r}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\site.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "rl5dcbfpcw",
+      "Integrity": "Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle#[.{fingerprint=4094rpi4f9}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "u3mr700haq",
+      "Integrity": "qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "SourceId": "Application",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "Application#[.{fingerprint=799ttxylpz}]?.styles.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "4j158a22v9",
+      "Integrity": "AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "SourceId": "Application",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "Application#[.{fingerprint=799ttxylpz}]!.bundle.scp.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "4j158a22v9",
+      "Integrity": "AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle.min#[.{fingerprint=hd3gran6i8}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "yc8010sx1o",
+      "Integrity": "rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "css/bootstrap.min#[.{fingerprint=gjwqz8t07j}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\bootstrap.min.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "k8krxsf9r7",
+      "Integrity": "NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\bootstrap.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle.min.js#[.{fingerprint=iovd86k7lj}]?.map.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "svb68clhd0",
+      "Integrity": "WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle.js#[.{fingerprint=6pdc2jztkx}]?.map.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "sgz3bfuucz",
+      "Integrity": "tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\wkth70762r-ti0mbi9qtc.gz",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "css/site#[.{fingerprint=ti0mbi9qtc}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\site.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "muct7x4e28",
+      "Integrity": "ss7isNFF+4DMiv/wn7DkP1BsafpDTC5XAUbfMFF2Utw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "SourceId": "Application",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\bundle\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "Application#[.{fingerprint}]?.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "Fingerprint": "799ttxylpz",
+      "Integrity": "5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "SourceId": "Application",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "Application#[.{fingerprint}]!.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "799ttxylpz",
+      "Integrity": "5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\bootstrap.min.css",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "css/bootstrap.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gjwqz8t07j",
+      "Integrity": "xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\site.css",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "css/site#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ti0mbi9qtc",
+      "Integrity": "JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\favicon.ico",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "favicon#[.{fingerprint}]?.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "61n19gt1b8",
+      "Integrity": "Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4094rpi4f9",
+      "Integrity": "bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6pdc2jztkx",
+      "Integrity": "Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hd3gran6i8",
+      "Integrity": "6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/bootstrap.bundle.min.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "iovd86k7lj",
+      "Integrity": "Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Identity": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\site.js",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "js/site#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xtxxf3hu2r",
+      "Integrity": "hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "Application.799ttxylpz.bundle.scp.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "799ttxylpz"
+        },
+        {
+          "Name": "label",
+          "Value": "Application.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.799ttxylpz.bundle.scp.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "799ttxylpz"
+        },
+        {
+          "Name": "label",
+          "Value": "Application.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.799ttxylpz.bundle.scp.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "799ttxylpz"
+        },
+        {
+          "Name": "label",
+          "Value": "Application.bundle.scp.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
+        }
+      ]
+    },
+    {
+      "Route": "Application.799ttxylpz.styles.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "799ttxylpz"
+        },
+        {
+          "Name": "label",
+          "Value": "Application.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.799ttxylpz.styles.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "799ttxylpz"
+        },
+        {
+          "Name": "label",
+          "Value": "Application.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.799ttxylpz.styles.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "799ttxylpz"
+        },
+        {
+          "Name": "label",
+          "Value": "Application.styles.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
+        }
+      ]
+    },
+    {
+      "Route": "Application.bundle.scp.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.bundle.scp.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.bundle.scp.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
+        }
+      ]
+    },
+    {
+      "Route": "Application.styles.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.styles.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+        }
+      ]
+    },
+    {
+      "Route": "Application.styles.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 23:57:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap.min.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000032171927"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "31082"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap.min.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "225508"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap.min.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "31082"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap.min.gjwqz8t07j.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000032171927"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "31082"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gjwqz8t07j"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap.min.gjwqz8t07j.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "225508"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gjwqz8t07j"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xOV+qi15R6qBC0qEIPgvhve3ZNUrQY/5aXrzzrOHAXo="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap.min.gjwqz8t07j.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "31082"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gjwqz8t07j"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap.min.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\wkth70762r-ti0mbi9qtc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.045454545455"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ss7isNFF+4DMiv/wn7DkP1BsafpDTC5XAUbfMFF2Utw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\wkth70762r-ti0mbi9qtc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ss7isNFF+4DMiv/wn7DkP1BsafpDTC5XAUbfMFF2Utw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ss7isNFF+4DMiv/wn7DkP1BsafpDTC5XAUbfMFF2Utw="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ti0mbi9qtc.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\wkth70762r-ti0mbi9qtc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.045454545455"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ss7isNFF+4DMiv/wn7DkP1BsafpDTC5XAUbfMFF2Utw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ti0mbi9qtc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ti0mbi9qtc.css",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ti0mbi9qtc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JS8QyDYQ68oaBZwLroJV66L5W+TR17z6idckioLZ8RE="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ti0mbi9qtc.css.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\wkth70762r-ti0mbi9qtc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ss7isNFF+4DMiv/wn7DkP1BsafpDTC5XAUbfMFF2Utw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ti0mbi9qtc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ss7isNFF+4DMiv/wn7DkP1BsafpDTC5XAUbfMFF2Utw="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.61n19gt1b8.ico",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000405022276"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2468"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "61n19gt1b8"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.61n19gt1b8.ico",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\favicon.ico",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5430"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "61n19gt1b8"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.61n19gt1b8.ico.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2468"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "61n19gt1b8"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.ico",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000405022276"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2468"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.ico",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\favicon.ico",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5430"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.ico.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2468"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.4094rpi4f9.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000022400932"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44640"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4094rpi4f9"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.4094rpi4f9.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "214133"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4094rpi4f9"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.4094rpi4f9.js.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44640"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4094rpi4f9"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000022400932"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44640"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "214133"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js.6pdc2jztkx.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000010864133"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "92045"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6pdc2jztkx"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js.6pdc2jztkx.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444579"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6pdc2jztkx"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js.6pdc2jztkx.map.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "92045"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6pdc2jztkx"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js.map.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44640"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000010864133"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "92045"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444579"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wq4aWW1rQdJ+6oAgy1JQc9IBjHL9T3MKfXTBNqOv02c="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.js.map.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "92045"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.hd3gran6i8.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000041678823"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23992"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hd3gran6i8"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.hd3gran6i8.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "80727"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hd3gran6i8"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.hd3gran6i8.js.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23992"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hd3gran6i8"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.min.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000041678823"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23992"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "80727"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23992"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js.iovd86k7lj.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000011499937"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "86956"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "iovd86k7lj"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.min.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js.iovd86k7lj.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332090"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "iovd86k7lj"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.min.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js.iovd86k7lj.map.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "86956"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "iovd86k7lj"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.min.js.map.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000011499937"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "86956"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js.map",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332090"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Xj4HYxZBQ7qqHKBwa2EAugRS+RHWzpcTtI49vgezUSU="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.min.js.map.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "86956"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005263157895"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "189"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "231"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.js.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "189"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.xtxxf3hu2r.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005263157895"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "189"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xtxxf3hu2r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.xtxxf3hu2r.js",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "231"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xtxxf3hu2r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.xtxxf3hu2r.js.gz",
+      "AssetFile": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "189"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Feb 2025 08:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xtxxf3hu2r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA="
+        }
+      ]
+    }
+  ]
+}
