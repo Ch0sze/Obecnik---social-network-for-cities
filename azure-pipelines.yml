@@ -10,6 +10,9 @@
    inputs:
     version: "9.0.200"
     
+ - script: dotnet restore
+   displayName: "Restore NuGet Packages"
+    
  - script: dotnet clean
    displayName: "dotnet clean"
     
