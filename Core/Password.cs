@@ -1,12 +1,13 @@
-namespace Application.Core;
-
+using System.Security.Cryptography;
 using System.Text;
+
+namespace Application.Core;
 
 public static class Password
 {
     public static (byte[] passwordSalt, byte[] passwordHash) Create(string password)
     {
-        using var hmac = new System.Security.Cryptography.HMACSHA512();
+        using var hmac = new HMACSHA512();
         var passwordSalt = hmac.Key;
         var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         return (passwordSalt, passwordHash);
@@ -19,7 +20,7 @@ public static class Password
         if (storedSalt.Length != 128)
             throw new ArgumentException("Invalid length of password salt (128 bytes expected).", nameof(storedSalt));
 
-        using var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt);
+        using var hmac = new HMACSHA512(storedSalt);
         var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         return !computedHash.Where((t, i) => t != storedHash[i]).Any();
     }
