@@ -23,12 +23,12 @@
         @RenderBody()
     </main>
 </div>
-<partial name="Footer"/>
+@*<partial name="Footer"/>*@
 
 <!-- Scripts -->
 <script src="~/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Scripts", false)
 
 </body>
 </html>

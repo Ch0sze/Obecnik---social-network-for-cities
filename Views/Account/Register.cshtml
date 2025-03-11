@@ -10,22 +10,27 @@
         <form asp-controller="Account" asp-action="RegisterSubmit" method="post" novalidate="">
             <div>
                 <label asp-for="Email" class="form-label mt-4">Email address</label>
-                <input asp-for="Email" class="form-control @ViewData.ValidationClass(model => model.Email)" placeholder="john@doe.com">
+                <input asp-for="Email" class="form-control @ViewData.ValidationClass(model => model.Email)"
+                       placeholder="john@doe.com">
                 <span asp-validation-for="Email" class="invalid-feedback"></span>
             </div>
             <div>
                 <label asp-for="Name" class="form-label mt-4">Name</label>
-                <input asp-for="Name" class="form-control @ViewData.ValidationClass(model => model.Name)" placeholder="John doe">
+                <input asp-for="Name" class="form-control @ViewData.ValidationClass(model => model.Name)"
+                       placeholder="John doe">
                 <span asp-validation-for="Name" class="invalid-feedback"></span>
             </div>
             <div>
                 <label asp-for="Password" class="form-label mt-4">Password</label>
-                <input asp-for="Password" class="form-control @ViewData.ValidationClass(model => model.Password)" placeholder="*****">
+                <input asp-for="Password" class="form-control @ViewData.ValidationClass(model => model.Password)"
+                       placeholder="*****">
                 <span asp-validation-for="Password" class="invalid-feedback"></span>
             </div>
             <div>
                 <label asp-for="PasswordRepeat" class="form-label mt-4">Password</label>
-                <input asp-for="PasswordRepeat" class="form-control @ViewData.ValidationClass(model => model.PasswordRepeat)" placeholder="*****">
+                <input asp-for="PasswordRepeat"
+                       class="form-control @ViewData.ValidationClass(model => model.PasswordRepeat)"
+                       placeholder="*****">
                 <span asp-validation-for="PasswordRepeat" class="invalid-feedback"></span>
             </div>
             <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>

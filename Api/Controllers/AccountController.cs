@@ -33,7 +33,7 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         if (User.Identity?.IsAuthenticated == true)
             return RedirectToAction("Index", "Home");
 
-        return View("Login", new LoginViewModel()
+        return View("Login", new LoginViewModel
         {
             ReturnUrl = returnUrl
         });
@@ -47,10 +47,10 @@ public class AccountController(DatabaseContext databaseContext) : Controller
 
         var user = databaseContext.Users.FirstOrDefault(user => user.Email == model.Email);
         if (user == null)
-            return View("Login", model with { Message = "Invalid credentials" });
+            return View("Login", model with { Message = "Nemáte vytvořený účet." });
 
         if (Password.Verify(model.Password, user.PasswordHash, user.PasswordSalt) == false)
-            return View("Login", model with { Message = "Invalid credentials" });
+            return View("Login", model with { Message = "Nesprávné jméno nebo heslo." });
 
         var claims = new List<Claim>
         {
@@ -75,10 +75,18 @@ public class AccountController(DatabaseContext databaseContext) : Controller
             ? RedirectToAction("Index", "Home")
             : Redirect(model.ReturnUrl);
     }
-
+    
+    [HttpGet("forgotpassword")]
+    public IActionResult ForgotPassword()
+    {
+        return View("ForgotPassword", new ForgotPasswordViewModel());
+    }
+    
     [HttpGet("register")]
-    public IActionResult Register() =>
-        View("Register", new RegisterViewModel());
+    public IActionResult Register()
+    {
+        return View("Register", new RegisterViewModel());
+    }
 
     [HttpPost("register")]
     public async Task<IActionResult> RegisterSubmit(RegisterViewModel model)

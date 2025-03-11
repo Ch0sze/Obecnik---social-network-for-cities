@@ -9,7 +9,7 @@ public record RegisterViewModel
     [MaxLength(512)]
     [Display(Name = "Email Address")]
     public string Email { get; init; } = string.Empty;
-    
+
     [Required]
     [MaxLength(256)]
     [Display(Name = "Name")]

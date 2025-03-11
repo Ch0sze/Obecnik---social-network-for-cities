@@ -11,6 +11,6 @@ public class UserDo
     public required byte[] PasswordHash { get; set; }
 
     public required byte[] PasswordSalt { get; set; }
-    
+
     public required string Role { get; set; }
 }
