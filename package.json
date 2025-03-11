@@ -1,0 +1,37 @@
+{
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  },
+  "name": "staci-e",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "dependencies": {
+    "browserslist": "^4.24.4",
+    "caniuse-lite": "^1.0.30001703",
+    "electron-to-chromium": "^1.5.114",
+    "escalade": "^3.2.0",
+    "fraction.js": "^4.3.7",
+    "nanoid": "^3.3.9",
+    "node-releases": "^2.0.19",
+    "normalize-range": "^0.1.2",
+    "picocolors": "^1.1.1",
+    "postcss-value-parser": "^4.2.0",
+    "source-map-js": "^1.2.1",
+    "update-browserslist-db": "^1.1.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tailwindcss build wwwroot/css/styles.css -o wwwroot/css/output.css",
+    "watch": "npx tailwindcss build wwwroot/css/styles.css -o wwwroot/css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://ap8vt@dev.azure.com/ap8vt/Staci%20E/_git/Staci%20E"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

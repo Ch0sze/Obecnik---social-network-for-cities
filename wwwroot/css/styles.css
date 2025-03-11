@@ -1,0 +1,35 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-border {
+    @apply border-b-2 border-orange;
+}
+
+.custom-border:focus {
+    @apply focus:border-none focus:ring-4 focus:ring-orange;
+}
+
+.custom-checkmark {
+    @apply border-2 border-orange rounded-[4px] bg-white accent-orange focus:ring-0 cursor-pointer transition-all;
+    appearance: none;
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+.custom-checkmark:checked {
+    background-color: #F98866;
+    border-color: #F98866;
+}
+
+.custom-checkmark:checked::before {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+}

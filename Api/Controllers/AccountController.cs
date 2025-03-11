@@ -95,7 +95,7 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         {
             Id = default,
             Email = model.Email,
-            Name = model.Name,
+            Name = model.FirstName + " " + model.LastName,
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
             Role = string.Empty

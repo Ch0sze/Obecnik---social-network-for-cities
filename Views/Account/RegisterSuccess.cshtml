@@ -2,10 +2,17 @@
     ViewData["Title"] = "Registration was successful";
 }
 
+<link href="/css/output.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+
 <div class="row justify-content-center">
-    <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 text-center">
-        <h1>Thanks for your registration</h1>
-        <p>Your registration was successful, you can now log in with your credentials.</p>
-        <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Log in</a>
+    <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 text-center font-inria">
+        <h1 class="text-4xl">Děkujeme Vám za registraci</h1>
+        <p class="text-lg">Vaše registrace byla úspěšná, nyní se můžete příhlásit.</p>
+        <div class="d-flex justify-content-center">
+            <a asp-controller="Account" asp-action="Login" class="px-12 py-3 w-40 font-roboto text-white text-lg rounded-full bg-orange hover:bg-orange/90 active:bg-orange/80 focus:bg-orange border-none outline-none transition-all mt-8">
+                Přihlásit se
+            </a>
+        </div>
     </div>
 </div>
