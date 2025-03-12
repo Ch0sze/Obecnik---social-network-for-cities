@@ -6,13 +6,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 <div class="row justify-content-center">
-    <div class="col-sm-12 col-md-10 col-lg-7 col-xl-5 m-10 p-5 border-[1px] border-blackOpacity box-border font-inria text-xl tracking-normal font-medium text-black" style="background-color: #FFFAEF;">
+    <div class="col-sm-12 col-md-10 col-lg-7 col-xl-5 m-6 p-4 w-1/3 border-orange border-1 box-content rounded-4 font-inria text-[0.95rem] tracking-normal font-medium text-black bg-[#FFFAEF]">
         <form asp-controller="Account" asp-action="RegisterSubmit" method="post" novalidate="" id="register-form">
             <!-- Inputs and labels -->
             <div>
                 <label asp-for="Email" class="form-label mt-2">Email:</label>
                 <input asp-for="Email"
-                       class="form-control bg-white text-lg @ViewData.ValidationClass(model => model.Email) custom-border"
+                       class="form-control bg-white @ViewData.ValidationClass(model => model.Email) custom-border"
                        placeholder="Email">
                 <span asp-validation-for="Email" class="invalid-feedback"></span>
             </div>
@@ -20,7 +20,7 @@
             <div>
                 <label asp-for="Password" class="form-label mt-2">Heslo:</label>
                 <input asp-for="Password"
-                       class="form-control bg-white text-lg @ViewData.ValidationClass(model => model.Password) custom-border"
+                       class="form-control bg-white @ViewData.ValidationClass(model => model.Password) custom-border"
                        placeholder="********">
                 <span asp-validation-for="Password" class="invalid-feedback"></span>
             </div>
@@ -28,7 +28,7 @@
             <div>
                 <label asp-for="PasswordRepeat" class="form-label mt-2">Opakovat heslo:</label>
                 <input asp-for="PasswordRepeat"
-                       class="form-control bg-white text-lg @ViewData.ValidationClass(model => model.PasswordRepeat) custom-border"
+                       class="form-control bg-white @ViewData.ValidationClass(model => model.PasswordRepeat) custom-border"
                        placeholder="********">
                 <span asp-validation-for="PasswordRepeat" class="invalid-feedback"></span>
             </div>
@@ -36,7 +36,7 @@
             <div>
                 <label asp-for="FirstName" class="form-label mt-2">Jméno:</label>
                 <input asp-for="FirstName"
-                       class="form-control bg-white text-lg @ViewData.ValidationClass(model => model.FirstName) custom-border"
+                       class="form-control bg-white @ViewData.ValidationClass(model => model.FirstName) custom-border"
                        placeholder="">
                 <span asp-validation-for="FirstName" class="invalid-feedback"></span>
             </div>
@@ -44,7 +44,7 @@
             <div>
                 <label asp-for="LastName" class="form-label mt-2">Příjmení:</label>
                 <input asp-for="LastName"
-                       class="form-control bg-white text-lg @ViewData.ValidationClass(model => model.LastName) custom-border"
+                       class="form-control bg-white @ViewData.ValidationClass(model => model.LastName) custom-border"
                        placeholder="">
                 <span asp-validation-for="LastName" class="invalid-feedback"></span>
             </div>
@@ -62,11 +62,11 @@
 
 
             <!-- Submit Button -->
-            <div class="d-flex justify-content-center mt-5">
+            <div class="d-flex justify-content-center mt-3">
                 <button type="submit"
-                        class="px-12 py-3 w-75 font-roboto text-white text-lg 
-                        rounded-full bg-orange hover:bg-orange/90 active:bg-orange/80 
-                        focus:bg-orange border-none outline-none transition-all"
+                        class="px-2 py-2 w-40 font-roboto text-white text-[0.95rem] 
+                        rounded-full bg-orange hover:bg-[#f77755] focus:bg-[#f77755] active:bg-[#f77755]
+                        border-none outline-none transition-all"
                         id="submit-button" disabled>
                     Registrace
                 </button>

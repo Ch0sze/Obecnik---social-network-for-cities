@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .custom-border {
-    @apply border-b-2 border-orange;
+    @apply border-b border-orange;
 }
 
 .custom-border:focus {
-    @apply focus:border-none focus:ring-4 focus:ring-orange;
+    @apply focus:border-none focus:ring-2 focus:ring-orange;
 }
 
 .custom-checkmark {

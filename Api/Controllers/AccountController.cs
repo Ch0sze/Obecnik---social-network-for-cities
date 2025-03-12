@@ -94,9 +94,12 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         if (!ModelState.IsValid)
             return View("Register", model);
 
-        var user = databaseContext.Users.FirstOrDefault(user => user.Email == model.Email);
+        var user = databaseContext.Users.FirstOrDefault(u => u.Email == model.Email);
         if (user != null)
-            return View("RegisterSuccess");
+        {
+            ModelState.AddModelError("Email", "Tento e-mail je již použitý");
+            return View("Register", model);
+        }
 
         var (passwordSalt, passwordHash) = Password.Create(model.Password);
         var newUser = new UserDo
@@ -108,11 +111,13 @@ public class AccountController(DatabaseContext databaseContext) : Controller
             PasswordSalt = passwordSalt,
             Role = string.Empty
         };
+
         await databaseContext.Users.AddAsync(newUser);
         await databaseContext.SaveChangesAsync();
 
         return View("RegisterSuccess");
     }
+
 
     [HttpGet("logout")]
     public async Task<IActionResult> Logout()
