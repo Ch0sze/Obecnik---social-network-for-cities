@@ -1,112 +1,136 @@
 @model RegisterViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registrace";
 }
-<link href="/css/output.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-<div class="row justify-content-center">
-    <div class="col-sm-12 col-md-10 col-lg-7 col-xl-5 m-6 p-4 w-1/3 border-orange border-1 box-content rounded-4 font-inria text-[0.95rem] tracking-normal font-medium text-black bg-[#FFFAEF]">
-        <form asp-controller="Account" asp-action="RegisterSubmit" method="post" novalidate="" id="register-form">
-            <!-- Inputs and labels -->
-            <div>
-                <label asp-for="Email" class="form-label mt-2">Email:</label>
-                <input asp-for="Email"
-                       class="form-control bg-white @ViewData.ValidationClass(model => model.Email) custom-border"
-                       placeholder="Email">
-                <span asp-validation-for="Email" class="invalid-feedback"></span>
+<div class="container">
+    <div class="row justify-content-center mt-2">
+        <div class="col-12 col-md-8 col-lg-6">
+            <!-- Logo and label -->
+            <div class="header-section text-center mb-4">
+                <img src="~/image.png" alt="Logo" class="img-fluid" />
+                <h2>OBECNÍK</h2>
             </div>
 
-            <div>
-                <label asp-for="Password" class="form-label mt-2">Heslo:</label>
-                <input asp-for="Password"
-                       class="form-control bg-white @ViewData.ValidationClass(model => model.Password) custom-border"
-                       placeholder="********">
-                <span asp-validation-for="Password" class="invalid-feedback"></span>
+            <!-- Form container -->
+            <div class="register-container p-4 w-100 mx-auto">
+                <form asp-controller="Account" asp-action="RegisterSubmit" method="post" novalidate id="register-form">
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label asp-for="Email" class="login-label" style="font-weight: bold; color: black;">Email:</label>
+                        <input asp-for="Email"
+                               class="form-control register-input @ViewData.ValidationClass(model => model.Email)"
+                               placeholder="Email" style="background-color: #FAFAFA !important; 
+                               border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
+                               box-shadow: none !important; outline: none !important;"/>
+                        <span asp-validation-for="Email" class="invalid-feedback"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label asp-for="Password" class="register-label" style="font-weight: bold; color: black;">Heslo:</label>
+                        <input asp-for="Password" type="password"
+                               class="form-control register-input @ViewData.ValidationClass(model => model.Password)"
+                               placeholder="********" style="background-color: #FAFAFA !important; 
+                               border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
+                               box-shadow: none !important; outline: none !important;"/>
+                        <span asp-validation-for="Password" class="invalid-feedback"></span>
+                    </div>
+
+                    <!-- Repeat Password -->
+                    <div class="mb-3">
+                        <label asp-for="PasswordRepeat" class="register-label" style="font-weight: bold; color: black;">Opakovat heslo:</label>
+                        <input asp-for="PasswordRepeat" type="password"
+                               class="form-control register-input @ViewData.ValidationClass(model => model.PasswordRepeat)"
+                               placeholder="********" style="background-color: #FAFAFA !important; 
+                               border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
+                               box-shadow: none !important; outline: none !important;"/>
+                        <span asp-validation-for="PasswordRepeat" class="invalid-feedback"></span>
+                    </div>
+
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label asp-for="FirstName" class="register-label" style="font-weight: bold; color: black;">Jméno:</label>
+                        <input asp-for="FirstName"
+                               class="form-control register-input @ViewData.ValidationClass(model => model.FirstName)"
+                               placeholder="Jméno" style="background-color: #FAFAFA !important; 
+                               border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
+                               box-shadow: none !important; outline: none !important;"/>
+                        <span asp-validation-for="FirstName" class="invalid-feedback"></span>
+                    </div>
+
+                    <!-- Surname -->
+                    <div class="mb-3">
+                        <label asp-for="LastName" class="register-label" style="font-weight: bold; color: black;">Příjmení:</label>
+                        <input asp-for="LastName"
+                               class="register-input form-control @ViewData.ValidationClass(model => model.LastName)"
+                               placeholder="Příjmení" style="background-color: #FAFAFA !important; 
+                               border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
+                               box-shadow: none !important; outline: none !important;"/>
+                        <span asp-validation-for="LastName" class="invalid-feedback"></span>
+                    </div>
+
+                    <!-- Checkbox for terms -->
+                    <div class="form-check mb-3">
+                        <input type="checkbox" id="terms" name="terms" class="form-check-input" />
+                        <label for="terms" class="form-check-label text-dark fw-bold">Souhlasím s podmínkami užití</label>
+                    </div>
+                    <div id="terms-error" class="text-danger mb-3">
+                        Musíte souhlasit s podmínkami užití pro registraci
+                    </div>
+
+                    <!-- Registration button -->
+                    <div class="text-center">
+                        <button type="submit" class="register-button" id="submit-button" disabled>
+                            Registrace
+                        </button>
+                    </div>
+                </form>
+
+                @if (!string.IsNullOrWhiteSpace(Model.Message))
+                {
+                    <div class="alert alert-danger mt-4 text-center" role="alert">
+                        @Model.Message
+                    </div>
+                }
             </div>
-
-            <div>
-                <label asp-for="PasswordRepeat" class="form-label mt-2">Opakovat heslo:</label>
-                <input asp-for="PasswordRepeat"
-                       class="form-control bg-white @ViewData.ValidationClass(model => model.PasswordRepeat) custom-border"
-                       placeholder="********">
-                <span asp-validation-for="PasswordRepeat" class="invalid-feedback"></span>
-            </div>
-
-            <div>
-                <label asp-for="FirstName" class="form-label mt-2">Jméno:</label>
-                <input asp-for="FirstName"
-                       class="form-control bg-white @ViewData.ValidationClass(model => model.FirstName) custom-border"
-                       placeholder="">
-                <span asp-validation-for="FirstName" class="invalid-feedback"></span>
-            </div>
-
-            <div>
-                <label asp-for="LastName" class="form-label mt-2">Příjmení:</label>
-                <input asp-for="LastName"
-                       class="form-control bg-white @ViewData.ValidationClass(model => model.LastName) custom-border"
-                       placeholder="">
-                <span asp-validation-for="LastName" class="invalid-feedback"></span>
-            </div>
-
-            <!-- Checkbox for terms acceptance -->
-            <div class="flex items-center mt-4">
-                <input type="checkbox" id="terms" name="terms" class="w-5 h-5 custom-checkmark" />
-                <label for="terms" class="ml-2 cursor-pointer text-black">Podmínky užití</label>
-            </div>
-
-            <!-- Message if terms are not checked -->
-            <div id="terms-error" class="text-red-600 text-sm mt-2">
-                Musíte souhlasit s podmínkami užití pro registraci
-            </div>
-
-
-            <!-- Submit Button -->
-            <div class="d-flex justify-content-center mt-3">
-                <button type="submit"
-                        class="px-2 py-2 w-40 font-roboto text-white text-[0.95rem] 
-                        rounded-full bg-orange hover:bg-[#f77755] focus:bg-[#f77755] active:bg-[#f77755]
-                        border-none outline-none transition-all"
-                        id="submit-button" disabled>
-                    Registrace
-                </button>
-            </div>
-
-        </form>
-
-        @if (string.IsNullOrWhiteSpace(Model.Message) == false)
-        {
-            <div class="alert alert-danger mt-4" role="alert">
-                @Model.Message
-            </div>
-        }
+        </div>
     </div>
 </div>
 
+<div class="mt-4 register-link text-center" style="margin-bottom: 50px">
+    Máte účet?
+    <a href="/Account/Login">Přihlašte se zde</a>
+</div>
+
 <script>
-    // Get the checkbox, submit button, and error message elements
-    const termsCheckbox = document.getElementById("terms");
-    const submitButton = document.getElementById("submit-button");
-    const termsError = document.getElementById("terms-error");
+    document.addEventListener("DOMContentLoaded", function () {
+        const termsCheckbox = document.getElementById("terms");
+        const termsError = document.getElementById("terms-error");
+        const submitButton = document.getElementById("submit-button");
 
-    // Listen for changes on the checkbox
-    termsCheckbox.addEventListener("change", function() {
-        // Enable or disable the submit button based on checkbox state
-        submitButton.disabled = !termsCheckbox.checked;
-
-        // Hide the error message if checkbox is checked
-        if (termsCheckbox.checked) {
-            termsError.style.display = "none";
-        } else {
-            termsError.style.display = "block";
-        }
-    });
-
-    // Prevent form submission if terms are not checked
-    document.getElementById("register-form").addEventListener("submit", function(event) {
+        // Initially show the error message if checkbox is not checked
         if (!termsCheckbox.checked) {
-            event.preventDefault();
-            termsError.style.display = "block";
+            termsError.classList.remove("d-none");
         }
+
+        // Toggle error message visibility based on checkbox
+        termsCheckbox.addEventListener("change", function () {
+            if (termsCheckbox.checked) {
+                termsError.classList.add("d-none"); // Hide error if checked
+                submitButton.disabled = false; // Enable the submit button
+            } else {
+                termsError.classList.remove("d-none"); // Show error if not checked
+                submitButton.disabled = true; // Disable the submit button
+            }
+        });
+
+        // When submitting the form, check if checkbox is checked and show/hide error accordingly
+        document.getElementById("register-form").addEventListener("submit", function (event) {
+            if (!termsCheckbox.checked) {
+                event.preventDefault(); // Prevent form submission
+                termsError.classList.remove("d-none"); // Show error message
+            }
+        });
     });
 </script>

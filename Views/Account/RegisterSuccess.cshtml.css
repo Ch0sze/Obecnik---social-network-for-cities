@@ -1,0 +1,42 @@
+﻿/* Ensures proper centering */
+.registration-container {
+    text-align: center;
+    color: #F98866 !important; /* Force color */
+    max-width: 800px; /* Limit width for better layout */
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/* Ensure all text follows the color rule */
+.registration-container h1,
+.registration-container p {
+    color: #F98866 !important;
+}
+
+/* Custom button styling */
+.register-button {
+    background-color: #F98866 !important;
+    border: none !important;
+    color: #FFF !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    font-size: 1.1rem !important;
+    text-decoration: none !important; /* Remove underline */
+    display: inline-block !important;
+}
+
+.register-button:hover,
+.register-button:focus,
+.register-button:active {
+    background-color: #f77755 !important;
+}
+.register-link a,
+.register-link a:link,
+.register-link a:visited,
+.register-link a:hover,
+.register-link a:active {
+    color: #FFF !important;
+    text-decoration: none;
+}
