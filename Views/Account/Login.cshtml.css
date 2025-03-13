@@ -1,6 +1,4 @@
-﻿/* login.css */
-
-/* Kontejner formuláře */
+﻿/* Kontejner formuláře */
 .login-container {
     background-color: #FFFAEF; /* Světlé krémové pozadí */
     border: 1px solid #F98866;
@@ -21,12 +19,6 @@
 }
 .header-section h2 {
     margin: 0;
-}
-
-/* Stylování popisků (labelů) */
-.login-label {
-    font-weight: bold;
-    color: #333;
 }
 
 /* Tlačítko pro přihlášení ve tvaru oválu */

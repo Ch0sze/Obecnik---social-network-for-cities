@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Y75wOr6WDjbn1uD85zXOeqz9cTtQUQQE7etblCQAK2Y=",
+  "Hash": "MhqcAOd7FHDAEMXyxAydOR0eluS0kHarW9cB1yJVKJg=",
   "Source": "Application",
   "BasePath": "_content/Application",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Application\\wwwroot",
       "Source": "Application",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
       "RelativePath": "favicon#[.{fingerprint=61n19gt1b8}]?.ico.gz",
       "AssetKind": "All",
@@ -28,20 +28,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\favicon.ico",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\favicon.ico",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "nezsohjtde",
       "Integrity": "wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\favicon.ico"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/site#[.{fingerprint=xtxxf3hu2r}]?.js.gz",
       "AssetKind": "All",
@@ -49,104 +49,104 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\site.js",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\site.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "rl5dcbfpcw",
       "Integrity": "Ydq7YvQUzhbo68waLZeQvZnPOvmTeQ+HyDqjkA1whsA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\site.js"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\site.js"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-rz3q26joud.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
-      "RelativePath": "js/bootstrap.bundle#[.{fingerprint=4094rpi4f9}]?.js.gz",
+      "RelativePath": "js/bootstrap.bundle#[.{fingerprint=rz3q26joud}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "u3mr700haq",
-      "Integrity": "qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=",
+      "Fingerprint": "ieozpzd7pv",
+      "Integrity": "ShtLlMcE1Gxxx9V0ucGdodIoJeG/2vL8w+td+MeNF/Q=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-hhw14o7ziy.gz",
       "SourceId": "Application",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
-      "RelativePath": "Application#[.{fingerprint=799ttxylpz}]?.styles.css.gz",
+      "RelativePath": "Application#[.{fingerprint=hhw14o7ziy}]?.styles.css.gz",
       "AssetKind": "All",
       "AssetMode": "CurrentProject",
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "4j158a22v9",
-      "Integrity": "AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=",
+      "Fingerprint": "fl3pbcdw73",
+      "Integrity": "c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-hhw14o7ziy.gz",
       "SourceId": "Application",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
-      "RelativePath": "Application#[.{fingerprint=799ttxylpz}]!.bundle.scp.css.gz",
+      "RelativePath": "Application#[.{fingerprint=hhw14o7ziy}]!.bundle.scp.css.gz",
       "AssetKind": "All",
       "AssetMode": "Reference",
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "4j158a22v9",
-      "Integrity": "AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=",
+      "Fingerprint": "fl3pbcdw73",
+      "Integrity": "c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dp4mo3pkdx.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dzr36t7t01.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
-      "RelativePath": "css/styles#[.{fingerprint=dp4mo3pkdx}]?.css.gz",
+      "RelativePath": "css/styles#[.{fingerprint=dzr36t7t01}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\styles.css",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "4dgvjzvt9e",
-      "Integrity": "mPNSD7E3TCwY1CqJVjHKIGdg+bnILvs7J4XbHVzPmYE=",
+      "Fingerprint": "a0xycl1ss0",
+      "Integrity": "ZhQK2aw/fx3WaKOVkpYsc4NqYQRSMAMZRt/EpgaFnwE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\styles.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\styles.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/bootstrap.bundle.min#[.{fingerprint=hd3gran6i8}]?.js.gz",
       "AssetKind": "All",
@@ -154,20 +154,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "yc8010sx1o",
       "Integrity": "rjTJ9Ut8h6OLoNYsNgr7e/TIritk83K5bucjnu0BPlM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
       "RelativePath": "css/bootstrap.min#[.{fingerprint=gjwqz8t07j}]?.css.gz",
       "AssetKind": "All",
@@ -175,41 +175,41 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\bootstrap.min.css",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\bootstrap.min.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "k8krxsf9r7",
       "Integrity": "NIBkgMRvacIjOPvN/auZZ+GU1LacYggHds6ahSt46/Y=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\bootstrap.min.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-51lp682phi.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-y3y7z0h439.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
-      "RelativePath": "css/output#[.{fingerprint=51lp682phi}]?.css.gz",
+      "RelativePath": "css/output#[.{fingerprint=y3y7z0h439}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\output.css",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\output.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "3n2jijbdav",
-      "Integrity": "4f1lnj2iJqDHkyK5IfsGoABmBtH1RIU7y886RrubuXg=",
+      "Fingerprint": "uj7sp4jkt9",
+      "Integrity": "Oo6rHBvfwi9kZxs84yGEi/SsU5uo5twJORPCM/S96hc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\output.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\output.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/bootstrap.bundle.min.js#[.{fingerprint=iovd86k7lj}]?.map.gz",
       "AssetKind": "All",
@@ -217,20 +217,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "svb68clhd0",
       "Integrity": "WDZTOK9dQrex7lgPEZZ+JZhLPdAF5GijB8N4Mslft/0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js.map"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/bootstrap.bundle.js#[.{fingerprint=6pdc2jztkx}]?.map.gz",
       "AssetKind": "All",
@@ -238,20 +238,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js.map",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "sgz3bfuucz",
       "Integrity": "tELcWYAIUkPDirIRIOTlom3Q4rdUDcA6PdYMCRE48xY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js.map"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Application",
       "RelativePath": "css/site#[.{fingerprint=5ipweew5fc}]?.css.gz",
       "AssetKind": "All",
@@ -259,20 +259,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\site.css",
+      "RelatedAsset": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "5ipweew5fc",
       "Integrity": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\site.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
       "SourceId": "Application",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\",
       "BasePath": "_content/Application",
       "RelativePath": "Application#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -283,17 +283,17 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "799ttxylpz",
-      "Integrity": "5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=",
+      "Fingerprint": "hhw14o7ziy",
+      "Integrity": "tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
       "SourceId": "Application",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Application",
       "RelativePath": "Application#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -304,17 +304,17 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "799ttxylpz",
-      "Integrity": "5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=",
+      "Fingerprint": "hhw14o7ziy",
+      "Integrity": "tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\bootstrap.min.css",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\bootstrap.min.css",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "css/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -332,10 +332,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\output.css",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\output.css",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "css/output#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -346,17 +346,17 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "51lp682phi",
-      "Integrity": "uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw=",
+      "Fingerprint": "y3y7z0h439",
+      "Integrity": "kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\output.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\site.css",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "css/site#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -374,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\styles.css",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\styles.css",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "css/styles#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -388,17 +388,17 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "dp4mo3pkdx",
-      "Integrity": "r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE=",
+      "Fingerprint": "dzr36t7t01",
+      "Integrity": "l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\styles.css"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\favicon.ico",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "favicon#[.{fingerprint}]?.ico",
       "AssetKind": "All",
@@ -416,10 +416,31 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\image.png",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
+      "BasePath": "_content/Application",
+      "RelativePath": "image#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "o2cloazq04",
+      "Integrity": "oJ+db/PgFlWC7Qx5urZubZQ/EvEPETzXoXln1BoQkLs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image.png"
+    },
+    {
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/bootstrap.bundle#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -430,17 +451,17 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "4094rpi4f9",
-      "Integrity": "bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=",
+      "Fingerprint": "rz3q26joud",
+      "Integrity": "SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js.map",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/bootstrap.bundle.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -458,10 +479,10 @@
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/bootstrap.bundle.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -479,10 +500,10 @@
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/bootstrap.bundle.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -500,10 +521,10 @@
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\site.js",
+      "Identity": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\site.js",
       "SourceId": "Application",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\",
       "BasePath": "_content/Application",
       "RelativePath": "js/site#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -523,13 +544,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "Application.799ttxylpz.bundle.scp.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "Route": "Application.bundle.scp.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-hhw14o7ziy.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.006711409396"
+          "Quality": "0.001082251082"
         }
       ],
       "ResponseHeaders": [
@@ -539,15 +560,152 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "923"
         },
         {
           "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
+        }
+      ]
+    },
+    {
+      "Route": "Application.bundle.scp.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2285"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
+        }
+      ]
+    },
+    {
+      "Route": "Application.bundle.scp.css.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-hhw14o7ziy.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "923"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU="
+        }
+      ]
+    },
+    {
+      "Route": "Application.hhw14o7ziy.bundle.scp.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-hhw14o7ziy.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001082251082"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "923"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -567,13 +725,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+          "Value": "W/\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "799ttxylpz"
+          "Value": "hhw14o7ziy"
         },
         {
           "Name": "label",
@@ -581,13 +739,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
         }
       ]
     },
     {
-      "Route": "Application.799ttxylpz.bundle.scp.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
+      "Route": "Application.hhw14o7ziy.bundle.scp.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -596,7 +754,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "137"
+          "Value": "2285"
         },
         {
           "Name": "Content-Type",
@@ -604,11 +762,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+          "Value": "\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -618,7 +776,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "799ttxylpz"
+          "Value": "hhw14o7ziy"
         },
         {
           "Name": "label",
@@ -626,13 +784,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
         }
       ]
     },
     {
-      "Route": "Application.799ttxylpz.bundle.scp.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
+      "Route": "Application.hhw14o7ziy.bundle.scp.css.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-hhw14o7ziy.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -641,7 +799,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "923"
         },
         {
           "Name": "Content-Type",
@@ -649,11 +807,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -671,7 +829,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "799ttxylpz"
+          "Value": "hhw14o7ziy"
         },
         {
           "Name": "label",
@@ -679,18 +837,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
+          "Value": "sha256-c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU="
         }
       ]
     },
     {
-      "Route": "Application.799ttxylpz.styles.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "Route": "Application.hhw14o7ziy.styles.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-hhw14o7ziy.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.006711409396"
+          "Quality": "0.001082251082"
         }
       ],
       "ResponseHeaders": [
@@ -700,15 +858,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "923"
         },
         {
           "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -728,13 +886,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+          "Value": "W/\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "799ttxylpz"
+          "Value": "hhw14o7ziy"
         },
         {
           "Name": "label",
@@ -742,13 +900,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
         }
       ]
     },
     {
-      "Route": "Application.799ttxylpz.styles.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "Route": "Application.hhw14o7ziy.styles.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -757,7 +915,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "137"
+          "Value": "2285"
         },
         {
           "Name": "Content-Type",
@@ -765,11 +923,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+          "Value": "\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -779,7 +937,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "799ttxylpz"
+          "Value": "hhw14o7ziy"
         },
         {
           "Name": "label",
@@ -787,13 +945,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
         }
       ]
     },
     {
-      "Route": "Application.799ttxylpz.styles.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "Route": "Application.hhw14o7ziy.styles.css.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-hhw14o7ziy.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -802,7 +960,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "923"
         },
         {
           "Name": "Content-Type",
@@ -810,11 +968,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -832,7 +990,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "799ttxylpz"
+          "Value": "hhw14o7ziy"
         },
         {
           "Name": "label",
@@ -840,155 +998,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
-        }
-      ]
-    },
-    {
-      "Route": "Application.bundle.scp.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.006711409396"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "148"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
-        }
-      ]
-    },
-    {
-      "Route": "Application.bundle.scp.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Application.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "137"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
-        }
-      ]
-    },
-    {
-      "Route": "Application.bundle.scp.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7ptbc3d7e4-799ttxylpz.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "148"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
+          "Value": "sha256-c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU="
         }
       ]
     },
     {
       "Route": "Application.styles.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-hhw14o7ziy.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.006711409396"
+          "Quality": "0.001082251082"
         }
       ],
       "ResponseHeaders": [
@@ -998,15 +1019,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "923"
         },
         {
           "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1026,19 +1047,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+          "Value": "W/\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
         }
       ]
     },
     {
       "Route": "Application.styles.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\scopedcss\\bundle\\Application.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1047,7 +1068,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "137"
+          "Value": "2285"
         },
         {
           "Name": "Content-Type",
@@ -1055,11 +1076,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs=\""
+          "Value": "\"tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1069,13 +1090,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5WrUfcKHRhSLX1hzexR+GPtnJ43uF9hBHJUYo7CylIs="
+          "Value": "sha256-tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA="
         }
       ]
     },
     {
       "Route": "Application.styles.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-799ttxylpz.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\7bn2x0wyiq-hhw14o7ziy.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1084,7 +1105,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "923"
         },
         {
           "Name": "Content-Type",
@@ -1092,11 +1113,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A=\""
+          "Value": "\"c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:46:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1114,13 +1135,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AFlHuF+eLoi1FLJtBJj1QH8JK7m/Nipf9wLfe3tmU5A="
+          "Value": "sha256-c0lKQSUv/+4mGvGCoQJGb/+ZlE90DTroKUBDVFJaLLU="
         }
       ]
     },
     {
       "Route": "css/bootstrap.min.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1143,7 +1164,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1175,7 +1196,7 @@
     },
     {
       "Route": "css/bootstrap.min.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\bootstrap.min.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1196,7 +1217,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1212,7 +1233,7 @@
     },
     {
       "Route": "css/bootstrap.min.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1233,7 +1254,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1257,7 +1278,7 @@
     },
     {
       "Route": "css/bootstrap.min.gjwqz8t07j.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1280,7 +1301,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1320,7 +1341,7 @@
     },
     {
       "Route": "css/bootstrap.min.gjwqz8t07j.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\bootstrap.min.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1341,7 +1362,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1365,7 +1386,7 @@
     },
     {
       "Route": "css/bootstrap.min.gjwqz8t07j.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\d0ph00wdi7-gjwqz8t07j.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1386,7 +1407,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1417,13 +1438,13 @@
       ]
     },
     {
-      "Route": "css/output.51lp682phi.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-51lp682phi.gz",
+      "Route": "css/output.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-y3y7z0h439.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000225886605"
+          "Quality": "0.000223964166"
         }
       ],
       "ResponseHeaders": [
@@ -1433,15 +1454,152 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4426"
+          "Value": "4464"
         },
         {
           "Name": "ETag",
-          "Value": "\"4f1lnj2iJqDHkyK5IfsGoABmBtH1RIU7y886RrubuXg=\""
+          "Value": "\"Oo6rHBvfwi9kZxs84yGEi/SsU5uo5twJORPCM/S96hc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 17:30:42 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/output.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\output.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18304"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/output.css.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-y3y7z0h439.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4464"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Oo6rHBvfwi9kZxs84yGEi/SsU5uo5twJORPCM/S96hc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Oo6rHBvfwi9kZxs84yGEi/SsU5uo5twJORPCM/S96hc="
+        }
+      ]
+    },
+    {
+      "Route": "css/output.y3y7z0h439.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-y3y7z0h439.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000223964166"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4464"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Oo6rHBvfwi9kZxs84yGEi/SsU5uo5twJORPCM/S96hc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1461,13 +1619,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw=\""
+          "Value": "W/\"kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "51lp682phi"
+          "Value": "y3y7z0h439"
         },
         {
           "Name": "label",
@@ -1475,13 +1633,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw="
+          "Value": "sha256-kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y="
         }
       ]
     },
     {
-      "Route": "css/output.51lp682phi.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\output.css",
+      "Route": "css/output.y3y7z0h439.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\output.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1490,7 +1648,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "17328"
+          "Value": "18304"
         },
         {
           "Name": "Content-Type",
@@ -1498,11 +1656,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw=\""
+          "Value": "\"kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 17:30:42 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1512,7 +1670,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "51lp682phi"
+          "Value": "y3y7z0h439"
         },
         {
           "Name": "label",
@@ -1520,13 +1678,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw="
+          "Value": "sha256-kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y="
         }
       ]
     },
     {
-      "Route": "css/output.51lp682phi.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-51lp682phi.gz",
+      "Route": "css/output.y3y7z0h439.css.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-y3y7z0h439.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1535,7 +1693,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4426"
+          "Value": "4464"
         },
         {
           "Name": "Content-Type",
@@ -1543,11 +1701,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"4f1lnj2iJqDHkyK5IfsGoABmBtH1RIU7y886RrubuXg=\""
+          "Value": "\"Oo6rHBvfwi9kZxs84yGEi/SsU5uo5twJORPCM/S96hc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 17:30:42 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1565,7 +1723,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "51lp682phi"
+          "Value": "y3y7z0h439"
         },
         {
           "Name": "label",
@@ -1573,150 +1731,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-4f1lnj2iJqDHkyK5IfsGoABmBtH1RIU7y886RrubuXg="
-        }
-      ]
-    },
-    {
-      "Route": "css/output.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-51lp682phi.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000225886605"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4426"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"4f1lnj2iJqDHkyK5IfsGoABmBtH1RIU7y886RrubuXg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 17:30:42 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw="
-        }
-      ]
-    },
-    {
-      "Route": "css/output.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\output.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "17328"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 17:30:42 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw="
-        }
-      ]
-    },
-    {
-      "Route": "css/output.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\lw8badvptx-51lp682phi.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4426"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"4f1lnj2iJqDHkyK5IfsGoABmBtH1RIU7y886RrubuXg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 17:30:42 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-4f1lnj2iJqDHkyK5IfsGoABmBtH1RIU7y886RrubuXg="
+          "Value": "sha256-Oo6rHBvfwi9kZxs84yGEi/SsU5uo5twJORPCM/S96hc="
         }
       ]
     },
     {
       "Route": "css/site.5ipweew5fc.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1739,7 +1760,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 20:54:29 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1779,7 +1800,7 @@
     },
     {
       "Route": "css/site.5ipweew5fc.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\site.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1800,7 +1821,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 20:54:29 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1824,7 +1845,7 @@
     },
     {
       "Route": "css/site.5ipweew5fc.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1845,7 +1866,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 20:54:29 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1877,7 +1898,7 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1900,7 +1921,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 20:54:29 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1932,7 +1953,7 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\site.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1953,7 +1974,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 20:54:29 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1969,7 +1990,7 @@
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\wkth70762r-5ipweew5fc.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1990,7 +2011,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 20:54:29 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2014,12 +2035,12 @@
     },
     {
       "Route": "css/styles.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dp4mo3pkdx.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dzr36t7t01.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.002590673575"
+          "Quality": "0.002597402597"
         }
       ],
       "ResponseHeaders": [
@@ -2029,15 +2050,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "385"
+          "Value": "384"
         },
         {
           "Name": "ETag",
-          "Value": "\"mPNSD7E3TCwY1CqJVjHKIGdg+bnILvs7J4XbHVzPmYE=\""
+          "Value": "\"ZhQK2aw/fx3WaKOVkpYsc4NqYQRSMAMZRt/EpgaFnwE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 16:59:04 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2057,19 +2078,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE=\""
+          "Value": "W/\"l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE="
+          "Value": "sha256-l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A="
         }
       ]
     },
     {
       "Route": "css/styles.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\styles.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2078,7 +2099,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "791"
+          "Value": "789"
         },
         {
           "Name": "Content-Type",
@@ -2086,11 +2107,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE=\""
+          "Value": "\"l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 16:59:04 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2100,13 +2121,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE="
+          "Value": "sha256-l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A="
         }
       ]
     },
     {
       "Route": "css/styles.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dp4mo3pkdx.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dzr36t7t01.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2115,7 +2136,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "385"
+          "Value": "384"
         },
         {
           "Name": "Content-Type",
@@ -2123,11 +2144,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mPNSD7E3TCwY1CqJVjHKIGdg+bnILvs7J4XbHVzPmYE=\""
+          "Value": "\"ZhQK2aw/fx3WaKOVkpYsc4NqYQRSMAMZRt/EpgaFnwE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 16:59:04 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2145,18 +2166,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mPNSD7E3TCwY1CqJVjHKIGdg+bnILvs7J4XbHVzPmYE="
+          "Value": "sha256-ZhQK2aw/fx3WaKOVkpYsc4NqYQRSMAMZRt/EpgaFnwE="
         }
       ]
     },
     {
-      "Route": "css/styles.dp4mo3pkdx.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dp4mo3pkdx.gz",
+      "Route": "css/styles.dzr36t7t01.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dzr36t7t01.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.002590673575"
+          "Quality": "0.002597402597"
         }
       ],
       "ResponseHeaders": [
@@ -2166,15 +2187,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "385"
+          "Value": "384"
         },
         {
           "Name": "ETag",
-          "Value": "\"mPNSD7E3TCwY1CqJVjHKIGdg+bnILvs7J4XbHVzPmYE=\""
+          "Value": "\"ZhQK2aw/fx3WaKOVkpYsc4NqYQRSMAMZRt/EpgaFnwE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 16:59:04 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2194,13 +2215,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE=\""
+          "Value": "W/\"l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "dp4mo3pkdx"
+          "Value": "dzr36t7t01"
         },
         {
           "Name": "label",
@@ -2208,13 +2229,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE="
+          "Value": "sha256-l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A="
         }
       ]
     },
     {
-      "Route": "css/styles.dp4mo3pkdx.css",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\css\\styles.css",
+      "Route": "css/styles.dzr36t7t01.css",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\css\\styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2223,7 +2244,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "791"
+          "Value": "789"
         },
         {
           "Name": "Content-Type",
@@ -2231,11 +2252,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE=\""
+          "Value": "\"l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 16:59:04 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2245,7 +2266,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "dp4mo3pkdx"
+          "Value": "dzr36t7t01"
         },
         {
           "Name": "label",
@@ -2253,13 +2274,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE="
+          "Value": "sha256-l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A="
         }
       ]
     },
     {
-      "Route": "css/styles.dp4mo3pkdx.css.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dp4mo3pkdx.gz",
+      "Route": "css/styles.dzr36t7t01.css.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\az4k9t1d38-dzr36t7t01.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2268,7 +2289,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "385"
+          "Value": "384"
         },
         {
           "Name": "Content-Type",
@@ -2276,11 +2297,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mPNSD7E3TCwY1CqJVjHKIGdg+bnILvs7J4XbHVzPmYE=\""
+          "Value": "\"ZhQK2aw/fx3WaKOVkpYsc4NqYQRSMAMZRt/EpgaFnwE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 16:59:04 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2298,7 +2319,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "dp4mo3pkdx"
+          "Value": "dzr36t7t01"
         },
         {
           "Name": "label",
@@ -2306,13 +2327,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-mPNSD7E3TCwY1CqJVjHKIGdg+bnILvs7J4XbHVzPmYE="
+          "Value": "sha256-ZhQK2aw/fx3WaKOVkpYsc4NqYQRSMAMZRt/EpgaFnwE="
         }
       ]
     },
     {
       "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2335,7 +2356,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2375,7 +2396,7 @@
     },
     {
       "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\favicon.ico",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2396,7 +2417,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2420,7 +2441,7 @@
     },
     {
       "Route": "favicon.61n19gt1b8.ico.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2441,7 +2462,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2473,7 +2494,7 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2496,7 +2517,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2528,7 +2549,7 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\favicon.ico",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2549,7 +2570,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2565,7 +2586,7 @@
     },
     {
       "Route": "favicon.ico.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\1m1xwr9crl-61n19gt1b8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2586,7 +2607,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:58 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2609,71 +2630,8 @@
       ]
     },
     {
-      "Route": "js/bootstrap.bundle.4094rpi4f9.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000022400932"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "44640"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "4094rpi4f9"
-        },
-        {
-          "Name": "label",
-          "Value": "js/bootstrap.bundle.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
-        }
-      ]
-    },
-    {
-      "Route": "js/bootstrap.bundle.4094rpi4f9.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js",
+      "Route": "image.o2cloazq04.png",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\image.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2682,19 +2640,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "214133"
+          "Value": "11777"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/javascript"
+          "Value": "image/png"
         },
         {
           "Name": "ETag",
-          "Value": "\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
+          "Value": "\"oJ+db/PgFlWC7Qx5urZubZQ/EvEPETzXoXln1BoQkLs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2704,21 +2662,21 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4094rpi4f9"
+          "Value": "o2cloazq04"
         },
         {
           "Name": "label",
-          "Value": "js/bootstrap.bundle.js"
+          "Value": "image.png"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
+          "Value": "sha256-oJ+db/PgFlWC7Qx5urZubZQ/EvEPETzXoXln1BoQkLs="
         }
       ]
     },
     {
-      "Route": "js/bootstrap.bundle.4094rpi4f9.js.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "Route": "image.png",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\image.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2727,56 +2685,40 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "44640"
+          "Value": "11777"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/javascript"
+          "Value": "image/png"
         },
         {
           "Name": "ETag",
-          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
+          "Value": "\"oJ+db/PgFlWC7Qx5urZubZQ/EvEPETzXoXln1BoQkLs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
+          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "4094rpi4f9"
-        },
-        {
-          "Name": "label",
-          "Value": "js/bootstrap.bundle.js.gz"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4="
+          "Value": "sha256-oJ+db/PgFlWC7Qx5urZubZQ/EvEPETzXoXln1BoQkLs="
         }
       ]
     },
     {
       "Route": "js/bootstrap.bundle.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-rz3q26joud.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000022400932"
+          "Quality": "0.000021877051"
         }
       ],
       "ResponseHeaders": [
@@ -2786,15 +2728,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "44640"
+          "Value": "45709"
         },
         {
           "Name": "ETag",
-          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
+          "Value": "\"ShtLlMcE1Gxxx9V0ucGdodIoJeG/2vL8w+td+MeNF/Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2814,19 +2756,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
+          "Value": "W/\"SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
+          "Value": "sha256-SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY="
         }
       ]
     },
     {
       "Route": "js/bootstrap.bundle.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2835,7 +2777,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "214133"
+          "Value": "244042"
         },
         {
           "Name": "Content-Type",
@@ -2843,11 +2785,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=\""
+          "Value": "\"SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2857,13 +2799,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y="
+          "Value": "sha256-SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY="
         }
       ]
     },
     {
       "Route": "js/bootstrap.bundle.js.6pdc2jztkx.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2886,7 +2828,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2926,7 +2868,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.js.6pdc2jztkx.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2947,7 +2889,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2971,7 +2913,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.js.6pdc2jztkx.map.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2992,7 +2934,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3024,7 +2966,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.js.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-4094rpi4f9.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-rz3q26joud.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3033,7 +2975,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "44640"
+          "Value": "45709"
         },
         {
           "Name": "Content-Type",
@@ -3041,11 +2983,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4=\""
+          "Value": "\"ShtLlMcE1Gxxx9V0ucGdodIoJeG/2vL8w+td+MeNF/Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3063,13 +3005,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-qk/LGv3UCKBZhVKSwN0Lvyprj8TiWmp+iiWhP0Dwdt4="
+          "Value": "sha256-ShtLlMcE1Gxxx9V0ucGdodIoJeG/2vL8w+td+MeNF/Q="
         }
       ]
     },
     {
       "Route": "js/bootstrap.bundle.js.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3092,7 +3034,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3124,7 +3066,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.js.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.js.map",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3145,7 +3087,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3161,7 +3103,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.js.map.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\pwneli4n8r-6pdc2jztkx.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3182,7 +3124,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3206,7 +3148,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.hd3gran6i8.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3229,7 +3171,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3269,7 +3211,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.hd3gran6i8.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3290,7 +3232,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3314,7 +3256,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.hd3gran6i8.js.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3335,7 +3277,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3367,7 +3309,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3390,7 +3332,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3422,7 +3364,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3443,7 +3385,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3459,7 +3401,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\bo8myrm0gp-hd3gran6i8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3480,7 +3422,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3504,7 +3446,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js.iovd86k7lj.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3527,7 +3469,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3567,7 +3509,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js.iovd86k7lj.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3588,7 +3530,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3612,7 +3554,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js.iovd86k7lj.map.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3633,7 +3575,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3665,7 +3607,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3688,7 +3630,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3720,7 +3662,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js.map",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3741,7 +3683,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3757,7 +3699,7 @@
     },
     {
       "Route": "js/bootstrap.bundle.min.js.map.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\m9js5e76sg-iovd86k7lj.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3778,7 +3720,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3801,8 +3743,169 @@
       ]
     },
     {
+      "Route": "js/bootstrap.bundle.rz3q26joud.js",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-rz3q26joud.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000021877051"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45709"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ShtLlMcE1Gxxx9V0ucGdodIoJeG/2vL8w+td+MeNF/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rz3q26joud"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.rz3q26joud.js",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\bootstrap.bundle.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "244042"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rz3q26joud"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SR/koiM6P+67tUrMapp4CROpF8VJl+/hEP9Bkc3IaCY="
+        }
+      ]
+    },
+    {
+      "Route": "js/bootstrap.bundle.rz3q26joud.js.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\6ft29jn58e-rz3q26joud.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45709"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ShtLlMcE1Gxxx9V0ucGdodIoJeG/2vL8w+td+MeNF/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rz3q26joud"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bootstrap.bundle.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ShtLlMcE1Gxxx9V0ucGdodIoJeG/2vL8w+td+MeNF/Q="
+        }
+      ]
+    },
+    {
       "Route": "js/site.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3825,7 +3928,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3857,7 +3960,7 @@
     },
     {
       "Route": "js/site.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\site.js",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3878,7 +3981,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3894,7 +3997,7 @@
     },
     {
       "Route": "js/site.js.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3915,7 +4018,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3939,7 +4042,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3962,7 +4065,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4002,7 +4105,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\wwwroot\\js\\site.js",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4023,7 +4126,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4047,7 +4150,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js.gz",
-      "AssetFile": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
+      "AssetFile": "C:\\Users\\dakok\\Desktop\\plocha\\Staci_E\\obj\\Debug\\net9.0\\compressed\\44fgg7s3ic-xtxxf3hu2r.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4068,7 +4171,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 13:27:59 GMT"
+          "Value": "Thu, 13 Mar 2025 07:29:50 GMT"
         },
         {
           "Name": "Cache-Control",
