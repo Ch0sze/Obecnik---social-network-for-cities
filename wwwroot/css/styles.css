@@ -1,13 +1,11 @@
-﻿@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.custom-border {
-    @apply border-b border-orange;
+﻿.custom-border {
+    border-bottom: #F98866;
 }
 
 .custom-border:focus {
-    @apply focus:border-none focus:ring-2 focus:ring-orange;
+    border: none;
+    outline: 2px solid #F98866;
+    outline-offset: 2px;
 }
 
 .custom-checkmark {

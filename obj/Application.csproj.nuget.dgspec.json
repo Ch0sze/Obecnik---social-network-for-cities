@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\Application.csproj": {}
+    "C:\\Users\\merak\\RiderProjects\\Staci E\\Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\Application.csproj": {
+    "C:\\Users\\merak\\RiderProjects\\Staci E\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\merak\\RiderProjects\\Staci E\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\Application.csproj",
-        "packagesPath": "C:\\Users\\jakub\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\obj\\",
+        "projectPath": "C:\\Users\\merak\\RiderProjects\\Staci E\\Application.csproj",
+        "packagesPath": "C:\\Users\\merak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\merak\\RiderProjects\\Staci E\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jakub\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\merak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
