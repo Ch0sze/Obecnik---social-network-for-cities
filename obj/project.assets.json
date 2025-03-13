@@ -4680,26 +4680,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\merak\\.nuget\\packages\\": {}
+    "C:\\Users\\dakok\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\merak\\RiderProjects\\Staci E\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\dakok\\Desktop\\Staci_E\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\merak\\RiderProjects\\Staci E\\Application.csproj",
-      "packagesPath": "C:\\Users\\merak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\merak\\RiderProjects\\Staci E\\obj\\",
+      "projectPath": "C:\\Users\\dakok\\Desktop\\Staci_E\\Application.csproj",
+      "packagesPath": "C:\\Users\\dakok\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dakok\\Desktop\\Staci_E\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\merak\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\dakok\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
