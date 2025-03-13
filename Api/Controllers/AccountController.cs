@@ -82,6 +82,26 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         return View("ForgotPassword", new ForgotPasswordViewModel());
     }
     
+    [HttpPost("forgotpasswordsubmit")]
+    public IActionResult ForgotPasswordSubmit(ForgotPasswordViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View("ForgotPassword", model);
+        }
+
+        // Hledáme uživatele v databázi
+        var user = databaseContext.Users.FirstOrDefault(u => u.Email == model.Email);
+        if (user == null)
+        {
+            ModelState.AddModelError("Email", "Tento e-mail není registrován.");
+            return View("ForgotPassword", model);
+        }
+
+        model = model with { Message = "Pokyny k obnovení hesla byly odeslány na váš e-mail." };
+        return View("ForgotPassword", model);
+    }
+    
     [HttpGet("register")]
     public IActionResult Register()
     {

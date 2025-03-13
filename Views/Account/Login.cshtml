@@ -18,7 +18,7 @@
 
                 <!-- Email -->
                 <div class="mb-3">
-                    <label asp-for="Email" class="login-label" style="color: black; ">Email:</label>
+                    <label asp-for="Email" class="login-label" style="color: black; font-weight: bold;">Email:</label>
                     <input asp-for="Email"
                            class="form-control 
                             @ViewData.ValidationClass(model => model.Email)"
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Password" class="login-label" style="color: black;">Heslo:</label>
+                    <label asp-for="Password" class="login-label" style="color: black; font-weight: bold;">Heslo:</label>
                     <div class="d-flex justify-content-between align-items-end">
                         <!-- Input pro heslo (flexibilní šířka) -->
                         <div class="flex-grow-1 me-2">

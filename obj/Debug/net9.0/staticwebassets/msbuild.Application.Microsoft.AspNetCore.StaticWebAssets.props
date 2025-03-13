@@ -1,22 +1,22 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Application.gojh09y4nw.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Application.hhw14o7ziy.bundle.scp.css'))">
       <SourceType>Package</SourceType>
       <SourceId>Application</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Application</BasePath>
-      <RelativePath>Application.gojh09y4nw.bundle.scp.css</RelativePath>
+      <RelativePath>Application.hhw14o7ziy.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>gojh09y4nw</Fingerprint>
-      <Integrity>IJ7Tj9oMomvZGJrqdj3MINTPGnO3EVh2tF4fyG2n2j0=</Integrity>
+      <Fingerprint>hhw14o7ziy</Fingerprint>
+      <Integrity>tW49Qv5u4IR5Yy2jsyUD9+3q5B+tA2hdFNKzdsfPJyA=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Application.gojh09y4nw.bundle.scp.css'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Application.hhw14o7ziy.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap.min.css'))">
       <SourceType>Package</SourceType>
@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>51lp682phi</Fingerprint>
-      <Integrity>uXy8AdOaG6BfP10cUMAyalUyjIT18zBhIx4Xt5n/OKw=</Integrity>
+      <Fingerprint>y3y7z0h439</Fingerprint>
+      <Integrity>kkSp9LM/UzywMQAXLH1hSyOSNAFXb0o/GgwWV68eg7Y=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\output.css'))</OriginalItemSpec>
@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>dp4mo3pkdx</Fingerprint>
-      <Integrity>r6qiEeDRAV3ptjjvVQs5z1ehYZX/Jb7tANdTkYUP8RE=</Integrity>
+      <Fingerprint>dzr36t7t01</Fingerprint>
+      <Integrity>l0Uk/cPAk3//niQkjwaF75UmZG5ACxz667fFrRa8F5A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\styles.css'))</OriginalItemSpec>
