@@ -4680,24 +4680,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Adámek\\.nuget\\packages\\": {}
+    "C:\\Users\\jakub\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\Application.csproj",
-      "packagesPath": "C:\\Users\\Adámek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adámek\\RiderProjects\\Staci E\\obj\\",
+      "projectPath": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\Application.csproj",
+      "packagesPath": "C:\\Users\\jakub\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jakub\\OneDrive\\Documents\\code\\c#\\STAG-AUIUI-P8VT\\2025\\Staci E\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Adámek\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\jakub\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
