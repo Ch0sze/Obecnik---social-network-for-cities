@@ -2,7 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Staci Scrollbar</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="flex min-h-screen">
+    <!-- Left Sidebar -->
+    <div class="bg-orange-100 flex flex-col h-screen">
+        <partial name="LeftSidebar"/>
+    </div>
+
+    <!-- Center Content (Middle Page) -->
+    <div class="flex-1 flex justify-center bg-gray-50">
+        <partial name="AddContribution"/>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="bg-orange-100 flex flex-col h-screen">
+        <partial name="RightSidebar"/>
+    </div>
 </div>
+
+

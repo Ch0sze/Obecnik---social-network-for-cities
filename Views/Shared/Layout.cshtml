@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/Application.styles.css" asp-append-version="true"/>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 
-<partial name="Navbar"/>
-<div class="container">
-    <main role="main" class="main py-5">
+@* <partial name="Navbar"/> *@
+<div class="body">
+    <main role="main">
         @RenderBody()
     </main>
 </div>
