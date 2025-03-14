@@ -1,0 +1,27 @@
+/*pojebane css*/
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+#OpenContributionButton {
+    color: #969696;
+    border-radius: 20px;
+    border-color: #969696;
+    border-width: 1px;
+    width: 100%;
+    text-transform: none;
+    text-align: left;
+    transition: transform 0.1s ease;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px; 
+}
+
+#OpenContributionButton .i {
+    margin-left: auto;
+}
+
+#OpenContributionButton:active {
+    transform: scale(1.01);
+}

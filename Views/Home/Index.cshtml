@@ -2,21 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="flex min-h-screen">
+<div class="d-flex min-vh-100">
     <!-- Left Sidebar -->
-    <div class="bg-orange-100 flex flex-col h-screen">
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100">
         <partial name="LeftSidebar"/>
     </div>
 
     <!-- Center Content (Middle Page) -->
-    <div class="flex-1 flex justify-center bg-gray-50">
+    <div class="flex-grow-1 d-flex justify-content-center bg-light">
         <partial name="AddContribution"/>
     </div>
 
     <!-- Right Sidebar -->
-    <div class="bg-orange-100 flex flex-col h-screen">
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100">
         <partial name="RightSidebar"/>
     </div>
 </div>
-
 
