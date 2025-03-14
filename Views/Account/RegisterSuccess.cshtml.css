@@ -1,16 +1,9 @@
 ﻿/* Ensures proper centering */
 .registration-container {
     text-align: center;
-    color: #F98866 !important; /* Force color */
     max-width: 800px; /* Limit width for better layout */
     margin-top: 20px;
     padding: 20px;
-}
-
-/* Ensure all text follows the color rule */
-.registration-container h1,
-.registration-container p {
-    color: #F98866 !important;
 }
 
 /* Custom button styling */
