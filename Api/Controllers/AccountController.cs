@@ -79,6 +79,9 @@ public class AccountController(DatabaseContext databaseContext) : Controller
     [HttpGet("forgotpassword")]
     public IActionResult ForgotPassword()
     {
+        if (User.Identity?.IsAuthenticated == true)
+            return RedirectToAction("Index", "Home");
+        
         return View("ForgotPassword", new ForgotPasswordViewModel());
     }
     
@@ -105,6 +108,9 @@ public class AccountController(DatabaseContext databaseContext) : Controller
     [HttpGet("register")]
     public IActionResult Register()
     {
+        if (User.Identity?.IsAuthenticated == true)
+            return RedirectToAction("Index", "Home");
+        
         return View("Register", new RegisterViewModel());
     }
 
@@ -138,7 +144,7 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         return View("RegisterSuccess");
     }
 
-
+    [Authorize]
     [HttpGet("logout")]
     public async Task<IActionResult> Logout()
     {
