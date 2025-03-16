@@ -4,17 +4,17 @@
 
 <div class="d-flex min-vh-100">
     <!-- Left Sidebar -->
-    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100">
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
         <partial name="LeftSidebar"/>
     </div>
 
     <!-- Center Content (Middle Page) -->
-    <div class="flex-grow-1 d-flex justify-content-center bg-light">
+    <div class="flex-grow-1 d-flex justify-content-center bg-light overflow-auto">
         <partial name="AddContribution"/>
     </div>
 
     <!-- Right Sidebar -->
-    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100">
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
         <partial name="RightSidebar"/>
     </div>
 </div>
