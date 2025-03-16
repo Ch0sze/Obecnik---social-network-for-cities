@@ -110,6 +110,34 @@
         color: #333;
     }
 
+    /* Dropdown menu styling */
+    .dropdown-menu-rsb {
+        position: absolute;
+        top: 60px; /* Adjusted to position under the hamburger menu */
+        right: 20px;
+        background-color: white;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        width: 180px;
+        padding: 10px 0;
+    }
+
+    .dropdown-item-rsb {
+        display: block;
+        padding: 8px 16px;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        border: none;
+        background: none;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .dropdown-item-rsb:hover {
+        background-color: #f6f6f6;
+    }
 
 </style>
 
@@ -118,14 +146,21 @@
 
     <!-- Profile Header -->
     <div class="profile-header-rsb">
-        <button class="icon-btn-rsb">
+        <!-- Icon Button for User Profile (Redirect to /Account on click) -->
+        <button class="icon-btn-rsb" id="user-profile-btn-rsb">
             <i class="bi bi-person"></i>
         </button>
         <!-- Display the logged-in username -->
         <span id="username-rsb">@User.Identity?.Name</span>
-        <button class="icon-btn-rsb">
+        <!-- Hamburger Menu Button -->
+        <button class="icon-btn-rsb" id="hamburger-menu-btn-rsb">
             <i class="bi bi-list"></i>
         </button>
+    </div>
+
+    <!-- Dropdown Menu (Initially hidden) -->
+    <div id="dropdown-menu-rsb" class="dropdown-menu-rsb" style="display: none;">
+        <button class="dropdown-item-rsb" id="logout-btn-rsb">Odhlásit se</button>
     </div>
 
     <!-- User Avatars (Dynamic) -->
@@ -145,10 +180,11 @@
 <!-- Dynamic JavaScript -->
 <script>
     const users = [
-        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" },
-        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" },
-        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" },
-        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" }
+        { name: "Jožka Nula", image: "~Images/GenericAvatar.png"},
+        { name: "Jožka Nula", image: "~/wwwroot/Images/GenericAvatar.png"},
+        { name: "Jožka Nula", image: "~/wwwroot/Images/GenericAvatar.png"},
+        { name: "Jožka Nula", image: "~/wwwroot/Images/GenericAvatar.png"},
+
     ];
 
     const petition = {
@@ -185,5 +221,26 @@
     // Initialize content
     renderAvatars();
     renderPetition();
+
+    // Toggle dropdown menu visibility when hamburger menu is clicked
+    const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-rsb');
+    const dropdownMenu = document.getElementById('dropdown-menu-rsb');
+
+    hamburgerMenuBtn.addEventListener('click', () => {
+        // Toggle the display of the dropdown menu
+        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Redirect to /Account/Logout when "Odhlásit se" is clicked
+    const logoutBtn = document.getElementById('logout-btn-rsb');
+    logoutBtn.addEventListener('click', () => {
+        window.location.href = '/Account/Logout'; // Redirect to the logout page
+    });
+
+    // Redirect to /Account when user profile button is clicked
+    const userProfileBtn = document.getElementById('user-profile-btn-rsb');
+    userProfileBtn.addEventListener('click', () => {
+        window.location.href = '/Account'; // Redirect to the account page
+    });
 </script>
 
