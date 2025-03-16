@@ -1,45 +1,189 @@
-<div class="w-64 bg-orange-100 min-h-screen p-4 flex flex-col">
-    
-    <!-- Navigation Links -->
-    <nav class="mt-6">
-        <ul class="space-y-3">
-            <li>
-                <a href="#" class="flex items-center p-2 rounded-lg hover:bg-orange-200 transition">
-                    <span class="material-icons text-gray-600">place</span>
-                    <span class="ml-3 text-gray-800">Mapa</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center p-2 rounded-lg hover:bg-orange-200 transition">
-                    <span class="material-icons text-gray-600">store</span>
-                    <span class="ml-3 text-gray-800">Bazar</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center p-2 rounded-lg hover:bg-orange-200 transition">
-                    <span class="material-icons text-gray-600">pets</span>
-                    <span class="ml-3 text-gray-800">Pejskaři</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center p-2 rounded-lg hover:bg-orange-200 transition">
-                    <span class="material-icons text-gray-600">search</span>
-                    <span class="ml-3 text-gray-800">Ztráty a nálezy</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center p-2 rounded-lg hover:bg-orange-200 transition">
-                    <span class="material-icons text-gray-600">report</span>
-                    <span class="ml-3 text-gray-800">Stížnosti</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+<style>
+    .right-sidebar-rsb {
+        width: 260px;
+        min-height: 100vh;
+        background-color: #FFFAEF;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
 
-    <!-- User Avatars -->
-    <div class="mt-auto flex space-x-2">
-        <img src="~/wwwroot/images/user1.jpg" alt="User 1" class="w-10 h-10 rounded-full">
-        <img src="~/wwwroot/images/user2.jpg" alt="User 2" class="w-10 h-10 rounded-full">
-        <img src="~/wwwroot/images/user3.jpg" alt="User 3" class="w-10 h-10 rounded-full">
+    .profile-header-rsb {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
+
+    .icon-btn-rsb {
+        width: 42px; /* Match size with left sidebar avatar buttons */
+        height: 42px; /* Match size with left sidebar avatar buttons */
+        border-radius: 50%; /* Fully rounded */
+        background: #F98866;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px; /* Larger icon to match style */
+        border: none;
+        cursor: pointer;
+    }
+
+    #username-rsb {
+        font-weight: 500; /* Medium weight, same as left sidebar text */
+        color: #333;
+        font-size: 14px; /* Match text size with left sidebar */
+        margin: 0 10px;
+    }
+
+    .user-list-rsb {
+        flex-grow: 1;
+        overflow-y: auto;
+        margin-bottom: 24px;
+        padding-right: 4px;
+    }
+
+    .user-item-rsb {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .avatar-btn-rsb {
+        width: 40px; /* Match size with left sidebar avatars */
+        height: 40px; /* Match size with left sidebar avatars */
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 12px;
+        padding: 0;
+        border: 2px solid white;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        background: none;
+        cursor: pointer;
+    }
+
+    .avatar-btn-rsb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .user-item-rsb span {
+        font-weight: 500; /* Same weight as left sidebar text */
+        color: #333;
+        font-size: 14px; /* Match text size with left sidebar */
+        flex-grow: 1;
+    }
+
+    .petition-rsb {
+        background: white;
+        padding: 16px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        border-bottom: 1px solid #e7e5e4;
+        margin-bottom: 24px;
+    }
+
+    .petition-rsb p {
+        margin: 0 0 16px;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .btn-sign-rsb {
+        background-color: #F98866;
+        color: white;
+        border: none;
+        padding: 8px 20px; /* Increased padding */
+        border-radius: 30px; /* Fully rounded */
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-sign-rsb:hover {
+        background-color: #e06e54;
+    }
+
+    .signature-count-rsb {
+        font-weight: 500;
+        color: #333;
+    }
+
+
+</style>
+
+<!-- Right Sidebar -->
+<div class="right-sidebar-rsb">
+
+    <!-- Profile Header -->
+    <div class="profile-header-rsb">
+        <button class="icon-btn-rsb">
+            <i class="bi bi-person"></i>
+        </button>
+        <!-- Display the logged-in username -->
+        <span id="username-rsb">@User.Identity?.Name</span>
+        <button class="icon-btn-rsb">
+            <i class="bi bi-list"></i>
+        </button>
+    </div>
+
+    <!-- User Avatars (Dynamic) -->
+    <div id="user-list-rsb" class="user-list-rsb"></div>
+
+    <!-- Petition Section -->
+    <div class="petition-rsb">
+        <h5 id="petition-title-rsb">Název petice</h5>
+        <p id="petition-description-rsb">Popis petice</p>
+        <div class="d-flex">
+            <span class="signature-count-rsb" id="petition-signatures-rsb">123 podpisů</span>
+            <button class="btn-sign-rsb" id="sign-btn-rsb">Podepsat</button>
+        </div>
     </div>
 </div>
+
+<!-- Dynamic JavaScript -->
+<script>
+    const users = [
+        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" },
+        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" },
+        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" },
+        { name: "Jožka Nula", image: "~/wwwroot/images/user1.jpg" }
+    ];
+
+    const petition = {
+        title: "Nové lavičky",
+        description: "Žádáme o opravu veřejných laviček ve městě. Podpořte nás podpisem!",
+        signatures: 217
+    };
+
+    // Render avatars dynamically
+    function renderAvatars() {
+        const userList = document.getElementById('user-list-rsb');
+        userList.innerHTML = '';
+
+        users.forEach((user, index) => {
+            const item = document.createElement('div');
+            item.className = 'user-item-rsb';
+            item.innerHTML = `
+            <button class="avatar-btn-rsb" onclick="onAvatarClick(${index})">
+                <img src="${user.image}" alt="${user.name}">
+            </button>
+            <span>${user.name}</span>
+        `;
+            userList.appendChild(item);
+        });
+    }
+
+    // Render petition dynamically
+    function renderPetition() {
+        document.getElementById('petition-title-rsb').innerText = petition.title;
+        document.getElementById('petition-description-rsb').innerText = petition.description;
+        document.getElementById('petition-signatures-rsb').innerText = `${petition.signatures} podpisů`;
+    }
+
+    // Initialize content
+    renderAvatars();
+    renderPetition();
+</script>
+
