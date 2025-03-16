@@ -47,7 +47,7 @@ public class AccountController(DatabaseContext databaseContext) : Controller
 
         var user = databaseContext.Users.FirstOrDefault(user => user.Email == model.Email);
         if (user == null)
-            return View("Login", model with { Message = "Nemáte vytvořený účet." });
+            return View("Login", model with { Message = "Nesprávné jméno nebo heslo." });
 
         if (Password.Verify(model.Password, user.PasswordHash, user.PasswordSalt) == false)
             return View("Login", model with { Message = "Nesprávné jméno nebo heslo." });
