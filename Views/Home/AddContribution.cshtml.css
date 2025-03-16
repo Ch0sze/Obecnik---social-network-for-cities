@@ -3,7 +3,7 @@
     font-family: 'Inter', sans-serif;
 }
 
-#OpenContributionButton {
+#openModalButton {
     color: #969696;
     border-radius: 20px;
     border-color: #969696;
@@ -18,10 +18,10 @@
     padding: 10px 20px; 
 }
 
-#OpenContributionButton .i {
+#openModalButton .i {
     margin-left: auto;
 }
 
-#OpenContributionButton:active {
+#openModalButton:active {
     transform: scale(1.01);
 }

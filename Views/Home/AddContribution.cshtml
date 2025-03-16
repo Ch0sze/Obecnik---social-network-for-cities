@@ -1,75 +1,82 @@
 <div class="mt-3 w-75 justify-content-center">
-    <button id="OpenContributionButton" type="button" class="btn btn-default">
+    <partial name="_CreatePost"/>
+    <button id="openModalButton" type="button" class="btn btn-default mb-3">
         O co byste se chtěli podělit ...
         <i class="bi bi-envelope-arrow-up-fill"></i>
     </button>
     
-    <!-- Form for adding contributions, initially hidden -->
-    <div id="contributionFormContainer" style="display: block;" class="mt-3">
-        <form id="contributionForm">
-            <div class="form-group">
-                <textarea id="contentInput" class="form-control" rows="3" required placeholder="Napište svůj příspěvek..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary mt-2">Odeslat</button>
-        </form>
-    </div>
+    @* <button id="contributionFormContainer"></button> *@
+    @* <!-- Form for adding contributions, initially hidden --> *@
+    @* <div id="contributionFormContainer" style="display: block;" class="mt-3"> *@
+    @*     <form id="contributionForm"> *@
+    @*         <div class="form-group"> *@
+    @*             <textarea id="contentInput" class="form-control" rows="3" required placeholder="Napište svůj příspěvek..."></textarea> *@
+    @*         </div> *@
+    @*         <button type="submit" class="btn btn-primary mt-2">Odeslat</button> *@
+    @*     </form> *@
+    @* </div> *@
     
-    <div id="contributionsContainer" class="mt-3"></div>
+    <div id="contributionsContainer" class="mb-3"></div>
+    
 </div>
 
+@using System.Text.Json
+@{
+    var contributions = new List<object>
+    {
+        new { Id = 1, UserName = "Jan Novák", Headline = "První příspěvek", Message = "Toto je testovací příspěvek číslo 1.", Date = DateTime.Now.AddMinutes(-10).ToString("g") },
+        new { Id = 2, UserName = "Petr Svoboda", Headline = "Druhý příspěvek", Message = "Toto je testovací příspěvek číslo 2.", Date = DateTime.Now.AddMinutes(-20).ToString("g") },
+        new { Id = 3, UserName = "Anna Dvořáková", Headline = "Třetí příspěvek", Message = "Další příspěvek je tady!", Date = DateTime.Now.AddMinutes(-30).ToString("g") },
+        new { Id = 4, UserName = "Josef Černý", Headline = "Čtvrtý příspěvek", Message = "Ještě jeden příkladový příspěvek.", Date = DateTime.Now.AddMinutes(-40).ToString("g") },
+        new { Id = 5, UserName = "Marie Malá", Headline = "Pátý příspěvek", Message = "Pátý testovací příspěvek!", Date = DateTime.Now.AddMinutes(-50).ToString("g") },
+        new { Id = 6, UserName = "Tomáš Veselý", Headline = "Šestý příspěvek", Message = "Simulovaný příspěvek z databáze.", Date = DateTime.Now.AddMinutes(-60).ToString("g") },
+        new { Id = 7, UserName = "Eva Králová", Headline = "Sedmý příspěvek", Message = "Náhodná testovací zpráva.", Date = DateTime.Now.AddMinutes(-70).ToString("g") },
+        new { Id = 8, UserName = "Pavel Horák", Headline = "Osmý příspěvek", Message = "Test simulace databáze.", Date = DateTime.Now.AddMinutes(-80).ToString("g") },
+        new { Id = 9, UserName = "Lucie Kučerová", Headline = "Devátý příspěvek", Message = "Další příkladový příspěvek!", Date = DateTime.Now.AddMinutes(-90).ToString("g") },
+        new { Id = 10, UserName = "Martin Růžička", Headline = "Desátý příspěvek", Message = "Poslední testovací příspěvek.", Date = DateTime.Now.AddMinutes(-100).ToString("g") }
+    };
+
+    var jsonContributions = JsonSerializer.Serialize(contributions);
+}
 
 <script>
-        const avatarPath = "@Url.Content("~/Images/GenericAvatar.png")";
-        const userName = '@User.Identity?.Name';
-        
-        document.getElementById('OpenContributionButton').addEventListener('click', function() {
-            const formContainer = document.getElementById('contributionFormContainer');
-            if (formContainer.style.display === 'none' || formContainer.style.display === ''){
-                formContainer.style.display = 'block';
-            }
-            else formContainer.style.display = 'none';
-            });
-        
-        document.getElementById('contributionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent page reload
-        
-            const contentInput = document.getElementById('contentInput');
-            const message = contentInput.value.trim();
-            
-            if (message === "") return; // Prevent empty messages
-            
-            const now = new Date();
-            const formattedDate = now.toLocaleDateString(); // Format the date
-            const formattedTime = now.toLocaleTimeString(); // Format the time
-        
-            // Create a new post element
-            const postDiv = document.createElement('div');
-            postDiv.className = 'mt-3 p-3 border rounded shadow-sm';
+    const avatarPath = "@Url.Content("~/Images/GenericAvatar.png")";
+    const userName = '@User.Identity?.Name';
+
+    // Directly print the JSON variable from Razor
+    const contributions = @Html.Raw(jsonContributions);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("contributionsContainer");
+
+        // Loop through contributions and add them to the page
+        contributions.forEach(contribution => {
+            const postDiv = document.createElement("div");
+            postDiv.className = "mt-3 p-3 border rounded shadow-sm";
             postDiv.innerHTML = `
                 <div class="d-flex align-items-start">
                     <div>
                         <div>
                             <img src="${avatarPath}" alt="Avatar" 
                                  style="width: 30px; height: 30px; user-select: none; pointer-events: none;"/>
-                            <strong>${userName}</strong> 
-                            <small class="text-muted" >${formattedDate} v ${formattedTime}</small> <!-- Add date and time -->
+                            <strong>${contribution.UserName}</strong> 
+                            <small class="text-muted">${contribution.Date}</small>
                         </div>
-                        <p class="mb-0 mt-3 message-container" style="font-size: small;width: 100%;
+                        <p class="mb-0 mt-2" style="font-size: larger">${contribution.Headline}</p>
+                        <p class="mb-0 mt-1 message-container" style="font-size: small;width: 100%;
                         max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;
-                        overflow: auto;">${message}</p>
+                        overflow: auto;">${contribution.Message}</p>
                     </div>
                     <div class="ms-auto">
-                                <button type="button" class="btn btn-link p-0 border-0" style="pointer-events: none;">
-                                    <i class="bi bi-three-dots-vertical" style="pointer-events: auto;"></i>
-                                </button>
-                            </div>
+                        <button type="button" class="btn btn-link p-0 border-0" style="pointer-events: none;">
+                            <i class="bi bi-three-dots-vertical" style="pointer-events: auto;"></i>
+                        </button>
+                    </div>
                 </div>
             `;
-        
-            // Add the post to the container
-            document.getElementById('contributionsContainer').prepend(postDiv);
-        
-            // Clear the input field
-            contentInput.value = '';
+            container.appendChild(postDiv);
         });
+    });
 </script>
+
+

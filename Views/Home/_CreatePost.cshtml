@@ -1,53 +1,55 @@
-﻿@using (Html.BeginForm())
-{
-    <div id="createPostModal" class="modal">
-        <div class="modal-content">
-            <!-- Nadpis, který se mění na základě typu příspěvku -->
-            <h3 id="postTitleHeader" class="modal-header">Vytvořit diskuzi</h3>
+﻿<div class="create-post-modal-container">
+    @using (Html.BeginForm())
+    {
+        <div id="createPostModal" class="modal">
+            <div class="modal-content">
+                <!-- Nadpis, který se mění na základě typu příspěvku -->
+                <h3 id="postTitleHeader" class="modal-header">Vytvořit diskuzi</h3>
 
-            <!-- Tlačítka pro změnu typu příspěvku -->
-            <div class="button-group">
-                <button type="button" id="discussionButton" class="type-button active">Diskuze</button>
-                <button type="button" id="actionButton" class="type-button">Akce</button>
-                <button type="button" id="petitionButton" class="type-button">Petice</button>
-            </div>
-
-            <input type="text" id="postTitle" name="postTitle" class="input-field" placeholder="O co se jedná?" />
-            <textarea id="postContent" name="postContent" class="textarea-field" placeholder="Co se děje u vás?"></textarea>
-
-            <!-- Ikony pro obrázek, lokaci a datum -->
-            <div class="icon-group">
-                <div class="icon-button">
-                    <label for="uploadImage" class="icon-label">
-                        <img src="/icons/image_icon.svg" class="icon" />
-                    </label>
-                    <input type="file" id="uploadImage" name="uploadImage" style="display: none;" />
+                <!-- Tlačítka pro změnu typu příspěvku -->
+                <div class="button-group">
+                    <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
+                    <button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button>
+                    <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button>
                 </div>
 
-                <!-- Lokace a datum budou skryté pokud není zvolena akce -->
-                <div class="icon-button" id="locationButton" style="display: none;">
-                    <img src="/icons/location_icon.svg" class="icon" />
+                <input type="text" id="postTitle" name="postTitle" class="input-field" placeholder="O co se jedná?" />
+                <textarea id="postContent" name="postContent" class="textarea-field" placeholder="Co se děje u vás?"></textarea>
+
+                <!-- Ikony pro obrázek, lokaci a datum -->
+                <div class="icon-group">
+                    <div class="icon-button">
+                        <label for="uploadImage" class="icon-label">
+                            <img src="/icons/image_icon.svg" class="icon" />
+                        </label>
+                        <input type="file" id="uploadImage" name="uploadImage" style="display: none;" />
+                    </div>
+
+                    <!-- Lokace a datum budou skryté pokud není zvolena akce -->
+                    <div class="icon-button" id="locationButton" style="display: none;">
+                        <img src="/icons/location_icon.svg" class="icon" />
+                    </div>
+
+                    <div class="icon-button" id="dateButton" style="display: none;">
+                        <img src="/icons/calendar_icon.svg" class="icon" />
+                    </div>
                 </div>
 
-                <div class="icon-button" id="dateButton" style="display: none;">
-                    <img src="/icons/calendar_icon.svg" class="icon" />
+
+                <!-- Nové sekce pro "Akce" -->
+                <div id="actionFields" class="extra-fields" style="display: none;">
+                    <input type="text" id="location" name="location" class="input-field location-field" style="display: none;" />
+                    <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;" />
                 </div>
+
+                <button type="button" class="publish-button ButtonPublish">Publikovat</button>
             </div>
-
-
-            <!-- Nové sekce pro "Akce" -->
-            <div id="actionFields" class="extra-fields" style="display: none;">
-                <input type="text" id="location" name="location" class="input-field location-field" style="display: none;" />
-                <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;" />
-            </div>
-
-            <button type="button" class="publish-button">Publikovat</button>
         </div>
-    </div>
-}
+    }
+</div>
 
 <style>
-    .modal {
+    .create-post-modal-container .modal {
         display: none;
         position: fixed;
         left: 0;
@@ -58,7 +60,7 @@
         justify-content: center;
         align-items: center;
     }
-    .modal-header {
+    .create-post-modal-container .modal-header {
         margin-bottom: 15px;
         font-weight: bold;  /* Tučný text */
         font-size: 20px;    /* Zvětšení velikosti textu */
@@ -66,7 +68,7 @@
         text-transform: none;  /* Zajistí, že text nebude automaticky velkými písmeny */
     }
 
-    .modal-content {
+    .create-post-modal-container .modal-content {
         background-color: white;
         margin: 10% auto;
         padding: 20px;
@@ -74,7 +76,7 @@
         border-radius: 8px;
     }
 
-    .input-field, .textarea-field {
+    .create-post-modal-container .input-field, .textarea-field {
         width: 100%;
         margin-bottom: 15px;
         padding: 10px;
@@ -83,7 +85,7 @@
         font-size: 14px;
     }
 
-    .publish-button {
+    .create-post-modal-container .ButtonPublish {
         background-color: #ff926b;
         color: white;
         padding: 10px 20px;
@@ -92,14 +94,14 @@
         cursor: pointer;
     }
 
-    .button-group {
+    .create-post-modal-container .button-group {
         display: flex;
         width: 100%;
         margin-bottom: 15px;
         justify-content: space-between;
     }
 
-    .type-button {
+    .create-post-modal-container .ButtonPopup {
         background-color: #f1f1f1;
         color: #333;
         border: none;
@@ -111,22 +113,22 @@
         transition: background-color 0.3s ease;
     }
 
-    .type-button:hover {
+    .create-post-modal-container .ButtonPopup:hover {
         background-color: #e86f59;
         color: white;
     }
 
-    .type-button.active {
+    .create-post-modal-container .ButtonPopup.active {
         background-color: #ff926b;
         color: white;
     }
 
-    .extra-fields {
+    .create-post-modal-container .extra-fields {
         display: none;
     }
 
     /* Ikony vedle sebe */
-    .icon-group {
+    .create-post-modal-container .icon-group {
         display: flex;
         justify-content: flex-start; /* Zarovnáno na levou stranu */
         gap: 8px;
@@ -134,7 +136,7 @@
         margin-bottom: 12px;
     }
 
-    .icon-button {
+    .create-post-modal-container .icon-button {
         display: inline-block;
         width: 26px; /* Fixní šířka */
         height: 26px; /* Fixní výška */
@@ -142,13 +144,13 @@
         position: relative;
     }
 
-    .icon-label {
+    .create-post-modal-container .icon-label {
         display: block;
         width: 100%;
         height: 100%;
     }
 
-    .icon {
+    .create-post-modal-container .icon {
         width: 100%;
         height: 100%;
         object-fit: contain;
@@ -156,7 +158,7 @@
     }
 
     /* Skrytí polí pro lokaci a datum */
-    .location-field, .date-field {
+    .create-post-modal-container .location-field, .date-field {
         width: 100%;
         margin-top: 10px;
         padding: 10px;
