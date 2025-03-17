@@ -10,7 +10,10 @@
 
     <!-- Center Content (Middle Page) -->
     <div class="flex-grow-1 d-flex justify-content-center bg-light overflow-auto">
-        <partial name="AddContribution"/>
+        @if (Model.Contributions != null)
+            {
+                <partial name="AddContribution" model="Model.Contributions" />
+            }
     </div>
 
     <!-- Right Sidebar -->
