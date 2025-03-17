@@ -1,52 +1,46 @@
 ﻿<div class="create-post-modal-container">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("CreatePost", "Home", FormMethod.Post))
     {
         <div id="createPostModal" class="modal">
             <div class="modal-content">
-                <!-- Nadpis, který se mění na základě typu příspěvku -->
                 <h3 id="postTitleHeader" class="modal-header">Vytvořit diskuzi</h3>
-
-                <!-- Tlačítka pro změnu typu příspěvku -->
+    
                 <div class="button-group">
                     <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
                     <button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button>
                     <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button>
                 </div>
-
-                <input type="text" id="postTitle" name="postTitle" class="input-field" placeholder="O co se jedná?" />
-                <textarea id="postContent" name="postContent" class="textarea-field" placeholder="Co se děje u vás?"></textarea>
-
-                <!-- Ikony pro obrázek, lokaci a datum -->
+    
+                <input type="text" id="postTitle" name="postTitle" class="input-field" placeholder="O co se jedná?" required/>
+                <textarea id="postContent" name="postContent" class="textarea-field" placeholder="Co se děje u vás?" required></textarea>
+    
                 <div class="icon-group">
                     <div class="icon-button">
                         <label for="uploadImage" class="icon-label">
-                            <img src="/icons/image_icon.svg" class="icon" />
+                            <img src="/icons/image_icon.svg" class="icon"/>
                         </label>
-                        <input type="file" id="uploadImage" name="uploadImage" style="display: none;" />
+                        <input type="file" id="uploadImage" name="uploadImage" style="display: none;"/>
                     </div>
-
-                    <!-- Lokace a datum budou skryté pokud není zvolena akce -->
+    
                     <div class="icon-button" id="locationButton" style="display: none;">
-                        <img src="/icons/location_icon.svg" class="icon" />
+                        <img src="/icons/location_icon.svg" class="icon"/>
                     </div>
-
+    
                     <div class="icon-button" id="dateButton" style="display: none;">
-                        <img src="/icons/calendar_icon.svg" class="icon" />
+                        <img src="/icons/calendar_icon.svg" class="icon"/>
                     </div>
                 </div>
-
-
-                <!-- Nové sekce pro "Akce" -->
+    
                 <div id="actionFields" class="extra-fields" style="display: none;">
-                    <input type="text" id="location" name="location" class="input-field location-field" style="display: none;" />
-                    <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;" />
+                    <input type="text" id="location" name="location" class="input-field location-field" style="display: none;"/>
+                    <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;"/>
                 </div>
-
-                <button type="button" class="publish-button ButtonPublish">Publikovat</button>
+    
+                <button type="submit" class="publish-button ButtonPublish" id="publishPost">Publikovat</button>
             </div>
         </div>
     }
-</div>
+    </div>
 
 <style>
     .create-post-modal-container .modal {
@@ -90,7 +84,7 @@
         color: white;
         padding: 10px 20px;
         border: none;
-        border-radius: 5px;
+        border-radius: 90px;
         cursor: pointer;
     }
 
@@ -105,7 +99,7 @@
         background-color: #f1f1f1;
         color: #333;
         border: none;
-        border-radius: 5px;
+        border-radius: 90px;
         padding: 10px;
         flex-grow: 1;
         cursor: pointer;
@@ -169,6 +163,18 @@
 </style>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var publishButton = document.getElementById("publishPost");
+        var modal = document.getElementById("createPostModal");
+    
+        if (publishButton && modal) {
+            // Close the modal when "Publikovat" is clicked (i.e., form is submitted)
+            publishButton.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+        }
+    });
+    
     document.addEventListener("DOMContentLoaded", function () {
         var discussionButton = document.getElementById("discussionButton");
         var actionButton = document.getElementById("actionButton");
