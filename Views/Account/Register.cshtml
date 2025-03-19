@@ -73,8 +73,13 @@
                     <!-- Checkbox for terms -->
                     <div class="form-check mb-3">
                         <input type="checkbox" id="terms" name="terms" class="form-check-input" />
-                        <label for="terms" class="form-check-label text-dark fw-bold">Souhlasím s podmínkami užití</label>
+                        <label for="terms" class="form-check-label text-dark fw-bold">
+                            Souhlasím s
+                            <a href="#" id="terms-link" style="text-decoration: underline;">podmínkami užití</a>
+                        </label>
                     </div>
+
+
                     <div id="terms-error" class="text-danger mb-3">
                         Musíte souhlasit s podmínkami užití pro registraci
                     </div>
@@ -105,6 +110,137 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const termsLink = document.getElementById("terms-link");
+        const termsCheckbox = document.getElementById("terms");
+        const termsError = document.getElementById("terms-error");
+        const submitButton = document.getElementById("submit-button");
+
+        // Popup window terms (create popup element dynamically)
+        const popup = document.createElement("div");
+        popup.style.display = "none";
+        popup.style.position = "fixed";
+        popup.style.top = "0";
+        popup.style.left = "0";
+        popup.style.width = "100%";
+        popup.style.height = "100%";
+        popup.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        popup.style.zIndex = "9999";
+        popup.style.overflow = "overlay";
+
+        // Popup content
+        const popupContent = document.createElement("div");
+        popupContent.classList.add("popup-content");
+        popupContent.style.position = "relative";
+        popupContent.style.margin = "7% auto";
+        popupContent.style.padding = "30px";
+        popupContent.style.backgroundColor = "white";
+        popupContent.style.borderRadius = "8px";
+        popupContent.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.2)";
+        popupContent.style.maxWidth = "50%";
+        popupContent.style.maxHeight = "75%";
+        popupContent.style.overflowY = "auto";
+        popupContent.style.lineHeight = "1.6";
+
+        // Add terms content to the popup
+        popupContent.innerHTML = `
+    <span class="popup-close" style="cursor: pointer; position: absolute; top: 15px; right: 15px; font-size: 22px;">&times;</span>
+    <h2 style="margin-bottom: 10px;">Podmínky užití</h2>
+    <p><strong>1. Úvodní ustanovení</strong></p>
+    <p>1.1. Tyto podmínky užití (dále jen "Podmínky") upravují pravidla používání webové aplikace Obecník, která umožňuje uživatelům účastnit se komunitních aktivit v obcích a komunikovat s ostatními uživateli.</p>
+    <p>1.2. Používáním aplikace souhlasíte s těmito Podmínkami a potvrzujete, že jste je přečetli a rozumíte jim. Pokud s nimi nesouhlasíte, nemůžete aplikaci používat.</p>
+    <p><strong>2. Registrace a uživatelský účet</strong></p>
+    <p>2.1. Pro používání některých funkcí aplikace je nutné se zaregistrovat. Při registraci musí uživatel poskytnout správné a aktuální údaje.</p>
+    <p>2.2. Uživatelé jsou povinni chránit své přihlašovací údaje a zodpovídají za všechny aktivity provedené prostřednictvím jejich účtu.</p>
+    <p><strong>3. Práva a povinnosti uživatelů</strong></p>
+    <p>3.1. Uživatelé se zavazují používat aplikaci v souladu s platnými právními předpisy a těmito Podmínkami.</p>
+    <p>3.2. Uživatelé nesmí:</p>
+    <ul>
+        <li>Publikovat obsah, který je urážlivý, diskriminační, nezákonný nebo porušuje práva jiných osob.</li>
+        <li>Šířit nevyžádané zprávy, spam nebo reklamu.</li>
+        <li>Poškozovat funkčnost aplikace nebo jinak ohrožovat její bezpečnost.</li>
+    </ul>
+    <p>3.3. Uživatelé souhlasí s tím, že obsah, který zveřejní v aplikaci, může být veřejně přístupný a může být sdílen s ostatními uživateli.</p>
+    <p><strong>4. Obsah a moderování</strong></p>
+    <p>4.1. Uživatelé jsou zodpovědní za obsah, který zveřejní, a za jakékoliv následky jeho zveřejnění.</p>
+    <p>4.2. Aplikace si vyhrazuje právo upravit nebo odstranit obsah, který porušuje tyto Podmínky.</p>
+    <p>4.3. Administrátoři mají právo moderovat obsah, mazat příspěvky a přijímat opatření proti uživatelům, kteří porušují pravidla aplikace.</p>
+    <p><strong>5. Ochrana osobních údajů</strong></p>
+    <p>5.1. Vaše osobní údaje jsou shromažďovány a zpracovávány v souladu s platnými zákony o ochraně osobních údajů.</p>
+    <p>5.2. Uživatelé mají právo přistupovat k těmto údajům, opravovat je nebo požadovat jejich odstranění.</p>
+    <p><strong>6. Změny podmínek</strong></p>
+    <p>6.1. Aplikace si vyhrazuje právo kdykoliv změnit tyto Podmínky. Změny budou zveřejněny v aplikaci a budou platné okamžitě po jejich zveřejnění.</p>
+    <p><strong>7. Závěrečná ustanovení</strong></p>
+    <p>7.1. Tyto Podmínky představují celkovou dohodu mezi uživatelem a aplikací.</p>
+    <p>7.2. Jakékoliv spory vzniklé v souvislosti s těmito Podmínkami budou řešeny v souladu s právním řádem České republiky.</p>
+    `;
+
+        popup.appendChild(popupContent);
+        document.body.appendChild(popup);
+
+        // Open popup on clicking the terms link
+        termsLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            popup.style.display = "block";
+        });
+
+        // Close popup when clicking on X
+        const closePopup = popup.querySelector(".popup-close");
+        closePopup.addEventListener("click", function () {
+            popup.style.display = "none";
+        });
+
+        // Close popup when clicking outside the content area
+        window.addEventListener("click", function(event) {
+            if (event.target === popup) {
+                popup.style.display = "none";
+            }
+        });
+
+        // Handle checkbox behavior
+        if (!termsCheckbox.checked) {
+            termsError.classList.remove("d-none");
+        }
+
+        // Toggle error message and submit button status based on checkbox
+        termsCheckbox.addEventListener("change", function () {
+            if (termsCheckbox.checked) {
+                termsError.classList.add("d-none");
+                submitButton.disabled = false;
+            } else {
+                termsError.classList.remove("d-none");
+                submitButton.disabled = true;
+            }
+        });
+
+        // Prevent form submission if checkbox is unchecked
+        document.getElementById("register-form").addEventListener("submit", function (event) {
+            if (!termsCheckbox.checked) {
+                event.preventDefault();
+                termsError.classList.remove("d-none");
+            }
+        });
+        
+        // Add style for thumb like scrollbar
+        const style = document.createElement('style');
+        style.innerHTML = `
+            *::-webkit-scrollbar {
+              background-color: transparent;
+              width: 12px;
+            }
+            *::-webkit-scrollbar-track {
+              background-color: transparent;
+            }
+            *::-webkit-scrollbar-thumb {
+              border-radius: 20px;
+              border: 3px solid transparent;
+              background-color: rgba(0,0,0,0.3);
+              background-clip: content-box;
+            }    
+            `;
+        document.head.appendChild(style);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
         const termsCheckbox = document.getElementById("terms");
         const termsError = document.getElementById("terms-error");
         const submitButton = document.getElementById("submit-button");
@@ -117,20 +253,22 @@
         // Toggle error message visibility based on checkbox
         termsCheckbox.addEventListener("change", function () {
             if (termsCheckbox.checked) {
-                termsError.classList.add("d-none"); // Hide error if checked
-                submitButton.disabled = false; // Enable the submit button
+                termsError.classList.add("d-none");
+                submitButton.disabled = false;
             } else {
-                termsError.classList.remove("d-none"); // Show error if not checked
-                submitButton.disabled = true; // Disable the submit button
+                termsError.classList.remove("d-none");
+                submitButton.disabled = true;
             }
         });
 
         // When submitting the form, check if checkbox is checked and show/hide error accordingly
         document.getElementById("register-form").addEventListener("submit", function (event) {
             if (!termsCheckbox.checked) {
-                event.preventDefault(); // Prevent form submission
-                termsError.classList.remove("d-none"); // Show error message
+                event.preventDefault();
+                termsError.classList.remove("d-none");
             }
         });
     });
+    
+
 </script>
