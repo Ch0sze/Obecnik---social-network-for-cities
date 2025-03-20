@@ -1,4 +1,4 @@
-@model List<Application.Api.Models.HomeViewModel>
+@model List<HomeViewModel.Post>
 
 <div class="mt-3 w-75 justify-content-center">
     <partial name="_CreatePost"/>
@@ -7,124 +7,29 @@
         <i class="bi bi-envelope-arrow-up-fill"></i>
     </button>
 
-    <div id="contributionsContainer" class="mb-3"></div>
-</div>
-
-@using System.Text.Json
-<script>
-    const avatarPath = "@Url.Content("~/Images/GenericAvatar.png")";
-    const userName = '@User.Identity?.Name';
-
-    // Pass the Razor model to JavaScript
-    const contributions = @Html.Raw(Json.Serialize(Model));
-    console.log(contributions);
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const container = document.getElementById("contributionsContainer");
-
-        // Function to render a contribution post
-        function renderPost(contribution) {
-            const postDiv = document.createElement("div");
-            postDiv.className = "mt-3 p-3 border rounded shadow-sm";
-            postDiv.innerHTML = `
-                <div class="d-flex align-items-start">
+    <div id="contributionsContainer" class="mb-3">
+        @foreach (var post in Model)
+        {
+            <div class="d-flex align-items-start">
+                <div>
                     <div>
-                        <div>
-                            <img src="${avatarPath}" alt="Avatar" 
-                                 style="width: 30px; height: 30px; user-select: none; pointer-events: none;"/>
-                            <strong>${contribution.userName}</strong> 
-                            <small class="text-muted">${contribution.date}</small>
-                        </div>
-                        <p class="mb-0 mt-2" style="font-size: larger">${contribution.headline}</p>
-                        <p class="mb-0 mt-1 message-container" style="font-size: small;width: 100%;
-                        max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;
-                        overflow: auto;">${contribution.message}</p>
+                        <img src="~/Images/GenericAvatar.png" alt="Avatar"
+                             style="width: 30px; height: 30px; user-select: none; pointer-events: none;"/>
+                        <strong>@post.CreatedBy</strong>
+                        <small class="text-muted">@post.CreatedAt</small>
                     </div>
-                    <div class="ms-auto">
-                        <button type="button" class="btn btn-link p-0 border-0" style="pointer-events: none;">
-                            <i class="bi bi-three-dots-vertical" style="pointer-events: auto;"></i>
-                        </button>
-                    </div>
+                    <p class="mb-0 mt-2" style="font-size: larger">@post.Title</p>
+                    <p class="mb-0 mt-1 message-container"
+                       style="font-size: small;width: 100%; max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;                        overflow: auto;">
+                        @post.Description
+                    </p>
                 </div>
-            `;
-            container.insertBefore(postDiv, container.firstChild); // Insert at the top
+                <div class="ms-auto">
+                    <button type="button" class="btn btn-link p-0 border-0" style="pointer-events: none;">
+                        <i class="bi bi-three-dots-vertical" style="pointer-events: auto;"></i>
+                    </button>
+                </div>
+            </div>
         }
-
-        // Loop through existing contributions and render them
-        contributions.forEach(contribution => {
-            renderPost(contribution);
-        });
-
-        // Submit new post via AJAX
-        const postForm = document.querySelector('form'); // Assuming the form in _CreatePost partial
-        postForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent page reload
-
-            const formData = new FormData(postForm);
-            fetch('@Url.Action("CreatePost", "Home")', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(newPost => {
-                renderPost(newPost); // Add the new post dynamically
-                postForm.reset(); // Reset the form
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-</script>
-
-@* @model List<Application.Api.Models.HomeViewModel> *@
-@* *@
-@* <div class="mt-3 w-75 justify-content-center"> *@
-@*     <partial name="_CreatePost"/> *@
-@*     <button id="openModalButton" type="button" class="btn btn-default mb-3"> *@
-@*         O co byste se chtěli podělit ... *@
-@*         <i class="bi bi-envelope-arrow-up-fill"></i> *@
-@*     </button> *@
-@* *@
-@*     <div id="contributionsContainer" class="mb-3"></div> *@
-@* </div> *@
-@* *@
-@* @using System.Text.Json *@
-@* <script> *@
-@*     const avatarPath = "@Url.Content("~/Images/GenericAvatar.png")"; *@
-@*     const userName = '@User.Identity?.Name'; *@
-@* *@
-@*     // Pass the Razor model to JavaScript *@
-@*     const contributions = @Html.Raw(Json.Serialize(Model)); *@
-@*     console.log(contributions) *@
-@* *@
-@*     document.addEventListener("DOMContentLoaded", function () { *@
-@*         const container = document.getElementById("contributionsContainer"); *@
-@* *@
-@*         // Loop through contributions and add them to the page *@
-@*         contributions.forEach(contribution => { *@
-@*             const postDiv = document.createElement("div"); *@
-@*             postDiv.className = "mt-3 p-3 border rounded shadow-sm"; *@
-@*             postDiv.innerHTML = ` *@
-@*                 <div class="d-flex align-items-start"> *@
-@*                     <div> *@
-@*                         <div> *@
-@*                             <img src="${avatarPath}" alt="Avatar"  *@
-@*                                  style="width: 30px; height: 30px; user-select: none; pointer-events: none;"/> *@
-@*                             <strong>${contribution.userName}</strong>  *@
-@*                             <small class="text-muted">${contribution.date}</small> *@
-@*                         </div> *@
-@*                         <p class="mb-0 mt-2" style="font-size: larger">${contribution.headline}</p> *@
-@*                         <p class="mb-0 mt-1 message-container" style="font-size: small;width: 100%; *@
-@*                         max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap; *@
-@*                         overflow: auto;">${contribution.message}</p> *@
-@*                     </div> *@
-@*                     <div class="ms-auto"> *@
-@*                         <button type="button" class="btn btn-link p-0 border-0" style="pointer-events: none;"> *@
-@*                             <i class="bi bi-three-dots-vertical" style="pointer-events: auto;"></i> *@
-@*                         </button> *@
-@*                     </div> *@
-@*                 </div> *@
-@*             `; *@
-@*             container.appendChild(postDiv); *@
-@*         }); *@
-@*     }); *@
-@* </script> *@
+    </div>
+</div>

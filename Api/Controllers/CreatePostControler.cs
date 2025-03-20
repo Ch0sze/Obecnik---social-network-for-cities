@@ -1,14 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Api.Extensions;
+using Application.Api.Models;
+using Application.Infastructure.Database;
+using Application.Infastructure.Database.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Application.Api.Controllers
+namespace Application.Api.Controllers;
+
+[Route("posts")]
+public class PostsController(DatabaseContext databaseContext) : Controller
 {
-    [Route("post")]
-    public class CreatePostController : Controller
+    [HttpPost]
+    public IActionResult Create(CreatePostViewModel model)
     {
-        [HttpGet("create")]
-        public IActionResult Create()
+        var userId = User.GetId();
+        var user = databaseContext.Users.FirstOrDefault(user => user.Id == userId);
+        if (user == null)
+            throw new Exception("User is null");
+        
+        var posts = new PostDo
         {
-            return PartialView("_CreatePost");  // Returns the modal
-        }
+            Id = default,
+            Title = model.Title,
+            Description = model.Content,
+            CreatedAt = DateTimeOffset.Now,
+            CreatedBy = user.Id,
+        };
+
+        databaseContext.Posts.Add(posts);
+        databaseContext.SaveChanges();
+
+        return RedirectToAction("Index", "Home");
     }
 }

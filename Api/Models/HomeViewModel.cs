@@ -1,13 +1,19 @@
 ﻿namespace Application.Api.Models;
+
 public class HomeViewModel
 {
-    public int Id { get; set; }
-    public string? UserName { get; set; }
-    public string? Headline { get; set; }
-    public string? Message { get; set; }
-    public string? Date { get; set; }
+    public required List<Post> Posts { get; set; }
+
+    public record Post
+    {
+        public required Guid Id { get; set; }
     
-    // Add the list of contributions
-    // Initialize Contributions as an empty list or make it nullable
-    public List<HomeViewModel> Contributions { get; set; } = new List<HomeViewModel>();  // Empty list by default
+        public required string Title { get; set; }
+    
+        public required string Description { get; set; }
+    
+        public required DateTimeOffset CreatedAt { get; set; }
+    
+        public required string CreatedBy { get; set; }
+    }
 }

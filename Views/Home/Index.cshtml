@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -10,10 +11,7 @@
 
     <!-- Center Content (Middle Page) -->
     <div class="flex-grow-1 d-flex justify-content-center bg-light overflow-auto">
-        @if (Model.Contributions != null)
-            {
-                <partial name="AddContribution" model="Model.Contributions" />
-            }
+        <partial name="AddContribution" model="Model.Posts" />
     </div>
 
     <!-- Right Sidebar -->

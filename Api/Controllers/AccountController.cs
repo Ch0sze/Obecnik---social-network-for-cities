@@ -23,7 +23,7 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         return View("Account", new AccountViewModel
         {
             Email = user?.Email ?? string.Empty,
-            Name = user?.Name ?? string.Empty
+            Name = user?.Firstname ?? string.Empty
         });
     }
 
@@ -44,7 +44,7 @@ public class AccountController(DatabaseContext databaseContext) : Controller
     {
         if (!ModelState.IsValid)
             return View("Login", model);
-
+        
         var user = databaseContext.Users.FirstOrDefault(user => user.Email == model.Email);
         if (user == null)
             return View("Login", model with { Message = "Nesprávné jméno nebo heslo." });
@@ -55,7 +55,7 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         var claims = new List<Claim>
         {
             new("Id", user.Id.ToString()),
-            new(ClaimTypes.Name, user.Name),
+            new(ClaimTypes.Name, string.Join(" ", user.Firstname, user.LastName)),
             new(ClaimTypes.Email, user.Email),
             new(ClaimTypes.Role, user.Role)
         };
@@ -132,7 +132,8 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         {
             Id = default,
             Email = model.Email,
-            Name = model.FirstName + " " + model.LastName,
+            Firstname = model.FirstName,
+            LastName = model.LastName,
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
             Role = string.Empty
