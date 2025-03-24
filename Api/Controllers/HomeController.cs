@@ -17,7 +17,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         var homeViewModel = new HomeViewModel
         {
             Posts = databaseContext.Posts
-                .Include(post => post.CreatedByUser)
+                .Include(post => post.User)
                 .ToList()
                 .Select(post => new HomeViewModel.Post
                 {
@@ -25,7 +25,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                     Title = post.Title,
                     Description = post.Description,
                     CreatedAt = post.CreatedAt,
-                    CreatedBy = string.Join(" ", post.CreatedByUser!.Firstname, post.CreatedByUser!.LastName),
+                    CreatedBy = string.Join(" ", post.User!.Firstname, post.User!.LastName),
                 })
                 .ToList(),
         };

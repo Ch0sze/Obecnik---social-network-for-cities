@@ -16,5 +16,7 @@ public class UserDo
 
     public required string Role { get; init; }
 
+    public ICollection<UserCommunityDo> UserCommunities { get; init; } = [];
     public ICollection<PostDo> Posts { get; init; } = [];
+    public ICollection<CommentDo> Comments { get; init; } = [];
 }
