@@ -27,7 +27,6 @@ public class PostsController(DatabaseContext databaseContext) : Controller
             Type = "Discussion",
             Place = "Zlín",
             User = user,
-            ChannelId = Guid.NewGuid(),
         };
 
         databaseContext.Posts.Add(posts);

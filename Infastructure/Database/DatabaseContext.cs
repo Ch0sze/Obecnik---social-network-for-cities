@@ -38,9 +38,9 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
         modelBuilder.Entity<PostDo>()
             .HasOne(post => post.Channel)
             .WithMany(channel => channel.Posts)
-            .HasForeignKey(post => post.ChannelId)
-            .IsRequired();
-
+            .HasForeignKey(post => post.ChannelId);
+            //.IsRequired(true);
+        
         // Configure Channel-Community relationship
         modelBuilder.Entity<ChannelDo>()
             .HasOne(channel => channel.Community)

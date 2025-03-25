@@ -15,6 +15,12 @@ public class UserDo
     public required byte[] PasswordSalt { get; init; }
 
     public required string Role { get; init; }
+    
+    public string? Residence { get; init; }
+    public string? Description { get; init; }  
+    public string? PasswordLink { get; init; }
+    public string? PostalCode { get; init; }
+    public string? Picture { get; init; }
 
     public ICollection<UserCommunityDo> UserCommunities { get; init; } = [];
     public ICollection<PostDo> Posts { get; init; } = [];
