@@ -24,6 +24,10 @@ public class PostsController(DatabaseContext databaseContext) : Controller
             Description = model.Content,
             CreatedAt = DateTimeOffset.Now,
             CreatedBy = user.Id,
+            Type = "Discussion",
+            Place = "Zlín",
+            User = user,
+            ChannelId = Guid.NewGuid(),
         };
 
         databaseContext.Posts.Add(posts);
