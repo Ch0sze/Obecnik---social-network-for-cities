@@ -15,5 +15,22 @@ public class HomeViewModel
         public required DateTimeOffset CreatedAt { get; set; }
     
         public required string CreatedBy { get; set; }
+        
+        public string GetFormattedCreatedAt()
+        {
+            var now = DateTimeOffset.Now;
+            var difference = now - CreatedAt;
+
+            if (difference.TotalMinutes < 1)
+                return "Právě teď";
+            if (difference.TotalMinutes < 60)
+                return $"Před {(int)difference.TotalMinutes} min";
+            if (difference.TotalHours < 24)
+                return $"Před {(int)difference.TotalHours} h";
+            if (CreatedAt.Date == now.Date.AddDays(-1))
+                return $"Včera v {CreatedAt:HH:mm}";
+
+            return CreatedAt.ToString("dd.MM.yyyy HH:mm");
+        }
     }
 }

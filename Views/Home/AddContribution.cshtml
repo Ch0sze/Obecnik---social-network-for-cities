@@ -10,26 +10,59 @@
     <div id="contributionsContainer" class="mb-3">
         @foreach (var post in Model)
         {
-            <div class="d-flex align-items-start">
+            <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm">
                 <div>
                     <div>
                         <img src="~/Images/GenericAvatar.png" alt="Avatar"
-                             style="width: 30px; height: 30px; user-select: none; pointer-events: none;"/>
+                             style="width: 30px; height: 30px; user-select: none; pointer-events: none; "/>
                         <strong>@post.CreatedBy</strong>
-                        <small class="text-muted">@post.CreatedAt</small>
+                        <small class="text-muted">@post.GetFormattedCreatedAt()</small>
                     </div>
-                    <p class="mb-0 mt-2" style="font-size: larger">@post.Title</p>
+                    <p class="mb-0 mt-2"
+                       style="font-size: larger; width: 100%; max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; overflow: auto;">
+                        @post.Title
+                    </p>
                     <p class="mb-0 mt-1 message-container"
-                       style="font-size: small;width: 100%; max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;                        overflow: auto;">
+                       style="font-size: small;width: 100%; max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; overflow: auto;">
                         @post.Description
                     </p>
                 </div>
-                <div class="ms-auto">
-                    <button type="button" class="btn btn-link p-0 border-0" style="pointer-events: none;">
-                        <i class="bi bi-three-dots-vertical" style="pointer-events: auto;"></i>
-                    </button>
-                </div>
+                @if (@post.CreatedBy == User.Identity?.Name)
+                {
+                    <div class="ms-auto">
+                        <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="contribution-settings-btn">
+                            <form asp-action="Delete" asp-controller="Home" method="post">
+                                <input type="hidden" name="id" value="@post.Id" />
+                                <button type="submit" class="dropdown-item"
+									onclick="return confirm('Opravdu chcete odstranit tento příspěvek?');">
+                                    Odstranit příspěvek
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
             </div>
         }
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.contribution-settings-btn').click(function(event) {
+            event.stopPropagation(); // Zabráníme šíření události, aby se dropdown nezavřel hned po otevření
+            $(this).next('.dropdown-menu').toggle();
+        });
+
+        // Skryjeme dropdown, když uživatel klikne mimo něj
+        $(document).click(function() {
+            $('.dropdown-menu').hide();
+        });
+    });
+
+    //"RequestVerificationToken": document.querySelector('meta[name="csrf-token"]').content
+</script>
+
