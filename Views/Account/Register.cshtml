@@ -70,6 +70,42 @@
                         <span asp-validation-for="LastName" class="invalid-feedback"></span>
                     </div>
 
+                    <!-- Address -->
+                    <div class="mb-3" style="position: relative;">
+                        <label asp-for="Residence" class="register-label" style="font-weight: bold; color: black;">Lokalita:</label>
+
+                        <!-- Readonly Input (Shows Selected Address) -->
+                        <input type="text"
+                               id="readonlyInput"
+                               class="register-input form-control"
+                               placeholder="Vyberte adresu a PSČ"
+                               readonly
+                               style="background-color: #FAFAFA !important;
+                  border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
+                  box-shadow: none !important; outline: none !important; cursor: pointer;" />
+
+                        <!-- Hidden Search Input -->
+                        <input type="text"
+                               id="searchInput"
+                               class="register-input form-control @ViewData.ValidationClass(model => model.Residence)"
+                               placeholder="Zadejte adresu nebo PSČ"
+                               style="display: none; background-color: #FAFAFA !important;
+                  border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
+                  box-shadow: none !important; outline: none !important;" />
+
+                        <!-- Hidden Fields to Store Residence and Postal Code -->
+                        <input type="hidden" asp-for="Residence" id="residenceField" value=""/>
+                        <input type="hidden" asp-for="PostalCode" id="postalcodeField" value=""/>
+
+                        <!-- Suggestions Box -->
+                        <ul id="suggestions" class="list-group" style="position: absolute; width: 100%; z-index: 10;"></ul>
+                        <p class="form-text text-muted" style="color: gray;">Pokud nemůžete najít svou adresu, zkuste zadat PSČ</p>
+                        <span asp-validation-for="Residence" class="invalid-feedback"></span>
+                        <span asp-validation-for="PostalCode" class="invalid-feedback"></span>
+                    </div>
+
+
+
                     <!-- Checkbox for terms -->
                     <div class="form-check mb-3">
                         <input type="checkbox" id="terms" name="terms" class="form-check-input" />
@@ -269,6 +305,105 @@
             }
         });
     });
-    
+    document.addEventListener("DOMContentLoaded", function () {
+        const readonlyInput = document.getElementById("readonlyInput");
+        const searchInput = document.getElementById("searchInput");
+        const suggestionsBox = document.getElementById("suggestions");
+
+        const residenceField = document.getElementById("residenceField");
+        const postalcodeField = document.getElementById("postalcodeField");
+
+        let timeout = null;
+
+        // Click on readonly input to switch to search input
+        readonlyInput.addEventListener("click", function () {
+            readonlyInput.style.display = "none";  // Hide readonly input
+            searchInput.style.display = "block";   // Show search input
+            searchInput.focus();
+        });
+
+        // Handle input in search box
+        searchInput.addEventListener("input", function () {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                searchCityPostcode();
+            }, 300);
+        });
+
+        async function searchCityPostcode() {
+            const query = searchInput.value.trim();
+            if (query.length < 2) {
+                suggestionsBox.style.display = "none";
+                return;
+            }
+
+            const apiKey = "ulZ6yvSAHSr1Nc-_aHfZUMclfryM1ZDKLUgOaU8dUgw";
+            const url = `https://api.mapy.cz/v1/suggest?lang=cs&apikey=${apiKey}&query=${encodeURIComponent(query)}&limit=10&type=regional.address&countryCode=CZ&locality=CZ`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Chyba při načítání API");
+                const data = await response.json();
+
+                const seen = new Set();
+                suggestionsBox.innerHTML = "";
+
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(item => {
+                        const city = item.location.split(",")[0].trim(); // Extract city
+                        const zip = item.zip || ""; // Extract postal code
+                        const suggestionText = `${city}, ${zip}`.trim();
+
+                        if (!seen.has(suggestionText)) {
+                            seen.add(suggestionText);
+
+                            const listItem = document.createElement("li");
+                            listItem.classList.add("list-group-item", "list-group-item-action");
+                            listItem.textContent = suggestionText;
+                            listItem.style.cursor = "pointer";
+
+                            listItem.addEventListener("click", function () {
+                                readonlyInput.value = suggestionText; // Show in readonly field
+                                residenceField.value = city;  // Store residence in hidden field
+                                postalcodeField.value = zip.replace(/\s/g, ""); // Remove spaces from postal code
+
+                                console.log("Residence set to:", residenceField.value);
+                                console.log("PostalCode set to:", postalcodeField.value); // Debugging
+
+                                searchInput.value = "";
+                                searchInput.style.display = "none";
+                                readonlyInput.style.display = "block";
+                                suggestionsBox.style.display = "none";
+                            });
+
+
+                            suggestionsBox.appendChild(listItem);
+                        }
+                    });
+
+                    suggestionsBox.style.width = `${searchInput.offsetWidth}px`;
+                    suggestionsBox.style.display = "block";
+                } else {
+                    suggestionsBox.style.display = "none";
+                }
+            } catch (error) {
+                console.error("API Error:", error);
+                suggestionsBox.style.display = "none";
+            }
+        }
+
+        // Click outside to close search
+        document.addEventListener("click", function (event) {
+            if (!readonlyInput.contains(event.target) &&
+                !searchInput.contains(event.target) &&
+                !suggestionsBox.contains(event.target)) {
+                suggestionsBox.style.display = "none";
+                searchInput.style.display = "none";
+                readonlyInput.style.display = "block";
+            }
+        });
+    });
+
+
 
 </script>

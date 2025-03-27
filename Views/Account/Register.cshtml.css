@@ -93,3 +93,30 @@
     color: #F98866 !important;
     text-decoration: none;
 }
+
+#suggestions {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 9999;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+#suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+#suggestions li:hover {
+    background-color: #f0f0f0;
+}
+
+#suggestions:empty {
+    display: none !important;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset !important;
+}
