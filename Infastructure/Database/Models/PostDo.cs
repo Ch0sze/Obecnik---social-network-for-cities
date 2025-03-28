@@ -1,3 +1,5 @@
+using System.Reflection.Metadata;
+
 namespace Application.Infastructure.Database.Models;
 
 public class PostDo
@@ -8,7 +10,7 @@ public class PostDo
     public required string Type { get; init; }
     public required string Description { get; init; }
     public DateTime? EventDate { get; init; }
-    public string? Photo { get; init; }
+    public byte[]? Photo { get; init; }
     public required string Place { get; init; }
     public int? SignaturesNo { get; init; }
     

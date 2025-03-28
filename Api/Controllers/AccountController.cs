@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Application.Api.Controllers;
 
@@ -117,9 +119,24 @@ public class AccountController(DatabaseContext databaseContext) : Controller
     [HttpPost("register")]
     public async Task<IActionResult> RegisterSubmit(RegisterViewModel model)
     {
+        Console.WriteLine($"Registering user: {model.Email}");
         if (!ModelState.IsValid)
+        {
+            Console.WriteLine($"ModelState is invalid. Errors:");
+            foreach (var error in ModelState)
+            {
+                foreach (var subError in error.Value.Errors)
+                {
+                    Console.WriteLine($" - {error.Key}: {subError.ErrorMessage}");
+                }
+            }
             return View("Register", model);
+        }
 
+
+        // Log the model data to confirm it's being received correctly
+        Console.WriteLine($"Registering user: {model.Email}");
+    
         var user = databaseContext.Users.FirstOrDefault(u => u.Email == model.Email);
         if (user != null)
         {
@@ -130,10 +147,12 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         var (passwordSalt, passwordHash) = Password.Create(model.Password);
         var newUser = new UserDo
         {
-            Id = default,
+            Id = Guid.NewGuid(),
             Email = model.Email,
             Firstname = model.FirstName,
             LastName = model.LastName,
+            Residence = model.Residence,
+            PostalCode = model.PostalCode,
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
             Role = string.Empty
@@ -142,8 +161,84 @@ public class AccountController(DatabaseContext databaseContext) : Controller
         await databaseContext.Users.AddAsync(newUser);
         await databaseContext.SaveChangesAsync();
 
+        // Assign the user to a community
+        await AssignUserToCommunity(newUser);
+
+        
         return View("RegisterSuccess");
     }
+
+    private async Task AssignUserToCommunity(UserDo user)
+{
+    var existingCommunity = await databaseContext.Communities
+        .FirstOrDefaultAsync(c => c.PostalCode == user.PostalCode && c.Name == $"{user.Residence}");
+
+    if (existingCommunity != null)
+    {
+        // Add user to the existing community via UserCommunityDo
+        var communityMember = new UserCommunityDo
+        {
+            UserId = user.Id,
+            CommunityId = existingCommunity.Id,
+            User = user,
+            Community = existingCommunity
+        };
+
+        await databaseContext.UserCommunities.AddAsync(communityMember);
+        Console.WriteLine($"User {user.Email} added to community {existingCommunity.Name}");
+    }
+    else
+    {
+        // Create a new community
+        var newCommunity = new CommunityDo
+        {
+            Id = Guid.NewGuid(),
+            Name = $"{user.Residence}",
+            PostalCode = user.PostalCode
+        };
+
+        await databaseContext.Communities.AddAsync(newCommunity);
+        await databaseContext.SaveChangesAsync(); // Save to get the newCommunity.Id
+
+        // Reload user from DB to ensure it's tracked
+        var trackedUser = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
+
+        if (trackedUser == null)
+        {
+            Console.WriteLine($"User {user.Email} not found in DB.");
+            return;
+        }
+
+        // Add user as the first member of the new community
+        var newCommunityMember = new UserCommunityDo
+        {
+            UserId = trackedUser.Id,
+            CommunityId = newCommunity.Id,
+            User = trackedUser,
+            Community = newCommunity
+        };
+
+        await databaseContext.UserCommunities.AddAsync(newCommunityMember);
+
+        // Create a new "Příspěvky" channel for the new community
+        var postsChannel = new ChannelDo
+        {
+            Id = Guid.NewGuid(),
+            Name = "Příspěvky", // Channel name
+            CommunityId = newCommunity.Id, // Link to the new community
+            Community = newCommunity // Link the channel to the new community
+        };
+
+        // Add the channel to the community
+        await databaseContext.Channels.AddAsync(postsChannel);
+        await databaseContext.SaveChangesAsync(); // Save the channel to the database
+
+        Console.WriteLine($"New community created: {newCommunity.Name} with channel 'Příspěvky'");
+    }
+
+    await databaseContext.SaveChangesAsync(); // Final save for the user-community relation
+}
+
 
     [Authorize]
     [HttpGet("logout")]
