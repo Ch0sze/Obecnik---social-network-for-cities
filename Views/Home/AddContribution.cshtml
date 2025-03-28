@@ -36,8 +36,7 @@
                         <div class="dropdown-menu" aria-labelledby="contribution-settings-btn">
                             <form asp-action="Delete" asp-controller="Home" method="post">
                                 <input type="hidden" name="id" value="@post.Id" />
-                                <button type="submit" class="dropdown-item"
-									onclick="return confirm('Opravdu chcete odstranit tento příspěvek?');">
+                                <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
                                     Odstranit příspěvek
                                 </button>
                             </form>
@@ -49,17 +48,68 @@
     </div>
 </div>
 
+<div class="modal" tabindex="-1" id="delete-popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Odstranit příspěvek</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Opravdu chcete tenhle příspěvek odstranit?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+        <button type="button" class="btn btn-primary" id="confirm-delete">Odstranit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('.contribution-settings-btn').click(function(event) {
-            event.stopPropagation(); // Zabráníme šíření události, aby se dropdown nezavřel hned po otevření
+    $(document).ready(function () {
+        $('.contribution-settings-btn').click(function (event) {
+            event.stopPropagation();
             $(this).next('.dropdown-menu').toggle();
         });
-
-        // Skryjeme dropdown, když uživatel klikne mimo něj
-        $(document).click(function() {
+    
+        $(document).click(function () {
             $('.dropdown-menu').hide();
+        });
+        
+        let postIdToDelete = null;
+
+        // Po kliknutí na "Odstranit příspěvek" se zobrazí modal a uloží se ID příspěvku
+        $('.delete-post-btn').click(function () {
+            postIdToDelete = $(this).data('post-id'); // Uložení ID příspěvku
+            let myModal = new bootstrap.Modal(document.getElementById('delete-popup'));
+            myModal.show();
+        });
+        
+        // AJAX odstranění příspěvku
+        $('#confirm-delete').click(function () {
+            if (!postIdToDelete) return;
+    
+            $.ajax({
+                url: '@Url.Action("Delete", "DeletePost")',
+                type: 'POST',
+                data: { id: postIdToDelete, __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() },
+                success: function (response) {
+                    if (response.success) {
+                        $('button[data-post-id="' + postIdToDelete + '"]').closest('.d-flex').fadeOut(300, function () {
+                            $(this).remove();
+                        });
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('Chyba při odstraňování příspěvku.');
+                }
+            });
+            let modal = bootstrap.Modal.getInstance(document.getElementById('delete-popup'));
+            modal.hide();
         });
     });
 

@@ -34,23 +34,6 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         return View(homeViewModel);  
     }
     
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(Guid id)
-    {
-        var post = await databaseContext.Posts.FindAsync(id);
-    
-        if (post == null)
-        {
-            return NotFound();
-        }
-
-        databaseContext.Posts.Remove(post);
-        await databaseContext.SaveChangesAsync();
-
-        return RedirectToAction(nameof(Index));
-    }
-    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     { 
