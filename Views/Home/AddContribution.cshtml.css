@@ -25,84 +25,53 @@
 #openModalButton:active {
     transform: scale(1.01);
 }
+/*DELETE MODAL==========================*/
+/* Center the modal properly */
+.modal-dialog {
+    font-family: 'Roboto', sans-serif;
+    max-width: 400px;
+}
 
-/*odstranění příspěvku modal ----------------------------------*/
+/* Modal content styling */
 .modal-content {
-    border-radius: 16px;
+    border-radius: 10px;
     padding: 20px;
 }
 
-/* Nadpis */
+/* Header styling */
 .modal-header {
     border-bottom: none;
     text-align: center;
-    width: 100%;
-    justify-content: center;
 }
 
 .modal-title {
+    font-weight: bold;
     font-size: 22px;
-    font-weight: bold;
-}
-
-/* Styl pro tlačítka Diskuze, Akce, Petice */
-.tab-buttons {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-}
-
-.tab-btn {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 20px;
-    background-color: #f3f3f3;
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.tab-btn.active {
-    background-color: #ff926e;
-    color: white;
-}
-
-/* Pole pro zadávání textu */
-.form-control {
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    padding: 12px;
-    font-size: 14px;
-}
-
-/* Ikona pro nahrání obrázku */
-.image-upload {
-    display: flex;
-    justify-content: left;
-    padding: 10px 0;
-    cursor: pointer;
-}
-
-.image-upload img {
-    width: 30px;
-    height: 30px;
-}
-
-/* Tlačítko Publikovat */
-.publish-btn {
-    background-color: #ff926e;
-    color: white;
-    border-radius: 25px;
-    padding: 12px;
-    border: none;
     width: 100%;
-    font-weight: bold;
-    transition: background 0.3s;
+    text-transform: none;
 }
 
-.publish-btn:hover {
-    background-color: #ff7b50;
+/* Body styling */
+.modal-body {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    text-transform: none;
+}
+
+/* Footer styling */
+.modal-footer {
+    border-top: none;
+    justify-content: center;
+}
+
+/* Button styling */
+.close-btn, .delete-btn {
+    background-color: #FF926B;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    text-transform: none;
 }

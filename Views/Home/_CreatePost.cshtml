@@ -1,55 +1,103 @@
 ﻿<div class="create-post-modal-container">
-    <form asp-controller="Posts" asp-action="Create" id="createPostForm">
-        <div id="createPostModal" class="modal">
-            <div class="modal-content">
-                <h3 id="postTitleHeader" class="modal-header">Vytvořit diskuzi</h3>
+    <form asp-controller="Posts" asp-action="Create" id="createPostForm" onsubmit="return validateForm()">
+        <div id="createPostModal" class="modal fade" tabindex="-1" aria-hidden="true" data-bs-backdrop="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <h3 id="postTitleHeader" class="modal-header">Vytvořit diskuzi</h3>
 
-                <div class="button-group">
-                    <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
-                    <button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button>
-                    <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button>
-                </div>
-
-                <input name="Title" type="text" class="input-field" placeholder="O co se jedná?" required/>
-                <textarea name="Content" class="textarea-field" placeholder="Co se děje u vás?" required></textarea>
-
-                <div class="icon-group">
-                    <div class="icon-button">
-                        <label for="uploadImage" class="icon-label">
-                            <img src="/icons/image_icon.svg" class="icon"/>
-                        </label>
-                        <input type="file" id="uploadImage" name="uploadImage" style="display: none;"/>
+                    <div class="button-group">
+                        <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
+                        @* <button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button> *@
+                        @* <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button> *@
                     </div>
 
-                    <div class="icon-button" id="locationButton" style="display: none;">
-                        <img src="/icons/location_icon.svg" class="icon"/>
+                    <input name="Title" type="text" class="input-field" placeholder="O co se jedná?" id="postTitle" maxlength="100" required/>
+                    <span id="titleError" class="error-message" style="color: red; display: none; font-size: 12px; margin-left: 2px;">Je potřeba napsat předmět.</span>
+                    <span id="titleLength" style="font-size: 12px; color: gray; margin-bottom: 12px; margin-left: 2px;">0/100</span>
+
+                    <textarea name="Content" class="textarea-field" placeholder="Co se děje u vás?" id="postContent" maxlength="1000" required></textarea>
+                    <span id="contentError" class="error-message" style="color: red; display: none; font-size: 12px; margin-left: 2px;">Je potřeba napsat popis.</span>
+                    <span id="contentLength" style="font-size: 12px; color: gray; margin-left: 2px;">0/1000</span>
+
+                    <div class="icon-group">
+                        <div class="icon-button">
+                            <label for="uploadImage" class="icon-label">
+                                <img src="/icons/image_icon.svg" class="icon"/>
+                            </label>
+                            <input type="file" id="uploadImage" name="uploadImage" style="display: none;"/>
+                        </div>
+
+                        <div class="icon-button" id="locationButton" style="display: none;">
+                            <img src="/icons/location_icon.svg" class="icon"/>
+                        </div>
+
+                        <div class="icon-button" id="dateButton" style="display: none;">
+                            <img src="/icons/calendar_icon.svg" class="icon"/>
+                        </div>
                     </div>
 
-                    <div class="icon-button" id="dateButton" style="display: none;">
-                        <img src="/icons/calendar_icon.svg" class="icon"/>
+                    <div id="actionFields" class="extra-fields" style="display: none;">
+                        <input type="text" id="location" name="location" class="input-field location-field" style="display: none;"/>
+                        <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;"/>
                     </div>
-                </div>
 
-                <div id="actionFields" class="extra-fields" style="display: none;">
-                    <input type="text" id="location" name="location" class="input-field location-field" style="display: none;"/>
-                    <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;"/>
+                    <button type="button" class="publish-button ButtonPublish" id="publishPost">Publikovat</button>
                 </div>
-
-                <button type="submit" class="publish-button ButtonPublish" id="publishPost">Publikovat</button>
             </div>
         </div>
     </form>
 </div>
 
 <script>
+    // validation functions
+    function validateForm() {
+        const titleInput = document.getElementById('postTitle');
+        const contentInput = document.getElementById('postContent');
+        let isValid = true;
+
+        // Reset error messages
+        document.getElementById('titleError').style.display = 'none';
+        document.getElementById('contentError').style.display = 'none';
+
+        // Validate title
+        if (!titleInput.value.trim()) {
+            document.getElementById('titleError').style.display = 'block';
+            isValid = false;
+        }
+
+        // Validate content
+        if (!contentInput.value.trim()) {
+            document.getElementById('contentError').style.display = 'block';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    // Add character counters
+    document.getElementById('postTitle').addEventListener('input', function() {
+        const length = this.value.length;
+        document.getElementById('titleLength').textContent = `${length}/100`;
+    });
+
+    document.getElementById('postContent').addEventListener('input', function() {
+        const length = this.value.length;
+        document.getElementById('contentLength').textContent = `${length}/1000`;
+    });
+    
     document.addEventListener("DOMContentLoaded", function () {
         var publishButton = document.getElementById("publishPost");
-        var modal = document.getElementById("createPostModal");
-    
-        if (publishButton && modal) {
-            // Close the modal when "Publikovat" is clicked (i.e., form is submitted)
+        var form = document.getElementById("createPostForm");
+        var modal = new bootstrap.Modal(document.getElementById("createPostModal"));
+        
+        if (publishButton && modal && form) {
+            // Handle publish button click
             publishButton.addEventListener("click", function () {
-                modal.style.display = "none";
+                if (validateForm()) {
+                    // Only submit if validation passes
+                    form.submit();
+                    modal.hide();
+                }
             });
         }
     });
@@ -118,33 +166,14 @@
 </script>
 
 <script>
-    document.getElementById("openModalButton").addEventListener("click", function () {
-        document.getElementById("createPostModal").style.display = "block";
-    });
-</script>
-
-<script>
     document.addEventListener("DOMContentLoaded", function () {
-        console.log("Skript byl načten!");
-
         var openModalButton = document.getElementById("openModalButton");
-        var modal = document.getElementById("createPostModal");
+        var modal = new bootstrap.Modal(document.getElementById("createPostModal"));
 
         if (openModalButton && modal) {
             openModalButton.addEventListener("click", function () {
-                console.log("Tlačítko bylo kliknuto!");
-                modal.style.display = "block";
+                modal.show();
             });
-
-            // Zavření modalu při kliknutí mimo obsah
-            window.addEventListener("click", function (event) {
-                if (event.target === modal) {
-                    console.log("Kliknuto mimo modal, zavírám.");
-                    modal.style.display = "none";
-                }
-            });
-        } else {
-            console.log("Chyba: Nemohu najít tlačítko nebo modal.");
         }
     });
 </script>

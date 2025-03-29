@@ -34,10 +34,12 @@
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="contribution-settings-btn">
-                            <form asp-action="Delete" asp-controller="Home" method="post">
-                                <input type="hidden" name="id" value="@post.Id" />
+                            <form asp-action="Delete">
                                 <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
                                     Odstranit příspěvek
+                                </button>
+                                <button type="button" class="dropdown-item update-post-btn">
+                                    Upravit příspěvek
                                 </button>
                             </form>
                         </div>
@@ -48,23 +50,22 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" id="delete-popup">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Odstranit příspěvek</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Opravdu chcete tenhle příspěvek odstranit?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
-        <button type="button" class="btn btn-primary" id="confirm-delete">Odstranit</button>
+<div class="modal fade" id="delete-popup" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Odstranit příspěvek</h5>
+        </div>
+        <div class="modal-body">
+          <p>Opravdu chcete tento příspěvek odstranit?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn close-btn" data-bs-dismiss="modal">Zavřít</button>
+          <button type="button" class="btn delete-btn" id="confirm-delete">Odstranit</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -112,7 +113,5 @@
             modal.hide();
         });
     });
-
-    //"RequestVerificationToken": document.querySelector('meta[name="csrf-token"]').content
 </script>
 

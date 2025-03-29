@@ -12,10 +12,36 @@ public class PostsController(DatabaseContext databaseContext) : Controller
     [HttpPost]
     public IActionResult Create(CreatePostViewModel model)
     {
+        
+        // Server-side validation
+        if (string.IsNullOrWhiteSpace(model.Title))
+        {
+            ModelState.AddModelError("Title", "Je potřeba napsat Předmět");
+        }
+        else if (model.Title.Length > 100)
+        {
+            ModelState.AddModelError("Title", "Předmět může mít maximálně 100 znaků");
+        }
+
+        if (string.IsNullOrWhiteSpace(model.Content))
+        {
+            ModelState.AddModelError("Content", "Je potřeba napsat do popisu");
+        }
+        else if (model.Content.Length > 1000)
+        {
+            ModelState.AddModelError("Content", "Popis může mít maximálně 1000 znaků");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            // Return to the form with errors
+            return View("~/Views/Home/Index.cshtml", model);
+        }
+        
         var userId = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(user => user.Id == userId);
         if (user == null)
-            throw new Exception("User is null");
+            return RedirectToAction("Login", "Account"); // Přesměrování na přihlášení
         
         var posts = new PostDo
         {
