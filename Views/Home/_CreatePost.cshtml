@@ -6,7 +6,7 @@
                     <h3 id="postTitleHeader" class="modal-header">Vytvořit příspěvek</h3>
 
                     <div class="button-group">
-                        <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
+                        @*<button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
                         @* <button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button> *@
                         @* <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button> *@
                     </div>
@@ -184,8 +184,12 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        var removeImageButton = document.getElementById("removeImageButton");
+        var imagePreview = document.getElementById("imagePreview");
+        var imagePreviewContainer = document.getElementById("imagePreviewContainer");
+        var imageInput = document.getElementById("uploadImage");
         // Funkce pro zobrazení náhledu obrázku
-        document.getElementById("uploadImage").addEventListener("change", function (event) {
+        imageInput.addEventListener("change", function (event) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
@@ -202,7 +206,7 @@
         removeImageButton.addEventListener("click", function () {
             imagePreview.src = "";
             imagePreviewContainer.style.display = "none";
-            imageInput.value = null; // Resetuje vstup souboru
+            imageInput.value = ""; // Resetuje vstup souboru
         });
     });
 </script>
