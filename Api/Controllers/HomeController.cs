@@ -14,10 +14,33 @@ public class HomeController(DatabaseContext databaseContext) : Controller
     [HttpGet]
     public IActionResult Index()
     {
+        var userId = User.GetId(); // Získání ID přihlášeného uživatele
+        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+
+        if (user == null)
+            return Unauthorized(); // Ošetření nepřihlášeného uživatele
+        var communityId = databaseContext.UserCommunities
+            .Where(uc => uc.UserId == user.Id)
+            .Select(uc => uc.CommunityId)
+            .FirstOrDefault();
+
+        if (communityId == default)
+            return View(new HomeViewModel { Posts = new List<HomeViewModel.Post>() }); // Pokud uživatel nemá komunitu, vrátíme prázdný seznam
+
+        // 2. Najdeme ChannelId této komunity
+        var channelId = databaseContext.Channels
+            .Where(c => c.CommunityId == communityId)
+            .Select(c => c.Id)
+            .FirstOrDefault();
+
+        if (channelId == default)
+            return View(new HomeViewModel { Posts = new List<HomeViewModel.Post>() });
+        
         var homeViewModel = new HomeViewModel
         {
             Posts = databaseContext.Posts
                 .Include(post => post.User)
+                .Where(post => post.ChannelId == channelId)
                 .ToList()
                 .OrderByDescending(post => post.CreatedAt)
                 .Select(post => new HomeViewModel.Post
