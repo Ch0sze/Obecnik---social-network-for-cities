@@ -15,6 +15,7 @@ public class HomeViewModel
         public required DateTimeOffset CreatedAt { get; set; }
     
         public required string CreatedBy { get; set; }
+        public bool Photo { get; set; } 
         
         public string GetFormattedCreatedAt()
         {

@@ -27,6 +27,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                     Description = post.Description,
                     CreatedAt = post.CreatedAt,
                     CreatedBy = string.Join(" ", post.User!.Firstname, post.User!.LastName),
+                    Photo = post.Photo != null
                 })
                 .ToList(),
         };
@@ -34,21 +35,16 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         return View(homeViewModel);  
     }
     
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpGet("image/{postId}")]
+    public IActionResult GetImage(Guid postId)
     {
-        var post = await databaseContext.Posts.FindAsync(id);
-    
-        if (post == null)
+        var post = databaseContext.Posts.FirstOrDefault(p => p.Id == postId);
+        if (post?.Photo == null)
         {
             return NotFound();
         }
-
-        databaseContext.Posts.Remove(post);
-        await databaseContext.SaveChangesAsync();
-
-        return RedirectToAction(nameof(Index));
+        Response.Headers.CacheControl = "public,max-age=31536000";
+        return File(post.Photo, "image/jpeg");
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

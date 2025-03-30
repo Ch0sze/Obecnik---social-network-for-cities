@@ -35,5 +35,15 @@ public record RegisterViewModel
     [Display(Name = "Opakovat heslo")]
     public string PasswordRepeat { get; init; } = string.Empty;
 
+    [Required(ErrorMessage = "Město nemůže být prázdné")]
+    [MaxLength(256, ErrorMessage = "Město může mít maximálně 256 znaků")]
+    [Display(Name = "Město")]
+    public string Residence { get; init; } = string.Empty; // City
+
+    [Required(ErrorMessage = "PSČ nemůže být prázdné")]
+    [RegularExpression(@"\d{5}", ErrorMessage = "PSČ musí obsahovat přesně 5 číslic")]
+    [Display(Name = "PSČ")]
+    public string PostalCode { get; init; } = string.Empty; // Postal Code
+
     public string Message { get; init; } = string.Empty;
 }

@@ -1,246 +1,108 @@
-<style>
-    .right-sidebar-rsb {
-        width: 260px;
-        min-height: 100vh;
-        background-color: #FFFAEF;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .profile-header-rsb {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 24px;
-    }
-
-    .icon-btn-rsb {
-        width: 42px; /* Match size with left sidebar avatar buttons */
-        height: 42px; /* Match size with left sidebar avatar buttons */
-        border-radius: 50%; /* Fully rounded */
-        background: #F98866;
-        color: white;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px; /* Larger icon to match style */
-        border: none;
-        cursor: pointer;
-    }
-
-    #username-rsb {
-        font-weight: 500; /* Medium weight, same as left sidebar text */
-        color: #333;
-        font-size: 14px; /* Match text size with left sidebar */
-        margin: 0 10px;
-    }
-
-    .user-list-rsb {
-        flex-grow: 1;
-        overflow-y: auto;
-        margin-bottom: 24px;
-        padding-right: 4px;
-    }
-
-    .user-item-rsb {
-        display: flex;
-        align-items: center;
-        margin-bottom: 16px;
-    }
-
-    .avatar-btn-rsb {
-        width: 40px; /* Match size with left sidebar avatars */
-        height: 40px; /* Match size with left sidebar avatars */
-        border-radius: 50%;
-        overflow: hidden;
-        margin-right: 12px;
-        padding: 0;
-        border: 2px solid white;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        background: none;
-        cursor: pointer;
-    }
-
-    .avatar-btn-rsb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .user-item-rsb span {
-        font-weight: 500; /* Same weight as left sidebar text */
-        color: #333;
-        font-size: 14px; /* Match text size with left sidebar */
-        flex-grow: 1;
-    }
-
-    .petition-rsb {
-        background: white;
-        padding: 16px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        border-bottom: 1px solid #e7e5e4;
-        margin-bottom: 24px;
-    }
-
-    .petition-rsb p {
-        margin: 0 0 16px;
-        font-size: 14px;
-        color: #666;
-    }
-
-    .btn-sign-rsb {
-        background-color: #F98866;
-        color: white;
-        border: none;
-        padding: 8px 20px; /* Increased padding */
-        border-radius: 30px; /* Fully rounded */
-        font-size: 14px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-    }
-
-    .btn-sign-rsb:hover {
-        background-color: #e06e54;
-    }
-
-    .signature-count-rsb {
-        font-weight: 500;
-        color: #333;
-    }
-
-    /* Dropdown menu styling */
-    .dropdown-menu-rsb {
-        position: absolute;
-        top: 60px; /* Adjusted to position under the hamburger menu */
-        right: 20px;
-        background-color: white;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
-        width: 180px;
-        padding: 10px 0;
-    }
-
-    .dropdown-item-rsb {
-        display: block;
-        padding: 8px 16px;
-        font-size: 14px;
-        color: #333;
-        text-decoration: none;
-        border: none;
-        background: none;
-        text-align: left;
-        width: 100%;
-        cursor: pointer;
-    }
-
-    .dropdown-item-rsb:hover {
-        background-color: #f6f6f6;
-    }
-
-</style>
-
 <!-- Right Sidebar -->
-<div class="right-sidebar-rsb">
+<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true" />
+<div class="sidebar-sb right-sidebar-sb">
 
-    <!-- Profile Header -->
-    <div class="profile-header-rsb">
+    <!-- Profile Header (right sidebar-specific) -->
+    <div class="profile-header-sb">
         <!-- Icon Button for User Profile (Redirect to /Account on click) -->
-        <button class="icon-btn-rsb" id="user-profile-btn-rsb">
+        <button class="icon-btn-sb" id="user-profile-btn-sb">
             <i class="bi bi-person"></i>
         </button>
         <!-- Display the logged-in username -->
-        <span id="username-rsb">@User.Identity?.Name</span>
+        <span class="text-sb" id="username-sb">@User.Identity?.Name</span>
         <!-- Hamburger Menu Button -->
-        <button class="icon-btn-rsb" id="hamburger-menu-btn-rsb">
+        <button class="icon-btn-sb" id="hamburger-menu-btn-sb">
             <i class="bi bi-list"></i>
         </button>
     </div>
 
     <!-- Dropdown Menu (Initially hidden) -->
-    <div id="dropdown-menu-rsb" class="dropdown-menu-rsb" style="display: none;">
-        <button class="dropdown-item-rsb" id="logout-btn-rsb">Odhlásit se</button>
+    <div id="dropdown-menu-sb" class="dropdown-menu-sb" style="display: none;">
+        <button class="dropdown-item-sb" id="logout-btn-sb">Odhlásit se</button>
     </div>
 
     <!-- User Avatars (Dynamic) -->
-    <div id="user-list-rsb" class="user-list-rsb"></div>
+    <div id="user-list-sb" class="avatar-scroll-sb"></div>
 
-    <!-- Petition Section -->
-    <div class="petition-rsb">
-        <h5 id="petition-title-rsb">Název petice</h5>
-        <p id="petition-description-rsb">Popis petice</p>
+    <!-- Petition Section (right sidebar-specific) -->
+    <!--<div class="petition-sb">
+        <h5 class="text-sb" id="petition-title-sb">Název petice</h5>
+        <p class="text-sb" id="petition-description-sb">Popis petice</p>
         <div class="d-flex">
-            <span class="signature-count-rsb" id="petition-signatures-rsb">123 podpisů</span>
-            <button class="btn-sign-rsb" id="sign-btn-rsb">Podepsat</button>
+            <span class="signature-count-sb" id="petition-signatures-sb">123 podpisů</span>
+            <button class="btn-sign-sb" id="sign-btn-sb">Podepsat</button>
         </div>
-    </div>
+    </div>-->
 </div>
 
 <!-- Dynamic JavaScript -->
 <script>
-    const users = [
-        { name: "Jožka Nula", image: "/Images/GenericAvatar.png"},
-        { name: "Jožka Nula", image: "/Images/GenericAvatar.png"},
-        { name: "Jožka Nula", image: "/Images/GenericAvatar.png"},
-        { name: "Jožka Nula", image: "/Images/GenericAvatar.png"}
+    /*const users = [
+        { name: "Jožka Nula", image: "/Images/GenericAvatar.png" },
+        { name: "Michaela Černá", image: "/Images/GenericAvatar.png" },
+        { name: "Petr Novák", image: "/Images/GenericAvatar.png" },
+        { name: "Anna Horáková", image: "/Images/GenericAvatar.png" }
+    ];*/
 
-    ];
-
-    const petition = {
+    /*const petition = {
         title: "Nové lavičky",
         description: "Žádáme o opravu veřejných laviček ve městě. Podpořte nás podpisem!",
         signatures: 217
-    };
+    };*/
 
-    // Render avatars dynamically
+    // Render avatars dynamically in the right sidebar
     function renderAvatars() {
-        const userList = document.getElementById('user-list-rsb');
+        const userList = document.getElementById('user-list-sb');
         userList.innerHTML = '';
 
         users.forEach((user, index) => {
             const item = document.createElement('div');
-            item.className = 'user-item-rsb';
+            item.className = 'user-item-sb';
             item.innerHTML = `
-            <button class="avatar-btn-rsb" onclick="onAvatarClick(${index})">
-                <img src="${user.image}" alt="${user.name}">
-            </button>
-            <span>${user.name}</span>
-        `;
+                <button class="avatar-btn-sb" onclick="onAvatarClick(${index})">
+                    <img src="${user.image}" alt="${user.name}">
+                </button>
+                <span class="text-sb">${user.name}</span>
+            `;
             userList.appendChild(item);
         });
     }
 
-    // Render petition dynamically
+    // Render petition dynamically in the right sidebar
     function renderPetition() {
-        document.getElementById('petition-title-rsb').innerText = petition.title;
-        document.getElementById('petition-description-rsb').innerText = petition.description;
-        document.getElementById('petition-signatures-rsb').innerText = `${petition.signatures} podpisů`;
+        document.getElementById('petition-title-sb').innerText = petition.title;
+        document.getElementById('petition-description-sb').innerText = petition.description;
+        document.getElementById('petition-signatures-sb').innerText = `${petition.signatures} podpisů`;
     }
 
     // Initialize content
-    renderAvatars();
-    renderPetition();
+    /*renderAvatars();
+    renderPetition();*/
 
     // Toggle dropdown menu visibility when hamburger menu is clicked
-    const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-rsb');
-    const dropdownMenu = document.getElementById('dropdown-menu-rsb');
+    const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb');
+    const dropdownMenu = document.getElementById('dropdown-menu-sb');
 
     hamburgerMenuBtn.addEventListener('click', () => {
-        // Toggle the display of the dropdown menu
-        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
     });
 
     // Redirect to /Account/Logout when "Odhlásit se" is clicked
-    const logoutBtn = document.getElementById('logout-btn-rsb');
+    const logoutBtn = document.getElementById('logout-btn-sb');
     logoutBtn.addEventListener('click', () => {
         window.location.href = '/Account/Logout'; // Redirect to the logout page
     });
 
     // Redirect to /Account when user profile button is clicked
-    const userProfileBtn = document.getElementById('user-profile-btn-rsb');
+    const userProfileBtn = document.getElementById('user-profile-btn-sb');
     userProfileBtn.addEventListener('click', () => {
         window.location.href = '/Account'; // Redirect to the account page
     });
+
+    // Handle avatar click (you can add specific logic here if needed)
+    /*function onAvatarClick(index) {
+        alert(`Clicked on user: ${users[index].name}`);
+    }*/
 </script>
+
 

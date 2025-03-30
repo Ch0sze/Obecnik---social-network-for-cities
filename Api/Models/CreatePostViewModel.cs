@@ -4,4 +4,5 @@ public class CreatePostViewModel
 {
     public required string Title { get; set; }
     public required string Content { get; set; }
+    public IFormFile? Photo { get; set; }
 }

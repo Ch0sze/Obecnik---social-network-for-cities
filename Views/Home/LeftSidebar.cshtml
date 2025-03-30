@@ -1,221 +1,70 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true" />
 
-<style>
-    .sidebar-lsb {
-        width: 260px;
-        min-height: 100vh;
-        background-color: #FFFAEF;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .logo-container-lsb {
-        display: flex;
-        align-items: center;
-        margin-bottom: 40px;
-    }
-
-    .logo-container-lsb img {
-        width: 48px;
-        height: 48px;
-        object-fit: contain;
-        margin-right: 10px;
-    }
-
-    /* Horizontal avatar scroll */
-    .avatar-scroll-lsb {
-        overflow-x: auto;
-        overflow-y: hidden;
-        white-space: nowrap;
-        margin-bottom: 20px;
-        padding-bottom: 6px;
-        gap: 12px; /* Increased gap between avatar buttons */
-        display: flex;
-        justify-content: flex-start; /* Align avatars to the left */
-    }
-
-    .avatar-scroll-lsb::-webkit-scrollbar {
-        height: 4px;
-    }
-
-    .avatar-scroll-lsb::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-    }
-
-    .avatar-scroll-lsb .avatar-btn-lsb {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        display: inline-block;
-        flex-shrink: 0;
-        border: none;
-        cursor: pointer;
-    }
-
-    .avatar-scroll-lsb .add-btn-lsb {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: #F98866;
-        color: white;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px; /* Reduced icon size */
-        flex-shrink: 0;
-        cursor: pointer;
-        border: none;
-    }
-
-    .add-btn-lsb .material-icons {
-        font-size: 24px; /* Adjusted icon size */
-    }
-
-    /* Navigation styling */
-    .nav-item-lsb {
-        padding: 12px 0;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .nav-item-lsb:not(:last-child) {
-        border-bottom: 1px solid #e7e5e4;
-    }
-
-    .nav-item-lsb a {
-        text-decoration: none;
-        color: #4a4a4a; /* Darker for better contrast */
-        display: flex;
-        align-items: center;
-        width: 100%;
-        font-size: 14px;
-        font-weight: 500; /* Medium weight */
-    }
-
-    .nav-item-lsb .material-icons {
-        font-size: 26px;
-        color: #F98866;
-    }
-
-    /* Active nav */
-    .nav-item-lsb.active-lsb a {
-        font-weight: bold;
-    }
-
-    .nav-item-lsb.active-lsb .material-icons {
-        background: #FFFAEF;
-        border-radius: 50%;
-        padding: 6px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-item-lsb.active-lsb::after {
-        content: '';
-        display: block;
-        height: 3px;
-        width: 50%;
-        background: #F98866;
-        position: absolute;
-        bottom: 0;
-        left: 25%;
-        border-radius: 2px;
-    }
-
-    .user-item-lsb {
-        display: flex;
-        align-items: center;
-        margin-bottom: 16px;
-    }
-
-    .avatar-btn-lsb {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-right: 6px;
-        padding: 0;
-        border: 2px solid white;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        background: none;
-        cursor: pointer;
-    }
-
-    .avatar-btn-lsb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Dot for notification */
-    .nav-item-lsb .dot-lsb {
-        width: 8px;
-        height: 8px;
-        background: #F98866;
-        border-radius: 50%;
-        margin-left: auto;
-    }
-</style>
-
-<div class="sidebar-lsb">
+<div class="sidebar-sb">
     <!-- Logo -->
-    <div class="logo-container-lsb">
+    <div class="logo-container-sb">
         <img src="~/image.png" alt="Logo">
         <h4>OBECNÍK</h4>
     </div>
 
-    <!-- Horizontally scrollable Avatars -->
-    <div class="avatar-scroll-lsb" id="avatar-container-lsb">
-        <button class="avatar-btn-lsb" onclick="handleAvatarClick('1')">
-            <img src="/Images/obec.jpg" alt="Obec" class="avatar-lsb">
-        </button>
-        <button class="avatar-btn-lsb" onclick="handleAvatarClick('2')">
-            <img src="/Images/obec.jpg" alt="Obec" class="avatar-lsb">
-        </button>
-        <button class="avatar-btn-lsb" onclick="handleAvatarClick('3')">
-            <img src="/Images/obec.jpg" alt="Obec" class="avatar-lsb">
-        </button>
-        <button class="avatar-btn-lsb" onclick="handleAvatarClick('4')">
-            <img src="/Images/obec.jpg" alt="Obec" class="avatar-lsb">
-        </button>
-        <button class="add-btn-lsb" id="add-avatar-btn-lsb" type="button">
-            <span class="material-icons">add</span>
-        </button>
-    </div>
+    <!-- Dynamic Avatar Container (left sidebar) -->
+    <div class="avatar-container-sb" id="user-list-left-sb"></div>
 
-    <!-- Navigation -->
-    <div id="nav-links-lsb">
+    <!-- Scrollable Navigation (fills remaining height) -->
+    <div class="nav-container-sb" id="nav-links-sb">
         <!-- Dynamic content via JS -->
     </div>
 </div>
 
 <script>
+    // Navigation items (with dot as a parameter)
     let navItems = [
-        { icon: '', label: 'Bazar', link: '#', active: false, dot: true },
-        { icon: '', label: 'Pejskaři', link: '#', active: false, dot: false },
-        { icon: '', label: 'Ztráty a nálezy', link: '#', active: false, dot: false },
-        { icon: '', label: 'Stížnosti', link: '#', active: false, dot: false }
+        { icon: '', label: 'Obecné', link: '#', active: false, dot: true },
     ];
 
-    const navContainer = document.getElementById('nav-links-lsb');
+    // Users (now with dot parameter)
+    let users = [
+        { name: "Lhotka", image: "/Images/GenericCommunity.png", dot: true },
+    ];
 
+    const navContainer = document.getElementById('nav-links-sb');
+
+    // Render avatars dynamically (left sidebar)
+    function renderLeftAvatars() {
+        const userList = document.getElementById('user-list-left-sb');
+        userList.innerHTML = '';
+
+        users.forEach((user, index) => {
+            const item = document.createElement('div');
+            item.className = 'user-item-sb';
+            item.innerHTML = `
+                <div class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
+                    <button class="avatar-btn-sb">
+                        <img src="${user.image}" alt="${user.name}">
+                    </button>
+                    <span class="text-sb">${user.name}</span>
+                    ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                </div>
+            `;
+            userList.appendChild(item);
+        });
+    }
+
+    // Render navigation dynamically (left sidebar)
     function renderNav() {
-        navContainer.innerHTML = ''; // Clear existing elements
+        navContainer.innerHTML = '';
 
         navItems.forEach((item, index) => {
             const div = document.createElement('div');
-            div.className = `nav-item-lsb${item.active ? ' active-lsb' : ''}`;
-            div.dataset.index = index; // Store index for event handling
+            div.className = `nav-item-sb${item.active ? ' active-sb' : ''}`;
+            div.dataset.index = index;
 
             div.innerHTML = `
                 <a href="${item.link}" onclick="updateDot(${index})">
                     ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
-                    <span>${item.label}</span>
-                    ${item.dot ? `<span class="dot-lsb ms-auto"></span>` : ''}
+                    <span class="text-sb">${item.label}</span>
+                    ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
                 </a>
             `;
 
@@ -223,17 +72,26 @@
         });
     }
 
+    // Update dot indicator on nav click
     function updateDot(index) {
         navItems = navItems.map((item, i) => ({
             ...item,
-            dot: i === index // Set dot only for the clicked item
+            dot: i === index
         }));
-
-        renderNav(); // Re-render the menu
+        renderNav();
     }
 
-    // Initial rendering of navigation menu
+    // Handle avatar click and update dots for avatars
+    function onAvatarClick(index) {
+        // Update the dot state
+        users = users.map((user, i) => ({
+            ...user,
+            dot: i === index
+        }));
+        renderLeftAvatars();
+    }
+
+    // Initial render
+    renderLeftAvatars();
     renderNav();
 </script>
-
-
