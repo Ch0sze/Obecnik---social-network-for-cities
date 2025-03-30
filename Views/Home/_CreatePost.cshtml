@@ -1,9 +1,9 @@
 ﻿<div class="create-post-modal-container">
-    <form asp-controller="Posts" asp-action="Create" id="createPostForm" onsubmit="return validateForm()">
+    <form asp-controller="Posts" asp-action="Create" id="createPostForm" onsubmit="return validateForm()" enctype="multipart/form-data">
         <div id="createPostModal" class="modal fade" tabindex="-1" aria-hidden="true" data-bs-backdrop="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <h3 id="postTitleHeader" class="modal-header">Vytvořit diskuzi</h3>
+                    <h3 id="postTitleHeader" class="modal-header">Vytvořit příspěvek</h3>
 
                     <div class="button-group">
                         <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
@@ -24,7 +24,7 @@
                             <label for="uploadImage" class="icon-label">
                                 <img src="/icons/image_icon.svg" class="icon"/>
                             </label>
-                            <input type="file" id="uploadImage" name="uploadImage" style="display: none;"/>
+                            <input type="file" id="uploadImage" name="Photo" style="display: none;" accept=".png, .jpeg, .jpg"/>
                         </div>
 
                         <div class="icon-button" id="locationButton" style="display: none;">
@@ -39,6 +39,10 @@
                     <div id="actionFields" class="extra-fields" style="display: none;">
                         <input type="text" id="location" name="location" class="input-field location-field" style="display: none;"/>
                         <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;"/>
+                    </div>
+                    <div id="imagePreviewContainer" style="display:none;">
+                        <button type="button" id="removeImageButton" class="remove-image">&times;</button>
+                        <img id="imagePreview" src="" alt="Image Preview" />
                     </div>
 
                     <button type="button" class="publish-button ButtonPublish" id="publishPost">Publikovat</button>
@@ -175,5 +179,30 @@
                 modal.show();
             });
         }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Funkce pro zobrazení náhledu obrázku
+        document.getElementById("uploadImage").addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var imagePreview = document.getElementById("imagePreview");
+                    imagePreview.src = e.target.result;  // Nastavíme obrázek jako Data URL
+                    document.getElementById("imagePreviewContainer").style.display = "block";  // Zobrazíme náhled
+                };
+
+                reader.readAsDataURL(file);  // Načteme obrázek jako Data URL
+            }
+        });
+        removeImageButton.addEventListener("click", function () {
+            imagePreview.src = "";
+            imagePreviewContainer.style.display = "none";
+            imageInput.value = null; // Resetuje vstup souboru
+        });
     });
 </script>

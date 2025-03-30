@@ -1,4 +1,6 @@
-﻿using Application.Api.Extensions;
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using Application.Api.Extensions;
 using Application.Api.Models;
 using Application.Infastructure.Database;
 using Application.Infastructure.Database.Models;
@@ -12,7 +14,6 @@ public class PostsController(DatabaseContext databaseContext) : Controller
     [HttpPost]
     public IActionResult Create(CreatePostViewModel model)
     {
-        
         // Server-side validation
         if (string.IsNullOrWhiteSpace(model.Title))
         {
@@ -43,6 +44,39 @@ public class PostsController(DatabaseContext databaseContext) : Controller
         if (user == null)
             return RedirectToAction("Login", "Account"); // Přesměrování na přihlášení
         
+        byte[]? imageData = null;
+        if (model.Photo != null)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                // Načtení obrázku
+                using (var image = Image.Load(model.Photo.OpenReadStream()))
+                {
+                    // Výpočet nových rozměrů (zachová poměr stran)
+                    var maxWidth = 800; // maximální šířka
+                    var maxHeight = 600; // maximální výška
+                
+                    // Výpočet nových rozměrů se zachováním poměru stran
+                    var options = new ResizeOptions
+                    {
+                        Size = new Size(maxWidth, maxHeight),
+                        Mode = ResizeMode.Max
+                    };
+                
+                    // Změna velikosti obrázku
+                    image.Mutate(x => x.Resize(options));
+                
+                    // Uložení do formátu JPEG s 80% kvalitou
+                    image.SaveAsJpeg(memoryStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder
+                    {
+                        Quality = 80
+                    });
+                }
+            
+                imageData = memoryStream.ToArray();
+            }
+        }
+        
         var posts = new PostDo
         {
             Id = default,
@@ -53,6 +87,7 @@ public class PostsController(DatabaseContext databaseContext) : Controller
             Type = "Discussion",
             Place = "Zlín",
             User = user,
+            Photo = imageData,
         };
 
         databaseContext.Posts.Add(posts);

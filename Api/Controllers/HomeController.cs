@@ -27,11 +27,24 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                     Description = post.Description,
                     CreatedAt = post.CreatedAt,
                     CreatedBy = string.Join(" ", post.User!.Firstname, post.User!.LastName),
+                    Photo = post.Photo != null
                 })
                 .ToList(),
         };
 
         return View(homeViewModel);  
+    }
+    
+    [HttpGet("image/{postId}")]
+    public IActionResult GetImage(Guid postId)
+    {
+        var post = databaseContext.Posts.FirstOrDefault(p => p.Id == postId);
+        if (post?.Photo == null)
+        {
+            return NotFound();
+        }
+        Response.Headers.CacheControl = "public,max-age=31536000";
+        return File(post.Photo, "image/jpeg");
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,3 +1,42 @@
+.create-post-modal-container #imagePreviewContainer {
+    position: relative;
+    padding: 10px; /* Padding pro náhled obrázku */
+    max-width: 150px; /* Max šířka pro náhled obrázku */
+    max-height: 150px; /* Max výška pro náhled obrázku */
+    overflow: hidden; /* Skrývá obsah přesahující max-height */
+    display: none; /* Zpočátku skryté, dokud obrázek nevybereme */
+    border: none #ccc; /* Volitelně přidáme rámeček kolem náhledu */
+}
+.create-post-modal-container  #imagePreview {
+    width: 100px;     /* Přesná šířka */
+    height: 100px;    /* Přesná výška */
+    object-fit: cover; /* Zajistí, že obrázek vyplní daný prostor a zachová estetiku */
+    border-radius: 5px; /* Volitelně, zaoblené rohy */
+}
+.create-post-modal-container .remove-image {
+    position: absolute;
+    top: +0px;
+    right: +30px;
+    background-color: #ff926b; /* Stejná oranžová jako hlavní tlačítko */
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Jemný stín */
+    transition: background-color 0.3s ease;
+}
+
+/* Efekt při najetí na křížek */
+.create-post-modal-container .remove-image:hover {
+    background-color: #e86f59; /* Trochu tmavší oranžová při hoveru */
+}
 .create-post-modal-container .modal {
     display: none;
     position: fixed;

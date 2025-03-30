@@ -11,21 +11,30 @@
         @foreach (var post in Model)
         {
             <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm">
-                <div>
+                <div class="flex-grow-1">
                     <div>
                         <img src="~/Images/GenericAvatar.png" alt="Avatar"
                              style="width: 30px; height: 30px; user-select: none; pointer-events: none; "/>
                         <strong>@post.CreatedBy</strong>
                         <small class="text-muted">@post.GetFormattedCreatedAt()</small>
                     </div>
-                    <p class="mb-0 mt-2"
-                       style="font-size: larger; width: 100%; max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; overflow: auto;">
+                    <p class="mb-0 mt-2 text-break"
+                       style="font-size: larger;">
                         @post.Title
                     </p>
-                    <p class="mb-0 mt-1 message-container"
-                       style="font-size: small;width: 100%; max-width: 75vh; overflow-wrap: break-word; word-wrap: break-word; overflow: auto;">
+                    <p class="mb-0 mt-1 message-container text-break"
+                       style="font-size: small;">
                         @post.Description
                     </p>
+                    @if (post.Photo)
+                        {
+                            <div class="mt-2 w-100">
+                                <img src="@Url.Action("GetImage", "Home", new { postId = post.Id })" 
+                                     class="img-fluid rounded" 
+                                     style="width: 100%; height: auto; max-height: 500px; object-fit: cover;"
+                                     alt="Post image"/>
+                            </div>
+                        }
                 </div>
                 @if (@post.CreatedBy == User.Identity?.Name)
                 {
@@ -38,7 +47,10 @@
                                 <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
                                     Odstranit příspěvek
                                 </button>
-                                <button type="button" class="dropdown-item update-post-btn">
+                                <button type="button" class="dropdown-item update-post-btn"
+                                        data-post-id="@post.Id" 
+                                        data-title="@post.Title" 
+                                        data-content="@post.Description">
                                     Upravit příspěvek
                                 </button>
                             </form>
@@ -88,7 +100,7 @@
             myModal.show();
         });
         
-        // AJAX odstranění příspěvku
+        // AJAX odstranění příspěvku bez reloadnutí stránky
         $('#confirm-delete').click(function () {
             if (!postIdToDelete) return;
     
@@ -115,3 +127,26 @@
     });
 </script>
 
+@* <script> *@
+@*     $(document).ready(function () { *@
+@*         let editingPostId = null; *@
+@*          *@
+@*         // Open "Create Post" Modal with Existing Data for Editing *@
+@*         $('.update-post-btn').click(function () { *@
+@*             editingPostId = $(this).data('post-id'); *@
+@*             let title = $(this).data('title'); *@
+@*             let content = $(this).data('content'); *@
+@*              *@
+@*             // Fill modal inputs *@
+@*             $('#postTitle').val(title); *@
+@*             $('#postContent').val(content); *@
+@*              *@
+@*             // Change button text *@
+@*             $('#publishPost').text('Upravit příspěvek'); *@
+@*              *@
+@*             // Show modal *@
+@*             let modal = new bootstrap.Modal(document.getElementById('createPostModal')); *@
+@*             modal.show(); *@
+@*         }); *@
+@*     }) *@
+@* </script> *@
