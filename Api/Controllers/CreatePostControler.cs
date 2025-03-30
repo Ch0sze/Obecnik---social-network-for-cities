@@ -45,7 +45,16 @@ public class PostsController(DatabaseContext databaseContext) : Controller
             return RedirectToAction("Login", "Account"); // Přesměrování na přihlášení
         
         byte[]? imageData = null;
-        if (model.Photo != null)
+        var communityId = databaseContext.UserCommunities
+            .Where(uc => uc.UserId == user.Id)
+            .Select(uc => uc.CommunityId)
+            .FirstOrDefault();
+
+        var channelId = databaseContext.Channels
+            .Where(c => c.CommunityId == communityId)
+            .Select(c => c.Id)
+            .FirstOrDefault();
+        if (model.Photo != null && model.Photo.Length > 0)
         {
             using (var memoryStream = new MemoryStream())
             {
@@ -88,6 +97,7 @@ public class PostsController(DatabaseContext databaseContext) : Controller
             Place = "Zlín",
             User = user,
             Photo = imageData,
+            ChannelId = channelId,
         };
 
         databaseContext.Posts.Add(posts);

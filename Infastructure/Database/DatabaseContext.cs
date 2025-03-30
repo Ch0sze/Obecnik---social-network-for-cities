@@ -11,6 +11,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<UserCommunityDo> UserCommunities => Set<UserCommunityDo>();
     public DbSet<PostDo> Posts => Set<PostDo>();
     public DbSet<CommentDo> Comments => Set<CommentDo>();
+    public DbSet<ApiLoginDo> ApiLogins => Set<ApiLoginDo>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
