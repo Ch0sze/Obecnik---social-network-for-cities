@@ -28,7 +28,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Password" class="login-label" style="color: black; font-weight: bold;">Heslo:</label>
+                    <label asp-for="Password" class="login-label"
+                           style="color: black; font-weight: bold;">Heslo:</label>
                     <div class="d-flex justify-content-between align-items-end">
                         <!-- Input pro heslo (flexibilní šířka) -->
                         <div class="flex-grow-1 me-2">
@@ -37,7 +38,7 @@
                                    placeholder="********"
                                    style="max-width: 300px; background-color: #FAFAFA !important;
                           border: none !important; border-bottom: 1px solid #F98866 !important;
-                          border-radius: 0 !important; box-shadow: none !important;" />
+                          border-radius: 0 !important; box-shadow: none !important;"/>
                             <span asp-validation-for="Password" class="invalid-feedback"></span>
                         </div>
 

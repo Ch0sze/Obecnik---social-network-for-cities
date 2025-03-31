@@ -1,6 +1,9 @@
+using Application.Api.Services;
 using Application.Infastructure.Database;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+
+// Přidej tento using, aby byl dostupný IEmailService a EmailService
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,9 @@ builder.Services
         options.AccessDeniedPath = "/Forbidden/";
     });
 builder.Services.AddAuthorization();
+
+// Registrace e-mailové služby
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Build application and start building middleware pipeline
 var app = builder.Build();
