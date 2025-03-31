@@ -18,13 +18,13 @@
     <div class="profile-container-sb">
         <div class="profile-header-sb">
             <!-- Icon Button for User Profile (Redirect to /Account on click) -->
-            <button class="icon-btn-sb" id="user-profile-btn-sb">
+            <button class="icon-btn-sb" id="user-profile-btn-sb2">
                 <i class="bi bi-person"></i>
             </button>
             <!-- Display the logged-in username -->
             <span class="text-sb" id="username-sb2">@User.Identity?.Name</span>
             <!-- Hamburger Menu Button -->
-            <button class="icon-btn-sb" id="hamburger-menu-btn-sb">
+            <button class="icon-btn-sb" id="hamburger-menu-btn-sb2">
                 <i class="bi bi-box-arrow-right"></i>
             </button>
         </div>
@@ -108,7 +108,16 @@
         }));
         renderLeftAvatars();
     }
-    
+    const logoutBtn2 = document.getElementById('hamburger-menu-btn-sb2');
+    logoutBtn2.addEventListener('click', () => {
+        window.location.href = '/Account/Logout'; // Redirect to the logout page
+    });
+
+    // Redirect to /Account when user profile button is clicked
+    const userProfileBtn2 = document.getElementById('user-profile-btn-sb2');
+    userProfileBtn2.addEventListener('click', () => {
+        window.location.href = '/Account'; // Redirect to the account page
+    });
 
     // Initial render
     renderLeftAvatars();
