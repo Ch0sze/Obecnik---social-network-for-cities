@@ -1,15 +1,15 @@
 ﻿<div class="create-post-modal-container">
     <form asp-controller="Posts" asp-action="Create" id="createPostForm" onsubmit="return validateForm()" enctype="multipart/form-data">
         <div id="createPostModal" class="modal fade" tabindex="-1" aria-hidden="true" data-bs-backdrop="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <h3 id="postTitleHeader" class="modal-header">Vytvořit příspěvek</h3>
 
-                    <div class="button-group">
-                        <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
+                    @* <div class="button-group"> *@
+                    @*     <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button> *@
                         @* <button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button> *@
                         @* <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button> *@
-                    </div>
+                    @* </div> *@
 
                     <input name="Title" type="text" class="input-field" placeholder="O co se jedná?" id="postTitle" maxlength="100" required/>
                     <span id="titleError" class="error-message" style="color: red; display: none; font-size: 12px; margin-left: 2px;">Je potřeba napsat předmět.</span>
@@ -184,8 +184,12 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        var removeImageButton = document.getElementById("removeImageButton");
+        var imagePreview = document.getElementById("imagePreview");
+        var imagePreviewContainer = document.getElementById("imagePreviewContainer");
+        var imageInput = document.getElementById("uploadImage");
         // Funkce pro zobrazení náhledu obrázku
-        document.getElementById("uploadImage").addEventListener("change", function (event) {
+        imageInput.addEventListener("change", function (event) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
@@ -202,7 +206,7 @@
         removeImageButton.addEventListener("click", function () {
             imagePreview.src = "";
             imagePreviewContainer.style.display = "none";
-            imageInput.value = null; // Resetuje vstup souboru
+            imageInput.value = ""; // Resetuje vstup souboru
         });
     });
 </script>
