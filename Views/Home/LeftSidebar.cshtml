@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true" />
 
-<div class="sidebar-sb">
+<div id="leftSidebar" class="sidebar-sb">
     <!-- Logo -->
     <div class="logo-container-sb">
         <img src="~/image.png" alt="Logo">
@@ -15,10 +15,28 @@
     <div class="nav-container-sb" id="nav-links-sb">
         <!-- Dynamic content via JS -->
     </div>
+    <div class="profile-container-sb">
+        <div class="profile-header-sb">
+            <!-- Icon Button for User Profile (Redirect to /Account on click) -->
+            <button class="icon-btn-sb" id="user-profile-btn-sb">
+                <i class="bi bi-person"></i>
+            </button>
+            <!-- Display the logged-in username -->
+            <span class="text-sb" id="username-sb2">@User.Identity?.Name</span>
+            <!-- Hamburger Menu Button -->
+            <button class="icon-btn-sb" id="hamburger-menu-btn-sb">
+                <i class="bi bi-box-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Dropdown Menu (Initially hidden) -->
+        <div id="dropdown-menu-sb" class="dropdown-menu-sb" style="display: none;">
+            <button class="dropdown-item-sb" id="logout-btn-sb">Odhlásit se</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    // Navigation items (with dot as a parameter)
     let navItems = [
         { icon: '', label: 'Obecné', link: '#', active: false, dot: true },
     ];
@@ -39,14 +57,14 @@
             const item = document.createElement('div');
             item.className = 'user-item-sb';
             item.innerHTML = `
-                <div class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
-                    <button class="avatar-btn-sb">
-                        <img src="${user.image}" alt="${user.name}">
-                    </button>
-                    <span class="text-sb">${user.name}</span>
-                    ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-                </div>
-            `;
+            <div class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
+                <button class="avatar-btn-sb">
+                    <img src="${user.image}" alt="${user.name}">
+                </button>
+                <span class="text-sb">${user.name}</span>
+                ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+            </div>
+        `;
             userList.appendChild(item);
         });
     }
@@ -61,12 +79,12 @@
             div.dataset.index = index;
 
             div.innerHTML = `
-                <a href="${item.link}" onclick="updateDot(${index})">
-                    ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
-                    <span class="text-sb">${item.label}</span>
-                    ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-                </a>
-            `;
+            <a href="${item.link}" onclick="updateDot(${index})">
+                ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
+                <span class="text-sb">${item.label}</span>
+                ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+            </a>
+        `;
 
             navContainer.appendChild(div);
         });
@@ -83,13 +101,14 @@
 
     // Handle avatar click and update dots for avatars
     function onAvatarClick(index) {
-        // Update the dot state
+        // Update the dot state for users
         users = users.map((user, i) => ({
             ...user,
             dot: i === index
         }));
         renderLeftAvatars();
     }
+    
 
     // Initial render
     renderLeftAvatars();

@@ -12,7 +12,7 @@
         <span class="text-sb" id="username-sb">@User.Identity?.Name</span>
         <!-- Hamburger Menu Button -->
         <button class="icon-btn-sb" id="hamburger-menu-btn-sb">
-            <i class="bi bi-list"></i>
+            <i class="bi bi-box-arrow-right"></i>
         </button>
     </div>
 
@@ -82,10 +82,7 @@
     // Toggle dropdown menu visibility when hamburger menu is clicked
     const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb');
     const dropdownMenu = document.getElementById('dropdown-menu-sb');
-
-    hamburgerMenuBtn.addEventListener('click', () => {
-        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
-    });
+    
 
     // Redirect to /Account/Logout when "Odhlásit se" is clicked
     const logoutBtn = document.getElementById('logout-btn-sb');
@@ -97,6 +94,20 @@
     const userProfileBtn = document.getElementById('user-profile-btn-sb');
     userProfileBtn.addEventListener('click', () => {
         window.location.href = '/Account'; // Redirect to the account page
+    });
+
+    // Toggle dropdown menu visibility when hamburger menu is clicked
+
+    hamburgerMenuBtn.addEventListener('click', function() {
+        window.location.href = '/Account/Logout';
+        /*const buttonRect = hamburgerMenuBtn.getBoundingClientRect();
+
+        // Position the dropdown below the button and shift it 50px to the left
+        dropdownMenu.style.top = `${buttonRect.bottom + window.scrollY}px`; // Position it below the button
+        dropdownMenu.style.left = `${buttonRect.left + window.scrollX - 50}px`; // Shift 50px to the left
+
+        // Toggle visibility of dropdown
+        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';*/
     });
 
     // Handle avatar click (you can add specific logic here if needed)
