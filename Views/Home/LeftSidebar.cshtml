@@ -1,12 +1,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true"/>
 @model HomeViewModel
+@using System.Web
 
 <div id="leftSidebar" class="sidebar-sb">
     <!-- Logo -->
     <div class="logo-container-sb">
         <img src="~/image.png" alt="Logo">
-        <h4>Obecník @Model.CommunityName</h4>
+        <h4>Obecník</h4>
     </div>
 
     <!-- Dynamic Avatar Container (left sidebar) -->
@@ -38,90 +39,92 @@
 </div>
 
 <script>
-    let navItems = [
-        {icon: '', label: 'Obecné', link: '#', active: false, dot: true},
-    ];
-
-    // Users (now with dot parameter)
-    let users = [
-        {name: "Vaše komunita", image: "/Images/GenericCommunity.png", dot: true},
-    ];
-
-    const navContainer = document.getElementById('nav-links-sb');
-
-    // Render avatars dynamically (left sidebar)
-    function renderLeftAvatars() {
-        const userList = document.getElementById('user-list-left-sb');
-        userList.innerHTML = '';
-
-        users.forEach((user, index) => {
-            const item = document.createElement('div');
-            item.className = 'user-item-sb';
-            item.innerHTML = `
-            <div class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
-                <button class="avatar-btn-sb">
-                    <img src="${user.image}" alt="${user.name}">
-                </button>
-                <span class="text-sb">${user.name}</span>
-                ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-            </div>
-        `;
-            userList.appendChild(item);
+    document.addEventListener('DOMContentLoaded', function() {
+        let navItems = [
+            {icon: '', label: 'Obecné', link: '#', active: false, dot: true},
+        ];
+    
+        // Users (now with dot parameter)
+        let users = [
+            {name: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.CommunityName))', image: "/Images/GenericCommunity.png", dot: true},
+        ];
+    
+        const navContainer = document.getElementById('nav-links-sb');
+    
+        // Render avatars dynamically (left sidebar)
+        function renderLeftAvatars() {
+            const userList = document.getElementById('user-list-left-sb');
+            userList.innerHTML = '';
+    
+            users.forEach((user, index) => {
+                const item = document.createElement('div');
+                item.className = 'user-item-sb';
+                item.innerHTML = `
+                <div class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
+                    <button class="avatar-btn-sb">
+                        <img src="${user.image}" alt="${user.name}">
+                    </button>
+                    <span class="text-sb">${user.name}</span>
+                    ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                </div>
+            `;
+                userList.appendChild(item);
+            });
+        }
+    
+        // Render navigation dynamically (left sidebar)
+        function renderNav() {
+            navContainer.innerHTML = '';
+    
+            navItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `nav-item-sb${item.active ? ' active-sb' : ''}`;
+                div.dataset.index = index;
+    
+                div.innerHTML = `
+                <a href="${item.link}" onclick="updateDot(${index})">
+                    ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
+                    <span class="text-sb">${item.label}</span>
+                    ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                </a>
+            `;
+    
+                navContainer.appendChild(div);
+            });
+        }
+    
+        // Update dot indicator on nav click
+        function updateDot(index) {
+            navItems = navItems.map((item, i) => ({
+                ...item,
+                dot: i === index
+            }));
+            window.location.href = window.location.origin + "/";
+            renderNav();
+        }
+    
+        // Handle avatar click and update dots for avatars
+        function onAvatarClick(index) {
+            // Update the dot state for users
+            users = users.map((user, i) => ({
+                ...user,
+                dot: i === index
+            }));
+            renderLeftAvatars();
+        }
+        const logoutBtn2 = document.getElementById('hamburger-menu-btn-sb2');
+        logoutBtn2.addEventListener('click', () => {
+            window.location.href = '/Account/Logout'; // Redirect to the logout page
         });
-    }
-
-    // Render navigation dynamically (left sidebar)
-    function renderNav() {
-        navContainer.innerHTML = '';
-
-        navItems.forEach((item, index) => {
-            const div = document.createElement('div');
-            div.className = `nav-item-sb${item.active ? ' active-sb' : ''}`;
-            div.dataset.index = index;
-
-            div.innerHTML = `
-            <a href="${item.link}" onclick="updateDot(${index})">
-                ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
-                <span class="text-sb">${item.label}</span>
-                ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-            </a>
-        `;
-
-            navContainer.appendChild(div);
-        });
-    }
-
-    // Update dot indicator on nav click
-    function updateDot(index) {
-        navItems = navItems.map((item, i) => ({
-            ...item,
-            dot: i === index
-        }));
-        window.location.href = window.location.origin + "/";
-        renderNav();
-    }
-
-    // Handle avatar click and update dots for avatars
-    function onAvatarClick(index) {
-        // Update the dot state for users
-        users = users.map((user, i) => ({
-            ...user,
-            dot: i === index
-        }));
+    
+        // // Redirect to /Account when user profile button is clicked
+        // const userProfileBtn2 = document.getElementById('user-profile-btn-sb2');
+        // userProfileBtn2.addEventListener('click', () => {
+        //     window.location.href = '/Account'; // Redirect to the account page
+        // });
+    
+        // Initial render
         renderLeftAvatars();
-    }
-    const logoutBtn2 = document.getElementById('hamburger-menu-btn-sb2');
-    logoutBtn2.addEventListener('click', () => {
-        window.location.href = '/Account/Logout'; // Redirect to the logout page
-    });
-
-    // Redirect to /Account when user profile button is clicked
-    const userProfileBtn2 = document.getElementById('user-profile-btn-sb2');
-    userProfileBtn2.addEventListener('click', () => {
-        window.location.href = '/Account'; // Redirect to the account page
-    });
-
-    // Initial render
-    renderLeftAvatars();
-    renderNav();
+        renderNav();
+    })
 </script>
