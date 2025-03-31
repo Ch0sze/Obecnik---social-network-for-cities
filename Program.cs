@@ -26,6 +26,7 @@ builder.Services
     });
 builder.Services.AddAuthorization();
 
+
 // Registrace e-mailové služby
 builder.Services.AddScoped<IEmailService, EmailService>();
 

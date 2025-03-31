@@ -5,6 +5,7 @@ namespace Application.Api.Services;
 
 public class EmailService : IEmailService
 {
+    
     public async Task SendResetEmail(string email, string callbackUrl)
     {
         try

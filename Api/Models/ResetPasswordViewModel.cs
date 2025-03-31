@@ -4,6 +4,7 @@ namespace Application.Api.Models;
 
 public record ResetPasswordViewModel
 {
+    //this is resetPassword
     public string Token { get; init; } = string.Empty;
     public string Email { get; init; } = string.Empty;
     
