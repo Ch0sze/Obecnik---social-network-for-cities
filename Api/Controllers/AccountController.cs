@@ -22,12 +22,15 @@ public class AccountController(DatabaseContext databaseContext) : Controller
     {
         var id = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(user => user.Id == id);
+    
         return View("Account", new AccountViewModel
         {
             Email = user?.Email ?? string.Empty,
-            Name = user?.Firstname ?? string.Empty
+            Name = user != null ? $"{user.Firstname} {user.LastName}" : string.Empty,
+            Hometown = user != null ? $"{user.Residence}, {user.PostalCode}" : string.Empty
         });
     }
+
 
     [HttpGet("login")]
     public IActionResult Login(string? returnUrl)
