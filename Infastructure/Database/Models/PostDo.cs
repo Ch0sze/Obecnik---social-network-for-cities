@@ -1,5 +1,3 @@
-using System.Reflection.Metadata;
-
 namespace Application.Infastructure.Database.Models;
 
 public class PostDo
@@ -13,13 +11,13 @@ public class PostDo
     public byte[]? Photo { get; init; }
     public required string Place { get; init; }
     public int? SignaturesNo { get; init; }
-    
+
     public required Guid CreatedBy { get; init; }
     public required UserDo User { get; init; }
-    
+
     public Guid? ChannelId { get; init; } //to be added
-    
+
     public ChannelDo? Channel { get; init; } //to be added
-    
+
     public ICollection<CommentDo> Comments { get; init; } = [];
 }

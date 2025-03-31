@@ -1,12 +1,7 @@
-using Application.Api.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Application.Api.Models;
 using Application.Infastructure.Database;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Api.Controllers;
-
 
 [Route("/delete")]
 public class DeletePostController(DatabaseContext databaseContext) : Controller
@@ -16,11 +11,8 @@ public class DeletePostController(DatabaseContext databaseContext) : Controller
     public async Task<IActionResult> Delete(Guid id)
     {
         var post = await databaseContext.Posts.FindAsync(id);
-    
-        if (post == null)
-        {
-            return Json(new { success = false, message = "Příspěvek nenalezen." });
-        }
+
+        if (post == null) return Json(new { success = false, message = "Příspěvek nenalezen." });
 
         databaseContext.Posts.Remove(post);
         await databaseContext.SaveChangesAsync();

@@ -17,9 +17,9 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     {
         // Configure Post-User relationship
         modelBuilder.Entity<PostDo>()
-            .HasOne(post => post.User)  // Matches PostDo's navigation property
+            .HasOne(post => post.User) // Matches PostDo's navigation property
             .WithMany(user => user.Posts)
-            .HasForeignKey(post => post.CreatedBy)  // Matches PostDo's FK property
+            .HasForeignKey(post => post.CreatedBy) // Matches PostDo's FK property
             .IsRequired();
 
         // Configure Comment-User relationship
@@ -40,8 +40,8 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             .HasOne(post => post.Channel)
             .WithMany(channel => channel.Posts)
             .HasForeignKey(post => post.ChannelId);
-            //.IsRequired(true);
-        
+        //.IsRequired(true);
+
         // Configure Channel-Community relationship
         modelBuilder.Entity<ChannelDo>()
             .HasOne(channel => channel.Community)

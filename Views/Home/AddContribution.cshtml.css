@@ -1,5 +1,5 @@
 /*pojebane css*/
-*{
+* {
     font-family: 'Inter', sans-serif;
 }
 
@@ -12,10 +12,10 @@
     text-transform: none;
     text-align: left;
     transition: transform 0.1s ease;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 10px 20px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 #openModalButton .i {
@@ -25,6 +25,7 @@
 #openModalButton:active {
     transform: scale(1.01);
 }
+
 /*DELETE MODAL==========================*/
 /* Center the modal properly */
 .modal-dialog {

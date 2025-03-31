@@ -14,6 +14,7 @@
 .register-button:hover {
     background-color: #f77755;
 }
+
 .register-button:disabled {
     background-color: #fcb9a6 !important;
     cursor: not-allowed !important;
@@ -64,7 +65,7 @@
 .form-check-input:checked {
     background-color: #F98866;
     border-color: #F98866;
-    
+
 }
 
 /* White checkmark */
@@ -109,6 +110,7 @@
     padding: 8px;
     cursor: pointer;
 }
+
 #suggestions li:hover {
     background-color: #f0f0f0;
 }
