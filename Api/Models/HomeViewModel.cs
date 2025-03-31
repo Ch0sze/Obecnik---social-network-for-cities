@@ -2,10 +2,12 @@
 
 public class HomeViewModel
 {
+    public string? CommunityName { get; init; } = string.Empty;
     public required List<Post> Posts { get; set; }
 
     public record Post
     {
+        public string CommunityName { get; init; } = string.Empty;
         public required Guid Id { get; set; }
 
         public required string Title { get; set; }

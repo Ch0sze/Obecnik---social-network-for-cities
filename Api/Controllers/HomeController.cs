@@ -19,23 +19,25 @@ public class HomeController(DatabaseContext databaseContext) : Controller
 
         if (user == null)
             return Unauthorized(); // Ošetření nepřihlášeného uživatele
+
         var communityId = databaseContext.UserCommunities
             .Where(uc => uc.UserId == user.Id)
             .Select(uc => uc.CommunityId)
             .FirstOrDefault();
 
-        if (communityId == default)
-            return View(new HomeViewModel { Posts = new List<HomeViewModel.Post>() }); // Pokud uživatel nemá komunitu, vrátíme prázdný seznam
+        var communityName = databaseContext.Communities
+            .Where(c => c.Id == communityId)
+            .Select(c => c.Name)
+            .FirstOrDefault();
 
-        // 2. Najdeme ChannelId této komunity
+        if (communityId == default)
+            return View(new HomeViewModel { Posts = new List<HomeViewModel.Post>(), CommunityName = "No Community" }); // Modify this to include the community name
+
         var channelId = databaseContext.Channels
             .Where(c => c.CommunityId == communityId)
             .Select(c => c.Id)
             .FirstOrDefault();
 
-        if (channelId == default)
-            return View(new HomeViewModel { Posts = new List<HomeViewModel.Post>() });
-        
         var homeViewModel = new HomeViewModel
         {
             Posts = databaseContext.Posts
@@ -52,7 +54,8 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                     CreatedBy = string.Join(" ", post.User!.Firstname, post.User!.LastName),
                     Photo = post.Photo != null
                 })
-                .ToList()
+                .ToList(),
+            CommunityName = communityName // Add community name to the model
         };
 
         return View(homeViewModel);

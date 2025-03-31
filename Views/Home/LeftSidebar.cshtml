@@ -1,11 +1,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true"/>
+@model HomeViewModel
 
 <div id="leftSidebar" class="sidebar-sb">
     <!-- Logo -->
     <div class="logo-container-sb">
         <img src="~/image.png" alt="Logo">
-        <h4>OBECNÍK</h4>
+        <h4>Obecník @Model.CommunityName</h4>
     </div>
 
     <!-- Dynamic Avatar Container (left sidebar) -->
