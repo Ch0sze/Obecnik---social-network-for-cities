@@ -1,13 +1,12 @@
-using Application.Api.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Application.Api.Models;
 using Application.Infastructure.Database;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Api.Controllers;
 
-[Authorize]  
+[Authorize]
 [Route("/")]
 public class HomeController(DatabaseContext databaseContext) : Controller
 {
@@ -52,28 +51,24 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                     CreatedBy = string.Join(" ", post.User!.Firstname, post.User!.LastName),
                     Photo = post.Photo != null
                 })
-                .ToList(),
+                .ToList()
         };
 
-        return View(homeViewModel);  
+        return View(homeViewModel);
     }
-    
+
     [HttpGet("image/{postId}")]
     public IActionResult GetImage(Guid postId)
     {
         var post = databaseContext.Posts.FirstOrDefault(p => p.Id == postId);
-        if (post?.Photo == null)
-        {
-            return NotFound();
-        }
+        if (post?.Photo == null) return NotFound();
         Response.Headers.CacheControl = "public,max-age=31536000";
         return File(post.Photo, "image/jpeg");
     }
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
-    { 
+    {
         return View("Error");
     }
-
 }

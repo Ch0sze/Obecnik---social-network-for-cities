@@ -6,7 +6,7 @@ public class CommunityDo
     public required string Name { get; init; }
     public string? Picture { get; init; }
     public string? PostalCode { get; init; }
-    
+
     public ICollection<UserCommunityDo> UserCommunities { get; init; } = [];
     public ICollection<ChannelDo> Channels { get; init; } = [];
 }

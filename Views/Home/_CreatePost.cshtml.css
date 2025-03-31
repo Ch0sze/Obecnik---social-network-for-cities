@@ -7,12 +7,14 @@
     display: none; /* Zpočátku skryté, dokud obrázek nevybereme */
     border: none #ccc; /* Volitelně přidáme rámeček kolem náhledu */
 }
-.create-post-modal-container  #imagePreview {
-    width: 100px;     /* Přesná šířka */
-    height: 100px;    /* Přesná výška */
+
+.create-post-modal-container #imagePreview {
+    width: 100px; /* Přesná šířka */
+    height: 100px; /* Přesná výška */
     object-fit: cover; /* Zajistí, že obrázek vyplní daný prostor a zachová estetiku */
     border-radius: 5px; /* Volitelně, zaoblené rohy */
 }
+
 .create-post-modal-container .remove-image {
     position: absolute;
     top: +0px;
@@ -37,6 +39,7 @@
 .create-post-modal-container .remove-image:hover {
     background-color: #e86f59; /* Trochu tmavší oranžová při hoveru */
 }
+
 .create-post-modal-container .modal {
     display: none;
     position: fixed;
@@ -48,12 +51,13 @@
     justify-content: center;
     align-items: center;
 }
+
 .create-post-modal-container .modal-header {
     margin-bottom: 15px;
-    font-weight: bold;  /* Tučný text */
-    font-size: 20px;    /* Zvětšení velikosti textu */
-    font-family: 'Roboto Light', sans-serif ; /* Univerzální font */
-    text-transform: none;  /* Zajistí, že text nebude automaticky velkými písmeny */
+    font-weight: bold; /* Tučný text */
+    font-size: 20px; /* Zvětšení velikosti textu */
+    font-family: 'Roboto Light', sans-serif; /* Univerzální font */
+    text-transform: none; /* Zajistí, že text nebude automaticky velkými písmeny */
 }
 
 .create-post-modal-container .modal-content {
