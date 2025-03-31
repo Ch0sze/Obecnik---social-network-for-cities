@@ -1,3 +1,4 @@
+using Application.Api.Extensions;
 using Application.Api.Models;
 using Application.Infastructure.Database;
 using Microsoft.AspNetCore.Authorization;
