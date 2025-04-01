@@ -1,4 +1,6 @@
-﻿namespace Application.Api.Models;
+﻿using System.Threading.Channels;
+
+namespace Application.Api.Models;
 
 public class HomeViewModel
 {

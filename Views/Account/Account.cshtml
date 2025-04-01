@@ -1,4 +1,6 @@
-@model AccountViewModel
+@model CombinedViewModel
+
+
 @{
     ViewData["Title"] = "Account";
 }
@@ -9,21 +11,21 @@
         <partial name="~/Views/Home/LeftSidebar.cshtml"/>
     </div>
 
-    <!-- Center Content (Styled Account Page) -->
+    <!-- Center Content (Account Page) -->
     <div class="flex-grow-1 d-flex justify-content-center bg-light overflow-auto">
         <div class="col-sm-12 col-md-8 col-lg-6 p-4">
-            <h2 class="text-center mb-3">@Model.Name</h2>
+            <h2 class="text-center mb-3">@Model.AccountViewModel?.Name</h2>
 
             <div class="mb-3">
                 <label class="fw-bold">Email:</label>
-                <p class="fs-5">@Model.Email</p>
+                <p class="fs-5">@Model.AccountViewModel?.Email</p>
             </div>
 
             <div class="mb-3">
                 <label class="fw-bold">Bydliště:</label>
-                <p class="fs-4">@Model.Hometown</p>
+                <p class="fs-4">@Model.AccountViewModel?.Hometown</p>
             </div>
-            
+
         </div>
     </div>
 

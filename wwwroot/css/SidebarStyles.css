@@ -323,3 +323,16 @@
     padding: 0;
     transition: width 0.3s ease;
 }
+
+.text-sb {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.text-sb:hover {
+    text-decoration: none;
+}
+
+.avatar-btn-container-sb {
+    text-decoration: none;
+}

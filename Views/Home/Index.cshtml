@@ -1,4 +1,4 @@
-﻿@model HomeViewModel
+﻿@model CombinedViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -11,7 +11,7 @@
 
     <!-- Center Content (Middle Page) -->
     <div class="flex-grow-1 d-flex justify-content-center bg-light overflow-auto">
-        <partial name="AddContribution" model="Model.Posts"/>
+        <partial name="AddContribution" model="Model.HomeViewModel?.Posts"/>
     </div>
 
     <!-- Right Sidebar -->

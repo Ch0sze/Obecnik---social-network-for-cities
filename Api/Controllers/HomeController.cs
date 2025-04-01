@@ -14,11 +14,11 @@ public class HomeController(DatabaseContext databaseContext) : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var userId = User.GetId(); // Získání ID přihlášeného uživatele
+        var userId = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
 
         if (user == null)
-            return Unauthorized(); // Ošetření nepřihlášeného uživatele
+            return Unauthorized();
 
         var communityId = databaseContext.UserCommunities
             .Where(uc => uc.UserId == user.Id)
@@ -31,35 +31,50 @@ public class HomeController(DatabaseContext databaseContext) : Controller
             .FirstOrDefault();
 
         if (communityId == default)
-            return View(new HomeViewModel { Posts = new List<HomeViewModel.Post>(), CommunityName = "No Community" }); // Modify this to include the community name
+            communityName = "No Community";
 
         var channelId = databaseContext.Channels
             .Where(c => c.CommunityId == communityId)
             .Select(c => c.Id)
             .FirstOrDefault();
 
+        var posts = databaseContext.Posts
+            .Include(post => post.User)
+            .Where(post => post.ChannelId == channelId)
+            .OrderByDescending(post => post.CreatedAt)
+            .Select(post => new HomeViewModel.Post
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Description = post.Description,
+                CreatedAt = post.CreatedAt,
+                CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
+                Photo = post.Photo != null
+            })
+            .ToList();
+
         var homeViewModel = new HomeViewModel
         {
-            Posts = databaseContext.Posts
-                .Include(post => post.User)
-                .Where(post => post.ChannelId == channelId)
-                .ToList()
-                .OrderByDescending(post => post.CreatedAt)
-                .Select(post => new HomeViewModel.Post
-                {
-                    Id = post.Id,
-                    Title = post.Title,
-                    Description = post.Description,
-                    CreatedAt = post.CreatedAt,
-                    CreatedBy = string.Join(" ", post.User!.Firstname, post.User!.LastName),
-                    Photo = post.Photo != null
-                })
-                .ToList(),
-            CommunityName = communityName // Add community name to the model
+            Posts = posts,
+            CommunityName = communityName
         };
 
-        return View(homeViewModel);
+        var accountViewModel = new AccountViewModel
+        {
+            Email = user?.Email ?? string.Empty,
+            Name = $"{user?.Firstname} {user?.LastName}",
+            Hometown = $"{user?.Residence}, {user?.PostalCode}"
+        };
+
+        var combinedViewModel = new CombinedViewModel
+        {
+            AccountViewModel = accountViewModel,
+            HomeViewModel = homeViewModel
+        };
+
+        return View(combinedViewModel);
     }
+
 
     [HttpGet("image/{postId}")]
     public IActionResult GetImage(Guid postId)

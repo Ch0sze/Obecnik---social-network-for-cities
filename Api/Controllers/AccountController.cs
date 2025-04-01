@@ -23,15 +23,45 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         var id = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(user => user.Id == id);
     
-        return View("Account", new AccountViewModel
+        // Check if user is found, otherwise redirect or show an error
+        if (user == null)
         {
-            Email = user?.Email ?? string.Empty,
-            Name = user != null ? $"{user.Firstname} {user.LastName}" : string.Empty,
-            Hometown = user != null ? $"{user.Residence}, {user.PostalCode}" : string.Empty
-        });
+            return RedirectToAction("Error", "Home");  // or render a different error page
+        }
+
+        // Assuming HomeViewModel contains CommunityName
+        var homeViewModel = new HomeViewModel
+        {
+            CommunityName = GetCommunityName(user),
+            Posts = new List<HomeViewModel.Post>() // Required property now properly initialized
+        };
+
+
+
+        // Pass both Account and HomeViewModel together as CombinedViewModel
+        var combinedViewModel = new CombinedViewModel
+        {
+            AccountViewModel = new AccountViewModel
+            {
+                Email = user?.Email ?? string.Empty,
+                Name = $"{user?.Firstname} {user?.LastName}",
+                Hometown = $"{user?.Residence}, {user?.PostalCode}"
+            },
+            HomeViewModel = homeViewModel
+        };
+
+        return View("Account", combinedViewModel);
     }
 
+    private string GetCommunityName(UserDo user)
+    {
+        var community = databaseContext.UserCommunities
+            .Include(uc => uc.Community)
+            .FirstOrDefault(uc => uc.UserId == user.Id)?.Community;
 
+        return community?.Name ?? "Neznámá komunita"; // Fallback if no community is found
+    }
+    
     [HttpGet("login")]
     public IActionResult Login(string? returnUrl)
     {
