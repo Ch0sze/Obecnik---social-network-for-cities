@@ -18,7 +18,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
 
         if (user == null)
-            return Unauthorized();
+            return RedirectToAction("Login", "Account"); // Přesměrování na přihlášení
 
         var communityId = databaseContext.UserCommunities
             .Where(uc => uc.UserId == user.Id)
@@ -81,7 +81,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
     {
         var post = databaseContext.Posts.FirstOrDefault(p => p.Id == postId);
         if (post?.Photo == null) return NotFound();
-        Response.Headers.CacheControl = "public,max-age=31536000";
+        //Response.Headers.CacheControl = "public,max-age=31536000";
         return File(post.Photo, "image/jpeg");
     }
 

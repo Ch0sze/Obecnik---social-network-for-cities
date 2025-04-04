@@ -21,21 +21,23 @@
                         </div>
                         @if (@post.CreatedBy == User.Identity?.Name)
                         {
-                            <div class="ms-auto">
-                                <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn">
+                            <div class="ms-auto dropdown">
+                                <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn" 
+                                        data-bs-toggle="dropdown">
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="contribution-settings-btn">
+                                <div class="dropdown-menu dropdown-menu-start rounded post-settings shadow-sm">
                                     <form asp-action="Delete">
                                         <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
                                             Odstranit příspěvek
                                         </button>
-                                        @* <button type="button" class="dropdown-item update-post-btn" *@
-                                        @*         data-post-id="@post.Id" *@
-                                        @*         data-title="@post.Title" *@
-                                        @*         data-content="@post.Description"> *@
-                                        @*     Upravit příspěvek *@
-                                        @* </button> *@
+                                        <button type="button" class="dropdown-item update-post-btn"
+                                                data-post-id="@post.Id"
+                                                data-title="@post.Title"
+                                                data-content="@post.Description" 
+                                                data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) :"")">
+                                            Upravit příspěvek
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -66,33 +68,24 @@
 
 <div class="modal fade" id="delete-popup" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Odstranit příspěvek</h5>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Odstranit příspěvek</h5>
+            </div>
+            <div class="modal-body">
+                <p>Opravdu chcete tento příspěvek odstranit?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn close-btn" data-bs-dismiss="modal">Zavřít</button>
+                <button type="button" class="btn delete-btn" id="confirm-delete">Odstranit</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Opravdu chcete tento příspěvek odstranit?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn close-btn" data-bs-dismiss="modal">Zavřít</button>
-          <button type="button" class="btn delete-btn" id="confirm-delete">Odstranit</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('.contribution-settings-btn').click(function (event) {
-            event.stopPropagation();
-            $(this).next('.dropdown-menu').toggle();
-        });
-    
-        $(document).click(function () {
-            $('.dropdown-menu').hide();
-        });
-        
         let postIdToDelete = null;
 
         // Po kliknutí na "Odstranit příspěvek" se zobrazí modal a uloží se ID příspěvku
@@ -126,29 +119,92 @@
             let modal = bootstrap.Modal.getInstance(document.getElementById('delete-popup'));
             modal.hide();
         });
+    
+        // Handle edit post button click
+        $('.update-post-btn').click(function() {
+            const postId = $(this).data('post-id');
+            const title = $(this).data('title');
+            const content = $(this).data('content');
+            let photoUrl = $(this).data('photo');
+            
+            // Set the form action to the edit endpoint
+            $('#createPostForm').attr('action', '/editposts/' + postId);
+            
+            // Populate the form fields
+            $('#postTitle').val(title);
+            $('#postContent').val(content);
+            
+            // Update character counters
+            $('#titleLength').text(`${title.length}/100`);
+            $('#contentLength').text(`${content.length}/1000`);
+            
+            // Handle image preview
+            const imagePreviewContainer = $('#imagePreviewContainer');
+            const imagePreview = $('#imagePreview');
+            
+            if (photoUrl) {
+                imagePreview.attr('src', photoUrl);
+                imagePreviewContainer.show();
+            } else {
+                imagePreview.attr('src', null);
+                imagePreviewContainer.hide();
+            }
+            
+            // Change the publish button text
+            $('#publishPost').text('Upravit');
+            $('#postTitleHeader').text('Upravit příspěvek');
+            
+            // Show the modal
+            var modal = new bootstrap.Modal(document.getElementById('createPostModal'));
+            modal.show();
+        });
+        
+        // Reset form when opening for new post
+        $('#openModalButton').click(function() {
+            $('#createPostForm').attr('action', '/posts');
+            $('#createPostForm').attr('data-mode', 'create');
+            $('#createPostForm')[0].reset();
+            $('#imagePreview').attr('src', '');
+            $('#imagePreviewContainer').hide();
+            $('#titleLength').text('0/100');
+            $('#contentLength').text('0/1000');
+            $('#publishPost').text('Publikovat');
+        });
+        
+        $('#createPostForm').submit(function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return false;
+            }
+            
+            const formData = new FormData(this);
+            const url = $(this).attr('action');
+            const isEdit = url.includes('/editposts/');
+            
+            if (isEdit && $('#imagePreview').attr('src') === '') {
+                formData.append('RemoveImage', 'true');
+            }
+            
+            $.ajax({
+                url: url,
+                type: isEdit ? 'POST' : 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.redirect) {
+                        window.location.href = response.redirect;
+                    } else {
+                        location.reload();
+                    }
+                },
+                error: function(xhr) {
+                    // Handle errors
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
+        });
     });
 </script>
 
-@* <script> *@
-@*     $(document).ready(function () { *@
-@*         let editingPostId = null; *@
-@*          *@
-@*         // Open "Create Post" Modal with Existing Data for Editing *@
-@*         $('.update-post-btn').click(function () { *@
-@*             editingPostId = $(this).data('post-id'); *@
-@*             let title = $(this).data('title'); *@
-@*             let content = $(this).data('content'); *@
-@*              *@
-@*             // Fill modal inputs *@
-@*             $('#postTitle').val(title); *@
-@*             $('#postContent').val(content); *@
-@*              *@
-@*             // Change button text *@
-@*             $('#publishPost').text('Upravit příspěvek'); *@
-@*              *@
-@*             // Show modal *@
-@*             let modal = new bootstrap.Modal(document.getElementById('createPostModal')); *@
-@*             modal.show(); *@
-@*         }); *@
-@*     }) *@
-@* </script> *@

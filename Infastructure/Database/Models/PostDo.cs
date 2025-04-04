@@ -4,11 +4,11 @@ public class PostDo
 {
     public required Guid Id { get; init; }
     public required DateTimeOffset CreatedAt { get; init; }
-    public required string Title { get; init; }
+    public required string Title { get; set; }
     public required string Type { get; init; }
-    public required string Description { get; init; }
+    public required string Description { get; set; }
     public DateTime? EventDate { get; init; }
-    public byte[]? Photo { get; init; }
+    public byte[]? Photo { get; set; }
     public required string Place { get; init; }
     public int? SignaturesNo { get; init; }
 
