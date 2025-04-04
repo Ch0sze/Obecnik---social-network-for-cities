@@ -104,8 +104,8 @@ namespace Application.Infastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Picture")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");

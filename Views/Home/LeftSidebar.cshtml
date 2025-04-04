@@ -41,20 +41,17 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let navItems = [
-            {icon: '', label: 'Obecné', link: '/#', active: false, dot: true},
+            {icon: '', label: 'Obecné', link: '/#', active: false, dot: true}
         ];
 
-        // Users (with proper dynamic community name and link to posts)
         let users = [
             {
                 name: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.HomeViewModel?.CommunityName))',
-                image: "/Images/GenericCommunity.png",
+                image: '/community/image/' + '@Model.HomeViewModel!.CommunityId',
                 dot: true,
-                link: "/#"  // <-- Adjust this to the correct URL showing posts or content
+                link: "/#"  // Adjust to appropriate navigation link
             }
         ];
-
-        const navContainer = document.getElementById('nav-links-sb');
 
         // Render avatars dynamically (left sidebar)
         function renderLeftAvatars() {
@@ -64,22 +61,22 @@
             users.forEach((user, index) => {
                 const item = document.createElement('div');
                 item.className = 'user-item-sb';
-                item.innerHTML = `
-            <!-- Wrap the whole div inside a clickable link -->
-            <a href="${user.link}" class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
-                <button class="avatar-btn-sb">
-                    <img src="${user.image}" alt="${user.name}">
-                </button>
-                <span class="text-sb">${user.name}</span>
-                ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-            </a>
-        `;
+                item.innerHTML = ` 
+                    <a href="${user.link}" class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
+                        <button class="avatar-btn-sb">
+                            <img src="${user.image}" alt="${user.name}">
+                        </button>
+                        <span class="text-sb">${user.name}</span>
+                        ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                    </a>
+                `;
                 userList.appendChild(item);
             });
         }
 
         // Render navigation dynamically (left sidebar)
         function renderNav() {
+            const navContainer = document.getElementById('nav-links-sb');
             navContainer.innerHTML = '';
 
             navItems.forEach((item, index) => {
@@ -87,51 +84,23 @@
                 div.className = `nav-item-sb${item.active ? ' active-sb' : ''}`;
                 div.dataset.index = index;
 
-                div.innerHTML = `
-            <a href="${item.link}" onclick="updateDot(${index})">
-                ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
-                <span class="text-sb">${item.label}</span>
-                ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-            </a>
-        `;
+                div.innerHTML = ` 
+                    <a href="${item.link}" onclick="updateDot(${index})">
+                        ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
+                        <span class="text-sb">${item.label}</span>
+                        ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                    </a>
+                `;
 
                 navContainer.appendChild(div);
             });
         }
 
-        // Update dot indicator on nav click
-        function updateDot(index) {
-            navItems = navItems.map((item, i) => ({
-                ...item,
-                dot: i === index
-            }));
-            window.location.href = window.location.origin + "/";
-            renderNav();
-        }
-
-        // Handle avatar click and update dots for avatars
-        function onAvatarClick(index) {
-            // Update the dot state for users
-            users = users.map((user, i) => ({
-                ...user,
-                dot: i === index
-            }));
-            renderLeftAvatars();
-        }
-
-        const logoutBtn2 = document.getElementById('hamburger-menu-btn-sb2');
-        logoutBtn2.addEventListener('click', () => {
-            window.location.href = '/Account/Logout'; // Redirect to the logout page
-        });
-
-        // Redirect to /Account when user profile button is clicked
-        const userProfileBtn2 = document.getElementById('user-profile-btn-sb2');
-        userProfileBtn2.addEventListener('click', () => {
-            window.location.href = '/Account'; // Redirect to the account page
-        });
-
-        // Initial render
         renderLeftAvatars();
         renderNav();
-    })
+    });
 </script>
+
+
+
+
