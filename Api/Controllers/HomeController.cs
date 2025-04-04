@@ -56,7 +56,8 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         var homeViewModel = new HomeViewModel
         {
             Posts = posts,
-            CommunityName = communityName
+            CommunityName = communityName,
+            CommunityId = communityId // Pass the communityId to the view model
         };
 
         var accountViewModel = new AccountViewModel
@@ -83,6 +84,15 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         if (post?.Photo == null) return NotFound();
         Response.Headers.CacheControl = "public,max-age=31536000";
         return File(post.Photo, "image/jpeg");
+    }
+    
+    [HttpGet("community/image/{communityId}")]
+    public IActionResult GetCommunityImage(Guid communityId)
+    {
+        var community = databaseContext.Communities.FirstOrDefault(c => c.Id == communityId);
+        if (community?.Picture == null) return NotFound();
+        Response.Headers.CacheControl = "public,max-age=31536000";
+        return File(community.Picture, "image/jpeg");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

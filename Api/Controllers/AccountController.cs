@@ -5,6 +5,7 @@ using Application.Api.Services;
 using Application.Core;
 using Application.Infastructure.Database;
 using Application.Infastructure.Database.Models;
+using CoatOfArmsDownloader.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -22,21 +23,24 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
     {
         var id = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(user => user.Id == id);
-    
+
         // Check if user is found, otherwise redirect or show an error
         if (user == null)
         {
-            return RedirectToAction("Error", "Home");  // or render a different error page
+            return RedirectToAction("Error", "Home"); // or render a different error page
         }
 
-        // Assuming HomeViewModel contains CommunityName
+        // Get the community data for the user
+        var community = databaseContext.UserCommunities
+            .Include(uc => uc.Community)
+            .FirstOrDefault(uc => uc.UserId == user.Id)?.Community;
+
         var homeViewModel = new HomeViewModel
         {
-            CommunityName = GetCommunityName(user),
-            Posts = new List<HomeViewModel.Post>() // Required property now properly initialized
+            CommunityName = community?.Name ?? "Neznámá komunita", // Use community name
+            Posts = new List<HomeViewModel.Post>(),
+            CommunityId = community?.Id ?? Guid.Empty // Ensure the CommunityId is set correctly
         };
-
-
 
         // Pass both Account and HomeViewModel together as CombinedViewModel
         var combinedViewModel = new CombinedViewModel
@@ -61,7 +65,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
         return community?.Name ?? "Neznámá komunita"; // Fallback if no community is found
     }
-    
+
     [HttpGet("login")]
     public IActionResult Login(string? returnUrl)
     {
@@ -165,45 +169,45 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
     [HttpGet("resetpassword")]
     public IActionResult ResetPassword(string token, string email)
-{
-    // Pokud chybí token nebo e-mail, zobrazíme chybovou stránku.
-    if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
     {
-        return View("ResetPasswordError", new ErrorViewModel { Message = "Neplatný odkaz." });
+        // Pokud chybí token nebo e-mail, zobrazíme chybovou stránku.
+        if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
+        {
+            return View("ResetPasswordError", new ErrorViewModel { Message = "Neplatný odkaz." });
+        }
+
+        // Najdeme uživatele podle e-mailu
+        var user = databaseContext.Users.FirstOrDefault(u => u.Email == email);
+        if (user == null || string.IsNullOrEmpty(user.PasswordLink) || user.PasswordLink != token)
+        {
+            return View("ResetPasswordError", new ErrorViewModel { Message = "Odkaz je neplatný nebo již použit." });
+        }
+
+        // Rozdělíme token na dvě části očekávaného formátu "GUID_TICKS"
+        var parts = token.Split('_');
+        if (parts.Length != 2 || !long.TryParse(parts[1], out var expirationTicks))
+        {
+            return View("ResetPasswordError", new ErrorViewModel { Message = "Odkaz je poškozený." });
+        }
+
+        var expirationTime = new DateTime(expirationTicks, DateTimeKind.Utc);
+        if (DateTime.UtcNow > expirationTime)
+        {
+            return View("ResetPasswordError", new ErrorViewModel { Message = "Odkaz vypršel." });
+        }
+
+        // Token je platný – vytvoříme view model a zobrazíme formulář pro reset hesla
+        var model = new ResetPasswordViewModel
+        {
+            Token = token,
+            Email = email
+        };
+
+        return View("ResetPassword", model);
     }
 
-    // Najdeme uživatele podle e-mailu
-    var user = databaseContext.Users.FirstOrDefault(u => u.Email == email);
-    if (user == null || string.IsNullOrEmpty(user.PasswordLink) || user.PasswordLink != token)
-    {
-        return View("ResetPasswordError", new ErrorViewModel { Message = "Odkaz je neplatný nebo již použit." });
-    }
-
-    // Rozdělíme token na dvě části očekávaného formátu "GUID_TICKS"
-    var parts = token.Split('_');
-    if (parts.Length != 2 || !long.TryParse(parts[1], out var expirationTicks))
-    {
-        return View("ResetPasswordError", new ErrorViewModel { Message = "Odkaz je poškozený." });
-    }
-
-    var expirationTime = new DateTime(expirationTicks, DateTimeKind.Utc);
-    if (DateTime.UtcNow > expirationTime)
-    {
-        return View("ResetPasswordError", new ErrorViewModel { Message = "Odkaz vypršel." });
-    }
-
-    // Token je platný – vytvoříme view model a zobrazíme formulář pro reset hesla
-    var model = new ResetPasswordViewModel
-    {
-        Token = token,
-        Email = email
-    };
-
-    return View("ResetPassword", model);
-}
 
 
-    
     [HttpPost("resetpasswordsubmit")]
     public async Task<IActionResult> ResetPasswordSubmit(ResetPasswordViewModel model)
     {
@@ -242,13 +246,11 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         var (newSalt, newHash) = Password.Create(model.NewPassword);
         user.PasswordSalt = newSalt;
         user.PasswordHash = newHash;
-
-        // Zneplatníme resetovací token, aby se odkaz nemohl znovu použít
         user.PasswordLink = null;
 
         await databaseContext.SaveChangesAsync();
 
-        // Přesměrujeme uživatele na potvrzovací stránku
+        
         return RedirectToAction("ResetPasswordConfirmation");
     }
 
@@ -321,71 +323,44 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
     private async Task AssignUserToCommunity(UserDo user)
     {
         var existingCommunity = await databaseContext.Communities
-            .FirstOrDefaultAsync(c => c.PostalCode == user.PostalCode && c.Name == $"{user.Residence}");
+            .FirstOrDefaultAsync(c => c.PostalCode == user.PostalCode && c.Name == user.Residence);
 
-        if (existingCommunity != null)
+        if (existingCommunity == null)
         {
-            // Add user to the existing community via UserCommunityDo
-            var communityMember = new UserCommunityDo
-            {
-                UserId = user.Id,
-                CommunityId = existingCommunity.Id,
-                User = user,
-                Community = existingCommunity
-            };
-
-            await databaseContext.UserCommunities.AddAsync(communityMember);
-            Console.WriteLine($"User {user.Email} added to community {existingCommunity.Name}");
-        }
-        else
-        {
-            // Create a new community
             var newCommunity = new CommunityDo
             {
                 Id = Guid.NewGuid(),
-                Name = $"{user.Residence}",
-                PostalCode = user.PostalCode
+                Name = user.Residence ?? "Unknown Community",
+                PostalCode = user.PostalCode,
+                Picture = await CoatOfArmsScraper.GetCommunityCoatOfArms(user.Residence ?? "Unknown Community") // Store image
             };
 
             await databaseContext.Communities.AddAsync(newCommunity);
-            await databaseContext.SaveChangesAsync(); // Save to get the newCommunity.Id
+            await databaseContext.SaveChangesAsync();
 
-            // Reload user from DB to ensure it's tracked
-            var trackedUser = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
-
-            if (trackedUser == null)
+            // Create a corresponding channel for the new community
+            var newChannel = new ChannelDo
             {
-                Console.WriteLine($"User {user.Email} not found in DB.");
-                return;
-            }
+                Id = Guid.NewGuid(),
+                Name = "Příspěvky",
+                CommunityId = newCommunity.Id,
+                Community = newCommunity
+            };
 
-            // Add user as the first member of the new community
+            await databaseContext.Channels.AddAsync(newChannel);
+            await databaseContext.SaveChangesAsync();
+
             var newCommunityMember = new UserCommunityDo
             {
-                UserId = trackedUser.Id,
+                UserId = user.Id,
                 CommunityId = newCommunity.Id,
-                User = trackedUser,
+                User = user,
                 Community = newCommunity
             };
 
             await databaseContext.UserCommunities.AddAsync(newCommunityMember);
-
-            // Create a new "Příspěvky" channel for the new community
-            var postsChannel = new ChannelDo
-            {
-                Id = Guid.NewGuid(),
-                Name = "Příspěvky", // Channel name
-                CommunityId = newCommunity.Id, // Link to the new community
-                Community = newCommunity // Link the channel to the new community
-            };
-
-            // Add the channel to the community
-            await databaseContext.Channels.AddAsync(postsChannel);
-            await databaseContext.SaveChangesAsync(); // Save the channel to the database
-
-            Console.WriteLine($"New community created: {newCommunity.Name} with channel 'Příspěvky'");
+            await databaseContext.SaveChangesAsync();
         }
-
-        await databaseContext.SaveChangesAsync(); // Final save for the user-community relation
     }
+
 }
