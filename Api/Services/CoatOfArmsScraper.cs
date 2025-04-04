@@ -92,6 +92,20 @@ namespace CoatOfArmsDownloader.Services
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+            
+            try
+            {
+                var filePath = "wwwroot/Images/GenericCommunity.png";
+                if (File.Exists(filePath))
+                {
+                    Console.WriteLine("Using generic image.");
+                    return await File.ReadAllBytesAsync(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading local image: {ex.Message}");
+            }
 
             return null;
         }
