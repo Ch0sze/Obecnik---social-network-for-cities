@@ -333,13 +333,12 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
                 Id = Guid.NewGuid(),
                 Name = user.Residence ?? "Unknown Community",
                 PostalCode = user.PostalCode,
-                Picture = await CoatOfArmsScraper.GetCommunityCoatOfArms(user.Residence ?? "Unknown Community") // Store image
+                Picture = await CoatOfArmsScraper.GetCommunityCoatOfArms(user.Residence ?? "Unknown Community")
             };
 
             await databaseContext.Communities.AddAsync(newCommunity);
             await databaseContext.SaveChangesAsync();
 
-            // Create a corresponding channel for the new community
             var newChannel = new ChannelDo
             {
                 Id = Guid.NewGuid(),
@@ -362,7 +361,27 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             await databaseContext.UserCommunities.AddAsync(newCommunityMember);
             await databaseContext.SaveChangesAsync();
         }
+        else
+        {
+            var alreadyMember = await databaseContext.UserCommunities
+                .AnyAsync(uc => uc.UserId == user.Id && uc.CommunityId == existingCommunity.Id);
+
+            if (!alreadyMember)
+            {
+                var newCommunityMember = new UserCommunityDo
+                {
+                    UserId = user.Id,
+                    CommunityId = existingCommunity.Id,
+                    User = user,
+                    Community = existingCommunity
+                };
+
+                await databaseContext.UserCommunities.AddAsync(newCommunityMember);
+                await databaseContext.SaveChangesAsync();
+            }
+        }
     }
+
     public async Task<IActionResult> UpdateMissingCommunityPictures()
     {
         var communitiesWithoutPictures = await databaseContext.Communities
