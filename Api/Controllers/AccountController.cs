@@ -81,6 +81,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
     [HttpPost("login")]
     public async Task<IActionResult> LoginSubmit(LoginViewModel model)
     {
+        await UpdateMissingCommunityPictures();
         if (!ModelState.IsValid)
             return View("Login", model);
 
@@ -361,6 +362,33 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             await databaseContext.UserCommunities.AddAsync(newCommunityMember);
             await databaseContext.SaveChangesAsync();
         }
+    }
+    public async Task<IActionResult> UpdateMissingCommunityPictures()
+    {
+        var communitiesWithoutPictures = await databaseContext.Communities
+            .Where(c => c.Picture == null || c.Picture.Length == 0)
+            .ToListAsync();
+
+        foreach (var community in communitiesWithoutPictures)
+        {
+            try
+            {
+                var pictureBytes = await CoatOfArmsScraper.GetCommunityCoatOfArms(community.Name);
+                if (pictureBytes != null && pictureBytes.Length > 0)
+                {
+                    community.Picture = pictureBytes;
+                    Console.WriteLine($"Updated picture for: {community.Name}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to update picture for {community.Name}: {ex.Message}");
+            }
+        }
+
+        await databaseContext.SaveChangesAsync();
+
+        return Ok($"Updated {communitiesWithoutPictures.Count} community pictures.");
     }
 
 }
