@@ -307,7 +307,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             PostalCode = model.PostalCode,
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
-            Role = string.Empty
+            Role = "User"
         };
 
         await databaseContext.Users.AddAsync(newUser);
