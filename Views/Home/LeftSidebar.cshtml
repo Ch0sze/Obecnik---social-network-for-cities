@@ -96,6 +96,18 @@
             });
         }
 
+        const userProfileBtn = document.getElementById('user-profile-btn-sb2');
+        userProfileBtn.addEventListener('click', () => {
+            window.location.href = '/Account'; // Redirect to the account page
+        });
+
+        // Toggle dropdown menu visibility when hamburger menu is clicked
+
+        const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb2');
+        hamburgerMenuBtn.addEventListener('click', function() {
+            window.location.href = '/Account/Logout';
+        });
+
         renderLeftAvatars();
         renderNav();
     });
