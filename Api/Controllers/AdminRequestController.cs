@@ -40,16 +40,16 @@ namespace Application.Api.Controllers
             if (!ModelState.IsValid)
             {
                 // Return to the form with errors
-                return View("~/Views/Home/Index.cshtml", model); // Adjust to your actual return view
+                return View("~/Views/Home/Index.cshtml", model);
             }
 
-            var userId = User.GetId();  // Assuming GetId() is a helper method to get the logged-in user's ID
+            var userId = User.GetId();
             var user = _databaseContext.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
-                return RedirectToAction("Login", "Account");  // Redirect if user is not found
+                return RedirectToAction("Login", "Account");
 
             // Use the CommunityId passed from the form
-            var communityId = model.CommunityId; // Use the CommunityId from the form
+            var communityId = model.CommunityId;
 
             // Ensure the community exists in the database
             var community = _databaseContext.Communities.FirstOrDefault(c => c.Id == communityId);
