@@ -1,8 +1,7 @@
-@model Application.Api.Models.CombinedViewModel
-@using System.Web
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true"/>
+@model CombinedViewModel
+@using System.Web
 
 <div id="leftSidebar" class="sidebar-sb">
     <!-- Logo -->
@@ -18,105 +17,80 @@
     <div class="nav-container-sb" id="nav-links-sb">
         <!-- Dynamic content via JS -->
     </div>
-
-    <!-- Profile Info -->
     <div class="profile-container-sb">
         <div class="profile-header-sb">
+            <!-- Icon Button for User Profile (Redirect to /Account on click) -->
             <button class="icon-btn-sb" id="user-profile-btn-sb2">
                 <i class="bi bi-person"></i>
             </button>
+            <!-- Display the logged-in username -->
             <span class="text-sb" id="username-sb2">@User.Identity?.Name</span>
+            <!-- Hamburger Menu Button -->
             <button class="icon-btn-sb" id="hamburger-menu-btn-sb2">
                 <i class="bi bi-box-arrow-right"></i>
             </button>
         </div>
 
-        <!-- Dropdown -->
+        <!-- Dropdown Menu (Initially hidden) -->
         <div id="dropdown-menu-sb" class="dropdown-menu-sb" style="display: none;">
             <button class="dropdown-item-sb" id="logout-btn-sb">Odhlásit se</button>
-        </div>
-    </div>
-
-    <!-- Popup Form -->
-    <div id="admin-request-popup" class="popup-sb" style="display: none;">
-        <div class="popup-content-sb">
-            <h3>Žádost o práva správce</h3>
-
-            <form id="admin-request-form" method="post" action="/adminrequest">
-                <div class="form-group-sb">
-                    <label for="community-name">Název komunity</label>
-                    <input type="text" id="community-name" name="communityName" readonly value="@Model.AdminRequestViewModel.CommunityId">
-                </div>
-
-                <input type="hidden" id="community-id" name="communityId" />
-
-                <div class="form-group-sb">
-                    <label for="official-input">Oficiální email</label>
-                    <input type="text" id="official-input" name="officialEmail" placeholder="Oficiální email obce, starosty, či jiného pověřeného orgánu..." value="@Model.AdminRequestViewModel.OfficialEmail">
-                </div>
-
-                <div class="form-group-sb">
-                    <label for="notes">Poznámky</label>
-                    <textarea id="notes" name="notes" rows="5" placeholder="Zadejte doplňující informace...">@Model.AdminRequestViewModel.Notes</textarea>
-                </div>
-
-                <div class="form-group-sb">
-                    <button class="btn-sb" type="submit">Odeslat žádost</button>
-                </div>
-            </form>
-
-            <button class="close-btn-sb" onclick="closePopup()">X</button>
         </div>
     </div>
 </div>
 
 <script>
+   
     document.addEventListener('DOMContentLoaded', function () {
         let navItems = [
-            { icon: '', label: 'Obecné', link: '/#', active: false, dot: true }
+            {icon: '', label: 'Obecné', link: '/#', active: false, dot: true}
         ];
 
-        let users = [
+        let communities = [
             {
                 name: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.HomeViewModel?.CommunityName))',
                 image: '/community/image/' + '@Model.HomeViewModel!.CommunityId',
                 dot: true,
-                link: "/#",
-                communityId: '@Model.HomeViewModel!.CommunityId'
+                link: "/#"  // Adjust to appropriate navigation link
             }
         ];
 
+        // Render avatars dynamically (left sidebar)
         function renderLeftAvatars() {
             const userList = document.getElementById('user-list-left-sb');
             userList.innerHTML = '';
 
-            users.forEach((user, index) => {
+            communities.forEach((user, index) => {
                 const item = document.createElement('div');
                 item.className = 'user-item-sb';
-
-                item.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                        <div style="display: flex; align-items: center;">
-                            <button class="avatar-btn-sb" onclick="onAvatarClick(${index})" style="margin-right: 8px;">
-                                <img src="${user.image}" alt="${user.name}">
-                            </button>
-                            <div style="display: flex; flex-direction: column;">
-                                <span class="text-sb" style="font-size: 0.95rem;">${user.name}</span>
-                                <button
-                                    onclick="requestAdminRights(${index})"
-                                    style="background: none; border: none; color: #007bff; font-size: 0.75rem; padding: 0; margin-top: 2px; cursor: pointer; text-align: left; display: flex; align-items: center;">
-                                    <i class="material-icons" style="font-size: 16px; margin-right: 4px;">person_add</i>
-                                    Žádost o správce
-                                </button>
-                            </div>
-                        </div>
-                        ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-                    </div>
-                `;
+                item.innerHTML = ` 
+                <a href="${user.link}" class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
+                    <button class="avatar-btn-sb">
+                        <img src="${user.image}" alt="${user.name}">
+                    </button>
+                    <span class="text-sb">${user.name}</span>
+                    ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                </a>
+            `;
                 userList.appendChild(item);
+            });
+
+            // Add button at the end of the communities list to trigger the modal
+            const addBtnContainer = document.createElement('div');
+            addBtnContainer.className = 'user-item-sb';
+            addBtnContainer.innerHTML = ` 
+            <button class="add-btn-sb" id="add-community-btn">+</button>
+        `;
+            userList.appendChild(addBtnContainer);
+
+            // Add event listener to open the modal when the button is clicked
+            document.getElementById('add-community-btn').addEventListener('click', function () {
+                // Ensure that the modal is correctly targeted and shown
+                const modal = new bootstrap.Modal(document.getElementById('addCommunityModal'));
+                modal.show();
             });
         }
 
+        // Render navigation dynamically (left sidebar)
         function renderNav() {
             const navContainer = document.getElementById('nav-links-sb');
             navContainer.innerHTML = '';
@@ -127,29 +101,30 @@
                 div.dataset.index = index;
 
                 div.innerHTML = ` 
-                    <a href="${item.link}" onclick="updateDot(${index})">
-                        ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
-                        <span class="text-sb">${item.label}</span>
-                        ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-                    </a>
-                `;
+                <a href="${item.link}" onclick="updateDot(${index})">
+                    ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
+                    <span class="text-sb">${item.label}</span>
+                    ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                </a>
+            `;
 
                 navContainer.appendChild(div);
             });
         }
 
+        const userProfileBtn = document.getElementById('user-profile-btn-sb2');
+        userProfileBtn.addEventListener('click', () => {
+            window.location.href = '/Account'; // Redirect to the account page
+        });
+        // Toggle dropdown menu visibility when hamburger menu is clicked
+        const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb2');
+        hamburgerMenuBtn.addEventListener('click', function() {
+            window.location.href = '/Account/Logout';
+        });
+        
         renderLeftAvatars();
         renderNav();
-
-        window.requestAdminRights = function (index) {
-            const user = users[index];
-            document.getElementById('community-name').value = user.name;  // Set community name
-            document.getElementById('community-id').value = user.communityId;  // Set the CommunityId dynamically
-            document.getElementById('admin-request-popup').style.display = 'flex';  // Show the popup
-        };
-
-        window.closePopup = function () {
-            document.getElementById('admin-request-popup').style.display = 'none';
-        };
     });
+
 </script>
+

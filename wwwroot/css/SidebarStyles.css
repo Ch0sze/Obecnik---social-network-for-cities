@@ -199,6 +199,7 @@
     font-size: 22px;
     border: none;
     cursor: pointer;
+    margin-left: 5px; /* Shift 3px to the left */
 }
 
 .add-btn-sb:hover {
