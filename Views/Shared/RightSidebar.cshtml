@@ -1,15 +1,25 @@
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 <!-- Right Sidebar -->
-<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true" />
 <div class="sidebar-sb right-sidebar-sb">
 
     <!-- Profile Header (right sidebar-specific) -->
     <div class="profile-header-sb">
-        <!-- Icon Button for User Profile (Redirect to /Account on click) -->
+        <!-- Icon Button for User Profile -->
         <button class="icon-btn-sb" id="user-profile-btn-sb">
             <i class="bi bi-person"></i>
         </button>
+
+        <!-- SuperAdmin Dropdown (Initially Hidden) -->
+        <div id="superadmin-dropdown-sb" class="dropdown-menu-sb" style="display: none;">
+            <button class="dropdown-item-sb" onclick="window.location.href='/Account'">Zobrazit profil</button>
+            <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin'">Zobrazení žádostí</button>
+        </div>
+
         <!-- Display the logged-in username -->
         <span class="text-sb" id="username-sb">@User.Identity?.Name</span>
+
         <!-- Hamburger Menu Button -->
         <button class="icon-btn-sb" id="hamburger-menu-btn-sb">
             <i class="bi bi-box-arrow-right"></i>
@@ -37,6 +47,7 @@
 
 <!-- Dynamic JavaScript -->
 <script>
+    // Example data for avatars (can be enabled later)
     /*const users = [
         { name: "Jožka Nula", image: "/Images/GenericAvatar.png" },
         { name: "Michaela Černá", image: "/Images/GenericAvatar.png" },
@@ -50,7 +61,50 @@
         signatures: 217
     };*/
 
-    // Render avatars dynamically in the right sidebar
+    // Get the user role from claims
+    // Razor should resolve the value of the user role properly
+    const userRole = '@User.FindFirst(ClaimTypes.Role)?.Value'
+
+    // Print the user role to the console
+    console.log('User Role:', userRole);
+
+    const userProfileBtn = document.getElementById('user-profile-btn-sb');
+    const superAdminDropdown = document.getElementById("superadmin-dropdown-sb");
+
+    // Show the dropdown menu if user is SuperAdmin, otherwise redirect to /Account
+    userProfileBtn.addEventListener('click', () => {
+        if (userRole === "SuperAdmin") {
+            // If the role is SuperAdmin, show the dropdown menu
+            const isVisible = superAdminDropdown.style.display === "block";
+            const rect = userProfileBtn.getBoundingClientRect();
+            superAdminDropdown.style.top = `${rect.bottom + window.scrollY}px`;
+            superAdminDropdown.style.left = `${rect.left + window.scrollX - 30}px`;
+            superAdminDropdown.style.display = isVisible ? "none" : "block";
+        } else {
+            // Redirect to /Account if the role is not SuperAdmin
+            window.location.href = '/Account';
+        }
+    });
+
+    // Redirect to /Account/Logout when "Odhlásit se" is clicked
+    const logoutBtn = document.getElementById('logout-btn-sb');
+    logoutBtn.addEventListener('click', () => {
+        window.location.href = '/Account/Logout';
+    });
+
+    // Hamburger menu, which logs out the user
+    const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb');
+    hamburgerMenuBtn.addEventListener('click', function () {
+        window.location.href = '/Account/Logout';
+        /*
+        const buttonRect = hamburgerMenuBtn.getBoundingClientRect();
+        dropdownMenu.style.top = `${buttonRect.bottom + window.scrollY}px`;
+        dropdownMenu.style.left = `${buttonRect.left + window.scrollX - 50}px`;
+        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+        */
+    });
+
+    // Handle avatar rendering (can be enabled later)
     function renderAvatars() {
         const userList = document.getElementById('user-list-sb');
         userList.innerHTML = '';
@@ -68,52 +122,19 @@
         });
     }
 
-    // Render petition dynamically in the right sidebar
+    // Handle petition rendering (can be enabled later)
     function renderPetition() {
         document.getElementById('petition-title-sb').innerText = petition.title;
         document.getElementById('petition-description-sb').innerText = petition.description;
         document.getElementById('petition-signatures-sb').innerText = `${petition.signatures} podpisů`;
     }
 
-    // Initialize content
-    /*renderAvatars();
-    renderPetition();*/
-
-    // Toggle dropdown menu visibility when hamburger menu is clicked
-    const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb');
-    const dropdownMenu = document.getElementById('dropdown-menu-sb');
-    
-
-    // Redirect to /Account/Logout when "Odhlásit se" is clicked
-    const logoutBtn = document.getElementById('logout-btn-sb');
-    logoutBtn.addEventListener('click', () => {
-        window.location.href = '/Account/Logout'; // Redirect to the logout page
-    });
-
-     // Redirect to /Account when user profile button is clicked
-     const userProfileBtn = document.getElementById('user-profile-btn-sb');
-     userProfileBtn.addEventListener('click', () => {
-         window.location.href = '/Account'; // Redirect to the account page
-     });
-
-    // Toggle dropdown menu visibility when hamburger menu is clicked
-
-    hamburgerMenuBtn.addEventListener('click', function() {
-        window.location.href = '/Account/Logout';
-        /*const buttonRect = hamburgerMenuBtn.getBoundingClientRect();
-
-        // Position the dropdown below the button and shift it 50px to the left
-        dropdownMenu.style.top = `${buttonRect.bottom + window.scrollY}px`; // Position it below the button
-        dropdownMenu.style.left = `${buttonRect.left + window.scrollX - 50}px`; // Shift 50px to the left
-
-        // Toggle visibility of dropdown
-        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';*/
-    });
-
     // Handle avatar click (you can add specific logic here if needed)
     /*function onAvatarClick(index) {
         alert(`Clicked on user: ${users[index].name}`);
     }*/
+
+    // You can enable these later:
+    // renderAvatars();
+    // renderPetition();
 </script>
-
-
