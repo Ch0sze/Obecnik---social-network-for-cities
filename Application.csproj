@@ -27,4 +27,10 @@
         <Folder Include="Infastructure\Database\Migrations\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Views\Account\RequestAdminRights.css">
+        <DependentUpon>RequestAdminRights.cshtml</DependentUpon>
+      </None>
+    </ItemGroup>
+
 </Project>

@@ -1,15 +1,16 @@
 ﻿using Application.Infastructure.Database.Models;
 
-namespace Application.Api.Models;
-
-public class AdminRequestFormViewModel
+namespace Application.Api.Models
 {
-    public Guid Id { get; set; }
-    public Guid CommunityId { get; set; }
-    public string OfficialEmail { get; set; } = string.Empty;
-    public string? Notes { get; set; }
-    public DateTime RequestDate { get; set; }
-    public CommunityDo? Community { get; set; }
-    public UserDo? User { get; set; }
-
+    public class AdminRequestFormViewModel
+    {
+        public Guid Id { get; set; }
+        public Guid CommunityId { get; set; }
+        public string OfficialEmail { get; set; } = string.Empty;
+        public string? Notes { get; set; }
+        public DateTime RequestDate { get; set; }
+        public CommunityDo? Community { get; set; }
+        public UserDo? User { get; set; }
+        public List<CommunityDo> Communities { get; set; } = new List<CommunityDo>(); // List of communities
+    }
 }

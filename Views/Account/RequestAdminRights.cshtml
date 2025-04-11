@@ -1,0 +1,51 @@
+﻿@model Application.Api.Models.AdminRequestFormViewModel
+
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div style="max-width: 600px; width: 100%;">
+        <!-- Header section -->
+        <div class="header-section text-center mb-4">
+            <img src="~/image.png" alt="Logo" style="max-height: 100px;" />
+            <h2>Žádost o administrátorská práva</h2>
+        </div>
+
+        <!-- Form container -->
+        <div class="bg-white p-4 shadow rounded">
+            <form asp-controller="AdminRequest" asp-action="CreateAdminRequest" method="post">
+
+                <!-- Community -->
+                <div class="mb-3">
+                    <label for="community" class="form-label fw-bold">Komunita:</label>
+                    <select class="form-control" id="community" name="CommunityId" style="background-color: #FAFAFA; border: none; border-bottom: 1px solid #F98866; border-radius: 0;">
+                        <option value="">Vyberte komunitu</option>
+                        @foreach (var community in Model.Communities)
+                        {
+                            <option value="@community.Id" selected="@(community.Id == Model.CommunityId ? "selected" : null)">
+                                @community.Name - @community.PostalCode
+                            </option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.CommunityId, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Official Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">Oficiální e-mail:</label>
+                    <input type="email" class="form-control" id="email" name="OfficialEmail" value="@Model.OfficialEmail" placeholder="např. starosta@obec.cz" style="background-color: #FAFAFA; border: none; border-bottom: 1px solid #F98866; border-radius: 0;" />
+                    @Html.ValidationMessageFor(model => model.OfficialEmail, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Notes -->
+                <div class="mb-3">
+                    <label for="notes" class="form-label fw-bold">Poznámky:</label>
+                    <textarea class="form-control" id="notes" name="Notes" rows="5" placeholder="Zde uveďte důvody a podrobnosti žádosti" style="background-color: #FAFAFA; border: 1px solid #F98866; border-radius: 5px;">@Model.Notes</textarea>
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning text-white fw-bold px-4">Odeslat žádost</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

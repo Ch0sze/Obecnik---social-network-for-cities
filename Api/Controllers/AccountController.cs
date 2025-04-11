@@ -410,5 +410,22 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
         return Ok($"Updated {communitiesWithoutPictures.Count} community pictures.");
     }
+    
+    [HttpGet("requestadminrights")]
+    [Authorize]
+    public IActionResult RequestAdminRights()
+    {
+        // Fetch communities from the database
+        var communities = databaseContext.Communities.ToList();
+
+        // Create the view model and populate the Communities list
+        var model = new AdminRequestFormViewModel
+        {
+            Communities = communities // Add communities to the view model
+        };
+
+        return View("RequestAdminRights", model);
+    }
+
 
 }
