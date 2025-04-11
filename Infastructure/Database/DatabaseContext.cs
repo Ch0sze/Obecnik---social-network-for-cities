@@ -12,44 +12,45 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<PostDo> Posts => Set<PostDo>();
     public DbSet<CommentDo> Comments => Set<CommentDo>();
     public DbSet<ApiLoginDo> ApiLogins => Set<ApiLoginDo>();
+    public DbSet<AdminRequestDo> AdminRequests => Set<AdminRequestDo>(); // New DbSet
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure Post-User relationship
+        // Post -> User
         modelBuilder.Entity<PostDo>()
-            .HasOne(post => post.User) // Matches PostDo's navigation property
+            .HasOne(post => post.User)
             .WithMany(user => user.Posts)
-            .HasForeignKey(post => post.CreatedBy) // Matches PostDo's FK property
+            .HasForeignKey(post => post.CreatedBy)
             .IsRequired();
 
-        // Configure Comment-User relationship
+        // Comment -> User
         modelBuilder.Entity<CommentDo>()
             .HasOne(comment => comment.User)
             .WithMany(user => user.Comments)
-            .HasForeignKey(comment => comment.UserId).OnDelete(DeleteBehavior.NoAction);
+            .HasForeignKey(comment => comment.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
 
-        // Configure Comment-Post relationship
+        // Comment -> Post
         modelBuilder.Entity<CommentDo>()
             .HasOne(comment => comment.Post)
             .WithMany(post => post.Comments)
             .HasForeignKey(comment => comment.PostId)
             .IsRequired();
 
-        // Configure Post-Channel relationship
+        // Post -> Channel
         modelBuilder.Entity<PostDo>()
             .HasOne(post => post.Channel)
             .WithMany(channel => channel.Posts)
             .HasForeignKey(post => post.ChannelId);
-        //.IsRequired(true);
 
-        // Configure Channel-Community relationship
+        // Channel -> Community
         modelBuilder.Entity<ChannelDo>()
             .HasOne(channel => channel.Community)
             .WithMany(community => community.Channels)
             .HasForeignKey(channel => channel.CommunityId)
             .IsRequired();
 
-        // Configure many-to-many relationship: User <-> Community
+        // User <-> Community (many-to-many)
         modelBuilder.Entity<UserCommunityDo>()
             .HasKey(uc => new { uc.UserId, uc.CommunityId });
 
@@ -63,6 +64,20 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             .HasOne(uc => uc.Community)
             .WithMany(community => community.UserCommunities)
             .HasForeignKey(uc => uc.CommunityId)
+            .IsRequired();
+
+        // AdminRequest -> User
+        modelBuilder.Entity<AdminRequestDo>()
+            .HasOne(ar => ar.User)
+            .WithMany() // Add .WithMany(user => user.AdminRequests) if reverse nav is needed
+            .HasForeignKey(ar => ar.UserId)
+            .IsRequired();
+
+        // AdminRequest -> Community
+        modelBuilder.Entity<AdminRequestDo>()
+            .HasOne(ar => ar.Community)
+            .WithMany() // Add .WithMany(community => community.AdminRequests) if reverse nav is needed
+            .HasForeignKey(ar => ar.CommunityId)
             .IsRequired();
     }
 }

@@ -1,6 +1,5 @@
 @model CombinedViewModel
 
-
 @{
     ViewData["Title"] = "Account";
 }
@@ -8,7 +7,7 @@
 <div class="d-flex min-vh-100">
     <!-- Left Sidebar -->
     <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
-        <partial name="~/Views/Home/LeftSidebar.cshtml"/>
+        <partial name="LeftSidebar"/>
     </div>
 
     <!-- Center Content (Account Page) -->
@@ -31,8 +30,8 @@
 
     <!-- Right Sidebar -->
     <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
-        <partial name="~/Views/Home/RightSidebar.cshtml"/>
+        <partial name="RightSidebar"/>
     </div>
 </div>
 
-<partial name="~/Views/Home/ToggleButton.cshtml"/>
+<partial name="ToggleButton"/>

@@ -1,0 +1,40 @@
+﻿/* Removed display: none from the modal */
+.create-post-modal-container .modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Allow Bootstrap to handle the backdrop */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Keep other styles intact for content inside the modal */
+.create-post-modal-container .modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 400px;
+    border-radius: 8px;
+}
+
+/* Keep the input and button styling */
+.create-post-modal-container .input-field, .textarea-field {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Button Styling */
+.create-post-modal-container .ButtonPublish {
+    background-color: #ff926b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 90px;
+    cursor: pointer;
+}

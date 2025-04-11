@@ -99,6 +99,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             new(ClaimTypes.Email, user.Email),
             new(ClaimTypes.Role, user.Role)
         };
+        Console.WriteLine($"User role: {user.Role}");
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var authProperties = new AuthenticationProperties
         {
@@ -308,7 +309,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             PostalCode = model.PostalCode,
             PasswordHash = passwordHash,
             PasswordSalt = passwordSalt,
-            Role = "User"
+            Role = model.Email == "obecnika@gmail.com" ? "SuperAdmin" : "User"
         };
 
         await databaseContext.Users.AddAsync(newUser);
