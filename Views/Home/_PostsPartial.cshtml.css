@@ -1,3 +1,6 @@
+.thepost {
+    padding-bottom: 5px !important;
+}
 .post-settings {
     padding: 5px;
     background-color: #FFFAEF;
@@ -13,6 +16,14 @@
     color: black;
 }
 
+.thepost .btn-sm {
+    padding: 3px 5px 3px;
+}
+.btn-hover-light:hover {
+    background-color: #FFF2D6 !important;
+    border-radius: 8px;
+}
+
 /* Custom adjustments if needed */
 @media (max-width: 576px) {
     .thepost .flex-column {
@@ -25,5 +36,15 @@
     .thepost small {
         line-height: 1;
         margin-top: -2px; /* Adjust vertical spacing */
+    }
+    
+    /* Hide button text on mobile */
+    .thepost .btn-sm span.text-label {
+        display: none;
+    }
+
+    /* Optional: Adjust button padding for better mobile appearance */
+    .thepost .btn-sm {
+        padding: 0.25rem 0.5rem;
     }
 }
