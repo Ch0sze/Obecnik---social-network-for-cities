@@ -3,6 +3,7 @@
     ViewData["Title"] = "Přihlášení";
 }
 
+
 <div class="d-flex align-items-center justify-content-center" style="min-height: 100%;">
     <div style="max-width: 500px; width: 100%;">
         <!-- Logo a nadpis mimo kontejner formuláře -->
@@ -43,6 +44,12 @@
                             <span asp-validation-for="Password" class="invalid-feedback"></span>
                         </div>
 
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @TempData["ErrorMessage"]
+                            </div>
+                        }
                         <!-- Tlačítko zarovnané doprava -->
                         <button type="submit" class="login-button">
                             Přihlásit se

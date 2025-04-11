@@ -1,0 +1,31 @@
+﻿.search-input {
+    background-color: #FFFFFF !important;
+    border: 1px solid #F98866 !important;
+    border-radius: 50px !important;
+    box-shadow: none !important;
+    padding-left: 15px;
+}
+
+.search-input::placeholder {
+    color: #A1A1A1;
+}
+
+.search-button {
+    background-color: #F98866;
+    border: none;
+    color: #FFF;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-left: 0.5rem;
+}
+
+.search-button:hover {
+    background-color: #f77755;
+}
+
+.search-button i {
+    font-size: 1.2rem;
+}

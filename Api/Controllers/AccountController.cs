@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OpenQA.Selenium.DevTools.V133.Database;
 
 namespace Application.Api.Controllers;
 
@@ -19,10 +20,18 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 {
     [HttpGet]
     [Authorize]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         var id = User.GetId();
-        var user = databaseContext.Users.FirstOrDefault(user => user.Id == id);
+        var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+        // Check if user is banned
+        // if (user?.Role == "Banned")
+        // {
+        //     // If banned, log them out and redirect to login with banned message
+        //     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //     return RedirectToAction("Login", "Account", new { error = "Váš účet byl zabanován." });
+        // }
 
         // Check if user is found, otherwise redirect or show an error
         if (user == null)
@@ -30,10 +39,11 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             return RedirectToAction("Error", "Home"); // or render a different error page
         }
 
-        // Get the community data for the user
-        var community = databaseContext.UserCommunities
-            .Include(uc => uc.Community)
-            .FirstOrDefault(uc => uc.UserId == user.Id)?.Community;
+        var community = await databaseContext.UserCommunities
+            .Where(uc => uc.UserId == user.Id)
+            .Select(uc => uc.Community)
+            .FirstOrDefaultAsync();
+
 
         var homeViewModel = new HomeViewModel
         {
@@ -57,6 +67,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         return View("Account", combinedViewModel);
     }
 
+
     private string GetCommunityName(UserDo user)
     {
         var community = databaseContext.UserCommunities
@@ -67,14 +78,15 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
     }
 
     [HttpGet("login")]
-    public IActionResult Login(string? returnUrl)
+    public IActionResult Login(string? returnUrl, string? message)
     {
         if (User.Identity?.IsAuthenticated == true)
             return RedirectToAction("Index", "Home");
 
         return View("Login", new LoginViewModel
         {
-            ReturnUrl = returnUrl
+            ReturnUrl = returnUrl,
+            Message = message
         });
     }
 
@@ -82,24 +94,28 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
     public async Task<IActionResult> LoginSubmit(LoginViewModel model)
     {
         await UpdateMissingCommunityPictures();
+
         if (!ModelState.IsValid)
             return View("Login", model);
 
         var user = databaseContext.Users.FirstOrDefault(user => user.Email == model.Email);
         if (user == null)
             return View("Login", model with { Message = "Nesprávné jméno nebo heslo." });
+        
+        if (user.Role == "Banned")
+            return View("Login", model with { Message = "Váš účet byl zabanován." });
 
-        if (Password.Verify(model.Password, user.PasswordHash, user.PasswordSalt) == false)
+        if (!Password.Verify(model.Password, user.PasswordHash, user.PasswordSalt))
             return View("Login", model with { Message = "Nesprávné jméno nebo heslo." });
 
         var claims = new List<Claim>
         {
             new("Id", user.Id.ToString()),
-            new(ClaimTypes.Name, string.Join(" ", user.Firstname, user.LastName)),
+            new(ClaimTypes.Name, $"{user.Firstname} {user.LastName}"),
             new(ClaimTypes.Email, user.Email),
             new(ClaimTypes.Role, user.Role)
         };
-        Console.WriteLine($"User role: {user.Role}");
+
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var authProperties = new AuthenticationProperties
         {
@@ -116,6 +132,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             ? RedirectToAction("Index", "Home")
             : Redirect(model.ReturnUrl);
     }
+
 
     [HttpGet("forgotpassword")]
     public IActionResult ForgotPassword()
@@ -322,19 +339,19 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         return View("RegisterSuccess");
     }
 
-    private async Task AssignUserToCommunity(UserDo user)
+    private async Task AssignUserToCommunity(UserDo? user)
     {
         var existingCommunity = await databaseContext.Communities
-            .FirstOrDefaultAsync(c => c.PostalCode == user.PostalCode && c.Name == user.Residence);
+            .FirstOrDefaultAsync(c => user != null && c.PostalCode == user.PostalCode && c.Name == user.Residence);
 
         if (existingCommunity == null)
         {
             var newCommunity = new CommunityDo
             {
                 Id = Guid.NewGuid(),
-                Name = user.Residence ?? "Unknown Community",
-                PostalCode = user.PostalCode,
-                Picture = await CoatOfArmsScraper.GetCommunityCoatOfArms(user.Residence ?? "Unknown Community")
+                Name = user?.Residence ?? "Unknown Community",
+                PostalCode = user?.PostalCode,
+                Picture = await CoatOfArmsScraper.GetCommunityCoatOfArms(user?.Residence ?? "Unknown Community")
             };
 
             await databaseContext.Communities.AddAsync(newCommunity);
@@ -351,33 +368,41 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             await databaseContext.Channels.AddAsync(newChannel);
             await databaseContext.SaveChangesAsync();
 
-            var newCommunityMember = new UserCommunityDo
+            if (user != null)
             {
-                UserId = user.Id,
-                CommunityId = newCommunity.Id,
-                User = user,
-                Community = newCommunity
-            };
+                var newCommunityMember = new UserCommunityDo
+                {
+                    UserId = user.Id,
+                    CommunityId = newCommunity.Id,
+                    User = user,
+                    Community = newCommunity
+                };
 
-            await databaseContext.UserCommunities.AddAsync(newCommunityMember);
+                await databaseContext.UserCommunities.AddAsync(newCommunityMember);
+            }
+
             await databaseContext.SaveChangesAsync();
         }
         else
         {
             var alreadyMember = await databaseContext.UserCommunities
-                .AnyAsync(uc => uc.UserId == user.Id && uc.CommunityId == existingCommunity.Id);
+                .AnyAsync(uc => user != null && uc.UserId == user.Id && uc.CommunityId == existingCommunity.Id);
 
             if (!alreadyMember)
             {
-                var newCommunityMember = new UserCommunityDo
+                if (user != null)
                 {
-                    UserId = user.Id,
-                    CommunityId = existingCommunity.Id,
-                    User = user,
-                    Community = existingCommunity
-                };
+                    var newCommunityMember = new UserCommunityDo
+                    {
+                        UserId = user.Id,
+                        CommunityId = existingCommunity.Id,
+                        User = user,
+                        Community = existingCommunity
+                    };
 
-                await databaseContext.UserCommunities.AddAsync(newCommunityMember);
+                    await databaseContext.UserCommunities.AddAsync(newCommunityMember);
+                }
+
                 await databaseContext.SaveChangesAsync();
             }
         }

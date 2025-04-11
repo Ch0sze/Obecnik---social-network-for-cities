@@ -1,6 +1,8 @@
 using Application.Api.Extensions;
 using Application.Api.Models;
 using Application.Infastructure.Database;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +20,18 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
 
         if (user == null)
-            return RedirectToAction("Login", "Account"); // Přesměrování na přihlášení
+            return RedirectToAction("Login", "Account");
+
+        // Check if user is banned
+        if (user?.Role == "Banned")
+        {
+            // If banned, log them out and redirect to login with banned message
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account", new { error = "Banned", message = "Váš účet byl zabanován." });
+        }
 
         var communityId = databaseContext.UserCommunities
-            .Where(uc => uc.UserId == user.Id)
+            .Where(uc => user != null && uc.UserId == user.Id)
             .Select(uc => uc.CommunityId)
             .FirstOrDefault();
 

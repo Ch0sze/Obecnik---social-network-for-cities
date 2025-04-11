@@ -16,5 +16,5 @@ public record LoginViewModel
 
     public string? ReturnUrl { get; init; }
 
-    public string Message { get; init; } = string.Empty;
+    public string? Message { get; init; } = string.Empty;
 }

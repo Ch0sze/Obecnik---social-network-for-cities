@@ -1,4 +1,5 @@
-﻿using Application.Infastructure.Database.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using Application.Infastructure.Database.Models;
 
 namespace Application.Api.Models
 {
@@ -6,6 +7,7 @@ namespace Application.Api.Models
     {
         public Guid Id { get; set; }
         public Guid CommunityId { get; set; }
+        [EmailAddress(ErrorMessage = "Neplatná emailová adresa")]
         public string OfficialEmail { get; set; } = string.Empty;
         public string? Notes { get; set; }
         public DateTime RequestDate { get; set; }

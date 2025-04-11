@@ -4,6 +4,8 @@ using Application.Api.Extensions;
 using Application.Api.Models;
 using Application.Infastructure.Database;
 using Application.Infastructure.Database.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Api.Controllers;
@@ -43,10 +45,19 @@ public class PostsController(DatabaseContext databaseContext) : Controller
         var user = databaseContext.Users.FirstOrDefault(user => user.Id == userId);
         if (user == null)
             return RedirectToAction("Login", "Account"); // Přesměrování na přihlášení
+
+        // Check if user is banned
+        if (user?.Role == "Banned")
+        {
+            // If banned, log them out and redirect to login with banned message
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account", new { error = "Banned", message = "Váš účet byl zabanován." });
+        }
+        
         
         byte[]? imageData = null;
         var communityId = databaseContext.UserCommunities
-            .Where(uc => uc.UserId == user.Id)
+            .Where(uc => user != null && uc.UserId == user.Id)
             .Select(uc => uc.CommunityId)
             .FirstOrDefault();
 
@@ -85,22 +96,26 @@ public class PostsController(DatabaseContext databaseContext) : Controller
                 imageData = memoryStream.ToArray();
             }
         }
-        
-        var posts = new PostDo
-        {
-            Id = default,
-            Title = model.Title,
-            Description = model.Content,
-            CreatedAt = DateTimeOffset.Now,
-            CreatedBy = user.Id,
-            Type = "Discussion",
-            Place = "Zlín",
-            User = user,
-            Photo = imageData,
-            ChannelId = channelId,
-        };
 
-        databaseContext.Posts.Add(posts);
+        if (user != null)
+        {
+            var posts = new PostDo
+            {
+                Id = default,
+                Title = model.Title,
+                Description = model.Content,
+                CreatedAt = DateTimeOffset.Now,
+                CreatedBy = user.Id,
+                Type = "Discussion",
+                Place = "Zlín",
+                User = user,
+                Photo = imageData,
+                ChannelId = channelId,
+            };
+
+            databaseContext.Posts.Add(posts);
+        }
+
         databaseContext.SaveChanges();
 
         return RedirectToAction("Index", "Home");

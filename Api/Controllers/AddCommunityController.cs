@@ -5,6 +5,8 @@ using Application.Infastructure.Database.Models;
 using CoatOfArmsDownloader.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Application.Api.Controllers
 {
@@ -31,6 +33,14 @@ namespace Application.Api.Controllers
             if (user == null)
             {
                 return Unauthorized(); // Handle if user is not found in the database
+            }
+            
+            // Check if user is banned
+            if (user?.Role == "Banned")
+            {
+                // If banned, log them out and redirect to login with banned message
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("Login", "Account", new { error = "Banned", message = "Váš účet byl zabanován." });
             }
 
             var community = await databaseContext.Communities
@@ -63,20 +73,24 @@ namespace Application.Api.Controllers
             }
 
             var alreadyMember = await databaseContext.UserCommunities
-                .AnyAsync(uc => uc.UserId == user.Id && uc.CommunityId == community.Id);
+                .AnyAsync(uc => user != null && uc.UserId == user.Id && uc.CommunityId == community.Id);
 
             if (!alreadyMember)
             {
                 // Add user to the community
-                var userCommunity = new UserCommunityDo
+                if (user != null)
                 {
-                    UserId = user.Id,
-                    CommunityId = community.Id,
-                    User = user,
-                    Community = community
-                };
+                    var userCommunity = new UserCommunityDo
+                    {
+                        UserId = user.Id,
+                        CommunityId = community.Id,
+                        User = user,
+                        Community = community
+                    };
 
-                await databaseContext.UserCommunities.AddAsync(userCommunity);
+                    await databaseContext.UserCommunities.AddAsync(userCommunity);
+                }
+
                 await databaseContext.SaveChangesAsync();
             }
 

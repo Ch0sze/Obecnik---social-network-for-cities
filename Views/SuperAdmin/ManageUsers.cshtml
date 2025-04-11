@@ -1,0 +1,78 @@
+﻿@model CombinedViewModel
+
+@{
+    ViewData["Title"] = "ManageUsers";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="d-flex min-vh-100">
+    <!-- Left Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0" id="leftSidebar">
+        <partial name="LeftSidebar" model="Model" />
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-fill p-4">
+        <h2>Správa uživatelů</h2>
+
+        <!-- Search Bar -->
+        <form method="get" asp-action="ManageUsers" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control search-input" name="searchQuery" placeholder="Vyhledat pomocí jména nebo emailu" value="@Model.SearchQuery" />
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+
+        @if (Model.Users != null && Model.Users.Any())
+        {
+            <div id="usersContainer">
+                @foreach (var user in Model.Users)
+                {
+                    @if(user.Role != "SuperAdmin"){
+                        <div class="d-flex justify-content-between align-items-start mt-3 p-3 border rounded shadow-sm bg-white">
+                            <div class="flex-grow-1">
+                                <p class="mb-1"><strong>Jméno:</strong> @($"{user.Firstname} {user.LastName}")</p>
+                                <p class="mb-1"><strong>Email:</strong> @user.Email</p>
+                                <p class="mb-1"><strong>Role:</strong> @user.Role</p>
+                            </div>
+
+                            <div class="d-flex flex-column ms-3">
+                                @if (user.Role != "Banned")
+                                {
+                                    <form asp-action="BanUser" asp-route-id="@user.Id" method="post" class="mb-1">
+                                        <button type="submit" class="btn btn-danger btn-sm rounded-circle d-flex justify-content-center align-items-center"
+                                                title="Ban" style="width: 55px; height: 55px;">
+                                            <i class="fas fa-gavel"></i>
+                                        </button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="UnbanUser" asp-route-id="@user.Id" method="post">
+                                        <button type="submit" class="btn btn-success btn-sm rounded-circle d-flex justify-content-center align-items-center"
+                                                title="Unban" style="width: 55px; height: 55px;">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+
+                        </div>
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">Žádní uživatelé k zobrazení.</div>
+        }
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
+        <partial name="RightSidebar" model="Model" />
+    </div>
+</div>

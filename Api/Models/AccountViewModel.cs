@@ -6,4 +6,6 @@ public record AccountViewModel
 
     public string Name { get; init; } = string.Empty;
     public string Hometown { get; init; } = string.Empty;
+    
+    public string? Role { get; set; } = string.Empty;
 }

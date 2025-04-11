@@ -6,7 +6,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Api.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Api.Controllers
 {
@@ -20,7 +19,6 @@ namespace Application.Api.Controllers
             _databaseContext = databaseContext;
         }
 
-        // POST method to handle form submission
         [HttpPost]
         public async Task<IActionResult> CreateAdminRequest(AdminRequestFormViewModel model)
         {
@@ -41,14 +39,12 @@ namespace Application.Api.Controllers
 
             if (!ModelState.IsValid)
             {
-                // Re-fetch the communities list when there are validation errors
-                var communities = await _databaseContext.Communities.ToListAsync();
-                model.Communities = communities; // Pass the communities back to the view
-                return View(model); // Return the view with error
+                // Return to the form with errors
+                return View("~/Views/Home/Index.cshtml", model);
             }
 
             var userId = User.GetId();
-            var user = await _databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = _databaseContext.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
                 return RedirectToAction("Login", "Account");
 
@@ -56,14 +52,11 @@ namespace Application.Api.Controllers
             var communityId = model.CommunityId;
 
             // Ensure the community exists in the database
-            var community = await _databaseContext.Communities
-                .FirstOrDefaultAsync(c => c.Id == communityId);
+            var community = _databaseContext.Communities.FirstOrDefault(c => c.Id == communityId);
             if (community == null)
             {
                 ModelState.AddModelError("CommunityId", "Komunita nebyla nalezena");
-                var communities = await _databaseContext.Communities.ToListAsync();
-                model.Communities = communities;
-                return View(model); // Return to form with error
+                return View("~/Views/Home/Index.cshtml", model);
             }
 
             // Create the admin request object
@@ -84,12 +77,6 @@ namespace Application.Api.Controllers
 
             // Redirect to a success page or where you need
             return RedirectToAction("Index", "Home"); // Or another page after successful request
-        }
-
-        public IActionResult Account()
-        {
-            var model = new AccountViewModel();
-            return View("Account", model);
         }
     }
 }
