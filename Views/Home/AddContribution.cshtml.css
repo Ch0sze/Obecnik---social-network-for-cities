@@ -76,18 +76,3 @@
     border: none;
     text-transform: none;
 }
-
-.post-settings {
-    padding: 5px;
-    background-color: #FFFAEF;
-    border-color: #E5E5E5;
-}
-
-.dropdown-menu .dropdown-item:hover {
-    background-color: #FFF2D6;
-}
-
-.dropdown-menu .dropdown-item:active {
-    background-color: #FFF2D6;
-    color: black;
-}

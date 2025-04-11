@@ -8,61 +8,19 @@
     </button>
 
     <div id="contributionsContainer" class="mb-3">
-        @foreach (var post in Model)
+        @if (!Model.Any())
         {
-            <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm thepost">
-                <div class="flex-grow-1">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <img src="~/Images/GenericAvatar.png" alt="Avatar"
-                            style="width: 30px; height: 30px; user-select: none; pointer-events: none; "/>
-                            <strong>@post.CreatedBy</strong>
-                            <small class="text-muted">@post.GetFormattedCreatedAt()</small>
-                        </div>
-                        @if (@post.CreatedBy == User.Identity?.Name)
-                        {
-                            <div class="ms-auto dropdown">
-                                <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn" 
-                                        data-bs-toggle="dropdown">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-start rounded post-settings shadow-sm">
-                                    <form asp-action="Delete">
-                                        <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
-                                            Odstranit příspěvek
-                                        </button>
-                                        <button type="button" class="dropdown-item update-post-btn"
-                                                data-post-id="@post.Id"
-                                                data-title="@post.Title"
-                                                data-content="@post.Description" 
-                                                data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) :"")">
-                                            Upravit příspěvek
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <p class="mb-0 mt-2 text-break"
-                       style="font-size: larger;">
-                        @post.Title
-                    </p>
-                    <p class="mb-0 mt-1 message-container text-break"
-                       style="font-size: small;">
-                        @post.Description
-                    </p>
-                    @if (post.Photo)
-                        {
-                            <div class="mt-2 w-100">
-                                <img src="@Url.Action("GetImage", "Home", new { postId = post.Id })" 
-                                     class="img-fluid rounded" 
-                                     style="width: 100%; max-height: 500px; object-fit: contain;"
-                                     alt="Post image"/>
-                            </div>
-                        }
-                </div>
+            <div id="noPostsMessage" class="text-center text-muted py-4">
+                Ještě tady nic není, buďte první kdo něco přispěje! :)
             </div>
         }
+        @foreach (var post in Model.Take(10))
+        {
+            <partial name="_PostsPartial" model="new List<HomeViewModel.Post> { post }"/>
+        }
+    </div>
+    <div id="loading" style="display: none; text-align: center;">
+        <img src="~/Images/Loading-spinner.gif" alt="Loading..." style="width: 6rem; height: 6rem;" />
     </div>
 </div>
 
@@ -86,10 +44,53 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+        let noMorePosts = false;
+        let page = 2; // already loaded page 1 on initial load
+        let isLoading = false;
+    
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if (!isLoading && !noMorePosts && $(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
+                    isLoading = true;
+                    loadMorePosts(page);
+                    page++;
+                }
+            });
+        });
+    
+        function loadMorePosts(pageNumber) {
+            $('#loading').show();
+            $.ajax({
+                url: '/load-posts',
+                type: 'GET',
+                data: {
+                    pageNumber: pageNumber,
+                    pageSize: 10
+                },
+                success: function (result) {
+                    if ($.trim(result)) {
+                        $('#contributionsContainer').append(result);
+                        isLoading = false;
+                    } else {
+                        console.log("No more posts.");
+                        noMorePosts = true;
+                    }
+                },
+                error: function () {
+                    console.error("Error loading more posts.");
+                    isLoading = false;
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    isLoading = false;
+                }            
+            });
+        }
+    
         let postIdToDelete = null;
 
         // Po kliknutí na "Odstranit příspěvek" se zobrazí modal a uloží se ID příspěvku
-        $('.delete-post-btn').click(function () {
+        $(document).on('click', '.delete-post-btn', function () {
             postIdToDelete = $(this).data('post-id'); // Uložení ID příspěvku
             let myModal = new bootstrap.Modal(document.getElementById('delete-popup'));
             myModal.show();
@@ -121,7 +122,7 @@
         });
     
         // Handle edit post button click
-        $('.update-post-btn').click(function() {
+        $(document).on('click', '.update-post-btn', function () {
             const postId = $(this).data('post-id');
             const title = $(this).data('title');
             const content = $(this).data('content');

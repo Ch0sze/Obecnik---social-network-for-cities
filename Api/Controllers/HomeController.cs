@@ -42,6 +42,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
             .Include(post => post.User)
             .Where(post => post.ChannelId == channelId)
             .OrderByDescending(post => post.CreatedAt)
+            .Take(10)
             .Select(post => new HomeViewModel.Post
             {
                 Id = post.Id,
@@ -75,7 +76,45 @@ public class HomeController(DatabaseContext databaseContext) : Controller
 
         return View(combinedViewModel);
     }
+    
+    [HttpGet("load-posts")]
+    public IActionResult LoadPosts(int pageNumber, int pageSize)
+    {
+        var userId = User.GetId();
+        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
 
+        if (user == null)
+            return Unauthorized();
+
+        var communityId = databaseContext.UserCommunities
+            .Where(uc => uc.UserId == user.Id)
+            .Select(uc => uc.CommunityId)
+            .FirstOrDefault();
+
+        var channelId = databaseContext.Channels
+            .Where(c => c.CommunityId == communityId)
+            .Select(c => c.Id)
+            .FirstOrDefault();
+
+        var posts = databaseContext.Posts
+            .Include(post => post.User)
+            .Where(post => post.ChannelId == channelId)
+            .OrderByDescending(post => post.CreatedAt)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(post => new HomeViewModel.Post
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Description = post.Description,
+                CreatedAt = post.CreatedAt,
+                CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
+                Photo = post.Photo != null
+            })
+            .ToList();
+
+        return PartialView("_PostsPartial", posts);
+    }
 
     [HttpGet("image/{postId}")]
     public IActionResult GetImage(Guid postId)

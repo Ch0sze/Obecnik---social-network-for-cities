@@ -35,8 +35,11 @@ public class HomeViewModel
                 return $"Před {(int)difference.TotalHours} h";
             if (CreatedAt.Date == now.Date.AddDays(-1))
                 return $"Včera v {CreatedAt:HH:mm}";
-
-            return CreatedAt.ToString("dd.MM.yyyy HH:mm");
+            
+            if (CreatedAt.Hour < 12)
+                return CreatedAt.ToString("dd.MM.yyyy v HH:mm");
+                
+            else return CreatedAt.ToString("dd.MM.yyyy ve HH:mm");
         }
     }
 }
