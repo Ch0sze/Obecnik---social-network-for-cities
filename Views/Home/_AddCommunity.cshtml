@@ -48,8 +48,10 @@
         const communitySuggestions = document.getElementById("communitySuggestions");
         const communityField = document.getElementById("communityField");
         const postalcodeField = document.getElementById("postalcodeField");
+        const form = document.getElementById("joinCommunityForm");
 
         let communityTimeout = null;
+        let selectedFromList = false;
 
         // Show the search input when user clicks on the display field
         communityInputDisplay.addEventListener("click", function () {
@@ -58,12 +60,38 @@
             communitySearchInput.focus();
         });
 
-        // Trigger the search function when user types
+        // Reset selection flag and start search when typing
         communitySearchInput.addEventListener("input", function () {
+            selectedFromList = false;
+            communityField.value = "";
+            postalcodeField.value = "";
             clearTimeout(communityTimeout);
             communityTimeout = setTimeout(() => {
                 searchCommunity();
             }, 300);
+        });
+
+        // Prevent submitting the form if no valid city was selected
+        form.addEventListener("submit", function (e) {
+            if (!communityField.value || !selectedFromList) {
+                e.preventDefault();
+                alert("Prosím vyberte platnou obec ze seznamu.");
+            }
+        });
+
+        // If input loses focus without valid selection, reset fields
+        communitySearchInput.addEventListener("blur", function () {
+            setTimeout(() => {
+                if (!selectedFromList) {
+                    communitySearchInput.value = "";
+                    communityField.value = "";
+                    postalcodeField.value = "";
+                    communitySearchInput.style.display = "none";
+                    communityInputDisplay.style.display = "block";
+                    communityInputDisplay.value = "";
+                    communitySuggestions.style.display = "none";
+                }
+            }, 200); // Delay to allow click event to register on list
         });
 
         // Perform search and show suggestions
@@ -87,8 +115,8 @@
 
                 if (data.items && data.items.length > 0) {
                     data.items.forEach(item => {
-                        const city = item.location.split(",")[0].trim(); // Extract city
-                        const zip = item.zip || ""; // Extract postal code
+                        const city = item.location.split(",")[0].trim();
+                        const zip = item.zip || "";
                         const suggestionText = `${city}, ${zip}`.trim();
 
                         if (!seenCommunities.has(suggestionText)) {
@@ -99,16 +127,12 @@
                             listItem.textContent = suggestionText;
                             listItem.style.cursor = "pointer";
 
-                            // When a suggestion is clicked, update the input fields
                             listItem.addEventListener("click", function () {
-                                // Update the readonly input with the city and postal code
-                                communityInputDisplay.value = city + (zip ? `, ${zip}` : '');
-
-                                // Store the city in the hidden field (communityField) and postal code in the postalcodeField
+                                communityInputDisplay.value = suggestionText;
                                 communityField.value = city;
-                                postalcodeField.value = zip.replace(/\s/g, ""); // Remove spaces from postal code if any
+                                postalcodeField.value = zip.replace(/\s/g, "");
+                                selectedFromList = true;
 
-                                // Reset the search input and hide the suggestions box
                                 communitySearchInput.value = "";
                                 communitySearchInput.style.display = "none";
                                 communityInputDisplay.style.display = "block";
@@ -119,7 +143,6 @@
                         }
                     });
 
-                    // Adjust the width of the suggestions list to match the input field
                     communitySuggestions.style.width = `${communitySearchInput.offsetWidth}px`;
                     communitySuggestions.style.display = "block";
                 } else {

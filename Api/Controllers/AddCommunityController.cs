@@ -1,26 +1,88 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Application.Api.Models;
+using Application.Infastructure.Database;
+using Application.Infastructure.Database.Models;
+using CoatOfArmsDownloader.Services;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Application.Api.Controllers
 {
-    public class AddCommunitiesController : Controller
+    public class AddCommunitiesController(DatabaseContext databaseContext) : Controller
     {
-        // This action method will handle the form submission
         [HttpPost]
-        public IActionResult Join(string communityCode)
+        public async Task<IActionResult> Join(JoinCommunityViewModel model)
         {
-            // Example logic: If you want to check if the community code is valid
-            if (string.IsNullOrEmpty(communityCode))
+            if (string.IsNullOrWhiteSpace(model.Community))
             {
-                // Optionally return an error message or redirect
-                ModelState.AddModelError("CommunityCode", "Community code is required.");
-                return View();  // You might want to render the view again with an error message
+                ModelState.AddModelError("Community", "Musíte vybrat obec ze seznamu.");
+                return RedirectToAction("Index", "Home");
             }
 
-            // Your logic for handling the community join goes here
-            // For example, check if the community exists in the database
+            // Safely retrieve the userId from claims
+            var userIdClaim = User.FindFirstValue("Id");
+            if (string.IsNullOrEmpty(userIdClaim))
+            {
+                return Unauthorized(); // Handle the case where the user is not authenticated
+            }
 
-            // After successfully joining the community, redirect or render a new view
-            return RedirectToAction("Index", "Home"); // Or whatever action you want after success
+            var userId = Guid.Parse(userIdClaim);
+            var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return Unauthorized(); // Handle if user is not found in the database
+            }
+
+            var community = await databaseContext.Communities
+                .FirstOrDefaultAsync(c => c.Name == model.Community && c.PostalCode == model.PostalCode);
+
+            if (community == null)
+            {
+                // Create new community if not found
+                community = new CommunityDo
+                {
+                    Id = Guid.NewGuid(),
+                    Name = model.Community,
+                    PostalCode = model.PostalCode,
+                    Picture = await CoatOfArmsScraper.GetCommunityCoatOfArms(model.Community)
+                };
+
+                await databaseContext.Communities.AddAsync(community);
+                await databaseContext.SaveChangesAsync();
+
+                // Create the default channel "Obecné"
+                var newChannel = new ChannelDo
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Obecné",
+                    CommunityId = community.Id,
+                    Community = community
+                };
+                await databaseContext.Channels.AddAsync(newChannel);
+                await databaseContext.SaveChangesAsync();
+            }
+
+            var alreadyMember = await databaseContext.UserCommunities
+                .AnyAsync(uc => uc.UserId == user.Id && uc.CommunityId == community.Id);
+
+            if (!alreadyMember)
+            {
+                // Add user to the community
+                var userCommunity = new UserCommunityDo
+                {
+                    UserId = user.Id,
+                    CommunityId = community.Id,
+                    User = user,
+                    Community = community
+                };
+
+                await databaseContext.UserCommunities.AddAsync(userCommunity);
+                await databaseContext.SaveChangesAsync();
+            }
+
+            TempData["Message"] = "Připojeno ke komunitě!";
+            return RedirectToAction("Index", "Home");
         }
     }
 }
+
