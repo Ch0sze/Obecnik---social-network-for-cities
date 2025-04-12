@@ -154,7 +154,6 @@ namespace Application.Api.Controllers
 
                 await databaseContext.Users.AddAsync(newUser);
 
-                // Assign user to community
                 var userCommunity = new UserCommunityDo
                 {
                     UserId = newUser.Id,
@@ -165,7 +164,16 @@ namespace Application.Api.Controllers
 
                 await databaseContext.UserCommunities.AddAsync(userCommunity);
 
-                // Create callback URL
+                var communityAdmin = new CommunityAdminDo
+                {
+                    UserId = newUser.Id,
+                    CommunityId = request.CommunityId,
+                    User = newUser,
+                    Community = request.Community
+                };
+
+                await databaseContext.CommunityAdmins.AddAsync(communityAdmin);
+
                 var callbackUrl = Url.Action("ResetPassword", "Account", 
                     new { token, email = newUser.Email }, Request.Scheme);
 
@@ -174,7 +182,6 @@ namespace Application.Api.Controllers
             }
             else
             {
-                // Update role
                 existingUser.Role = "UnpaidAdmin";
 
                 var alreadyAssigned = await databaseContext.UserCommunities
@@ -191,6 +198,22 @@ namespace Application.Api.Controllers
                     };
 
                     await databaseContext.UserCommunities.AddAsync(userCommunity);
+                }
+
+                var alreadyAdmin = await databaseContext.CommunityAdmins
+                    .AnyAsync(ca => ca.UserId == existingUser.Id && ca.CommunityId == request.CommunityId);
+
+                if (!alreadyAdmin)
+                {
+                    var communityAdmin = new CommunityAdminDo
+                    {
+                        UserId = existingUser.Id,
+                        CommunityId = request.CommunityId,
+                        User = existingUser,
+                        Community = request.Community
+                    };
+
+                    await databaseContext.CommunityAdmins.AddAsync(communityAdmin);
                 }
 
                 await emailService.SendExistingEmail(existingUser.Email);
