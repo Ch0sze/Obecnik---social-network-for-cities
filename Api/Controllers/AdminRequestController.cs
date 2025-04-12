@@ -39,8 +39,9 @@ namespace Application.Api.Controllers
 
             if (!ModelState.IsValid)
             {
+                model.Communities = _databaseContext.Communities.ToList();
                 // Return to the form with errors
-                return View("~/Views/Home/Index.cshtml", model);
+                return View("~/Views/Account/RequestAdminRights.cshtml", model);
             }
 
             var userId = User.GetId();
@@ -55,8 +56,9 @@ namespace Application.Api.Controllers
             var community = _databaseContext.Communities.FirstOrDefault(c => c.Id == communityId);
             if (community == null)
             {
+                model.Communities = _databaseContext.Communities.ToList();
                 ModelState.AddModelError("CommunityId", "Komunita nebyla nalezena");
-                return View("~/Views/Home/Index.cshtml", model);
+                return View("~/Views/Account/RequestAdminRights.cshtml", model);
             }
 
             // Create the admin request object

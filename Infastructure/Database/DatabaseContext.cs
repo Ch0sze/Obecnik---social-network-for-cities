@@ -9,10 +9,11 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<CommunityDo> Communities => Set<CommunityDo>();
     public DbSet<ChannelDo> Channels => Set<ChannelDo>();
     public DbSet<UserCommunityDo> UserCommunities => Set<UserCommunityDo>();
+    public DbSet<CommunityAdminDo> CommunityAdmins => Set<CommunityAdminDo>();
     public DbSet<PostDo> Posts => Set<PostDo>();
     public DbSet<CommentDo> Comments => Set<CommentDo>();
     public DbSet<ApiLoginDo> ApiLogins => Set<ApiLoginDo>();
-    public DbSet<AdminRequestDo> AdminRequests => Set<AdminRequestDo>(); // New DbSet
+    public DbSet<AdminRequestDo> AdminRequests => Set<AdminRequestDo>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -50,7 +51,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             .HasForeignKey(channel => channel.CommunityId)
             .IsRequired();
 
-        // User <-> Community (many-to-many)
+        // User <-> Community (Membership)
         modelBuilder.Entity<UserCommunityDo>()
             .HasKey(uc => new { uc.UserId, uc.CommunityId });
 
@@ -66,17 +67,33 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             .HasForeignKey(uc => uc.CommunityId)
             .IsRequired();
 
+        // User <-> Community (Admin)
+        modelBuilder.Entity<CommunityAdminDo>()
+            .HasKey(ca => new { ca.UserId, ca.CommunityId });
+
+        modelBuilder.Entity<CommunityAdminDo>()
+            .HasOne(ca => ca.User)
+            .WithMany(user => user.AdminCommunities)
+            .HasForeignKey(ca => ca.UserId)
+            .IsRequired();
+
+        modelBuilder.Entity<CommunityAdminDo>()
+            .HasOne(ca => ca.Community)
+            .WithMany(community => community.AdminUsers)
+            .HasForeignKey(ca => ca.CommunityId)
+            .IsRequired();
+
         // AdminRequest -> User
         modelBuilder.Entity<AdminRequestDo>()
             .HasOne(ar => ar.User)
-            .WithMany() // Add .WithMany(user => user.AdminRequests) if reverse nav is needed
+            .WithMany() // Add reverse nav if needed
             .HasForeignKey(ar => ar.UserId)
             .IsRequired();
 
         // AdminRequest -> Community
         modelBuilder.Entity<AdminRequestDo>()
             .HasOne(ar => ar.Community)
-            .WithMany() // Add .WithMany(community => community.AdminRequests) if reverse nav is needed
+            .WithMany() // Add reverse nav if needed
             .HasForeignKey(ar => ar.CommunityId)
             .IsRequired();
     }
