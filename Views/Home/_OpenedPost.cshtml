@@ -1,0 +1,51 @@
+﻿@model HomeViewModel.Post
+
+<div class="opened-post-modal-container">
+    <div class="modal fade" id="openedPostModal" tabindex="-1" aria-labelledby="openedPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Hlavička s křížkem -->
+                <div class="modal-header py-1 px-2 border-0" style="max-height: 20px;">
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close" style="scale: 0.85;"></button>
+                </div>
+
+                <!-- Tělo -->
+                <div class="modal-body pt-0">
+                    <div class="d-flex flex-column flex-sm-row">
+                        <!-- Levý sloupec s obrázkem -->
+                        <div class="col-12 col-sm-9 mb-3 mb-sm-0" style="padding-right: 15px;"> <!-- Levý sloupec na 75% (col-sm-9) -->
+                            @if (Model.Photo)
+                            {
+                                <img src="@Url.Action("GetImage", "Home", new { postId = Model.Id })" alt="Post image" class="img-fluid" />
+                            }
+                        </div>
+
+                        <!-- Pravý sloupec s textem -->
+                        <div class="col-12 col-sm-3">
+                            <!-- Zvětšení názvu diskuze, přidání mezery a středění -->
+                            <h5 class="mb-4 fw-bold text-center" style="font-size: 1.5rem; text-align: center;">Diskuze</h5> <!-- Zvětšený a středěný text -->
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <!-- Ikona s dynamickou velikostí a přidáním mezery -->
+                                <img src="~/Images/GenericAvatar.png" alt="Avatar" style="width: 30px; height: auto; user-select: none; pointer-events: none; margin-right: 10px;" /> <!-- Změna velikosti ikony -->
+
+                                <div class="d-flex flex-column mt-4">
+                                    <div class="d-flex align-items-center">
+                                        <strong style="font-size: 1vw;">@Model.CreatedBy</strong> <!-- Zmenšený text pro autora -->
+                                        <small class="ms-2 text-muted" style="font-size: 0.8vw;">@Model.GetFormattedCreatedAt()</small> <!-- Zmenšený text pro datum -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Titulek příspěvku -->
+                            <h4 class="fw-bold mb-3" style="font-size: 1.2vw;">@Model.Title</h4> <!-- Zmenšený titulek příspěvku -->
+
+                            <!-- Popis příspěvku -->
+                            <p style="font-size: 0.8vw;">@Model.Description</p> <!-- Zmenšený popis -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

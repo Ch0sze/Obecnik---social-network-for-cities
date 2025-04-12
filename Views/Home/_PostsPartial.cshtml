@@ -2,8 +2,12 @@
 
 @foreach (var post in Model)
 {
-    <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm thepost"
-		style="background-color: #ffffff; border-color: #e0e0e0 !important;">
+    <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm thepost opened-post-box"
+         data-post-id="@post.Id"
+         data-title="@post.Title"
+         data-content="@post.Description"
+         data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")"
+         style="background-color: #ffffff; border-color: #e0e0e0 !important;">
         <div class="flex-grow-1">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center flex-wrap">

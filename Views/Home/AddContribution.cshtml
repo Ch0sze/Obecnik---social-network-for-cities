@@ -86,7 +86,44 @@
                 }            
             });
         }
-    
+        $(document).on('click', '.opened-post-box', function (e) {
+            // Kontrola, zda nebylo kliknuto na tlačítko pro nastavení příspěvku
+            if ($(e.target).closest('.contribution-settings-btn, .dropdown-menu').length > 0) return;
+
+            const postId = $(this).data('post-id');
+            console.log('Odesílání požadavku pro příspěvek ID:', postId);
+
+            $.ajax({
+                url: '/OpenedPost/' + postId,
+                type: 'GET',
+                success: function (modalHtml) {
+                    console.log('Úspěšně načtený obsah pro příspěvek', postId);
+
+                    // Odstranit starý modal pro příspěvek (pokud existuje)
+                    $('#openedPostModal').remove();
+
+                    // Přidat nový modal pro příspěvek
+                    $('body').append(modalHtml);
+
+                    // Před otevřením modalu skryj pozadí nebo zamez přístup k jiným prvkům
+                    $('body').attr('aria-hidden', 'true');
+
+                    // Otevřít nový modal pro příspěvek
+                    const modal = new bootstrap.Modal(document.getElementById('openedPostModal'));
+                    modal.show();
+
+                    // Po otevření modalu, když se zavře, zruš "aria-hidden" pro tělo
+                    $('#openedPostModal').on('hidden.bs.modal', function () {
+                        $('body').removeAttr('aria-hidden');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Chyba AJAX požadavku:', error);
+                    alert('Nepodařilo se načíst příspěvek.');
+                }
+            });
+        });
+
         let postIdToDelete = null;
 
         // Po kliknutí na "Odstranit příspěvek" se zobrazí modal a uloží se ID příspěvku

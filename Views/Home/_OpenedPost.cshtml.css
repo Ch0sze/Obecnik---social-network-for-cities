@@ -1,0 +1,127 @@
+﻿
+
+
+
+.opened-post-modal-container .modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.opened-post-modal-container .modal-header {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Roboto Light', sans-serif;
+    text-transform: none;
+}
+
+.opened-post-modal-container .modal-content {
+    background-color: white;
+    padding: 20px;
+    width: 65vw; /* Šířka bude 90% šířky okna */
+    height: 80vh; /* Výška bude 90% výšky okna */ /* Maximální výška na 90% výšky okna */
+    border-radius: 8px;
+    position: fixed; /* Fixní pozice pro centrální umístění */
+    top: 50%; /* Umístí modal na střed vertikálně */
+    left: 50%; /* Umístí modal na střed horizontálně */
+    transform: translate(-50%, -50%); /* Oprava posunutí pro dokonalé zarovnání */
+    overflow: auto; /* Přidá scroll, pokud je obsah větší než prostor */
+    z-index: 1050; /* Zajišťuje, že modal je nad ostatními elementy */
+}
+
+.opened-post-modal-container .input-field, .textarea-field {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.opened-post-modal-container .ButtonPublish {
+    background-color: #ff926b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 90px;
+    cursor: pointer;
+}
+
+.opened-post-modal-container .button-group {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+.opened-post-modal-container .ButtonPopup {
+    background-color: #f1f1f1;
+    color: #333;
+    border: none;
+    border-radius: 90px;
+    padding: 10px;
+    margin: 3px;
+    flex-grow: 1;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.opened-post-modal-container .ButtonPopup:hover {
+    background-color: #e86f59;
+    color: white;
+}
+
+.opened-post-modal-container .ButtonPopup.active {
+    background-color: #ff926b;
+    color: white;
+}
+
+.opened-post-modal-container .extra-fields {
+    display: none;
+}
+
+.opened-post-modal-container .icon-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+.opened-post-modal-container .icon-button {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    position: relative;
+}
+
+.opened-post-modal-container .icon-label {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.opened-post-modal-container .icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(0) brightness(0) contrast(100%);
+}
+
+.opened-post-modal-container .location-field, .date-field {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}

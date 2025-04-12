@@ -143,7 +143,33 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         Response.Headers.CacheControl = "public,max-age=31536000";
         return File(community.Picture, "image/jpeg");
     }
+    
+    [HttpGet("OpenedPost/{id}")]
+    public IActionResult OpenedPost(Guid id)
+    {
+        var postDo = databaseContext.Posts
+            .Include(p => p.User)
+            .FirstOrDefault(p => p.Id == id);
 
+        if (postDo == null)
+        {
+            return NotFound("Příspěvek nebyl nalezen.");
+        }
+
+        // Přemapování na ViewModel
+        var postViewModel = new HomeViewModel.Post
+        {
+            Id = postDo.Id,
+            Title = postDo.Title,
+            Description = postDo.Description,
+            CreatedBy = $"{postDo.User.Firstname} {postDo.User.LastName}" ?? "Neznámý",
+            CreatedAt = postDo.CreatedAt,
+            Photo = postDo.Photo != null // true pokud má fotku
+        };
+
+        return PartialView("_OpenedPost", postViewModel);
+    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
