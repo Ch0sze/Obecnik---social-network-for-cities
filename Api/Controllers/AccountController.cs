@@ -26,12 +26,12 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == id);
 
         // Check if user is banned
-        // if (user?.Role == "Banned")
-        // {
-        //     // If banned, log them out and redirect to login with banned message
-        //     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        //     return RedirectToAction("Login", "Account", new { error = "Váš účet byl zabanován." });
-        // }
+         if (user?.Role == "Banned")
+         {
+             // If banned, log them out and redirect to login with banned message
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account", new { error = "Váš účet byl zabanován." });
+         }
 
         // Check if user is found, otherwise redirect or show an error
         if (user == null)
@@ -269,6 +269,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
         await databaseContext.SaveChangesAsync();
 
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         
         return RedirectToAction("ResetPasswordConfirmation");
     }
