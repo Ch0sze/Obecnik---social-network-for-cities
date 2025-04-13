@@ -1,7 +1,4 @@
 ﻿
-
-
-
 .opened-post-modal-container .modal {
     display: none;
     position: fixed;
@@ -34,67 +31,41 @@
     transform: translate(-50%, -50%); /* Oprava posunutí pro dokonalé zarovnání */
     overflow: auto; /* Přidá scroll, pokud je obsah větší než prostor */
     z-index: 1050; /* Zajišťuje, že modal je nad ostatními elementy */
+    scrollbar-gutter: stable;
 }
 
+.opened-post-modal-container .modal-content::-webkit-scrollbar {
+    width: 6px; /* zúží scrollbar */
+}
+
+.opened-post-modal-container .modal-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* barva „jezdce“ */
+    border-radius: 4px;
+}
+
+.opened-post-modal-container .modal-content::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 10px 0; /* volitelné – mezery nahoře/dole */
+}
 .opened-post-modal-container .input-field, .textarea-field {
+    height: 40px;
     width: 100%;
     margin-bottom: 15px;
+    resize: vertical;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-}
-
-.opened-post-modal-container .ButtonPublish {
-    background-color: #ff926b;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 90px;
-    cursor: pointer;
-}
-
-.opened-post-modal-container .button-group {
-    display: flex;
-    width: 100%;
-    margin-bottom: 15px;
-    justify-content: space-between;
-}
-
-.opened-post-modal-container .ButtonPopup {
-    background-color: #f1f1f1;
-    color: #333;
-    border: none;
-    border-radius: 90px;
-    padding: 10px;
-    margin: 3px;
-    flex-grow: 1;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.opened-post-modal-container .ButtonPopup:hover {
-    background-color: #e86f59;
-    color: white;
-}
-
-.opened-post-modal-container .ButtonPopup.active {
-    background-color: #ff926b;
-    color: white;
+    overflow-y: auto;
+    white-space: pre-wrap; /* zalomení řádků */
+    word-wrap: break-word;
+    line-height: 1.4;
 }
 
 .opened-post-modal-container .extra-fields {
     display: none;
 }
 
-.opened-post-modal-container .icon-group {
-    display: flex;
-    justify-content: flex-start;
-    gap: 8px;
-    margin-top: 8px;
-    margin-bottom: 12px;
-}
 
 .opened-post-modal-container .icon-button {
     display: inline-block;
@@ -142,6 +113,7 @@
     width: 40px;  /* Čtvercový tvar */
     border-radius: 5px;
     box-sizing: border-box;
+    margin-bottom: 13px;
 }
 
 .opened-post-modal-container .send-button:hover {
@@ -155,4 +127,54 @@
     background-color: transparent;
     filter: none;
     display: block;
+}
+
+.opened-post-modal-container .image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #FFFAEF; /* volitelné – světle šedé pozadí */
+}
+#commentsList {
+    word-break: break-word; /* Zamezí překročení šířky */
+}
+@media (max-width: 480px) {
+    .col-12.col-sm-9 {
+        order: 2; /* Levý sloupec (obrázek, komentáře) bude zobrazený jako druhý na mobilu */
+    }
+
+    .col-12.col-sm-3 {
+        order: 1; /* Pravý sloupec (texty) bude zobrazený jako první na mobilu */
+    }
+    .opened-post-modal-container .modal-content {
+        width: 95vw; /* Šířka bude téměř 100% */
+        height: 75vh; /* Sníží výšku pro malé obrazovky */
+        padding: 10px; /* Sníží padding pro malé obrazovky */
+    }
+
+    .opened-post-modal-container .modal-header {
+        font-size: 16px; /* Ještě menší písmo pro mobil */
+    }
+
+    .opened-post-modal-container .input-field, .textarea-field {
+        height: 30px; /* Zmenší výšku inputu pro malé obrazovky */
+        font-size: 11px; /* Ještě menší font pro malé obrazovky */
+    }
+
+    .opened-post-modal-container .send-button {
+        height: 30px; /* Zmenší výšku tlačítka */
+        width: 30px; /* Zmenší šířku tlačítka */
+    }
+
+    .opened-post-modal-container .send-icon {
+        width: 15px; /* Zmenší ikonu */
+        height: 15px;
+    }
+
+    .opened-post-modal-container .image-wrapper {
+        min-height: 150px; /* Ještě menší výška pro obrázek */
+    }
 }

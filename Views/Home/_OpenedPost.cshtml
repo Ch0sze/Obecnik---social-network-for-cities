@@ -2,12 +2,9 @@
 
 <div class="opened-post-modal-container">
     <div class="modal fade" id="openedPostModal" tabindex="-1" aria-labelledby="openedPostModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- Hlavička s křížkem -->
-                <div class="modal-header py-1 px-2 border-0" style="max-height: 20px;">
-                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close" style="scale: 0.85;"></button>
-                </div>
 
                 <!-- Tělo -->
                 <div class="modal-body pt-0">
@@ -16,17 +13,19 @@
                         <div class="col-12 col-sm-9 mb-3 mb-sm-0" style="padding-right: 15px;"> <!-- Levý sloupec na 75% (col-sm-9) -->
                             @if (Model.Photo)
                             {
-                                <img src="@Url.Action("GetImage", "Home", new { postId = Model.Id })" alt="Post image" class="img-fluid" />
+                                <div class="image-wrapper">
+                                    <img src="@Url.Action("GetImage", "Home", new { postId = Model.Id })" alt="Post image" class="img-fluid" />
+                                </div>
                             }
                             <div class="my-3">
                                 <form id="commentForm" onsubmit="submitComment(event)" class="d-flex align-items-center comment-wrapper">
-                                    <input name="Content" type="text" class="input-field" placeholder="Přidejte komentář" id="commentContent" maxlength="1000" required />
+                                    <input name="Content" type="text" class="input-field" placeholder="Přidejte komentář" id="commentContent" maxlength="500" required />
                                     <input type="hidden" name="PostId" value="@Model.Id" />
                                     <button type="submit" class="send-button">
                                         <img src="~/icons/send.svg" alt="Odeslat" class="send-icon" />
                                     </button>
                                 </form>
-                                <span id="titleLength" style="font-size: 12px; color: gray; margin-bottom: 12px; margin-left: 2px;">0/100</span>
+                                <span id="titleLength" style="font-size: 12px; color: gray; margin-bottom: 12px; margin-left: 2px;">limit 500 znaků</span>
                                 <div id="commentResponse" style="margin-top: 8px; font-size: 0.85rem;"></div>
                                 <div id="commentsList" class="mt-4">
                                     <!-- Sem se načtou komentáře -->
@@ -35,27 +34,28 @@
                         </div>
 
                         <!-- Pravý sloupec s textem -->
-                        <div class="col-12 col-sm-3">
+                        <div class="col-12 col-sm-3" style="margin-top: 10px;">
                             <!-- Zvětšení názvu diskuze, přidání mezery a středění -->
-                            <h5 class="mb-4 fw-bold text-center" style="font-size: 1.5rem; text-align: center;">Diskuze</h5> <!-- Zvětšený a středěný text -->
+                            <h5 class="mb-4 fw-bold text-center " style="font-size: 1.5rem; text-align: center; ">Diskuze</h5> <!-- Zvětšený a středěný text -->
                             
                             <div class="d-flex align-items-center mb-3">
                                 <!-- Ikona s dynamickou velikostí a přidáním mezery -->
-                                <img src="~/Images/GenericAvatar.png" alt="Avatar" style="width: 30px; height: auto; user-select: none; pointer-events: none; margin-right: 10px;" /> <!-- Změna velikosti ikony -->
+                                <img src="~/Images/GenericAvatar.png" alt="Avatar" style="width: 30px; height: auto; user-select: none; pointer-events: none; margin-right: 16px; " /> <!-- Změna velikosti ikony -->
 
                                 <div class="d-flex flex-column mt-4">
                                     <div class="d-flex align-items-center">
-                                        <strong style="font-size: 1vw;">@Model.CreatedBy</strong> <!-- Zmenšený text pro autora -->
-                                        <small class="ms-2 text-muted" style="font-size: 0.8vw;">@Model.GetFormattedCreatedAt()</small> <!-- Zmenšený text pro datum -->
+                                        <strong style="font-size: 16px;">@Model.CreatedBy</strong> <!-- Zmenšený text pro autora -->
+                                        <!-- Zmenšený text pro datum -->
                                     </div>
+                                    <small class="ms-2 text-muted"  style="font-size: 13px;word-break: break-word;">@Model.GetFormattedCreatedAt()</small>
                                 </div>
                             </div>
 
                             <!-- Titulek příspěvku -->
-                            <h4 class="fw-bold mb-3" style="font-size: 1.2vw;">@Model.Title</h4> <!-- Zmenšený titulek příspěvku -->
+                            <h4 class="fw-bold mb-3" style="word-break: break-word; margin-left: 10px;">@Model.Title</h4> <!-- Zmenšený titulek příspěvku -->
 
                             <!-- Popis příspěvku -->
-                            <p style="font-size: 0.8vw;">@Model.Description</p> <!-- Zmenšený popis -->
+                            <p style="font-size: 16px; word-break: break-word; margin-left: 10px;">@Model.Description</p> <!-- Zmenšený popis -->
                         </div>
                     </div>
                 </div>
@@ -65,10 +65,12 @@
 </div>
 <script>
     function submitComment(event) {
-        event.preventDefault(); // Zamezí reloadu
-        console.log("submited")
+        event.preventDefault();
         const form = document.getElementById("commentForm");
         const formData = new FormData(form);
+
+        const content = formData.get("Content");
+        const postId = formData.get("PostId");
 
         fetch('/Comments/Create', {
             method: 'POST',
@@ -76,14 +78,34 @@
         })
             .then(response => {
                 if (!response.ok) throw new Error("Chyba při odesílání.");
-                return response.text(); // Můžeš změnit na .json() pokud budeš vracet JSON
+                return response.text(); // protože backend vrací jen text
             })
             .then(data => {
                 document.getElementById("commentContent").value = "";
-                document.getElementById("commentResponse").innerText = "Komentář byl úspěšně odeslán ✅";
 
-                // Pokud chceš přidat komentář přímo do DOMu:
-                // document.getElementById("commentsList").insertAdjacentHTML("beforeend", data);
+                // ➕ Přidáme komentář ručně do DOMu (ze zadaných dat)
+                const list = document.getElementById("commentsList");
+
+                const div = document.createElement("div");
+                div.className = "d-flex mb-3";
+
+                const avatar = document.createElement("img");
+                avatar.src = "/Images/GenericAvatar.png"; // nemáme user picture, takže dáme výchozí
+                avatar.alt = "Avatar";
+                avatar.style = "width: 40px; height: 40px; object-fit: cover; border-radius: 50%; margin-right: 10px;";
+
+                const contentDiv = document.createElement("div");
+                const now = new Date().toLocaleString(); // použijeme aktuální čas
+
+                contentDiv.innerHTML = `
+                    <strong>${"@Model.CreatedBy"}</strong> 
+                    <small class="text-muted d-block">${now}</small>
+                    <p class="mb-1  comment-text">${content}</p>
+                `;
+
+                div.appendChild(avatar);
+                div.appendChild(contentDiv);
+                list.insertBefore(div, list.firstChild); // nový komentář nahoru
             })
             .catch(error => {
                 document.getElementById("commentResponse").innerText = "⚠️ Došlo k chybě: " + error.message;
@@ -124,7 +146,7 @@
                     contentDiv.innerHTML = `
                     <strong>${comment.userFullName}</strong>
                     <small class="text-muted d-block">${new Date(comment.dateTime).toLocaleString()}</small>
-                    <p class="mb-1">${comment.content}</p>
+                    <p class="mb-1  comment-text">${comment.content}</p>
                 `;
 
                     div.appendChild(avatar);
