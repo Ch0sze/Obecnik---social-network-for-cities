@@ -18,6 +18,20 @@
                             {
                                 <img src="@Url.Action("GetImage", "Home", new { postId = Model.Id })" alt="Post image" class="img-fluid" />
                             }
+                            <div class="my-3">
+                                <form id="commentForm" onsubmit="submitComment(event)" class="d-flex align-items-center comment-wrapper">
+                                    <input name="Content" type="text" class="input-field" placeholder="Přidejte komentář" id="commentContent" maxlength="1000" required />
+                                    <input type="hidden" name="PostId" value="@Model.Id" />
+                                    <button type="submit" class="send-button">
+                                        <img src="~/icons/send.svg" alt="Odeslat" class="send-icon" />
+                                    </button>
+                                </form>
+                                <span id="titleLength" style="font-size: 12px; color: gray; margin-bottom: 12px; margin-left: 2px;">0/100</span>
+                                <div id="commentResponse" style="margin-top: 8px; font-size: 0.85rem;"></div>
+                                <div id="commentsList" class="mt-4">
+                                    <!-- Sem se načtou komentáře -->
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Pravý sloupec s textem -->
@@ -49,3 +63,109 @@
         </div>
     </div>
 </div>
+<script>
+    function submitComment(event) {
+        event.preventDefault(); // Zamezí reloadu
+        console.log("submited")
+        const form = document.getElementById("commentForm");
+        const formData = new FormData(form);
+
+        fetch('/Comments/Create', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) throw new Error("Chyba při odesílání.");
+                return response.text(); // Můžeš změnit na .json() pokud budeš vracet JSON
+            })
+            .then(data => {
+                document.getElementById("commentContent").value = "";
+                document.getElementById("commentResponse").innerText = "Komentář byl úspěšně odeslán ✅";
+
+                // Pokud chceš přidat komentář přímo do DOMu:
+                // document.getElementById("commentsList").insertAdjacentHTML("beforeend", data);
+            })
+            .catch(error => {
+                document.getElementById("commentResponse").innerText = "⚠️ Došlo k chybě: " + error.message;
+            });
+    }
+</script>
+<script>
+    function loadComments(postId) {
+        console.log("Načítám komentáře pro příspěvek s ID:");  // Debug log, abychom věděli, že funkce je volaná.
+        
+        fetch(`/comments/${postId}`)
+            .then(response => {
+                console.log("Odpověď ze serveru:", response); // Debug log pro odpověď ze serveru
+                if (!response.ok) {
+                    console.error("Chyba při načítání komentářů:", response.statusText);
+                    throw new Error("Chyba při načítání komentářů.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Komentáře, které server vrátil:", data);  // Debug log pro data, která server posílá zpět.
+                const list = document.getElementById("commentsList");
+                list.innerHTML = "";  // Vymažeme staré komentáře.
+
+                // Vytvoření HTML pro každý komentář
+                data.forEach(comment => {
+                    console.log("Komentář:", comment); // Debug log pro každý komentář
+
+                    const div = document.createElement("div");
+                    div.className = "d-flex mb-3";
+
+                    const avatar = document.createElement("img");
+                    avatar.src = comment.userPicture || "/Images/GenericAvatar.png";
+                    avatar.alt = "Avatar";
+                    avatar.style = "width: 40px; height: 40px; object-fit: cover; border-radius: 50%; margin-right: 10px;";
+
+                    const contentDiv = document.createElement("div");
+                    contentDiv.innerHTML = `
+                    <strong>${comment.userFullName}</strong>
+                    <small class="text-muted d-block">${new Date(comment.dateTime).toLocaleString()}</small>
+                    <p class="mb-1">${comment.content}</p>
+                `;
+
+                    div.appendChild(avatar);
+                    div.appendChild(contentDiv);
+                    list.appendChild(div);
+                });
+            })
+            .catch(error => {
+                console.error("Chyba při načítání komentářů:", error); // Debug log pro chyby
+            });
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("Dokument byl načten.");  // Log pro potvrzení, že dokument je načten.
+
+        const modal = document.getElementById("openedPostModal");
+
+        if (modal) {
+            console.log("Modal okno nalezeno, přidávám posluchač událostí.");  // Log pro potvrzení, že modal je nalezen
+
+            modal.addEventListener("shown.bs.modal", function () {
+                console.log("Modal byl zobrazen.");  // Log pro potvrzení, že modal je zobrazený
+                const postId = "@Model.Id"; // ASP.NET ti sem vloží správné ID příspěvku
+                console.log("ID příspěvku pro načítání komentářů:", postId);  // Log pro ověření ID příspěvku
+                loadComments(postId);  // Volání funkce pro načítání komentářů
+            });
+        } else {
+            console.error("Modal okno nebylo nalezeno.");  // Pokud modal není nalezen, logujeme chybu
+        }
+    });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Zajisti, že jQuery je na stránce -->
+<script>
+    $(document).ready(function () {
+        $('#openedPostModal').on('shown.bs.modal', function () {
+            console.log("Modal byl zobrazen.");
+            const postId = "@Model.Id"; // ASP.NET ti sem vloží správné ID příspěvku
+            console.log("ID příspěvku pro načítání komentářů:", postId);
+            loadComments(postId); // Zavoláme funkci pro načítání komentářů
+        });
+    });
+</script>

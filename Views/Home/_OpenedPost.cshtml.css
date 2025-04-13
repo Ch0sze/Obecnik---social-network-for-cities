@@ -125,3 +125,34 @@
     border-radius: 5px;
     font-size: 14px;
 }
+.opened-post-modal-container .comment-wrapper {
+    width: 100%;
+}
+
+.opened-post-modal-container .send-button {
+    background-color: white !important;
+    border: 1px solid #ccc;
+    padding: 0;
+    margin-left: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; /* Shodné s výškou inputu */
+    width: 40px;  /* Čtvercový tvar */
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.opened-post-modal-container .send-button:hover {
+    background-color: #f9f9f9 !important;
+}
+
+.opened-post-modal-container .send-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    background-color: transparent;
+    filter: none;
+    display: block;
+}
