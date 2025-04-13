@@ -48,6 +48,11 @@ public class HomeController(DatabaseContext databaseContext) : Controller
             .Select(c => c.Id)
             .FirstOrDefault();
 
+		var isCommunityAdmin = databaseContext.CommunityAdmins
+        	.Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
+		
+		var adminRole = user?.Role == "UnpaidAdmin";
+
         var posts = databaseContext.Posts
             .Include(post => post.User)
             .Where(post => post.ChannelId == channelId)
@@ -60,7 +65,8 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 Description = post.Description,
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
-                Photo = post.Photo != null
+                Photo = post.Photo != null,
+				IsAdmin = adminRole && isCommunityAdmin
             })
             .ToList();
 
@@ -105,6 +111,11 @@ public class HomeController(DatabaseContext databaseContext) : Controller
             .Where(c => c.CommunityId == communityId)
             .Select(c => c.Id)
             .FirstOrDefault();
+		
+		var isCommunityAdmin = databaseContext.CommunityAdmins
+        	.Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
+		
+		var adminRole = user?.Role == "UnpaidAdmin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
@@ -119,7 +130,8 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 Description = post.Description,
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
-                Photo = post.Photo != null
+                Photo = post.Photo != null,
+				IsAdmin = adminRole && isCommunityAdmin
             })
             .ToList();
 

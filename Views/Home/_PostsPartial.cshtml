@@ -16,7 +16,7 @@
                         <small class="text-muted">@post.GetFormattedCreatedAt()</small>
                     </div>
                 </div>
-                @if (post.CreatedBy == User.Identity?.Name)
+                @if (post.CreatedBy == User.Identity?.Name || post.IsAdmin)
                 {
                     <div class="ms-auto dropdown">
                         <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn"
@@ -25,16 +25,20 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-start rounded post-settings shadow-sm">
                             <form asp-action="Delete">
-                                <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
-                                    Odstranit příspěvek
-                                </button>
-                                <button type="button" class="dropdown-item update-post-btn"
-                                        data-post-id="@post.Id"
-                                        data-title="@post.Title"
-                                        data-content="@post.Description"
-                                        data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")">
-                                    Upravit příspěvek
-                                </button>
+								@if (post.CreatedBy == User.Identity?.Name || post.IsAdmin){
+                                	<button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
+                                    	Odstranit příspěvek
+                                	</button>
+								}
+								@if (post.CreatedBy == User.Identity?.Name) {
+                                	<button type="button" class="dropdown-item update-post-btn"
+                                        	data-post-id="@post.Id"
+                                        	data-title="@post.Title"
+                                        	data-content="@post.Description"
+                                        	data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")">
+                                    	Upravit příspěvek
+                                	</button>
+								}
                             </form>
                         </div>
                     </div>
