@@ -46,6 +46,11 @@
                         <button type="button" id="removeImageButton" class="remove-image">&times;</button>
                         <img id="imagePreview" src="" alt="Image Preview" />
                     </div>
+                    @{
+                        var communityId = Context.Request.Query["communityId"].ToString();
+                    }
+                    <input type="hidden" name="CommunityId" value="@communityId" />
+
 
                     <button type="button" class="publish-button ButtonPublish" id="publishPost">Publikovat</button>
                 </div>

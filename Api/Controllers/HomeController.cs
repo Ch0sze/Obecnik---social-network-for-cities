@@ -14,7 +14,7 @@ namespace Application.Api.Controllers;
 public class HomeController(DatabaseContext databaseContext) : Controller
 {
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult Index(Guid? communityId)
     {
         var userId = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
@@ -22,36 +22,36 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         if (user == null)
             return RedirectToAction("Login", "Account");
 
-        // Check if user is banned
-        if (user?.Role == "Banned")
+        if (user.Role == "Banned")
         {
-            // If banned, log them out and redirect to login with banned message
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account", new { error = "Banned", message = "Váš účet byl zabanován." });
         }
 
-        var communityId = databaseContext.UserCommunities
-            .Where(uc => user != null && uc.UserId == user.Id)
+        // fallback to first community if none selected or invalid
+        var availableCommunityIds = databaseContext.UserCommunities
+            .Where(uc => uc.UserId == userId)
             .Select(uc => uc.CommunityId)
-            .FirstOrDefault();
+            .ToList();
+
+        var selectedCommunityId = communityId.HasValue && availableCommunityIds.Contains(communityId.Value)
+            ? communityId.Value
+            : availableCommunityIds.FirstOrDefault();
 
         var communityName = databaseContext.Communities
-            .Where(c => c.Id == communityId)
+            .Where(c => c.Id == selectedCommunityId)
             .Select(c => c.Name)
-            .FirstOrDefault();
-
-        if (communityId == default)
-            communityName = "No Community";
+            .FirstOrDefault() ?? "No Community";
 
         var channelId = databaseContext.Channels
-            .Where(c => c.CommunityId == communityId)
+            .Where(c => c.CommunityId == selectedCommunityId)
             .Select(c => c.Id)
             .FirstOrDefault();
 
-		var isCommunityAdmin = databaseContext.CommunityAdmins
-        	.Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
-		
-		var adminRole = user?.Role == "UnpaidAdmin";
+        var isCommunityAdmin = databaseContext.CommunityAdmins
+            .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
+
+        var adminRole = user.Role == "UnpaidAdmin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
@@ -66,7 +66,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
-				IsAdmin = adminRole && isCommunityAdmin
+                IsAdmin = adminRole && isCommunityAdmin
             })
             .ToList();
 
@@ -74,7 +74,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         {
             Posts = posts,
             CommunityName = communityName,
-            CommunityId = communityId // Pass the communityId to the view model
+            CommunityId = selectedCommunityId
         };
 
         var accountViewModel = new AccountViewModel
@@ -92,9 +92,10 @@ public class HomeController(DatabaseContext databaseContext) : Controller
 
         return View(combinedViewModel);
     }
+
     
     [HttpGet("load-posts")]
-    public IActionResult LoadPosts(int pageNumber, int pageSize)
+    public IActionResult LoadPosts(int pageNumber, int pageSize, Guid? communityId)
     {
         var userId = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
@@ -102,20 +103,25 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         if (user == null)
             return Unauthorized();
 
-        var communityId = databaseContext.UserCommunities
+        // Verify selected community belongs to user
+        var validCommunityId = databaseContext.UserCommunities
             .Where(uc => uc.UserId == user.Id)
             .Select(uc => uc.CommunityId)
-            .FirstOrDefault();
+            .ToList();
+
+        var selectedCommunityId = communityId.HasValue && validCommunityId.Contains(communityId.Value)
+            ? communityId.Value
+            : validCommunityId.FirstOrDefault();
 
         var channelId = databaseContext.Channels
-            .Where(c => c.CommunityId == communityId)
+            .Where(c => c.CommunityId == selectedCommunityId)
             .Select(c => c.Id)
             .FirstOrDefault();
-		
-		var isCommunityAdmin = databaseContext.CommunityAdmins
-        	.Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
-		
-		var adminRole = user?.Role == "UnpaidAdmin";
+
+        var isCommunityAdmin = databaseContext.CommunityAdmins
+            .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
+
+        var adminRole = user?.Role == "UnpaidAdmin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
@@ -131,12 +137,13 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
-				IsAdmin = adminRole && isCommunityAdmin
+                IsAdmin = adminRole && isCommunityAdmin
             })
             .ToList();
 
         return PartialView("_PostsPartial", posts);
     }
+
 
     [HttpGet("image/{postId}")]
     public IActionResult GetImage(Guid postId)
