@@ -8,5 +8,6 @@ public class CommunityDo
     public string? PostalCode { get; init; }
 
     public ICollection<UserCommunityDo> UserCommunities { get; init; } = [];
+    public ICollection<CommunityAdminDo> AdminUsers { get; init; } = [];
     public ICollection<ChannelDo> Channels { get; init; } = [];
 }

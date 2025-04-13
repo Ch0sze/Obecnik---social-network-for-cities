@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Application.Api.Extensions;
+using Application.Api.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -16,7 +17,7 @@ namespace Application.Api.Controllers
 {
     [Route("SuperAdmin")]
     [Authorize(Roles = "SuperAdmin")]
-    public class SuperAdminController(DatabaseContext databaseContext) : Controller
+    public class SuperAdminController(DatabaseContext databaseContext, IEmailService emailService) : Controller
     {
         [HttpGet("")]
         public async Task<IActionResult> Index()
@@ -134,6 +135,9 @@ namespace Application.Api.Controllers
                 var passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(randomPassword));
                 var passwordSalt = hmac.Key;
 
+                // Generate token with expiration
+                var token = $"{Guid.NewGuid()}_{DateTime.UtcNow.AddMinutes(30).Ticks}";
+
                 var newUser = new UserDo
                 {
                     Id = Guid.NewGuid(),
@@ -145,11 +149,11 @@ namespace Application.Api.Controllers
                     Role = "UnpaidAdmin",
                     Residence = request.Community.Name,
                     PostalCode = request.Community.PostalCode,
+                    PasswordLink = token
                 };
 
                 await databaseContext.Users.AddAsync(newUser);
 
-                // Assign user to community
                 var userCommunity = new UserCommunityDo
                 {
                     UserId = newUser.Id,
@@ -160,11 +164,24 @@ namespace Application.Api.Controllers
 
                 await databaseContext.UserCommunities.AddAsync(userCommunity);
 
-                // (Optional) Send email with login instructions or password reset
+                var communityAdmin = new CommunityAdminDo
+                {
+                    UserId = newUser.Id,
+                    CommunityId = request.CommunityId,
+                    User = newUser,
+                    Community = request.Community
+                };
+
+                await databaseContext.CommunityAdmins.AddAsync(communityAdmin);
+
+                var callbackUrl = Url.Action("ResetPassword", "Account", 
+                    new { token, email = newUser.Email }, Request.Scheme);
+
+                if (callbackUrl != null)
+                    await emailService.SendNewEmail(newUser.Email, callbackUrl);
             }
             else
             {
-                // Update role if user already exists
                 existingUser.Role = "UnpaidAdmin";
 
                 var alreadyAssigned = await databaseContext.UserCommunities
@@ -182,12 +199,27 @@ namespace Application.Api.Controllers
 
                     await databaseContext.UserCommunities.AddAsync(userCommunity);
                 }
+
+                var alreadyAdmin = await databaseContext.CommunityAdmins
+                    .AnyAsync(ca => ca.UserId == existingUser.Id && ca.CommunityId == request.CommunityId);
+
+                if (!alreadyAdmin)
+                {
+                    var communityAdmin = new CommunityAdminDo
+                    {
+                        UserId = existingUser.Id,
+                        CommunityId = request.CommunityId,
+                        User = existingUser,
+                        Community = request.Community
+                    };
+
+                    await databaseContext.CommunityAdmins.AddAsync(communityAdmin);
+                }
+
+                await emailService.SendExistingEmail(existingUser.Email);
             }
 
-            // Change the request status to Approved
             request.Status = AdminRequestStatus.Approved;
-
-            // Save changes to the database
             await databaseContext.SaveChangesAsync();
 
             return RedirectToAction("Index");
