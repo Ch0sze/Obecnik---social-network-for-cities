@@ -14,24 +14,19 @@
     <div class="avatar-container-sb" id="user-list-left-sb"></div>
 
     <!-- Scrollable Navigation (fills remaining height) -->
-    <div class="nav-container-sb" id="nav-links-sb">
-        <!-- Dynamic content via JS -->
-    </div>
+    <div class="nav-container-sb" id="nav-links-sb"></div>
+
     <div class="profile-container-sb">
         <div class="profile-header-sb">
-            <!-- Icon Button for User Profile (Redirect to /Account on click) -->
             <button class="icon-btn-sb" id="user-profile-btn-sb2">
                 <i class="bi bi-person"></i>
             </button>
-            <!-- Display the logged-in username -->
             <span class="text-sb" id="username-sb2">@User.Identity?.Name</span>
-            <!-- Hamburger Menu Button -->
             <button class="icon-btn-sb" id="hamburger-menu-btn-sb2">
                 <i class="bi bi-box-arrow-right"></i>
             </button>
         </div>
 
-        <!-- Dropdown Menu (Initially hidden) -->
         <div id="dropdown-menu-sb" class="dropdown-menu-sb" style="display: none;">
             <button class="dropdown-item-sb" id="logout-btn-sb">Odhlásit se</button>
         </div>
@@ -39,17 +34,20 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get communityId from URL (if present)
+        const urlParams = new URLSearchParams(window.location.search);
+        let selectedCommunityId = urlParams.get('communityId');
+
         let channels = [
-            {icon: '', label: 'Obecné', link: '/#', active: false, dot: true}
+            { icon: '', label: 'Obecné', link: '/#', active: false, dot: true }
         ];
 
         let communities = [];
 
-        // Fetch communities dynamically from the API
         async function fetchCommunities() {
             try {
-                const response = await fetch('/api/sidebar/communities'); // Adjust API endpoint as needed
+                const response = await fetch('/api/sidebar/communities');
                 if (!response.ok) {
                     throw new Error('Failed to fetch communities');
                 }
@@ -57,61 +55,68 @@
                 const communitiesData = await response.json();
                 communities = communitiesData.map(community => ({
                     name: community.name,
-                    image: community.imageUrl,  // Image URL from the API
-                    dot: community.dot,
-                    link: community.link  // Link to the community page
+                    image: community.imageUrl,
+                    link: community.link
                 }));
 
-                // Render the avatars once communities are fetched
-                renderLeftAvatars();
+                // If no selectedCommunityId from URL, default to the first one
+                if (!selectedCommunityId && communities.length > 0) {
+                    selectedCommunityId = communities[0].link;
+                }
 
+                renderLeftAvatars();
             } catch (error) {
                 console.error('Error fetching communities:', error);
             }
         }
 
+        function onAvatarClick(index) {
+            selectedCommunityId = communities[index].link;
+            // Reload with selected community in URL
+            window.location.href = `/?communityId=${selectedCommunityId}`;
+        }
 
-        // Render avatars dynamically (left sidebar)
         function renderLeftAvatars() {
             const userList = document.getElementById('user-list-left-sb');
             userList.innerHTML = '';
 
             communities.forEach((user, index) => {
+                const isSelected = user.link === selectedCommunityId;
+
                 const item = document.createElement('div');
                 item.className = 'user-item-sb';
-                item.innerHTML = ` 
-                <a href="${user.link}" class="avatar-btn-container-sb" onclick="onAvatarClick(${index})">
-                    <button class="avatar-btn-sb">
-                        <img src="${user.image}" alt="${user.name}">
-                    </button>
-                    <span class="text-sb">${user.name}</span>
-                    ${user.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-                </a>
-            `;
+
+                item.innerHTML = `
+                    <div class="avatar-btn-container-sb" data-index="${index}">
+                        <button class="avatar-btn-sb">
+                            <img src="${user.image}" alt="${user.name}">
+                        </button>
+                        <span class="text-sb">${user.name}</span>
+                        ${isSelected ? `<span class="dot-sb ms-auto"></span>` : ''}
+                    </div>
+                `;
+
                 userList.appendChild(item);
+
+                // Attach click handler
+                item.querySelector('.avatar-btn-container-sb').addEventListener('click', () => {
+                    onAvatarClick(index);
+                });
             });
 
-            // Add button at the end of the communities list to trigger the modal
             const addBtnContainer = document.createElement('div');
             addBtnContainer.className = 'user-item-sb';
-            addBtnContainer.innerHTML = ` 
-            <button class="add-btn-sb" id="add-community-btn">+</button>
-        `;
+            addBtnContainer.innerHTML = `
+                <button class="add-btn-sb" id="add-community-btn">+</button>
+            `;
             userList.appendChild(addBtnContainer);
 
-            // Add event listener to open the modal when the button is clicked
             document.getElementById('add-community-btn').addEventListener('click', function () {
-                // Ensure that the modal is correctly targeted and shown
                 const modal = new bootstrap.Modal(document.getElementById('addCommunityModal'));
                 modal.show();
             });
         }
-        // Fetch and render communities
-        fetchCommunities();
 
-        // Render channels
-
-        // Render navigation dynamically (left sidebar)
         function renderNav() {
             const navContainer = document.getElementById('nav-links-sb');
             navContainer.innerHTML = '';
@@ -121,31 +126,31 @@
                 div.className = `nav-item-sb${item.active ? ' active-sb' : ''}`;
                 div.dataset.index = index;
 
-                div.innerHTML = ` 
-                <a href="${item.link}" onclick="updateDot(${index})">
-                    ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
-                    <span class="text-sb">${item.label}</span>
-                    ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-                </a>
-            `;
+                div.innerHTML = `
+                    <a href="${item.link}" onclick="updateDot(${index})">
+                        ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
+                        <span class="text-sb">${item.label}</span>
+                        ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                    </a>
+                `;
 
                 navContainer.appendChild(div);
             });
         }
 
-        const userProfileBtn = document.getElementById('user-profile-btn-sb2');
-        userProfileBtn.addEventListener('click', () => {
-            window.location.href = '/Account'; // Redirect to the account page
+        document.getElementById('user-profile-btn-sb2').addEventListener('click', () => {
+            window.location.href = '/Account';
         });
-        // Toggle dropdown menu visibility when hamburger menu is clicked
-        const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb2');
-        hamburgerMenuBtn.addEventListener('click', function() {
+
+        document.getElementById('hamburger-menu-btn-sb2').addEventListener('click', function () {
             window.location.href = '/Account/Logout';
         });
-        
-        renderLeftAvatars();
+
+        fetchCommunities();
         renderNav();
     });
-
 </script>
+
+
+
 

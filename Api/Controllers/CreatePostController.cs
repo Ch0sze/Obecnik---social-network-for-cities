@@ -37,69 +37,65 @@ public class PostsController(DatabaseContext databaseContext) : Controller
 
         if (!ModelState.IsValid)
         {
-            // Return to the form with errors
             return View("~/Views/Home/Index.cshtml", model);
         }
-        
-        var userId = User.GetId();
-        var user = databaseContext.Users.FirstOrDefault(user => user.Id == userId);
-        if (user == null)
-            return RedirectToAction("Login", "Account"); // Přesměrování na přihlášení
 
-        // Check if user is banned
-        if (user?.Role == "Banned")
+        var userId = User.GetId();
+        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+        if (user == null)
+            return RedirectToAction("Login", "Account");
+
+        if (user.Role == "Banned")
         {
-            // If banned, log them out and redirect to login with banned message
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account", new { error = "Banned", message = "Váš účet byl zabanován." });
         }
-        
-        
-        byte[]? imageData = null;
-        var communityId = databaseContext.UserCommunities
-            .Where(uc => user != null && uc.UserId == user.Id)
-            .Select(uc => uc.CommunityId)
-            .FirstOrDefault();
 
+        // --- Use CommunityId from the form model
+        var communityId = model.CommunityId;
+
+        if (string.IsNullOrEmpty(communityId))
+        {
+            ModelState.AddModelError("", "Nebyla vybrána žádná komunita.");
+            return View("~/Views/Home/Index.cshtml", model);
+        }
+
+        // --- Get the first channel for the selected community
         var channelId = databaseContext.Channels
-            .Where(c => c.CommunityId == communityId)
+            .Where(c => c.CommunityId.ToString() == communityId)
             .Select(c => c.Id)
             .FirstOrDefault();
+
+        if (channelId == Guid.Empty)
+        {
+            ModelState.AddModelError("", "Nebyl nalezen žádný kanál pro vybranou komunitu.");
+            return View("~/Views/Home/Index.cshtml", model);
+        }
+
+        byte[]? imageData = null;
+
         if (model.Photo != null && model.Photo.Length > 0)
         {
-            using (var memoryStream = new MemoryStream())
+            using var memoryStream = new MemoryStream();
+            using (var image = Image.Load(model.Photo.OpenReadStream()))
             {
-                // Načtení obrázku
-                using (var image = Image.Load(model.Photo.OpenReadStream()))
+                var options = new ResizeOptions
                 {
-                    // Výpočet nových rozměrů (zachová poměr stran)
-                    var maxWidth = 800; // maximální šířka
-                    var maxHeight = 600; // maximální výška
-                
-                    // Výpočet nových rozměrů se zachováním poměru stran
-                    var options = new ResizeOptions
-                    {
-                        Size = new Size(maxWidth, maxHeight),
-                        Mode = ResizeMode.Max
-                    };
-                
-                    // Změna velikosti obrázku
-                    image.Mutate(x => x.Resize(options));
-                
-                    // Uložení do formátu JPEG s 80% kvalitou
-                    image.SaveAsJpeg(memoryStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder
-                    {
-                        Quality = 80
-                    });
-                }
-            
-                imageData = memoryStream.ToArray();
+                    Size = new Size(800, 600),
+                    Mode = ResizeMode.Max
+                };
+                image.Mutate(x => x.Resize(options));
+                image.SaveAsJpeg(memoryStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder
+                {
+                    Quality = 80
+                });
             }
+            imageData = memoryStream.ToArray();
         }
 
         if (user != null)
         {
-            var posts = new PostDo
+            var post = new PostDo
             {
                 Id = default,
                 Title = model.Title,
@@ -113,11 +109,11 @@ public class PostsController(DatabaseContext databaseContext) : Controller
                 ChannelId = channelId,
             };
 
-            databaseContext.Posts.Add(posts);
+            databaseContext.Posts.Add(post);
         }
 
         databaseContext.SaveChanges();
+        return RedirectToAction("Index", "Home", new { communityId = model.CommunityId });
 
-        return RedirectToAction("Index", "Home");
     }
 }

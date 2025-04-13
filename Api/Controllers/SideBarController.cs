@@ -35,8 +35,7 @@ namespace Application.Api.Controllers
                                Url.Action("GetCommunityImage", "SideBar", new { communityId = uc.Community.Id }) 
                                : "/Images/GenericCommunity.png", // Default image URL for null images
                     Dot = true,  // Change this condition based on your logic (e.g., new notifications)
-                    Link = "/#"  // Link to the community page
-                    //Link = $"/community/{uc.Community.Id}"  // Link to the community page
+                    Link = $"{uc.Community.Id}"  // Link to the community page
                 })
                 .ToList();
 

@@ -7,7 +7,7 @@ namespace Application.Api.Models
         public string Name { get; set; } = string.Empty;
         public string? ImageUrl { get; set; } = string.Empty;
         public bool Dot { get; set; } = true;
-        public string Link { get; set; } = "/#";
+        public string Link { get; set; } = string.Empty;
     }
 
     // Used specifically when joining a community (form model)
