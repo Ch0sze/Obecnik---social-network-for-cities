@@ -59,9 +59,13 @@
                     link: community.link
                 }));
 
-                // If no selectedCommunityId from URL, default to the first one
-                if (!selectedCommunityId && communities.length > 0) {
-                    selectedCommunityId = communities[0].link;
+                // Check if URL is exactly http://localhost:5096/ (no query or hash)
+                const isRootPath = window.location.pathname === '/' && !window.location.search && !window.location.hash;
+
+                if (isRootPath && communities.length > 0) {
+                    const firstCommunityId = communities[0].link;
+                    window.location.href = `/?communityId=${firstCommunityId}`;
+                    return;
                 }
 
                 renderLeftAvatars();
@@ -127,7 +131,7 @@
                 div.dataset.index = index;
 
                 div.innerHTML = `
-                    <a href="${item.link}" onclick="updateDot(${index})">
+                    <a href="?communityId=${selectedCommunityId}" onclick="updateDot(${index})">
                         ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
                         <span class="text-sb">${item.label}</span>
                         ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
