@@ -51,7 +51,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-        var adminRole = user.Role == "UnpaidAdmin";
+        var adminRole = user.Role == "Admin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
@@ -121,7 +121,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-        var adminRole = user?.Role == "UnpaidAdmin";
+        var adminRole = user?.Role == "Admin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
