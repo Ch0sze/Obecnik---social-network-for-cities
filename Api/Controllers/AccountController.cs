@@ -5,7 +5,6 @@ using Application.Api.Services;
 using Application.Core;
 using Application.Infastructure.Database;
 using Application.Infastructure.Database.Models;
-using CoatOfArmsDownloader.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -25,14 +24,6 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         var id = User.GetId();
         var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == id);
 
-        // Check if user is banned
-        // if (user?.Role == "Banned")
-        // {
-        //     // If banned, log them out and redirect to login with banned message
-        //     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        //     return RedirectToAction("Login", "Account", new { error = "Váš účet byl zabanován." });
-        // }
-
         // Check if user is found, otherwise redirect or show an error
         if (user == null)
         {
@@ -44,27 +35,38 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             .Select(uc => uc.Community)
             .FirstOrDefaultAsync();
 
-
         var homeViewModel = new HomeViewModel
         {
-            CommunityName = community?.Name ?? "Neznámá komunita", // Use community name
+            CommunityName = community?.Name ?? "Neznámá komunita",
             Posts = new List<HomeViewModel.Post>(),
-            CommunityId = community?.Id ?? Guid.Empty // Ensure the CommunityId is set correctly
+            CommunityId = community?.Id ?? Guid.Empty
         };
+        
+        var accountViewModel = MapUserDoToAccountViewModel(user);
 
         // Pass both Account and HomeViewModel together as CombinedViewModel
         var combinedViewModel = new CombinedViewModel
         {
-            AccountViewModel = new AccountViewModel
-            {
-                Email = user?.Email ?? string.Empty,
-                Name = $"{user?.Firstname} {user?.LastName}",
-                Hometown = $"{user?.Residence}, {user?.PostalCode}"
-            },
+            AccountViewModel = accountViewModel,
             HomeViewModel = homeViewModel
         };
 
         return View("Account", combinedViewModel);
+    }
+
+    // Privátní metoda pro mapování objektu UserDo na AccountViewModel
+    private AccountViewModel MapUserDoToAccountViewModel(UserDo user)
+    {
+        return new AccountViewModel
+        {
+            Email = user.Email,
+            FirstName = user.Firstname,
+            LastName = user.LastName,
+            Residence = user.Residence ?? string.Empty,
+            PostalCode = user.PostalCode ?? string.Empty,
+            Picture = user.Picture,
+            Role = user.Role,
+        };
     }
 
 
@@ -452,5 +454,70 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         return View("RequestAdminRights", model);
     }
 
+  [HttpPost("UpdateAccount")]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> UpdateAccount(CombinedViewModel model, IFormFile? ImageFile)
+{    
+    // Ověření, zda model obsahuje data
+    if (model == null || model.AccountViewModel == null)
+    {
+        ModelState.AddModelError("", "Data z formuláře nebyla přijata.");
+        return View("Account", model);
+    }
+
+    // Pokud model není validní, načtěte aktuální obrázek z databáze,
+    // aby se zobrazil i při opětovném vykreslení formuláře.
+    if (!ModelState.IsValid)
+    {
+        var userId = User.GetId();
+        var user = await databaseContext.Users.FindAsync(userId);
+        if (user != null)
+        {
+            model.AccountViewModel.Picture = user.Picture;
+        }
+        return View("Account", model);
+    }
+
+    // Získání ID aktuálního uživatele z claims (přes vaši extension metodu GetId)
+    var currentUserId = User.GetId();
+
+    // Načtení uživatele z databáze
+    var userFromDb = await databaseContext.Users.FindAsync(currentUserId);
+    if (userFromDb == null)
+    {
+        return NotFound("Uživatel nebyl nalezen.");
+    }
+
+    // Aktualizace údajů uživatele
+    userFromDb.Firstname = model.AccountViewModel.FirstName;
+    userFromDb.LastName = model.AccountViewModel.LastName;
+    userFromDb.Email = model.AccountViewModel.Email;
+    userFromDb.Residence = model.AccountViewModel.Residence;
+    userFromDb.PostalCode = model.AccountViewModel.PostalCode;
+
+    // Zpracování změny obrázku
+    if (Request.Form["RemoveImage"] == "true")
+    {
+        userFromDb.Picture = null;
+    }
+    else if (ImageFile is not null && ImageFile.Length > 0)
+    {
+        using var ms = new MemoryStream();
+        await ImageFile.CopyToAsync(ms);
+        var fileBytes = ms.ToArray();
+
+        // Získáme MIME typ obrázku (např. "image/jpeg" nebo "image/png")
+        var contentType = ImageFile.ContentType;
+
+        // Vytvoříme kompletní Base64 řetězec s prefixem
+        userFromDb.Picture = $"data:{contentType};base64,{Convert.ToBase64String(fileBytes)}";
+    }
+
+    // Uložení změn do databáze
+    await databaseContext.SaveChangesAsync();
+
+    // Přesměrování po úspěšném uložení - obrázek na stránce zůstane, protože nedochází k reloadu současného náhledu
+    return RedirectToAction("Index", "Home");
+}
 
 }
