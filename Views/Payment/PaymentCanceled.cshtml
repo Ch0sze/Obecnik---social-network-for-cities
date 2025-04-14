@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Platba zrušena</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body style="background-color: #f2f2f2;">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div style="max-width: 600px; width: 100%;">
+        <div class="header-section text-center mb-4">
+            <img src="~/image.png" alt="Logo" style="max-height: 100px;" />
+            <h2>Platba byla zrušena</h2>
+        </div>
+
+        <div class="bg-white p-4 shadow rounded text-center">
+            <p class="text-danger font-weight-bold mb-4">Platba nebyla dokončena. Pokud jste ji omylem zrušili, můžete to zkusit znovu.</p>
+
+            <a href="@Url.Action("Index", "Account")" class="btn btn-secondary">Návrat na účet</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

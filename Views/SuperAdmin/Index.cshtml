@@ -22,6 +22,7 @@
                             <p class="mb-1"><strong>Uživatel:</strong> @($"{request.User?.Firstname} {request.User?.LastName}")</p>
                             <p class="mb-1"><strong>Oficiální email:</strong> @request.OfficialEmail</p>
                             <p class="mb-1"><strong>Komunita:</strong> @request.Community?.Name</p>
+                            <p class="mb-1"><strong>Počet obyvatel:</strong> @request.Population</p>
                             <p class="mb-1"><strong>Datum žádosti:</strong> @request.RequestDate.ToString("dd.MM.yyyy")</p>
 
                             @if (!string.IsNullOrWhiteSpace(request.Notes))

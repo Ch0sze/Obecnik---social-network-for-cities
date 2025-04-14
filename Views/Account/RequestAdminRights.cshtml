@@ -26,6 +26,13 @@
                     </select>
                     @Html.ValidationMessageFor(model => model.CommunityId, "", new { @class = "text-danger" })
                 </div>
+                
+                <!-- Population -->
+                <div class="mb-3">
+                    <label for="population" class="form-label fw-bold">Počet obyvatel:</label>
+                    <input type="number" class="form-control" id="population" name="Population" value="@Model.Population" placeholder="Např. 1200" style="background-color: #FAFAFA; border: none; border-bottom: 1px solid #F98866; border-radius: 0;" />
+                    @Html.ValidationMessageFor(model => model.Population, "", new { @class = "text-danger" })
+                </div>
 
                 <!-- Official Email -->
                 <div class="mb-3">

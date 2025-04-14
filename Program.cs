@@ -2,6 +2,8 @@ using Application.Api.Services;
 using Application.Infastructure.Database;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Application.Configuration;
+using Microsoft.Extensions.Options;
 
 // Přidej tento using, aby byl dostupný IEmailService a EmailService
 
@@ -27,6 +29,7 @@ builder.Services
     });
 builder.Services.AddAuthorization();
 
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 // Registrace e-mailové služby
 builder.Services.AddScoped<IEmailService, EmailService>();

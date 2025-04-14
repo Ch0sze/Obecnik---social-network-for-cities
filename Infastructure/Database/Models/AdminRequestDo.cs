@@ -28,6 +28,10 @@ public class AdminRequestDo
 
     [Required]
     public DateTime RequestDate { get; init; } = DateTime.UtcNow;
+
     [Required]
     public AdminRequestStatus Status { get; set; } = AdminRequestStatus.Pending;
+
+    [Required]
+    public int Population { get; set; }
 }

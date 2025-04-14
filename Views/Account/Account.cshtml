@@ -25,11 +25,20 @@
                 <p class="fs-4">@Model.AccountViewModel?.Hometown</p>
             </div>
 
-            <!-- Request Admin Rights Button -->
+            <!-- Request Admin Rights or Paygate Button -->
             <div class="text-center mt-4">
-                <a href="/Account/RequestAdminRights" class="btn btn-warning fw-bold px-4">
-                    Žádat o práva administrátora
-                </a>
+                @if (Model.AccountViewModel?.Role == "UnpaidAdmin")
+                {
+                    <a href="/Account/AdminPaygate" class="btn btn-success fw-bold px-4">
+                        Zaplatit za práva
+                    </a>
+                }
+                else
+                {
+                    <a href="/Account/RequestAdminRights" class="btn btn-warning fw-bold px-4">
+                        Žádat o práva administrátora
+                    </a>
+                }
             </div>
         </div>
     </div>

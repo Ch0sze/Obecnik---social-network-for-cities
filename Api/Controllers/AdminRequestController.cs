@@ -69,6 +69,7 @@ namespace Application.Api.Controllers
                 CommunityId = communityId,
                 OfficialEmail = model.OfficialEmail,
                 Notes = model.Notes,
+                Population = model.Population,
                 RequestDate = DateTime.UtcNow,
                 Status = AdminRequestStatus.Pending
             };

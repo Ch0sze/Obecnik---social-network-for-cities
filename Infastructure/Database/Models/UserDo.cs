@@ -14,6 +14,7 @@ public class UserDo
     public string? PasswordLink { get; set; }
     public string? PostalCode { get; init; }
     public string? Picture { get; init; }
+    public DateTime? AdminRoleExpiresAt { get; set; }
 
     public ICollection<UserCommunityDo> UserCommunities { get; init; } = [];
     public ICollection<CommunityAdminDo> AdminCommunities { get; init; } = [];

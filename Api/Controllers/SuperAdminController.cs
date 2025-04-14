@@ -60,7 +60,8 @@ namespace Application.Api.Controllers
                         RequestDate = r.RequestDate,
                         Community = r.Community,
                         User = r.User,
-                        Notes = r.Notes
+                        Notes = r.Notes,
+                        Population = r.Population
                     }).ToList(),
 
                     HomeViewModel = new HomeViewModel
@@ -102,7 +103,8 @@ namespace Application.Api.Controllers
                     RequestDate = r.RequestDate,
                     Community = r.Community,
                     User = r.User,
-                    Notes = r.Notes
+                    Notes = r.Notes,
+                    Population = r.Population
                 }).ToList()
             };
 

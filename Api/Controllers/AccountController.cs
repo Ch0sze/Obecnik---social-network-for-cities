@@ -32,6 +32,12 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account", new { error = "Váš účet byl zabanován." });
          }
+         
+         if (user?.Role == "Admin" && user.AdminRoleExpiresAt is DateTime expiry && expiry < DateTime.UtcNow)
+         {
+             user.Role = "UnpaidAdmin";
+             await databaseContext.SaveChangesAsync();
+         }
 
         // Check if user is found, otherwise redirect or show an error
         if (user == null)
@@ -59,7 +65,8 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             {
                 Email = user?.Email ?? string.Empty,
                 Name = $"{user?.Firstname} {user?.LastName}",
-                Hometown = $"{user?.Residence}, {user?.PostalCode}"
+                Hometown = $"{user?.Residence}, {user?.PostalCode}",
+                Role = user?.Role
             },
             HomeViewModel = homeViewModel
         };
@@ -452,6 +459,36 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
         return View("RequestAdminRights", model);
     }
+    
+    [HttpGet("adminpaygate")]
+    [Authorize]
+    public async Task<IActionResult> AdminPaygate()
+    {
+        var userId = User.GetId();
+        var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
+        if (user == null || user.Role != "UnpaidAdmin")
+        {
+            return RedirectToAction("Index", "Home"); // Only unpaid admins should see this
+        }
+
+        // Find approved admin requests by this user
+        var approvedRequests = await databaseContext.AdminRequests
+            .Where(r => r.OfficialEmail == user.Email && r.Status == AdminRequestStatus.Approved)
+            .ToListAsync();
+
+        // Calculate the total population of the approved requests
+        var totalPopulation = approvedRequests.Sum(r => r.Population);
+
+        // Create a view model for the paygate view
+        var model = new AdminPaygateViewModel
+        {
+            OfficialEmail = user.Email,
+            TotalPopulation = totalPopulation,
+            TotalAmount = totalPopulation * 1.0m // e.g., 1 Kč per citizen
+        };
+
+        return View("AdminPaygate", model);
+    }
 
 }
