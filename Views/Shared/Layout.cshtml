@@ -35,3 +35,51 @@
 
 </body>
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleBtn = document.getElementById("sidebarToggle-sb");
+        const sidebar = document.querySelector(".sidebar-sb");
+        const userProfileBtn = document.getElementById("userProfileBtn-sb");
+        const superadminDropdown = document.getElementById("superadminDropdown-sb");
+
+        const userRole = "@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value";
+
+        toggleBtn?.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            sidebar?.classList.toggle("active-sb");
+        });
+
+        userProfileBtn?.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (userRole === "SuperAdmin") {
+                superadminDropdown.style.display =
+                    superadminDropdown.style.display === "block" ? "none" : "block";
+            } else {
+                window.location.href = "/Account";
+            }
+        });
+
+        document.addEventListener("click", (e) => {
+            if (
+                superadminDropdown &&
+                !superadminDropdown.contains(e.target) &&
+                !userProfileBtn.contains(e.target)
+            ) {
+                superadminDropdown.style.display = "none";
+            }
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.getElementById("sidebarToggle-sb");
+        const sidebar = document.querySelector(".sidebar-sb");
+
+        toggleButton?.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            sidebar?.classList.toggle("active-sb");
+        });
+    });
+</script>

@@ -9,7 +9,12 @@
     position: relative; /* Default position */
     transition: transform 0.3s ease, z-index 0.3s ease; /* Smooth transitions */
     z-index: 1; /* Default z-index */
+    pointer-events: auto;
 }
+#sidebarToggleContainer-sb, #sidebarToggle-sb {
+    z-index: 2100;
+}
+
 
 @media (max-width: 1000px) {
     .sidebar-sb {
@@ -261,6 +266,7 @@
     display: none; /* Initially hidden */
     z-index: 9999; /* Ensure it's above everything else */
     border: 1px solid #d3d3d3;
+    pointer-events: auto !important;
 }
 
 /* Updated Dropdown Item Styling */
