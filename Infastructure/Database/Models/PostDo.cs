@@ -11,6 +11,7 @@ public class PostDo
     public byte[]? Photo { get; set; }
     public required string Place { get; init; }
     public int? SignaturesNo { get; init; }
+    public bool IsPinned { get; set; } = false;
 
     public required Guid CreatedBy { get; init; }
     public required UserDo User { get; init; }

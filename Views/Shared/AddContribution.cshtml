@@ -2,10 +2,22 @@
 
 <div class="mt-3 w-75 justify-content-center">
     <partial name="_CreatePost"/>
-    <button id="openModalButton" type="button" class="btn btn-default mb-3">
-        O co byste se chtěli podělit ...
-        <i class="bi bi-envelope-arrow-up-fill"></i>
-    </button>
+    <div class="d-flex align-items-center">
+        <button id="openModalButton" type="button" class="btn btn-default">
+            O co byste se chtěli podělit ...
+            <i class="bi bi-envelope-arrow-up-fill"></i>
+        </button>
+        <div class="dropdown ms-1">
+            <button id="openPinsButton" class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="~/icons/Pin.svg" alt="bell" style="width: 30px; height: 30px;">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" id="pinnedPostsDropdown" style="width: 350px;">
+                <li><h6 class="dropdown-header">Připnuté příspěvky</h6></li>
+                <li id="noPinnedPosts" class="px-3 py-3 text-center"><small class="text-muted">Žádné připnuté příspěvky</small></li>
+                <!-- Pinned posts will be loaded here via AJAX -->
+            </ul>
+        </div>
+    </div>
 
     <div id="contributionsContainer" class="mb-3">
         @if (!Model.Any())
@@ -242,6 +254,118 @@
                     alert('Error: ' + xhr.responseText);
                 }
             });
+        });
+        
+        // Handle pin/unpin post
+        $(document).on('click', '.pin-post-btn', function() {
+            const postId = $(this).data('post-id');
+            const button = $(this);
+            const communityId = getCommunityIdFromUrl();
+            
+            $.ajax({
+                url: '/toggle-pin/' + postId,
+                type: 'POST',
+                data: {
+                    communityId: communityId // Pass community ID if needed by the server
+                },
+                success: function(response) {
+                    if (response.success) {
+                        button.text(response.isPinned ? "Odepnout příspěvek" : "Připnout příspěvek");
+                        button.toggleClass('active', response.isPinned);
+                        
+                        // Refresh pinned posts if dropdown is open
+                        if ($('#pinnedPostsDropdown').hasClass('show')) {
+                            loadPinnedPosts();
+                        }
+                    }
+                },
+                error: function() {
+                    alert('Chyba při změně stavu připnutí příspěvku.');
+                }
+            });
+        });
+        
+        function getCommunityIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('communityId') || '';
+        }
+        
+        function loadPinnedPosts() {
+            const communityId = getCommunityIdFromUrl();
+
+            $.ajax({
+                url: '/get-pinned-posts',
+                type: 'GET',
+                data: {
+                    communityId: communityId  // Pass the current community ID
+                },
+                success: function(response) {
+                    const dropdown = $('#pinnedPostsDropdown');
+                    const noPinnedItem = $('#noPinnedPosts');
+                    
+                    // Clear existing pinned posts (except the header and no-posts message)
+                    dropdown.find('.pinned-post-item').remove();
+                    
+                    if (response.length > 0) {
+                        noPinnedItem.hide();
+                        
+                        response.forEach(post => {
+                            // Format the date (you might want to use a better date formatter)
+                            const formattedDate = new Date(post.createdAt).toLocaleDateString();
+                            
+                            const shortTitle = post.title.length > 75 
+                                ? post.title.substring(0, 75) + '...' 
+                                : post.title;
+                            
+                            const shortDescription = post.description.length > 150 
+                                ? post.description.substring(0, 150) + '...' 
+                                : post.description;
+                            
+                            const item = $(`
+                                <li class="pinned-post-item border-bottom">
+                                    <a class="dropdown-item p-3" href="#" data-post-id="${post.id}">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-2">
+                                                    <img src="/Images/GenericAvatar.png" 
+                                                         class="rounded-circle" 
+                                                         style="width: 32px; height: 32px; object-fit: cover;">
+                                                </div>
+                                                <div>
+                                                    <strong>${post.createdBy}</strong>
+                                                </div>
+                                            </div>
+                                            <small class="text-muted">${formattedDate}</small>
+                                        </div>
+                                        <p class="mb-2 fw-semibold text-wrap" style="font-size: larger; color: #212529; word-break: break-word;">${shortTitle}</p>
+                                        <p class="mb-2 text-wrap" style="font-size: small; word-break: break-word;">${shortDescription}</p>
+                                    </a>
+                                </li>
+                            `);
+                            
+                            dropdown.append(item);
+                        });
+                    } else {
+                        noPinnedItem.show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error loading pinned posts:", error);
+                    // Optionally show an error message
+                }
+            });
+        }
+        
+        // Load pinned posts when dropdown is shown
+        $('#openPinsButton').on('click', function() {
+            loadPinnedPosts();
+        });
+        
+        // Handle clicking on a pinned post in dropdown
+        $(document).on('click', '.pinned-post-item a', function(e) {
+            e.preventDefault();
+            const postId = $(this).data('post-id');
+            $('.opened-post-box[data-post-id="' + postId + '"]').trigger('click');
         });
     });
 </script>

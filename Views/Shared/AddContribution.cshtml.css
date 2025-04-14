@@ -76,3 +76,23 @@
     border: none;
     text-transform: none;
 }
+#openPinsButton:active {
+    transform: scale(1.03);
+}
+
+#pinnedPostsDropdown {
+    padding-top: 8px;
+    padding-bottom: 0;
+    border-radius: 8px;
+    background-color: #FFFAEF;
+    border-color: #E5E5E5;
+}
+
+#pinnedPostsDropdown .dropdown-item:hover {
+    background-color: #FFF2D6;
+}
+
+#pinnedPostsDropdown .dropdown-item:active {
+    background-color: #FFF2D6;
+    color: black;
+}

@@ -43,6 +43,12 @@
                                     	Upravit příspěvek
                                 	</button>
 								}
+								@if (post.IsAdmin) {
+                                	<button type="button" class="dropdown-item pin-post-btn" 
+											data-post-id="@post.Id">
+										@(post.IsPinned ? "Odepnout příspěvek" : "Připnout příspěvek")
+									</button>
+								}
                             </form>
                         </div>
                     </div>

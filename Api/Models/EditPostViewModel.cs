@@ -6,4 +6,5 @@ public class EditPostViewModel
     public required string Content { get; set; }
     public IFormFile? Photo { get; set; }
     public bool RemoveImage { get; set; }
+    public string? CommunityId { get; set; }
 }
