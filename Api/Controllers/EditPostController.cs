@@ -61,6 +61,14 @@ public class EditPostController(DatabaseContext databaseContext) : Controller
             return Forbid(); // Uživatel může upravovat pouze své vlastní příspěvky
         }
         
+        var communityId = model.CommunityId;
+
+        if (string.IsNullOrEmpty(communityId))
+        {
+            ModelState.AddModelError("", "Nebyla vybrána žádná komunita.");
+            return View("~/Views/Home/Index.cshtml", model);
+        }
+        
         if (model.RemoveImage)
         {
             post.Photo = null;
@@ -100,6 +108,6 @@ public class EditPostController(DatabaseContext databaseContext) : Controller
         
         databaseContext.SaveChanges();
         
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Home", new { communityId = model.CommunityId });
     }
 }

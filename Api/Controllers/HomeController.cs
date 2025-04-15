@@ -66,7 +66,8 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
-                IsAdmin = adminRole && isCommunityAdmin
+                IsAdmin = adminRole && isCommunityAdmin,
+				IsPinned = post.IsPinned
             })
             .ToList();
 
@@ -137,12 +138,87 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
-                IsAdmin = adminRole && isCommunityAdmin
+                IsAdmin = adminRole && isCommunityAdmin,
+				IsPinned = post.IsPinned
             })
             .ToList();
 
         return PartialView("_PostsPartial", posts);
     }
+	
+	[HttpPost("toggle-pin/{postId}")]
+	public async Task<IActionResult> TogglePin(Guid postId)
+	{
+    	var userId = User.GetId();
+    	var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+    
+    	if (user == null)
+        	return Unauthorized();
+    
+    	var post = await databaseContext.Posts.FirstOrDefaultAsync(p => p.Id == postId);
+    
+    	if (post == null)
+        	return NotFound();
+    
+    	// Check if user is admin
+    	var communityId = await databaseContext.UserCommunities
+        	.Where(uc => uc.UserId == userId)
+        	.Select(uc => uc.CommunityId)
+        	.FirstOrDefaultAsync();
+    
+    	var isAdmin = await databaseContext.CommunityAdmins
+        	.AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
+    
+    	if (!isAdmin && user.Role != "UnpaidAdmin")
+        	return Forbid();
+    
+    	// Toggle the pin status
+    	post.IsPinned = !post.IsPinned;
+    	await databaseContext.SaveChangesAsync();
+    
+    	return Ok(new { success = true, isPinned = post.IsPinned });
+	}
+
+	[HttpGet("get-pinned-posts")]
+	public IActionResult GetPinnedPosts(Guid? communityId)
+	{
+    	var userId = User.GetId();
+    	var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+
+    	if (user == null)
+        	return Unauthorized();
+
+    	// Validate communityId
+    	var validCommunityIds = databaseContext.UserCommunities
+        	.Where(uc => uc.UserId == user.Id)
+        	.Select(uc => uc.CommunityId)
+        	.ToList();
+
+    	var selectedCommunityId = communityId.HasValue && validCommunityIds.Contains(communityId.Value)
+        	? communityId.Value
+        	: validCommunityIds.FirstOrDefault();
+
+    	var channelId = databaseContext.Channels
+        	.Where(c => c.CommunityId == selectedCommunityId)
+        	.Select(c => c.Id)
+        	.FirstOrDefault();
+
+    	var pinnedPosts = databaseContext.Posts
+        	.Include(post => post.User)
+        	.Where(post => post.ChannelId == channelId && post.IsPinned)
+        	.OrderByDescending(post => post.CreatedAt)
+        	.Select(post => new PinnedPostViewModel
+        	{
+            	Id = post.Id,
+            	Title = post.Title,
+            	Description = post.Description,
+            	CreatedAt = post.CreatedAt,
+            	CreatedBy = post.User!.Firstname + " " + post.User!.LastName
+        	})
+        	.ToList();
+
+    	return Json(pinnedPosts);
+	}
 
 
     [HttpGet("image/{postId}")]

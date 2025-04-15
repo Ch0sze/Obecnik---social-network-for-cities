@@ -9,12 +9,28 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddEnvironmentVariables();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
+
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 // Infrastructure - Database
 var connectionString = builder.Configuration.GetConnectionString("Database");
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 // Authentication & Authorization
 builder.Services

@@ -22,6 +22,7 @@ public class HomeViewModel
         public required string CreatedBy { get; set; }
         public bool Photo { get; set; }
         public bool IsAdmin { get; set; } 
+        public bool IsPinned { get; set; }
 
         public string GetFormattedCreatedAt()
         {
