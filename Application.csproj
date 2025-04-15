@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>61c1a858-0372-42c6-b1de-db4db6cadbab-staci-e</UserSecretsId>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="HtmlAgilityPack" Version="1.12.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+        <PackageReference Include="Selenium.WebDriver" Version="4.30.0" />
+        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="136.0.7103.1700-beta" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
+        <PackageReference Include="Stripe.net" Version="48.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Infastructure\Database\Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Views\Account\RequestAdminRights.css">
+        <DependentUpon>RequestAdminRights.cshtml</DependentUpon>
+      </None>
+    </ItemGroup>
+
+</Project>

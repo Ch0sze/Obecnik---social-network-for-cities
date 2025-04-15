@@ -1,0 +1,246 @@
+@model CombinedViewModel
+
+@{
+    ViewData["Title"] = "Account";
+}
+
+<div class="d-flex min-vh-100">
+    <!-- Left Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
+        <partial name="LeftSidebar"/>
+    </div>
+
+    <!-- Center Content (Account Page) -->
+    <div class="flex-grow-1 d-flex justify-content-center bg-light overflow-auto">
+        
+        <!-- Formulář pro úpravu účtu -->
+        <div class="edit-account-container">
+            
+            @if (!string.IsNullOrEmpty(Model.AccountViewModel!.Picture))
+            {
+                <img id="imagePreview" src="@Model.AccountViewModel!.Picture" alt="Profilový obrázek" class="profile-image"/>
+            }
+            else
+            {
+                <img id="imagePreview" src="Images/GenericAvatar.png" alt="Výchozí profilový obrázek" class="profile-image"/>
+            }
+            
+            <h2>Upravit účet</h2>
+            <form id="accountForm" asp-action="UpdateAccount" method="post" enctype="multipart/form-data" novalidate>
+                @Html.AntiForgeryToken()
+
+                <!-- Skrytý input pro signalizaci odstranění obrázku -->
+                <input type="hidden" id="RemoveImage" name="RemoveImage" value="false"/>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label asp-for="AccountViewModel!.Email" class="fw-bold">Email:</label>
+                    <input asp-for="AccountViewModel!.Email" class="form-control"/>
+                    <span asp-validation-for="AccountViewModel!.Email" class="invalid-feedback"></span>
+                </div>
+
+                <!-- Jméno -->
+                <div class="mb-3">
+                    <label asp-for="AccountViewModel!.FirstName" class="fw-bold">Jméno:</label>
+                    <input asp-for="AccountViewModel!.FirstName" class="form-control"/>
+                    <span asp-validation-for="AccountViewModel!.FirstName" class="invalid-feedback"></span>
+                </div>
+
+                <!-- Příjmení -->
+                <div class="mb-3">
+                    <label asp-for="AccountViewModel!.LastName" class="fw-bold">Příjmení:</label>
+                    <input asp-for="AccountViewModel!.LastName" class="form-control"/>
+                    <span asp-validation-for="AccountViewModel!.LastName" class="invalid-feedback"></span>
+                </div>
+
+                <!-- Obrázek uživatele pro aktualizaci -->
+                <div class="mb-3">
+                    <label class="fw-bold">Obrázek:</label>
+                    <input type="file" id="ImageFile" name="ImageFile" class="form-control" accept="image/*"
+                           onchange="previewImage(event)"/>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Uložit změny</button>
+            </form>
+            
+            <!-- Request Admin Rights or Paygate Button -->
+            <div class="text-center mt-4" style="padding-top: 15%">
+                @if (Model.AccountViewModel?.Role == "UnpaidAdmin")
+                {
+                    <a href="/Account/AdminPaygate" class="btn btn-success fw-bold px-4">
+                        Zaplatit za práva
+                    </a>
+                }
+                else if (Model.AccountViewModel?.Role == "User")
+                {
+                    <a href="/Account/RequestAdminRights" class="btn btn-warning fw-bold px-4">
+                        Žádat o práva administrátora
+                    </a>
+                }
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
+        <partial name="RightSidebar"/>
+    </div>
+</div>
+
+<partial name="ToggleButton"/>
+@Html.Partial("_AddCommunity")
+
+@* trhá mi to srdce, ale musí to být tady jinak to nefunguje *@
+<script>
+
+    $(document).ready(function () {
+        // Inicializace validátoru, který validuje i skryté elementy
+        $("#accountForm").validate({
+            ignore: [], // validovat i skryté pole
+            errorClass: "invalid-feedback",
+            errorElement: "span",
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            },
+            highlight: function (element, errorClass) {
+                $(element).addClass("is-invalid");
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).removeClass("is-invalid");
+            }
+        });
+
+        // Odeslání formuláře pomocí AJAXu, aby nedošlo k refreshi a obrázek zůstal
+        $("#accountForm").on("submit", function (e) {
+            e.preventDefault();
+            // Pokud formulář neprojde validací, AJAX se neprovede
+            if(!$(this).valid()){
+                return;
+            }
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: $(this).attr("action"),
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    // Zobrazí informaci o úspěšném uložení a upozorní, že je třeba se odhlásit pro projevení změn
+                    alert("Změny byly úspěšně uloženy. Pro zobrazení změn se prosím odhlaste a přihlašte znovu.");
+                },
+                error: function (xhr, status, error) {
+                    alert("Při ukládání došlo k chybě: " + error);
+                }
+            });
+        });
+
+        // ===== Náhled obrázku při výběru =====
+        function previewImage(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                $("#RemoveImage").val('false');
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#imagePreview").attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        window.previewImage = previewImage; // zajistí dostupnost funkce
+
+        // ... zbytek kódu pro práci s adresou ...
+    });
+
+    function previewImage(event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            document.getElementById('RemoveImage').value = 'false';
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('imagePreview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    window.previewImage = previewImage;
+</script>
+
+<style>
+    /* Kontejner pro formulář úprav účtu */
+    .edit-account-container {
+        background-color: #FFFAEF;
+        border: 1px solid #F98866;
+        border-radius: 8px;
+        padding: 2rem;
+        max-width: 60%;
+        margin: 2rem auto;
+        min-width: 50%;
+    }
+
+    .header-section img {
+        height: 60px;
+    }
+
+    .header-section h2 {
+        margin: 0;
+        color: #F98866;
+    }
+
+    /* Styl profilového obrázku */
+    .profile-image {
+        display: block;
+        margin: 1rem auto;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #F98866;
+    }
+
+    /* Vstupní pole */
+    .form-control {
+        background-color: #FAFAFA !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        width: 100%;
+    }
+
+    /* Tlačítko pro uložení změn */
+    .btn-primary {
+        background-color: #F98866;
+        border: none;
+        color: #FFF;
+        padding: 0.5rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary:hover {
+        background-color: #f77755;
+    }
+
+    /* Odkazy v login sekci */
+    .login-link a,
+    .login-link a:link,
+    .login-link a:visited,
+    .login-link a:hover,
+    .login-link a:active {
+        color: #F98866 !important;
+        text-decoration: none;
+    }
+
+    /* Zvýraznění neplatných polí */
+    .is-invalid {
+        border-color: #dc3545 !important;
+    }
+
+    .invalid-feedback {
+        display: block;
+        color: #dc3545;
+    }
+</style>

@@ -1,0 +1,89 @@
+@model IEnumerable<HomeViewModel.Post>
+
+@foreach (var post in Model)
+{
+    <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm thepost opened-post-box"
+         data-post-id="@post.Id"
+         data-title="@post.Title"
+         data-content="@post.Description"
+         data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")"
+         style="background-color: #ffffff; border-color: #e0e0e0 !important;">
+        <div class="flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center flex-wrap">
+                    <div class="d-flex align-items-center me-2" style="height: 30px;">
+                        <img src="~/Images/GenericAvatar.png" alt="Avatar"
+                             style="width: 30px; height: 30px; user-select: none; pointer-events: none;" />
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row align-items-sm-center">
+                        <strong class="me-sm-2">@post.CreatedBy</strong>
+                        <small class="text-muted">@post.GetFormattedCreatedAt()</small>
+                    </div>
+                </div>
+                @if (post.CreatedBy == User.Identity?.Name || post.IsAdmin)
+                {
+                    <div class="ms-auto dropdown">
+                        <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn"
+                                data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-start rounded post-settings shadow-sm">
+                            <form asp-action="Delete">
+								@if (post.CreatedBy == User.Identity?.Name || post.IsAdmin){
+                                	<button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
+                                    	Odstranit příspěvek
+                                	</button>
+								}
+								@if (post.CreatedBy == User.Identity?.Name) {
+                                	<button type="button" class="dropdown-item update-post-btn"
+                                        	data-post-id="@post.Id"
+                                        	data-title="@post.Title"
+                                        	data-content="@post.Description"
+                                        	data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")">
+                                    	Upravit příspěvek
+                                	</button>
+								}
+								@if (post.IsAdmin) {
+                                	<button type="button" class="dropdown-item pin-post-btn" 
+											data-post-id="@post.Id">
+										@(post.IsPinned ? "Odepnout příspěvek" : "Připnout příspěvek")
+									</button>
+								}
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+            <p class="mb-0 mt-2 text-break fw-semibold" style="font-size: larger; color: #212529;">
+                @post.Title
+            </p>
+            <p class="mb-0 mt-1 message-container text-break" style="font-size: small;">
+                @post.Description
+            </p>
+            @if (post.Photo)
+            {
+                <div class="mt-2 w-100">
+                    <img src="@Url.Action("GetImage", "Home", new { postId = post.Id })"
+                         class="img-fluid rounded"
+                         style="width: 100%; max-height: 500px; object-fit: contain;"
+                         alt="Post image" />
+                </div>
+            }
+			<!-- Pokud budou přidané liky a sdílení => předělat na justify-content-between -->
+            <div class="d-flex justify-content-end mt-3 pt-1 border-top">
+                <!--<button class="btn btn-sm btn-hover-light">
+                    <img src="~/icons/Like.svg" style="width: 18px; height: 18px;"></img>
+					<span class="text-label">To se mi líbí</span>
+                </button>-->
+                <button class="btn btn-sm btn-hover-light">
+                        <img src="~/icons/Comment.svg" width="18" height="18" class="me-1">
+                        <span class="d-none d-sm-inline">Okomentovat</span>
+                    </button>
+                <!--<button class="btn btn-sm btn-hover-light">
+                    <img src="~/icons/Share.svg" style="width: 18px; height: 18px;"></img>
+					<span class="text-label">Sdílet</span>
+                </button>-->
+            </div>
+        </div>
+    </div>
+}

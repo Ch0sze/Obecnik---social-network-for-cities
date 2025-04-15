@@ -1,0 +1,98 @@
+/*pojebane css*/
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+#openModalButton {
+    color: #969696;
+    border-radius: 20px;
+    border-color: #969696;
+    border-width: 1px;
+    width: 100%;
+    text-transform: none;
+    text-align: left;
+    transition: transform 0.1s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#openModalButton .i {
+    margin-left: auto;
+}
+
+#openModalButton:active {
+    transform: scale(1.01);
+}
+
+/*DELETE MODAL==========================*/
+/* Center the modal properly */
+.modal-dialog {
+    font-family: 'Roboto', sans-serif;
+    max-width: 400px;
+}
+
+/* Modal content styling */
+.modal-content {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Header styling */
+.modal-header {
+    border-bottom: none;
+    text-align: center;
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 22px;
+    width: 100%;
+    text-transform: none;
+}
+
+/* Body styling */
+.modal-body {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    text-transform: none;
+}
+
+/* Footer styling */
+.modal-footer {
+    border-top: none;
+    justify-content: center;
+}
+
+/* Button styling */
+.close-btn, .delete-btn {
+    background-color: #FF926B;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    text-transform: none;
+}
+#openPinsButton:active {
+    transform: scale(1.03);
+}
+
+#pinnedPostsDropdown {
+    padding-top: 8px;
+    padding-bottom: 0;
+    border-radius: 8px;
+    background-color: #FFFAEF;
+    border-color: #E5E5E5;
+}
+
+#pinnedPostsDropdown .dropdown-item:hover {
+    background-color: #FFF2D6;
+}
+
+#pinnedPostsDropdown .dropdown-item:active {
+    background-color: #FFF2D6;
+    color: black;
+}

@@ -1,0 +1,51 @@
+﻿@model Application.Api.Models.AdminPaygateViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Platba za administrátorská práva</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body style="background-color: #f2f2f2;">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div style="max-width: 600px; width: 100%;">
+        <!-- Header -->
+        <div class="header-section text-center mb-4">
+            <img src="~/image.png" alt="Logo" style="max-height: 100px;" />
+            <h2>Platba za administrátorská práva</h2>
+        </div>
+
+        <!-- Payment Form -->
+        <div class="bg-white p-4 shadow rounded">
+            <form asp-controller="Payment" asp-action="CreateCheckoutSession" method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">E-mail:</label>
+                    <input type="email" name="OfficialEmail" class="form-control" value="@Model.OfficialEmail" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Celkový počet obyvatel (součet):</label>
+                    <input type="text" name="TotalPopulation" class="form-control" value="@Model.TotalPopulation" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Částka k úhradě:</label>
+                    <div class="input-group">
+                        <input type="text" name="TotalAmount" class="form-control" value="@Model.TotalAmount Kč" readonly />
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success fw-bold px-4">Pokračovat k platbě</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

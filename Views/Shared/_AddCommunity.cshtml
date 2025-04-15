@@ -1,0 +1,157 @@
+﻿<div class="create-post-modal-container">
+    <form asp-controller="AddCommunities" asp-action="Join" id="joinCommunityForm">
+        <div id="addCommunityModal" class="modal fade" tabindex="-1" data-bs-backdrop="true" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Přidat se do komunity</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <!-- Community Autocomplete Input -->
+                        <div class="mb-3" style="position: relative;">
+                            <label for="communityInputDisplay" class="form-label fw-bold text-dark">Obec:</label>
+
+                            <input type="text"
+                                   id="communityInputDisplay"
+                                   class="form-control"
+                                   placeholder="Vyberte obec"
+                                   readonly
+                                   style="background-color: #FAFAFA; border: none; border-bottom: 1px solid #F98866; border-radius: 0; box-shadow: none; outline: none; cursor: pointer;" />
+
+                            <input type="text"
+                                   id="communitySearchInput"
+                                   class="form-control"
+                                   placeholder="Zadejte obec"
+                                   style="display: none; background-color: #FAFAFA; border: none; border-bottom: 1px solid #F98866; border-radius: 0; box-shadow: none; outline: none;" />
+
+                            <input type="hidden" name="Community" id="communityField" />
+                            <input type="hidden" name="PostalCode" id="postalcodeField" />
+                            <ul id="communitySuggestions" class="list-group" style="position: absolute; width: 100%; z-index: 10;"></ul>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="publish-button ButtonPublish">Přidat se</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const communityInputDisplay = document.getElementById("communityInputDisplay");
+        const communitySearchInput = document.getElementById("communitySearchInput");
+        const communitySuggestions = document.getElementById("communitySuggestions");
+        const communityField = document.getElementById("communityField");
+        const postalcodeField = document.getElementById("postalcodeField");
+        const form = document.getElementById("joinCommunityForm");
+
+        let communityTimeout = null;
+        let selectedFromList = false;
+
+        // Show the search input when user clicks on the display field
+        communityInputDisplay.addEventListener("click", function () {
+            communityInputDisplay.style.display = "none";
+            communitySearchInput.style.display = "block";
+            communitySearchInput.focus();
+        });
+
+        // Reset selection flag and start search when typing
+        communitySearchInput.addEventListener("input", function () {
+            selectedFromList = false;
+            communityField.value = "";
+            postalcodeField.value = "";
+            clearTimeout(communityTimeout);
+            communityTimeout = setTimeout(() => {
+                searchCommunity();
+            }, 300);
+        });
+
+        // Prevent submitting the form if no valid city was selected
+        form.addEventListener("submit", function (e) {
+            if (!communityField.value || !selectedFromList) {
+                e.preventDefault();
+                alert("Prosím vyberte platnou obec ze seznamu.");
+            }
+        });
+
+        // If input loses focus without valid selection, reset fields
+        communitySearchInput.addEventListener("blur", function () {
+            setTimeout(() => {
+                if (!selectedFromList) {
+                    communitySearchInput.value = "";
+                    communityField.value = "";
+                    postalcodeField.value = "";
+                    communitySearchInput.style.display = "none";
+                    communityInputDisplay.style.display = "block";
+                    communityInputDisplay.value = "";
+                    communitySuggestions.style.display = "none";
+                }
+            }, 200); // Delay to allow click event to register on list
+        });
+
+        // Perform search and show suggestions
+        async function searchCommunity() {
+            const query = communitySearchInput.value.trim();
+            if (query.length < 2) {
+                communitySuggestions.style.display = "none";
+                return;
+            }
+
+            const apiKey = "ulZ6yvSAHSr1Nc-_aHfZUMclfryM1ZDKLUgOaU8dUgw";
+            const url = `https://api.mapy.cz/v1/suggest?lang=cs&apikey=${apiKey}&query=${encodeURIComponent(query)}&limit=10&type=regional.address&countryCode=CZ`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Chyba při načítání API");
+                const data = await response.json();
+
+                const seenCommunities = new Set();
+                communitySuggestions.innerHTML = "";
+
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(item => {
+                        const city = item.location.split(",")[0].trim();
+                        const zip = item.zip || "";
+                        const suggestionText = `${city}, ${zip}`.trim();
+
+                        if (!seenCommunities.has(suggestionText)) {
+                            seenCommunities.add(suggestionText);
+
+                            const listItem = document.createElement("li");
+                            listItem.classList.add("list-group-item", "list-group-item-action");
+                            listItem.textContent = suggestionText;
+                            listItem.style.cursor = "pointer";
+
+                            listItem.addEventListener("click", function () {
+                                communityInputDisplay.value = suggestionText;
+                                communityField.value = city;
+                                postalcodeField.value = zip.replace(/\s/g, "");
+                                selectedFromList = true;
+
+                                communitySearchInput.value = "";
+                                communitySearchInput.style.display = "none";
+                                communityInputDisplay.style.display = "block";
+                                communitySuggestions.style.display = "none";
+                            });
+
+                            communitySuggestions.appendChild(listItem);
+                        }
+                    });
+
+                    communitySuggestions.style.width = `${communitySearchInput.offsetWidth}px`;
+                    communitySuggestions.style.display = "block";
+                } else {
+                    communitySuggestions.style.display = "none";
+                }
+            } catch (error) {
+                console.error("API Error (Community):", error);
+                communitySuggestions.style.display = "none";
+            }
+        }
+    });
+</script>

@@ -1,0 +1,27 @@
+﻿@model CombinedViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="d-flex min-vh-100">
+    <!-- Left Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0" id="leftSidebar">
+        <partial name="LeftSidebar"/>
+    </div>
+
+    <!-- Center Content (Middle Page) -->
+    <div class="flex-grow-1 d-flex justify-content-center bg-light overflow-auto">
+        <partial name="AddContribution" model="Model.HomeViewModel?.Posts"/>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
+        <partial name="RightSidebar"/>
+    </div>
+</div>
+
+<!-- Toggle Button (Placed outside main layout) -->
+<partial name="ToggleButton" />
+@Html.Partial("_AddCommunity")
+
+

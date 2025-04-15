@@ -1,0 +1,142 @@
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!-- Right Sidebar -->
+<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true" />
+<div class="sidebar-sb right-sidebar-sb">
+
+    <!-- Profile Header (right sidebar-specific) -->
+    <div class="profile-header-sb">
+        <!-- Icon Button for User Profile -->
+        <button class="icon-btn-sb" id="user-profile-btn-sb">
+            <i class="bi bi-person"></i>
+        </button>
+
+        <!-- SuperAdmin Dropdown (Initially Hidden) -->
+        <div id="superadmin-dropdown-sb" class="dropdown-menu-sb" style="display: none;">
+            <button class="dropdown-item-sb" onclick="window.location.href='/Account'">Zobrazit profil</button>
+            <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin'">Zobrazení žádostí</button>
+            <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Users'">Správa uživatelů</button>
+            <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Admins'">Zobrazení platících správců</button>
+        </div>
+
+        <!-- Display the logged-in username -->
+        <span class="text-sb" id="username-sb">@User.Identity?.Name</span>
+
+        <!-- Hamburger Menu Button -->
+        <button class="icon-btn-sb" id="hamburger-menu-btn-sb">
+            <i class="bi bi-box-arrow-right"></i>
+        </button>
+    </div>
+
+    <!-- Dropdown Menu (Initially hidden) -->
+    <div id="dropdown-menu-sb" class="dropdown-menu-sb" style="display: none;">
+        <button class="dropdown-item-sb" id="logout-btn-sb">Odhlásit se</button>
+    </div>
+
+    <!-- User Avatars (Dynamic) -->
+    <div id="user-list-sb" class="avatar-scroll-sb"></div>
+
+    <!-- Petition Section (right sidebar-specific) -->
+    <!--<div class="petition-sb">
+        <h5 class="text-sb" id="petition-title-sb">Název petice</h5>
+        <p class="text-sb" id="petition-description-sb">Popis petice</p>
+        <div class="d-flex">
+            <span class="signature-count-sb" id="petition-signatures-sb">123 podpisů</span>
+            <button class="btn-sign-sb" id="sign-btn-sb">Podepsat</button>
+        </div>
+    </div>-->
+</div>
+
+<!-- Dynamic JavaScript -->
+<script>
+    // Example data for avatars (can be enabled later)
+    /*const users = [
+        { name: "Jožka Nula", image: "/Images/GenericAvatar.png" },
+        { name: "Michaela Černá", image: "/Images/GenericAvatar.png" },
+        { name: "Petr Novák", image: "/Images/GenericAvatar.png" },
+        { name: "Anna Horáková", image: "/Images/GenericAvatar.png" }
+    ];*/
+
+    /*const petition = {
+        title: "Nové lavičky",
+        description: "Žádáme o opravu veřejných laviček ve městě. Podpořte nás podpisem!",
+        signatures: 217
+    };*/
+
+    // Get the user role from claims
+    // Razor should resolve the value of the user role properly
+    const userRole = '@User.FindFirst(ClaimTypes.Role)?.Value'
+
+    // Print the user role to the console
+    console.log('User Role:', userRole);
+
+    const userProfileBtn = document.getElementById('user-profile-btn-sb');
+    const superAdminDropdown = document.getElementById("superadmin-dropdown-sb");
+
+    // Show the dropdown menu if user is SuperAdmin, otherwise redirect to /Account
+    userProfileBtn.addEventListener('click', () => {
+        if (userRole === "SuperAdmin") {
+            // If the role is SuperAdmin, show the dropdown menu
+            const isVisible = superAdminDropdown.style.display === "block";
+            const rect = userProfileBtn.getBoundingClientRect();
+            superAdminDropdown.style.top = `${rect.bottom + window.scrollY}px`;
+            superAdminDropdown.style.left = `${rect.left + window.scrollX - 30}px`;
+            superAdminDropdown.style.display = isVisible ? "none" : "block";
+        } else {
+            // Redirect to /Account if the role is not SuperAdmin
+            window.location.href = '/Account';
+        }
+    });
+
+    // Redirect to /Account/Logout when "Odhlásit se" is clicked
+    const logoutBtn = document.getElementById('logout-btn-sb');
+    logoutBtn.addEventListener('click', () => {
+        window.location.href = '/Account/Logout';
+    });
+
+    // Hamburger menu, which logs out the user
+    const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn-sb');
+    hamburgerMenuBtn.addEventListener('click', function () {
+        window.location.href = '/Account/Logout';
+        /*
+        const buttonRect = hamburgerMenuBtn.getBoundingClientRect();
+        dropdownMenu.style.top = `${buttonRect.bottom + window.scrollY}px`;
+        dropdownMenu.style.left = `${buttonRect.left + window.scrollX - 50}px`;
+        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+        */
+    });
+
+    // Handle avatar rendering (can be enabled later)
+    function renderAvatars() {
+        const userList = document.getElementById('user-list-sb');
+        userList.innerHTML = '';
+
+        users.forEach((user, index) => {
+            const item = document.createElement('div');
+            item.className = 'user-item-sb';
+            item.innerHTML = `
+                <button class="avatar-btn-sb" onclick="onAvatarClick(${index})">
+                    <img src="${user.image}" alt="${user.name}">
+                </button>
+                <span class="text-sb">${user.name}</span>
+            `;
+            userList.appendChild(item);
+        });
+    }
+
+    // Handle petition rendering (can be enabled later)
+    function renderPetition() {
+        document.getElementById('petition-title-sb').innerText = petition.title;
+        document.getElementById('petition-description-sb').innerText = petition.description;
+        document.getElementById('petition-signatures-sb').innerText = `${petition.signatures} podpisů`;
+    }
+
+    // Handle avatar click (you can add specific logic here if needed)
+    /*function onAvatarClick(index) {
+        alert(`Clicked on user: ${users[index].name}`);
+    }*/
+
+    // You can enable these later:
+    // renderAvatars();
+    // renderPetition();
+</script>

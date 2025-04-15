@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Metadata -->
+    <title>@ViewData["Title"] - Obecník</title>
+
+    <!-- Importmap -->
+    <script type="importmap"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/Application.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="icon" href="~/image.png" type="image/png" />
+</head>
+<body>
+
+@* <partial name="Navbar"/> *@
+<div class="body">
+    <main role="main">
+        @RenderBody()
+    </main>
+</div>
+@* <partial name="Footer"/> *@
+
+<!-- Scripts -->
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", false)
+
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleBtn = document.getElementById("sidebarToggle-sb");
+        const sidebar = document.querySelector(".sidebar-sb");
+        const userProfileBtn = document.getElementById("userProfileBtn-sb");
+        const superadminDropdown = document.getElementById("superadminDropdown-sb");
+
+        const userRole = "@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value";
+
+        toggleBtn?.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            sidebar?.classList.toggle("active-sb");
+        });
+
+        userProfileBtn?.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (userRole === "SuperAdmin") {
+                superadminDropdown.style.display =
+                    superadminDropdown.style.display === "block" ? "none" : "block";
+            } else {
+                window.location.href = "/Account";
+            }
+        });
+
+        document.addEventListener("click", (e) => {
+            if (
+                superadminDropdown &&
+                !superadminDropdown.contains(e.target) &&
+                !userProfileBtn.contains(e.target)
+            ) {
+                superadminDropdown.style.display = "none";
+            }
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.getElementById("sidebarToggle-sb");
+        const sidebar = document.querySelector(".sidebar-sb");
+
+        toggleButton?.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            sidebar?.classList.toggle("active-sb");
+        });
+    });
+</script>

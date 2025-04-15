@@ -1,0 +1,52 @@
+﻿/* Kontejner formuláře */
+.login-container {
+    background-color: #FFFAEF; /* Světlé krémové pozadí */
+    border: 1px solid #F98866;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+/* Sekce pro logo a nadpis */
+.header-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+
+.header-section img {
+    height: 50px;
+}
+
+.header-section h2 {
+    margin: 0;
+}
+
+/* Tlačítko pro přihlášení ve tvaru oválu */
+.login-button {
+    background-color: #F98866; /* Oranžová barva pozadí */
+    border: none; /* Bez okraje */
+    color: #FFF; /* Bílý text */
+    padding: 0.5rem 1.5rem; /* Vertikální a horizontální odsazení */
+    border-radius: 9999px; /* Velké zaoblení -> oválný tvar */
+    font-weight: 600; /* Tučnější text */
+    cursor: pointer; /* Kurzor ruky při najetí myší */
+    font-size: 0.95rem; /* Mírně menší písmo (dle potřeby) */
+}
+
+.login-button:hover {
+    background-color: #f77755; /* O něco tmavší odstín při najetí myší */
+}
+
+
+/* Všechny stavy odkazu v .login-link */
+.login-link a,
+.login-link a:link,
+.login-link a:visited,
+.login-link a:hover,
+.login-link a:active {
+    color: #F98866 !important;
+    text-decoration: none;
+}

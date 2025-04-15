@@ -1,0 +1,23 @@
+﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<!-- Toggle Button (Appears on small screens) -->
+<div id="sidebarToggleContainer-sb">
+    <button id="sidebarToggle-sb" class="icon-btn-sb">
+        <i class="bi bi-layout-sidebar"></i>
+    </button>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.querySelector('.sidebar-sb');
+        const toggleButton = document.getElementById('sidebarToggle-sb');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('active-sb'); // Show/hide sidebar
+        });
+    });
+
+</script>

@@ -1,0 +1,59 @@
+﻿@model CombinedViewModel
+
+@{
+    ViewData["Title"] = "ManageAdmins";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="d-flex min-vh-100">
+    <!-- Left Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0" id="leftSidebar">
+        <partial name="LeftSidebar" model="Model" />
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-fill p-4">
+        <h2>Správa administrátorů</h2>
+
+        <!-- Search Bar -->
+        <form method="get" asp-action="ManageAdmins" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control search-input" name="searchQuery" placeholder="Vyhledat pomocí jména nebo emailu" value="@Model.SearchQuery" />
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+
+        @if (Model.Users != null && Model.Users.Any(u => u.Role == "Admin" || u.Role == "UnpaidAdmin"))
+        {
+            <div id="adminsContainer">
+                @foreach (var user in Model.Users.Where(u => u.Role == "Admin" || u.Role == "UnpaidAdmin"))
+                {
+                    <div class="d-flex justify-content-between align-items-start mt-3 p-3 border rounded shadow-sm bg-white">
+                        <div class="flex-grow-1">
+                            <p class="mb-1"><strong>Jméno:</strong> @($"{user.Firstname} {user.LastName}")</p>
+                            <p class="mb-1"><strong>Email:</strong> @user.Email</p>
+                            <p class="mb-1"><strong>Komunita:</strong> @user.UserCommunities.FirstOrDefault()?.Community?.Name</p>
+                            <p class="mb-1"><strong>Status:</strong>
+                                @(user.Role == "Admin" ? "Admin (Zaplaceno)" : "Čeká na platbu")
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">Žádní administrátoři k zobrazení.</div>
+        }
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0">
+        <partial name="RightSidebar" model="Model" />
+    </div>
+</div>
+<partial name="ToggleButton" />
+@Html.Partial("_AddCommunity")
