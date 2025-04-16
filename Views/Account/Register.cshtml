@@ -34,6 +34,7 @@
                                placeholder="********" style="background-color: #FAFAFA !important; 
                                border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
                                box-shadow: none !important; outline: none !important;"/>
+                        <small class="form-text text-muted" style="color: gray;">Heslo musí obsahovat alespoň jedno velké písmeno a číslo</small>
                         <span asp-validation-for="Password" class="invalid-feedback"></span>
                     </div>
 
@@ -80,6 +81,7 @@
                                class="register-input form-control"
                                placeholder="Vyberte adresu a PSČ"
                                readonly
+                               value=""
                                style="background-color: #FAFAFA !important;
                   border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important;
                   box-shadow: none !important; outline: none !important; cursor: pointer;" />
@@ -94,8 +96,8 @@
                   box-shadow: none !important; outline: none !important;" />
 
                         <!-- Hidden Fields to Store Residence and Postal Code -->
-                        <input type="hidden" asp-for="Residence" id="residenceField" value=""/>
-                        <input type="hidden" asp-for="PostalCode" id="postalcodeField" value=""/>
+                        <input type="hidden" asp-for="Residence" id="residenceField"/>
+                        <input type="hidden" asp-for="PostalCode" id="postalcodeField">
 
                         <!-- Suggestions Box -->
                         <ul id="suggestions" class="list-group" style="position: absolute; width: 100%; z-index: 10;"></ul>
@@ -145,6 +147,45 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        setFormattedAddress(residence, postalCode);
+    });
+
+    function formatPostalCode(postalCode) {
+        if (!postalCode) return '';
+        postalCode = postalCode.toString().replace(/\s+/g, '');
+        return postalCode.slice(0, 3) + ' ' + postalCode.slice(3);
+    }
+
+    function setFormattedAddress(residence, postalCode) {
+        const input = document.getElementById('readonlyInput');
+        if (!input) return;
+
+        let formatted = '';
+        if (residence) {
+            formatted += residence;
+        }
+        if (postalCode) {
+            formatted += residence ? `, ${formatPostalCode(postalCode)}` : formatPostalCode(postalCode);
+        }
+
+        input.value = formatted;
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const residence = @Html.Raw(Json.Serialize(Model.Residence ?? ""));
+        const postalCode = @Html.Raw(Json.Serialize(Model.PostalCode ?? ""));
+        setFormattedAddress(residence, postalCode);
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const residence = document.getElementById("residenceField").value;
+        const postalCode = document.getElementById("postalcodeField").value;
+
+        setFormattedAddress(residence, postalCode);
+    });
+
+
     document.addEventListener("DOMContentLoaded", function () {
         const termsLink = document.getElementById("terms-link");
         const termsCheckbox = document.getElementById("terms");
@@ -403,6 +444,8 @@
             }
         });
     });
+
+
 
 
 

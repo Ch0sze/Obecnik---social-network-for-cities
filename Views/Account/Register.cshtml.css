@@ -122,3 +122,18 @@
 input:-webkit-autofill {
     box-shadow: 0 0 0px 1000px white inset !important;
 }
+
+#readonlyInput {
+    background-color: #FAFAFA !important;
+    border: none !important;
+    border-bottom: 1px solid #F98866 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    cursor: pointer;
+    display: block;
+}
+
+#searchInput {
+    display: none; /* Initially hidden */
+}
