@@ -13,6 +13,6 @@ public record AccountViewModel
     
     public string Residence { get; set; } = string.Empty;
     
-    public string? Picture { get; set; } = string.Empty;
+    public byte[]? Picture { get; set; } = null;
     public string? Role { get; set; } = string.Empty;
 }

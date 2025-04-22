@@ -23,6 +23,8 @@ public class HomeViewModel
         public bool Photo { get; set; }
         public bool IsAdmin { get; set; } 
         public bool IsPinned { get; set; }
+        public Guid CreatedById { get; set; }
+        public bool UserHasPhoto { get; set; }
 
         public string GetFormattedCreatedAt()
         {

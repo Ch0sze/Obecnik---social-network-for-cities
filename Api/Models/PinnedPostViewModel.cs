@@ -7,4 +7,6 @@ public class PinnedPostViewModel
     public required string Description { get; set; }
     public required DateTimeOffset CreatedAt { get; set; }
     public required string CreatedBy { get; set; }
+    public Guid CreatedById { get; set; }
+    public bool UserHasPhoto { get; set; }
 }

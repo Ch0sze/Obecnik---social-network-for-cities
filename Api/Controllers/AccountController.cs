@@ -3,6 +3,8 @@ using Application.Api.Extensions;
 using Application.Api.Models;
 using Application.Api.Services;
 using Application.Core;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using Application.Infastructure.Database;
 using Application.Infastructure.Database.Models;
 using CoatOfArmsDownloader.Services;
@@ -502,71 +504,92 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
         return View("AdminPaygate", model);
     } 
-    
-[HttpPost("UpdateAccount")]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> UpdateAccount(CombinedViewModel model, IFormFile? ImageFile)
-{    
-    // Ověření, zda model obsahuje data
-    if (model == null || model.AccountViewModel == null)
-    {
-        ModelState.AddModelError("", "Data z formuláře nebyla přijata.");
-        return View("Account", model);
-    }
+        
+    [HttpPost("UpdateAccount")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UpdateAccount(CombinedViewModel model, IFormFile? ImageFile)
+    {    
+        // Ověření, zda model obsahuje data
+        if (model == null || model.AccountViewModel == null)
+        {
+            ModelState.AddModelError("", "Data z formuláře nebyla přijata.");
+            return View("Account", model);
+        }
 
-    // Pokud model není validní, načtěte aktuální obrázek z databáze,
-    // aby se zobrazil i při opětovném vykreslení formuláře.
-    if (!ModelState.IsValid)
+        // Pokud model není validní, načtěte aktuální obrázek z databáze,
+        // aby se zobrazil i při opětovném vykreslení formuláře.
+        if (!ModelState.IsValid)
+        {
+            var userId = User.GetId();
+            var user = await databaseContext.Users.FindAsync(userId);
+            if (user != null)
+            {
+                model.AccountViewModel.Picture = user.Picture;
+            }
+            return View("Account", model);
+        }
+
+        // Získání ID aktuálního uživatele z claims (přes vaši extension metodu GetId)
+        var currentUserId = User.GetId();
+
+        // Načtení uživatele z databáze
+        var userFromDb = await databaseContext.Users.FindAsync(currentUserId);
+        if (userFromDb == null)
+        {
+            return NotFound("Uživatel nebyl nalezen.");
+        }
+
+        // Aktualizace údajů uživatele
+        userFromDb.Firstname = model.AccountViewModel.FirstName;
+        userFromDb.LastName = model.AccountViewModel.LastName;
+        userFromDb.Email = model.AccountViewModel.Email;
+        userFromDb.Residence = model.AccountViewModel.Residence;
+        userFromDb.PostalCode = model.AccountViewModel.PostalCode;
+        
+        // Zpracování změny obrázku
+        byte[]? imageData = null;
+        if (Request.Form["RemoveImage"] == "true")
+        {
+            userFromDb.Picture = null;
+        }
+        else if (ImageFile != null && ImageFile.Length > 0)
+        {
+            using var memoryStream = new MemoryStream();
+            using (var image = Image.Load(ImageFile.OpenReadStream()))
+            {
+                var options = new ResizeOptions
+                {
+                    Size = new Size(800, 600),
+                    Mode = ResizeMode.Max
+                };
+                image.Mutate(x => x.Resize(options));
+                image.SaveAsJpeg(memoryStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder
+                {
+                    Quality = 80
+                });
+            }
+            imageData = memoryStream.ToArray();
+            userFromDb.Picture = imageData;
+        }
+
+        // Uložení změn do databáze
+        await databaseContext.SaveChangesAsync();
+
+        // Přesměrování po úspěšném uložení - obrázek na stránce zůstane, protože nedochází k reloadu současného náhledu
+        return RedirectToAction("Index", "Account");
+    }
+    
+    [HttpGet("user-photo")]
+    public async Task<IActionResult> GetProfileImage()
     {
         var userId = User.GetId();
         var user = await databaseContext.Users.FindAsync(userId);
-        if (user != null)
+        if (user?.Picture == null || user.Picture.Length == 0)
         {
-            model.AccountViewModel.Picture = user.Picture;
+            return File("~/Images/GenericAvatar.png", "image/png");
         }
-        return View("Account", model);
+    
+        return File(user.Picture, "image/jpeg");
     }
-
-    // Získání ID aktuálního uživatele z claims (přes vaši extension metodu GetId)
-    var currentUserId = User.GetId();
-
-    // Načtení uživatele z databáze
-    var userFromDb = await databaseContext.Users.FindAsync(currentUserId);
-    if (userFromDb == null)
-    {
-        return NotFound("Uživatel nebyl nalezen.");
-    }
-
-    // Aktualizace údajů uživatele
-    userFromDb.Firstname = model.AccountViewModel.FirstName;
-    userFromDb.LastName = model.AccountViewModel.LastName;
-    userFromDb.Email = model.AccountViewModel.Email;
-    userFromDb.Residence = model.AccountViewModel.Residence;
-    userFromDb.PostalCode = model.AccountViewModel.PostalCode;
-
-    // Zpracování změny obrázku
-    if (Request.Form["RemoveImage"] == "true")
-    {
-        userFromDb.Picture = null;
-    }
-    else if (ImageFile is not null && ImageFile.Length > 0)
-    {
-        using var ms = new MemoryStream();
-        await ImageFile.CopyToAsync(ms);
-        var fileBytes = ms.ToArray();
-
-        // Získáme MIME typ obrázku (např. "image/jpeg" nebo "image/png")
-        var contentType = ImageFile.ContentType;
-
-        // Vytvoříme kompletní Base64 řetězec s prefixem
-        userFromDb.Picture = $"data:{contentType};base64,{Convert.ToBase64String(fileBytes)}";
-    }
-
-    // Uložení změn do databáze
-    await databaseContext.SaveChangesAsync();
-
-    // Přesměrování po úspěšném uložení - obrázek na stránce zůstane, protože nedochází k reloadu současného náhledu
-    return RedirectToAction("Index", "Account");
-}
 
 }

@@ -88,9 +88,13 @@
                         noMorePosts = true;
                     }
                 },
-                error: function () {
-                    console.error("Error loading more posts.");
-                    isLoading = false;
+                error: function (xhr, status, error) {
+                    console.error('Chyba AJAX požadavku:', error);
+                    if (xhr.status === 401) { 
+                            window.location.href = '/Account/Logout'; 
+                            return; 
+                    }
+                    alert('Nepodařilo se načíst další příspěvky.');
                 },
                 complete: function () {
                     $('#loading').hide();
@@ -131,6 +135,10 @@
                 },
                 error: function (xhr, status, error) {
                     console.error('Chyba AJAX požadavku:', error);
+                    if (xhr.status === 401) { 
+                            window.location.href = '/Account/Logout'; 
+                            return; 
+                    }
                     alert('Nepodařilo se načíst příspěvek.');
                 }
             });
@@ -162,8 +170,13 @@
                         alert(response.message);
                     }
                 },
-                error: function () {
-                    alert('Chyba při odstraňování příspěvku.');
+                error: function (xhr, status, error) {
+                    console.error('Chyba AJAX požadavku:', error);
+                    if (xhr.status === 400) { 
+                            window.location.href = '/Account/Logout'; 
+                            return; 
+                    }
+                    alert('Nepodařilo se odstranit příspěvek.');
                 }
             });
             let modal = bootstrap.Modal.getInstance(document.getElementById('delete-popup'));
@@ -218,6 +231,7 @@
             $('#imagePreviewContainer').hide();
             $('#titleLength').text('0/100');
             $('#contentLength').text('0/1000');
+            $('#postTitleHeader').text('Vytvořit příspěvek');
             $('#publishPost').text('Publikovat');
         });
         
@@ -320,6 +334,9 @@
                             const shortDescription = post.description.length > 150 
                                 ? post.description.substring(0, 150) + '...' 
                                 : post.description;
+                            const userPhotoUrl = post.userHasPhoto 
+                                ? `/user-photo/${post.createdById}`
+                                : '/Images/GenericAvatar.png';
                             
                             const item = $(`
                                 <li class="pinned-post-item border-bottom">
@@ -327,9 +344,10 @@
                                         <div class="d-flex justify-content-between align-items-center mb-2">
                                             <div class="d-flex align-items-center">
                                                 <div class="me-2">
-                                                    <img src="/Images/GenericAvatar.png" 
-                                                         class="rounded-circle" 
-                                                         style="width: 32px; height: 32px; object-fit: cover;">
+                                                    <img src="${userPhotoUrl}" 
+                                                        alt="Avatar"
+                                                        style="width: 30px; height: 30px; user-select: none; 
+                                                            pointer-events: none; border-radius: 50%; object-fit: cover;" />
                                                 </div>
                                                 <div>
                                                     <strong>${post.createdBy}</strong>

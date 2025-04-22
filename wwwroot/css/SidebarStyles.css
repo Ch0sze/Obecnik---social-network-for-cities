@@ -193,22 +193,24 @@
 
 /* Add Button */
 .add-btn-sb {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #F98866;
-    color: white;
+    width: 95%;
+    height: 30px;
+    background: none;
+    border-radius: 20px;
+    border: 1px solid #bdbdbd;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    border: none;
+    font-size: 12px;
     cursor: pointer;
-    margin-left: 5px; /* Shift 3px to the left */
+    padding: 0 10px 0 10px;
+    transition: transform 0.2s ease;
+    margin-left: 4px;
+    margin-top: 15px;
 }
 
 .add-btn-sb:hover {
-    background-color: #e06e54;
+    transform: scale(1.03);
 }
 
 /* Navigation Container */

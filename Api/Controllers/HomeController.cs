@@ -67,7 +67,9 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
                 IsAdmin = adminRole && isCommunityAdmin,
-				IsPinned = post.IsPinned
+				IsPinned = post.IsPinned,
+                CreatedById = post.User!.Id,
+                UserHasPhoto = post.User!.Picture != null
             })
             .ToList();
 
@@ -139,7 +141,9 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
                 IsAdmin = adminRole && isCommunityAdmin,
-				IsPinned = post.IsPinned
+				IsPinned = post.IsPinned,
+                CreatedById = post.User!.Id,
+                UserHasPhoto = post.User!.Picture != null
             })
             .ToList();
 
@@ -213,13 +217,26 @@ public class HomeController(DatabaseContext databaseContext) : Controller
             	Title = post.Title,
             	Description = post.Description,
             	CreatedAt = post.CreatedAt,
-            	CreatedBy = post.User!.Firstname + " " + post.User!.LastName
+            	CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
+                CreatedById = post.User!.Id,
+                UserHasPhoto = post.User!.Picture != null
         	})
         	.ToList();
 
     	return Json(pinnedPosts);
 	}
-
+    
+    [HttpGet("user-photo/{userId}")]
+    public IActionResult GetUserPhoto(Guid userId)
+    {
+        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+        if (user?.Picture == null) 
+        {
+            // Return generic avatar if no photo exists
+            return File(System.IO.File.ReadAllBytes("wwwroot/Images/GenericAvatar.png"), "image/png");
+        }
+        return File(user.Picture, "image/jpeg");
+    }
 
     [HttpGet("image/{postId}")]
     public IActionResult GetImage(Guid postId)

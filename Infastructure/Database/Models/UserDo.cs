@@ -13,7 +13,7 @@ public class UserDo
     public string? Description { get; init; }
     public string? PasswordLink { get; set; }
     public string? PostalCode { get; set; }
-    public string? Picture { get; set; }
+    public byte[]? Picture { get; set; }
     public DateTime? AdminRoleExpiresAt { get; set; }
 
     public ICollection<UserCommunityDo> UserCommunities { get; init; } = [];

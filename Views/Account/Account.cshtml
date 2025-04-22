@@ -1,7 +1,7 @@
 @model CombinedViewModel
 
 @{
-    ViewData["Title"] = "Account";
+    ViewData["Title"] = "Profil";
 }
 
 <div class="d-flex min-vh-100">
@@ -15,10 +15,9 @@
         
         <!-- Formulář pro úpravu účtu -->
         <div class="edit-account-container">
-            
-            @if (!string.IsNullOrEmpty(Model.AccountViewModel!.Picture))
+            @if (Model.AccountViewModel!.Picture != null && Model.AccountViewModel.Picture.Length > 0)
             {
-                <img id="imagePreview" src="@Model.AccountViewModel!.Picture" alt="Profilový obrázek" class="profile-image"/>
+                <img id="imagePreview" src="@Url.Action("GetProfileImage", "Account")" alt="Profilový obrázek" class="profile-image"/>
             }
             else
             {
