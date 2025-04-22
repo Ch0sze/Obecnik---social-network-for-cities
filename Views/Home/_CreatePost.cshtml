@@ -5,11 +5,11 @@
                 <div class="modal-content">
                     <h3 id="postTitleHeader" class="modal-header">Vytvořit příspěvek</h3>
 
-                    @* <div class="button-group"> *@
-                    @*     <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button> *@
-                        @* <button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button> *@
-                        @* <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button> *@
-                    @* </div> *@
+                     <div class="button-group"> 
+                         <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button> 
+                         @*<button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button>*@
+                         <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button> 
+                     </div> 
 
                     <input name="Title" type="text" class="input-field" placeholder="O co se jedná?" id="postTitle" maxlength="100" required/>
                     <span id="titleError" class="error-message" style="color: red; display: none; font-size: 12px; margin-left: 2px;">Je potřeba napsat předmět.</span>
@@ -50,6 +50,7 @@
                         var communityId = Context.Request.Query["communityId"].ToString();
                     }
                     <input type="hidden" name="CommunityId" value="@communityId" />
+                    <input type="hidden" name="Type" id="postType" value="Discussion" />
 
 
                     <button type="button" class="publish-button ButtonPublish" id="publishPost">Publikovat</button>
@@ -123,14 +124,15 @@
         var actionFields = document.getElementById("actionFields");
 
         // Funkce pro změnu nadpisu a placeholderů na základě typu příspěvku
-        // discussionButton.addEventListener("click", function () {
-        //     postTitleHeader.innerHTML = "Vytvořit diskuzi";
-        //     postContentTextarea.placeholder = "Co se děje u vás?";
-        //     postTitleInput.placeholder = "O co se jedná?";
-        //     actionFields.style.display = "none";  // Skrýt sekci pro "Akce"
-        //     toggleIcons(false);  // Skryj ikonky pro lokaci a datum
-        //     updateActiveButton(discussionButton);
-        // });
+         discussionButton.addEventListener("click", function () {
+             document.getElementById("postType").value = "Discussion";
+             postTitleHeader.innerHTML = "Vytvořit diskuzi";
+             postContentTextarea.placeholder = "Co se děje u vás?";
+             postTitleInput.placeholder = "O co se jedná?";
+             actionFields.style.display = "none";  // Skrýt sekci pro "Akce"
+             toggleIcons(false);  // Skryj ikonky pro lokaci a datum
+             updateActiveButton(discussionButton);
+         });
         //
         // actionButton.addEventListener("click", function () {
         //     postTitleHeader.innerHTML = "Vytvořit akci";
@@ -141,14 +143,15 @@
         //     updateActiveButton(actionButton);
         // });
         //
-        // petitionButton.addEventListener("click", function () {
-        //     postTitleHeader.innerHTML = "Vytvořit petici";
-        //     postContentTextarea.placeholder = "Co chceme jinak?";
-        //     postTitleInput.placeholder = "O co se jedná?";
-        //     actionFields.style.display = "none";  // Skrýt sekci pro "Akce"
-        //     toggleIcons(false);  // Skryj ikonky pro lokaci a datum
-        //     updateActiveButton(petitionButton);
-        // });
+        petitionButton.addEventListener("click", function () {
+            document.getElementById("postType").value = "Petition";
+            postTitleHeader.innerHTML = "Vytvořit petici";
+            postContentTextarea.placeholder = "Co chceme jinak?";
+            postTitleInput.placeholder = "O co se jedná?";
+            actionFields.style.display = "none";  // Skrýt sekci pro "Akce"
+            toggleIcons(false);  // Skryj ikonky pro lokaci a datum
+            updateActiveButton(petitionButton);
+        });
 
         // Funkce pro aktivaci tlačítka
         function updateActiveButton(activeButton) {

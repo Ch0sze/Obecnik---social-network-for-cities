@@ -15,8 +15,7 @@ public class PostsController(DatabaseContext databaseContext) : Controller
 {
     [HttpPost]
     public IActionResult Create(CreatePostViewModel model)
-    {
-        // Server-side validation
+    { // Server-side validation
         if (string.IsNullOrWhiteSpace(model.Title))
         {
             ModelState.AddModelError("Title", "Je potřeba napsat Předmět");
@@ -102,7 +101,7 @@ public class PostsController(DatabaseContext databaseContext) : Controller
                 Description = model.Content,
                 CreatedAt = DateTimeOffset.Now,
                 CreatedBy = user.Id,
-                Type = "Discussion",
+                Type = model.Type,
                 Place = "Zlín",
                 User = user,
                 Photo = imageData,
