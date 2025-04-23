@@ -91,5 +91,22 @@ namespace Application.Api.Controllers
 
             return Ok(hasSigned);
         }
+        
+        [HttpGet("{postId}/signatures")]
+        public IActionResult GetSignatures(Guid postId)
+        {
+            var signatures = databaseContext.PetitionSignatures
+                .Where(p => p.PostId == postId)
+                .OrderByDescending(p => p.SignedAt)
+                .Select(p => new
+                {
+                    FullName = p.User.Firstname + " " + p.User.LastName,
+                    Picture = p.User.Picture,
+                    SignedAt = p.SignedAt
+                })
+                .ToList();
+
+            return Ok(signatures);
+        }
     }
 }

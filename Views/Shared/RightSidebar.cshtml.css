@@ -1,0 +1,21 @@
+﻿/* Reset button styles */
+.icon-btn-sb, .icon-btn-sb:hover{
+    all: unset;
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Profile image inside the button */
+.icon-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    pointer-events: none;
+    user-select: none;
+}

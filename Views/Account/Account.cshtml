@@ -15,15 +15,11 @@
         
         <!-- Formulář pro úpravu účtu -->
         <div class="edit-account-container">
-            @if (Model.AccountViewModel!.Picture != null && Model.AccountViewModel.Picture.Length > 0)
-            {
-                <img id="imagePreview" src="@Url.Action("GetProfileImage", "Account")" alt="Profilový obrázek" class="profile-image"/>
-            }
-            else
-            {
-                <img id="imagePreview" src="Images/GenericAvatar.png" alt="Výchozí profilový obrázek" class="profile-image"/>
-            }
-            
+            <img id="imagePreview"
+                 src="@Url.Action("GetUserPicture", "Account", new { id = User.GetId() })"
+                 alt="Profilový obrázek"
+                 class="profile-main-image" />
+
             <h2>Upravit účet</h2>
             <form id="accountForm" asp-action="UpdateAccount" method="post" enctype="multipart/form-data" novalidate>
                 @Html.AntiForgeryToken()
@@ -188,7 +184,7 @@
     }
 
     /* Styl profilového obrázku */
-    .profile-image {
+    .profile-main-image {
         display: block;
         margin: 1rem auto;
         width: 200px;

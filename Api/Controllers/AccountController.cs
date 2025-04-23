@@ -579,17 +579,17 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         return RedirectToAction("Index", "Account");
     }
     
-    [HttpGet("user-photo")]
-    public async Task<IActionResult> GetProfileImage()
+    [HttpGet("users/{id}/picture")]
+    public async Task<IActionResult> GetUserPicture(Guid id)
     {
-        var userId = User.GetId();
-        var user = await databaseContext.Users.FindAsync(userId);
+        var user = await databaseContext.Users.FindAsync(id);
         if (user?.Picture == null || user.Picture.Length == 0)
         {
-            return File("~/Images/GenericAvatar.png", "image/png");
+            return PhysicalFile("wwwroot/Images/GenericAvatar.png", "image/png");
         }
-    
+
         return File(user.Picture, "image/jpeg");
     }
+
 
 }

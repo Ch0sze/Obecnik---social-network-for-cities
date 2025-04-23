@@ -8,8 +8,12 @@
     <div class="profile-header-sb">
         <!-- Icon Button for User Profile -->
         <button class="icon-btn-sb" id="user-profile-btn-sb">
-            <i class="bi bi-person"></i>
+            <img id="imagePreview"
+                 src="@Url.Action("GetUserPicture", "Account", new { id = User.GetId() })"
+                 alt="Profilový obrázek"
+                 class="profile-image icon-image" />
         </button>
+
 
         <!-- SuperAdmin Dropdown (Initially Hidden) -->
         <div id="superadmin-dropdown-sb" class="dropdown-menu-sb" style="display: none;">
