@@ -1,4 +1,5 @@
-﻿@model HomeViewModel.Post
+﻿@using OpenQA.Selenium.BiDi.Modules.Script
+@model HomeViewModel.Post
 
 <div class="opened-post-modal-container">
     <div class="modal fade" id="openedPostModal" tabindex="-1" aria-labelledby="openedPostModalLabel"
@@ -49,10 +50,12 @@
 
                             <div class="d-flex align-items-center mb-3">
                                 <!-- Ikona s dynamickou velikostí a přidáním mezery -->
-                                <img src="~/Images/GenericAvatar.png" alt="Avatar"
-                                     style="width: 30px; height: auto; user-select: none; pointer-events: none; margin-right: 16px; "/>
+                                <img src="@("/user-photo/" + Model.CreatedById)"
+                                     alt="Avatar"
+                                     onerror="this.src='/Images/GenericAvatar.png'"
+                                     style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; 
+                                     pointer-events: none; user-select: none; margin-right: 10px"/>
                                 <!-- Změna velikosti ikony -->
-
                                 <div class="d-flex flex-column mt-4">
                                     <div class="d-flex align-items-center">
                                         <strong style="font-size: 16px;">@Model.CreatedBy</strong>
@@ -81,6 +84,18 @@
                                     </button>
                                     <div id="signatureMessage" class="mt-2 text-muted" style="font-size: 0.9rem;"></div>
                                 </div>
+                                <h5 style="margin-top: 20px">Petici již podepsali:</h5>
+                                @if (Model.IsAdmin)
+                                {
+                                    <div class="text-end mb-2">
+                                        <button class="download-button" onclick="alert('Stahují se podpisy...')">
+                                            Stáhnout podpisy
+                                        </button>
+                                    </div>
+                                }
+                                <div id="signaturesList" class="mt-4">
+                                    <ul id="signatureUsers" style="list-style: none; padding-left: 0;"></ul>
+                                </div>
                             }
                         </div>
                     </div>
@@ -108,6 +123,7 @@
                     countDisplay.textContent = `Počet podpisů: ${count}`;
                 });
         }
+
         function enableHoverEffect() {
             button.addEventListener("mouseenter", () => {
                 if (hasSigned) {
@@ -127,7 +143,9 @@
         }
 
         updateSignatureCount();
-        
+        loadSignatures(postId);
+        loadComments(postId);
+
         fetch(`/petitions/${postId}/signatures/me`)
             .then(res => res.json())
             .then(signed => {
@@ -150,6 +168,8 @@
                         button.classList.remove("btn-danger");
                         button.classList.add("sign-petition-button");
                         updateSignatureCount();
+                        loadSignatures(postId);
+                        loadComments(postId);
                         enableHoverEffect();
                     })
                     .catch(err => {
@@ -165,6 +185,8 @@
                         button.classList.add("sign-petition-button");
                         message.textContent = "Podpis zrušen.";
                         updateSignatureCount();
+                        loadSignatures(postId);
+                        loadComments(postId);
                     })
                     .catch(err => {
                         message.textContent = "Error: " + err.message;
@@ -191,30 +213,7 @@
             })
             .then(data => {
                 document.getElementById("commentContent").value = "";
-
-                // ➕ Přidáme komentář ručně do DOMu (ze zadaných dat)
-                const list = document.getElementById("commentsList");
-
-                const div = document.createElement("div");
-                div.className = "d-flex mb-3";
-
-                const avatar = document.createElement("img");
-                avatar.src = "/Images/GenericAvatar.png"; // nemáme user picture, takže dáme výchozí
-                avatar.alt = "Avatar";
-                avatar.style = "width: 40px; height: 40px; object-fit: cover; border-radius: 50%; margin-right: 10px;";
-
-                const contentDiv = document.createElement("div");
-                const now = new Date().toLocaleString(); // použijeme aktuální čas
-
-                contentDiv.innerHTML = `
-                    <strong>Vy</strong> 
-                    <small class="text-muted d-block">${now}</small>
-                    <p class="mb-1  comment-text">${content}</p>
-                `;
-
-                div.appendChild(avatar);
-                div.appendChild(contentDiv);
-                list.insertBefore(div, list.firstChild); // nový komentář nahoru
+                loadComments(postId)
             })
             .catch(error => {
                 document.getElementById("commentResponse").innerText = "⚠️ Došlo k chybě: " + error.message;
@@ -248,7 +247,7 @@
                     div.className = "d-flex mb-3";
 
                     const avatar = document.createElement("img");
-                    avatar.src = comment.userPicture || "/Images/GenericAvatar.png";
+                    avatar.src = comment.userId ? `/user-photo/${comment.userId}` : "/Images/GenericAvatar.png";
                     avatar.alt = "Avatar";
                     avatar.style = "width: 40px; height: 40px; object-fit: cover; border-radius: 50%; margin-right: 10px;";
 
@@ -265,9 +264,53 @@
                 });
             })
             .catch(error => {
-                console.error("Chyba při načítání komentářů:", error); // Debug log pro chyby
+                console.error("Chyba při načítání komentářů:", error);
             });
     }
+
+    function loadSignatures(postId) {
+        fetch(`/petitions/${postId}/signatures`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Chyba při načítání seznamu podpisů.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Načtené podpisy:", data);
+                const signaturesList = document.getElementById("signatureUsers");
+                signaturesList.innerHTML = "";
+
+                data.forEach(signature => {
+                    console.log("Zpracovávám podpis:", signature);
+                    const li = document.createElement("li");
+                    li.className = "d-flex align-items-center mb-2";
+
+                    // Avatar
+                    const avatar = document.createElement("img");
+                    avatar.src = signature.userId ? `/user-photo/${signature.userId}` : "/Images/GenericAvatar.png";
+                    avatar.alt = signature.fullName;
+                    avatar.style = "width: 40px; height: 40px; object-fit: cover; border-radius: 50%; " +
+                        "pointer-events: none; user-select: none; margin-right: 10px"
+
+                    // Jméno a datum podpisu
+                    const contentDiv = document.createElement("div");
+                    contentDiv.innerHTML = `
+                    <strong>${signature.fullName}</strong>
+                    <small class="text-muted d-block">${new Date(signature.signedAt).toLocaleString()}</small>
+                `;
+
+                    li.appendChild(avatar);
+                    li.appendChild(contentDiv);
+                    signaturesList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error("Chyba při načítání podpisů:", error);
+            });
+    }
+
+
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -296,6 +339,7 @@
             console.log("Modal byl zobrazen.");
             const postId = "@Model.Id";
             console.log("ID příspěvku pro načítání komentářů:", postId);
+            loadSignatures(postId);
             loadComments(postId);
             initializePetitionButton(postId);
         });

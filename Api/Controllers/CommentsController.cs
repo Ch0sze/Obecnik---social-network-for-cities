@@ -66,6 +66,7 @@ public class CommentsController(DatabaseContext databaseContext) : Controller
                 Content = c.Content,
                 DateTime = c.DateTime,
                 UserFullName = c.User != null ? $"{c.User.Firstname} {c.User.LastName}" : "Anonym",
+                UserId = c.UserId,
                 //UserPicture = c.User?.Picture
             })
             .ToList();

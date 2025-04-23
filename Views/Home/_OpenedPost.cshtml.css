@@ -21,6 +21,17 @@
     font-size: 1.1rem;
 }
 
+.download-button {
+    background-color: #F98866;
+    border: none;
+    color: #FFF;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
 .opened-post-modal-container .modal {
     display: none;
     position: fixed;
@@ -163,6 +174,17 @@
 #commentsList {
     word-break: break-word; /* Zamezí překročení šířky */
 }
+
+.avatar-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    pointer-events: none;
+    user-select: none;
+    margin-right: 10px;
+}
+
 @media (max-width: 480px) {
     .col-12.col-sm-9 {
         order: 2; /* Levý sloupec (obrázek, komentáře) bude zobrazený jako druhý na mobilu */

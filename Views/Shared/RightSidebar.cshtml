@@ -10,7 +10,8 @@
         <button class="icon-btn-sb" id="user-profile-btn-sb">
             <img id="imagePreview"
                  src="@Url.Action("GetUserPicture", "Account", new { id = User.GetId() })"
-                 alt="Profilový obrázek"
+                 alt="Avatar"
+                 onerror="this.src='/Images/GenericAvatar.png'"
                  class="profile-image icon-image" />
         </button>
 

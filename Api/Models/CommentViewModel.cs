@@ -7,5 +7,7 @@ public class CommentViewModel
     public DateTime DateTime { get; set; }
 
     public string UserFullName { get; set; } = string.Empty;
+    
+    public Guid? UserId { get; set; }
     //public string? UserPicture { get; set; }
 }

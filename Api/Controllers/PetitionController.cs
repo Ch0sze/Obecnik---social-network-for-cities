@@ -101,12 +101,13 @@ namespace Application.Api.Controllers
                 .Select(p => new
                 {
                     FullName = p.User.Firstname + " " + p.User.LastName,
-                    Picture = p.User.Picture,
+                    UserId = p.User.Id,
                     SignedAt = p.SignedAt
                 })
                 .ToList();
 
             return Ok(signatures);
         }
+
     }
 }

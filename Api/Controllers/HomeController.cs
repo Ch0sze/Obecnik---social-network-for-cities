@@ -11,7 +11,7 @@ namespace Application.Api.Controllers;
 
 [Authorize]
 [Route("/")]
-public class HomeController(DatabaseContext databaseContext) : Controller
+public class HomeController(DatabaseContext databaseContext, ILogger<HomeController> logger) : Controller
 {
     [HttpGet]
     public IActionResult Index(Guid? communityId)
@@ -53,6 +53,10 @@ public class HomeController(DatabaseContext databaseContext) : Controller
 
         var adminRole = user.Role == "Admin";
 
+        // Log the values of isCommunityAdmin and adminRole
+        logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId,
+            isCommunityAdmin, adminRole);
+
         var posts = databaseContext.Posts
             .Include(post => post.User)
             .Where(post => post.ChannelId == channelId)
@@ -66,9 +70,9 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
-                IsAdmin = adminRole && isCommunityAdmin,
+                IsAdmin = isCommunityAdmin && adminRole,
                 Type = post.Type,
-				IsPinned = post.IsPinned,
+                IsPinned = post.IsPinned,
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null,
                 HasUserSigned = databaseContext.PetitionSignatures
@@ -99,7 +103,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         return View(combinedViewModel);
     }
 
-    
+
     [HttpGet("load-posts")]
     public IActionResult LoadPosts(int pageNumber, int pageSize, Guid? communityId)
     {
@@ -143,9 +147,9 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
-                IsAdmin = adminRole && isCommunityAdmin,
+                IsAdmin = isCommunityAdmin && adminRole,
                 Type = post.Type,
-				IsPinned = post.IsPinned,
+                IsPinned = post.IsPinned,
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null,
                 HasUserSigned = databaseContext.PetitionSignatures
@@ -155,92 +159,93 @@ public class HomeController(DatabaseContext databaseContext) : Controller
 
         return PartialView("_PostsPartial", posts);
     }
-	
-	[HttpPost("toggle-pin/{postId}")]
-	public async Task<IActionResult> TogglePin(Guid postId)
-	{
-    	var userId = User.GetId();
-    	var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-    
-    	if (user == null)
-        	return Unauthorized();
-    
-    	var post = await databaseContext.Posts.FirstOrDefaultAsync(p => p.Id == postId);
-    
-    	if (post == null)
-        	return NotFound();
-    
-    	// Check if user is admin
-    	var communityId = await databaseContext.UserCommunities
-        	.Where(uc => uc.UserId == userId)
-        	.Select(uc => uc.CommunityId)
-        	.FirstOrDefaultAsync();
-    
-    	var isAdmin = await databaseContext.CommunityAdmins
-        	.AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
-    
-    	if (!isAdmin && user.Role != "UnpaidAdmin")
-        	return Forbid();
-    
-    	// Toggle the pin status
-    	post.IsPinned = !post.IsPinned;
-    	await databaseContext.SaveChangesAsync();
-    
-    	return Ok(new { success = true, isPinned = post.IsPinned });
-	}
 
-	[HttpGet("get-pinned-posts")]
-	public IActionResult GetPinnedPosts(Guid? communityId)
-	{
-    	var userId = User.GetId();
-    	var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+    [HttpPost("toggle-pin/{postId}")]
+    public async Task<IActionResult> TogglePin(Guid postId)
+    {
+        var userId = User.GetId();
+        var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
-    	if (user == null)
-        	return Unauthorized();
+        if (user == null)
+            return Unauthorized();
 
-    	// Validate communityId
-    	var validCommunityIds = databaseContext.UserCommunities
-        	.Where(uc => uc.UserId == user.Id)
-        	.Select(uc => uc.CommunityId)
-        	.ToList();
+        var post = await databaseContext.Posts.FirstOrDefaultAsync(p => p.Id == postId);
 
-    	var selectedCommunityId = communityId.HasValue && validCommunityIds.Contains(communityId.Value)
-        	? communityId.Value
-        	: validCommunityIds.FirstOrDefault();
+        if (post == null)
+            return NotFound();
 
-    	var channelId = databaseContext.Channels
-        	.Where(c => c.CommunityId == selectedCommunityId)
-        	.Select(c => c.Id)
-        	.FirstOrDefault();
+        // Check if user is admin
+        var communityId = await databaseContext.UserCommunities
+            .Where(uc => uc.UserId == userId)
+            .Select(uc => uc.CommunityId)
+            .FirstOrDefaultAsync();
 
-    	var pinnedPosts = databaseContext.Posts
-        	.Include(post => post.User)
-        	.Where(post => post.ChannelId == channelId && post.IsPinned)
-        	.OrderByDescending(post => post.CreatedAt)
-        	.Select(post => new PinnedPostViewModel
-        	{
-            	Id = post.Id,
-            	Title = post.Title,
-            	Description = post.Description,
-            	CreatedAt = post.CreatedAt,
-            	CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
+        var isAdmin = await databaseContext.CommunityAdmins
+            .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
+
+        if (!isAdmin && user.Role != "Admin")
+            return Forbid();
+
+        // Toggle the pin status
+        post.IsPinned = !post.IsPinned;
+        await databaseContext.SaveChangesAsync();
+
+        return Ok(new { success = true, isPinned = post.IsPinned });
+    }
+
+    [HttpGet("get-pinned-posts")]
+    public IActionResult GetPinnedPosts(Guid? communityId)
+    {
+        var userId = User.GetId();
+        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+
+        if (user == null)
+            return Unauthorized();
+
+        // Validate communityId
+        var validCommunityIds = databaseContext.UserCommunities
+            .Where(uc => uc.UserId == user.Id)
+            .Select(uc => uc.CommunityId)
+            .ToList();
+
+        var selectedCommunityId = communityId.HasValue && validCommunityIds.Contains(communityId.Value)
+            ? communityId.Value
+            : validCommunityIds.FirstOrDefault();
+
+        var channelId = databaseContext.Channels
+            .Where(c => c.CommunityId == selectedCommunityId)
+            .Select(c => c.Id)
+            .FirstOrDefault();
+
+        var pinnedPosts = databaseContext.Posts
+            .Include(post => post.User)
+            .Where(post => post.ChannelId == channelId && post.IsPinned)
+            .OrderByDescending(post => post.CreatedAt)
+            .Select(post => new PinnedPostViewModel
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Description = post.Description,
+                CreatedAt = post.CreatedAt,
+                CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null
-        	})
-        	.ToList();
+            })
+            .ToList();
 
-    	return Json(pinnedPosts);
-	}
-    
+        return Json(pinnedPosts);
+    }
+
     [HttpGet("user-photo/{userId}")]
     public IActionResult GetUserPhoto(Guid userId)
     {
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
-        if (user?.Picture == null) 
+        if (user?.Picture == null)
         {
             // Return generic avatar if no photo exists
             return File(System.IO.File.ReadAllBytes("wwwroot/Images/GenericAvatar.png"), "image/png");
         }
+
         return File(user.Picture, "image/jpeg");
     }
 
@@ -252,7 +257,7 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         //Response.Headers.CacheControl = "public,max-age=31536000";
         return File(post.Photo, "image/jpeg");
     }
-    
+
     [HttpGet("community/image/{communityId}")]
     public IActionResult GetCommunityImage(Guid communityId)
     {
@@ -261,10 +266,13 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         Response.Headers.CacheControl = "public,max-age=31536000";
         return File(community.Picture, "image/jpeg");
     }
-    
+
     [HttpGet("OpenedPost/{id}")]
     public IActionResult OpenedPost(Guid id)
     {
+        var userId = User.GetId();
+        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+        
         var postDo = databaseContext.Posts
             .Include(p => p.User)
             .FirstOrDefault(p => p.Id == id);
@@ -273,7 +281,16 @@ public class HomeController(DatabaseContext databaseContext) : Controller
         {
             return NotFound("Příspěvek nebyl nalezen.");
         }
+        var communityId = databaseContext.Channels
+            .Where(c => c.Id == postDo.ChannelId)
+            .Select(c => c.CommunityId)
+            .FirstOrDefault();
 
+        var isCommunityAdmin = databaseContext.CommunityAdmins
+            .Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
+
+        var isAdmin = isCommunityAdmin && user?.Role == "Admin";
+        
         // Přemapování na ViewModel
         var postViewModel = new HomeViewModel.Post
         {
@@ -283,13 +300,14 @@ public class HomeController(DatabaseContext databaseContext) : Controller
             Type = postDo.Type,
             CreatedBy = $"{postDo.User.Firstname} {postDo.User.LastName}" ?? "Neznámý",
             CreatedAt = postDo.CreatedAt,
+            CreatedById = postDo.User.Id,
+            IsAdmin = isAdmin,
             Photo = postDo.Photo != null // true pokud má fotku
-            
         };
 
         return PartialView("_OpenedPost", postViewModel);
     }
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
