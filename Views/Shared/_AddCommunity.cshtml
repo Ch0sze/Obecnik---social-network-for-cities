@@ -52,15 +52,14 @@
 
         let communityTimeout = null;
         let selectedFromList = false;
+        let suggestionClicked = false;
 
-        // Show the search input when user clicks on the display field
         communityInputDisplay.addEventListener("click", function () {
             communityInputDisplay.style.display = "none";
             communitySearchInput.style.display = "block";
             communitySearchInput.focus();
         });
 
-        // Reset selection flag and start search when typing
         communitySearchInput.addEventListener("input", function () {
             selectedFromList = false;
             communityField.value = "";
@@ -71,7 +70,6 @@
             }, 300);
         });
 
-        // Prevent submitting the form if no valid city was selected
         form.addEventListener("submit", function (e) {
             if (!communityField.value || !selectedFromList) {
                 e.preventDefault();
@@ -79,22 +77,26 @@
             }
         });
 
-        // If input loses focus without valid selection, reset fields
-        communitySearchInput.addEventListener("blur", function () {
+        // Use focusout to allow click on suggestions before resetting
+        communitySearchInput.addEventListener("focusout", function () {
             setTimeout(() => {
-                if (!selectedFromList) {
-                    communitySearchInput.value = "";
-                    communityField.value = "";
-                    postalcodeField.value = "";
-                    communitySearchInput.style.display = "none";
-                    communityInputDisplay.style.display = "block";
-                    communityInputDisplay.value = "";
-                    communitySuggestions.style.display = "none";
+                if (!selectedFromList && !suggestionClicked) {
+                    resetCommunityFields();
                 }
-            }, 200); // Delay to allow click event to register on list
+                suggestionClicked = false; // reset after any click attempt
+            }, 150);
         });
 
-        // Perform search and show suggestions
+        function resetCommunityFields() {
+            communitySearchInput.value = "";
+            communityField.value = "";
+            postalcodeField.value = "";
+            communitySearchInput.style.display = "none";
+            communityInputDisplay.style.display = "block";
+            communityInputDisplay.value = "";
+            communitySuggestions.style.display = "none";
+        }
+
         async function searchCommunity() {
             const query = communitySearchInput.value.trim();
             if (query.length < 2) {
@@ -127,7 +129,9 @@
                             listItem.textContent = suggestionText;
                             listItem.style.cursor = "pointer";
 
-                            listItem.addEventListener("click", function () {
+                            // Use mousedown instead of click to prevent race with blur/focusout
+                            listItem.addEventListener("mousedown", function () {
+                                suggestionClicked = true;
                                 communityInputDisplay.value = suggestionText;
                                 communityField.value = city;
                                 postalcodeField.value = zip.replace(/\s/g, "");
