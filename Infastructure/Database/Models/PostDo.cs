@@ -16,9 +16,12 @@ public class PostDo
     public required Guid CreatedBy { get; init; }
     public required UserDo User { get; init; }
 
-    public Guid? ChannelId { get; init; } //to be added
+    public Guid? ChannelId { get; init; }
 
-    public ChannelDo? Channel { get; init; } //to be added
+    public ChannelDo? Channel { get; init; }
 
     public ICollection<CommentDo> Comments { get; init; } = [];
+    
+    public ICollection<PetitionSignatureDo> PetitionSignatures { get; init; } = [];
+
 }

@@ -20,5 +20,8 @@ public class UserDo
     public ICollection<CommunityAdminDo> AdminCommunities { get; init; } = [];
     public ICollection<PostDo> Posts { get; init; } = [];
     public ICollection<CommentDo> Comments { get; init; } = [];
+    
+    public ICollection<PetitionSignatureDo> PetitionSignatures { get; init; } = [];
+
 }
 

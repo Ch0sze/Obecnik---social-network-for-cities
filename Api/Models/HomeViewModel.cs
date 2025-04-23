@@ -25,7 +25,11 @@ public class HomeViewModel
         public bool IsPinned { get; set; }
         public Guid CreatedById { get; set; }
         public bool UserHasPhoto { get; set; }
-
+        public required string Type { get; set; }
+        public bool IsPetition => Type.Equals("Petition", StringComparison.OrdinalIgnoreCase);
+        
+        public bool HasUserSigned { get; set; }
+        
         public string GetFormattedCreatedAt()
         {
             var now = DateTimeOffset.Now;

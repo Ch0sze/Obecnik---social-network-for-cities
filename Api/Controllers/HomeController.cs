@@ -67,9 +67,12 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
                 IsAdmin = adminRole && isCommunityAdmin,
+                Type = post.Type,
 				IsPinned = post.IsPinned,
                 CreatedById = post.User!.Id,
-                UserHasPhoto = post.User!.Picture != null
+                UserHasPhoto = post.User!.Picture != null,
+                HasUserSigned = databaseContext.PetitionSignatures
+                    .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
             })
             .ToList();
 
@@ -141,9 +144,12 @@ public class HomeController(DatabaseContext databaseContext) : Controller
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 Photo = post.Photo != null,
                 IsAdmin = adminRole && isCommunityAdmin,
+                Type = post.Type,
 				IsPinned = post.IsPinned,
                 CreatedById = post.User!.Id,
-                UserHasPhoto = post.User!.Picture != null
+                UserHasPhoto = post.User!.Picture != null,
+                HasUserSigned = databaseContext.PetitionSignatures
+                    .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
             })
             .ToList();
 
@@ -274,9 +280,11 @@ public class HomeController(DatabaseContext databaseContext) : Controller
             Id = postDo.Id,
             Title = postDo.Title,
             Description = postDo.Description,
+            Type = postDo.Type,
             CreatedBy = $"{postDo.User.Firstname} {postDo.User.LastName}" ?? "Neznámý",
             CreatedAt = postDo.CreatedAt,
             Photo = postDo.Photo != null // true pokud má fotku
+            
         };
 
         return PartialView("_OpenedPost", postViewModel);
