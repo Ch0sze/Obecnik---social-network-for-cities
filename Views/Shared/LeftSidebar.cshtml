@@ -4,16 +4,13 @@
 @using System.Web
 
 <div id="leftSidebar" class="sidebar-sb">
-    <!-- Logo -->
     <div class="logo-container-sb">
         <img src="~/image.png" alt="Logo">
         <h4>Obecník</h4>
     </div>
 
-    <!-- Dynamic Avatar Container (left sidebar) -->
     <div class="avatar-container-sb" id="user-list-left-sb"></div>
 
-    <!-- Scrollable Navigation (fills remaining height) -->
     <div class="nav-container-sb" id="nav-links-sb"></div>
 
     <div class="profile-container-sb">
@@ -26,7 +23,6 @@
                 <i class="bi bi-box-arrow-right"></i>
             </button>
         </div>
-
         <div id="dropdown-menu-sb" class="dropdown-menu-sb" style="display: none;">
             <button class="dropdown-item-sb" id="logout-btn-sb">Odhlásit se</button>
         </div>
@@ -35,22 +31,15 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Get communityId from URL (if present)
         const urlParams = new URLSearchParams(window.location.search);
         let selectedCommunityId = urlParams.get('communityId');
-
-        let channels = [
-            { icon: '', label: 'Obecné', link: '/#', active: false, dot: true }
-        ];
-
+        let channels = [{ icon: '', label: 'Obecné', link: '/#', active: false, dot: true }];
         let communities = [];
 
         async function fetchCommunities() {
             try {
                 const response = await fetch('/api/sidebar/communities');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch communities');
-                }
+                if (!response.ok) throw new Error('Failed to fetch communities');
 
                 const communitiesData = await response.json();
                 communities = communitiesData.map(community => ({
@@ -59,12 +48,9 @@
                     link: community.link
                 }));
 
-                // Check if URL is exactly http://localhost:5096/ (no query or hash)
                 const isRootPath = window.location.pathname === '/' && !window.location.search && !window.location.hash;
-
                 if (isRootPath && communities.length > 0) {
-                    const firstCommunityId = communities[0].link;
-                    window.location.href = `/?communityId=${firstCommunityId}`;
+                    window.location.href = `/?communityId=${communities[0].link}`;
                     return;
                 }
 
@@ -76,7 +62,6 @@
 
         function onAvatarClick(index) {
             selectedCommunityId = communities[index].link;
-            // Reload with selected community in URL
             window.location.href = `/?communityId=${selectedCommunityId}`;
         }
 
@@ -102,22 +87,71 @@
 
                 userList.appendChild(item);
 
-                // Attach click handler
-                item.querySelector('.avatar-btn-container-sb').addEventListener('click', () => {
+                const container = item.querySelector('.avatar-btn-container-sb');
+
+                container.addEventListener('click', () => {
                     onAvatarClick(index);
                 });
+                container.style.position = 'relative'; // Make container the positioning context
+
+                container.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    // Remove any existing menus
+                    document.querySelectorAll('.leave-menu-sb').forEach(el => el.remove());
+
+                    const menu = document.createElement('div');
+                    menu.className = 'leave-menu-sb';
+                    menu.innerHTML = `<button class="dropdown-item-sb">Opustit komunitu</button>`;
+
+                    // Attach to the same container, with absolute positioning
+                    menu.style.position = 'absolute';
+                    menu.style.zIndex = 1000;
+
+                    // Position just below the avatar button
+                    const avatarBtn = container.querySelector('.avatar-btn-sb');
+                    const btnRect = avatarBtn.getBoundingClientRect();
+                    const containerRect = container.getBoundingClientRect();
+
+                    menu.style.top = `${avatarBtn.offsetTop + avatarBtn.offsetHeight + 4}px`;
+                    menu.style.left = `${avatarBtn.offsetLeft}px`;
+
+                    container.appendChild(menu);
+
+                    // Leave action
+                    menu.querySelector('.dropdown-item-sb').addEventListener('click', async () => {
+                        const communityId = communities[index].link;
+                        try {
+                            const response = await fetch('/AddCommunities/LeaveCommunity', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                body: `communityId=${encodeURIComponent(communityId)}`
+                            });
+                            if (response.ok) {
+                                window.location.href = '/';
+                            } else {
+                                alert('Nepodařilo se opustit komunitu.');
+                            }
+                        } catch (err) {
+                            console.error('Leave error:', err);
+                        }
+                    });
+                });
+
             });
 
             const addBtnContainer = document.createElement('div');
             addBtnContainer.className = 'user-item-sb';
-            addBtnContainer.innerHTML = `
-                <button class="add-btn-sb" id="add-community-btn">+ Přidat se do komunity</button>
-            `;
+            addBtnContainer.innerHTML = `<button class="add-btn-sb" id="add-community-btn">+ Přidat se do komunity</button>`;
             userList.appendChild(addBtnContainer);
 
             document.getElementById('add-community-btn').addEventListener('click', function () {
                 const modal = new bootstrap.Modal(document.getElementById('addCommunityModal'));
                 modal.show();
+            });
+
+            // Close context menu on outside click
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.leave-menu-sb').forEach(el => el.remove());
             });
         }
 
@@ -129,7 +163,6 @@
                 const div = document.createElement('div');
                 div.className = `nav-item-sb${item.active ? ' active-sb' : ''}`;
                 div.dataset.index = index;
-
                 div.innerHTML = `
                     <a href="?communityId=${selectedCommunityId}" onclick="updateDot(${index})">
                         ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
@@ -137,7 +170,6 @@
                         ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
                     </a>
                 `;
-
                 navContainer.appendChild(div);
             });
         }
@@ -146,7 +178,7 @@
             window.location.href = '/Account';
         });
 
-        document.getElementById('hamburger-menu-btn-sb2').addEventListener('click', function () {
+        document.getElementById('hamburger-menu-btn-sb2').addEventListener('click', () => {
             window.location.href = '/Account/Logout';
         });
 

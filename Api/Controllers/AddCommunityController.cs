@@ -97,6 +97,28 @@ namespace Application.Api.Controllers
             TempData["Message"] = "Připojeno ke komunitě!";
             return RedirectToAction("Index", "Home");
         }
+        [HttpPost]
+        public async Task<IActionResult> LeaveCommunity(string communityId)
+        {
+            var userIdClaim = User.FindFirstValue("Id");
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized();
+
+            var userId = Guid.Parse(userIdClaim);
+
+            var userCommunity = await databaseContext.UserCommunities
+                .FirstOrDefaultAsync(uc => uc.UserId == userId && uc.CommunityId.ToString() == communityId);
+
+            if (userCommunity != null)
+            {
+                databaseContext.UserCommunities.Remove(userCommunity);
+                await databaseContext.SaveChangesAsync();
+            }
+
+            TempData["Message"] = "Opustili jste komunitu.";
+            return Ok(); // Consider JsonResult if doing via fetch
+        }
+
     }
 }
 
