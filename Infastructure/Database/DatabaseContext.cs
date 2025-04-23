@@ -14,9 +14,26 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<CommentDo> Comments => Set<CommentDo>();
     public DbSet<ApiLoginDo> ApiLogins => Set<ApiLoginDo>();
     public DbSet<AdminRequestDo> AdminRequests => Set<AdminRequestDo>();
+    public DbSet<PetitionSignatureDo> PetitionSignatures => Set<PetitionSignatureDo>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // PetitionSignature: User <-> Post (Petition)
+        modelBuilder.Entity<PetitionSignatureDo>()
+            .HasKey(ps => new { ps.UserId, ps.PostId });
+
+        modelBuilder.Entity<PetitionSignatureDo>()
+            .HasOne(ps => ps.User)
+            .WithMany(u => u.PetitionSignatures)
+            .HasForeignKey(ps => ps.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<PetitionSignatureDo>()
+            .HasOne(ps => ps.Post)
+            .WithMany(p => p.PetitionSignatures)
+            .HasForeignKey(ps => ps.PostId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         // Post -> User
         modelBuilder.Entity<PostDo>()
             .HasOne(post => post.User)

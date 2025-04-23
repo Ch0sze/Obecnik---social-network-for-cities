@@ -167,6 +167,24 @@ namespace Application.Infastructure.Database.Migrations
                     b.ToTable("Communities");
                 });
 
+            modelBuilder.Entity("Application.Infastructure.Database.Models.PetitionSignatureDo", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("SignedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("UserId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PetitionSignatures");
+                });
+
             modelBuilder.Entity("Application.Infastructure.Database.Models.PostDo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -354,6 +372,25 @@ namespace Application.Infastructure.Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Application.Infastructure.Database.Models.PetitionSignatureDo", b =>
+                {
+                    b.HasOne("Application.Infastructure.Database.Models.PostDo", "Post")
+                        .WithMany("PetitionSignatures")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Application.Infastructure.Database.Models.UserDo", "User")
+                        .WithMany("PetitionSignatures")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Application.Infastructure.Database.Models.PostDo", b =>
                 {
                     b.HasOne("Application.Infastructure.Database.Models.ChannelDo", "Channel")
@@ -407,6 +444,8 @@ namespace Application.Infastructure.Database.Migrations
             modelBuilder.Entity("Application.Infastructure.Database.Models.PostDo", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("PetitionSignatures");
                 });
 
             modelBuilder.Entity("Application.Infastructure.Database.Models.UserDo", b =>
@@ -414,6 +453,8 @@ namespace Application.Infastructure.Database.Migrations
                     b.Navigation("AdminCommunities");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("PetitionSignatures");
 
                     b.Navigation("Posts");
 
