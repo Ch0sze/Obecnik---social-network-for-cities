@@ -51,7 +51,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-        var adminRole = user.Role == "UnpaidAdmin";
+        var adminRole = user.Role == "Admin";
 
         // Log the values of isCommunityAdmin and adminRole
         logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId,
@@ -131,7 +131,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-        var adminRole = user?.Role == "UnpaidAdmin";
+        var adminRole = user?.Role == "Admin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
@@ -183,7 +183,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
     	var isAdmin = await databaseContext.CommunityAdmins
         	.AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
     
-    	if (!isAdmin && user.Role != "UnpaidAdmin")
+    	if (!isAdmin && user.Role != "Admin")
         	return Forbid();
     
     	// Toggle the pin status
@@ -223,7 +223,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
-        var adminRole = user.Role == "UnpaidAdmin";
+        var adminRole = user.Role == "Admin";
 
         var pinnedPosts = databaseContext.Posts
             .Include(post => post.User)
@@ -298,7 +298,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
 
-        var isAdmin = isCommunityAdmin && user?.Role == "UnpaidAdmin";
+        var isAdmin = isCommunityAdmin && user?.Role == "Admin";
         
         // Přemapování na ViewModel
         var postViewModel = new HomeViewModel.Post
