@@ -371,4 +371,16 @@
     background-color: #FFF2D6;
     color: black;
 }
+.profile-header-sb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-info-sb {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* small spacing between avatar and name */
+}
+
 
