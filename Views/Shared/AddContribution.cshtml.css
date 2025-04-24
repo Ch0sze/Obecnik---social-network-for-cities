@@ -4,14 +4,15 @@
 }
 
 #openModalButton {
-    color: #969696;
-    border-radius: 20px;
-    border-color: #969696;
+    color: #55595C;
+    border-color: #55595C;
+    background-color: #FFFAEF;
+    border-radius: 15px;
     border-width: 1px;
     width: 100%;
     text-transform: none;
     text-align: left;
-    transition: transform 0.1s ease;
+    transition: transform 0.2s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,14 +23,15 @@
     margin-left: auto;
 }
 
-#openModalButton:active {
-    transform: scale(1.01);
+#openModalButton:hover {
+    transform: scale(1.005);
+    box-shadow: 1px 3px #FFF2D6;
 }
 
 /*DELETE MODAL==========================*/
 /* Center the modal properly */
 .modal-dialog {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     max-width: 400px;
 }
 
@@ -76,23 +78,42 @@
     border: none;
     text-transform: none;
 }
-#openPinsButton:active {
-    transform: scale(1.03);
+
+#openPinsButton {
+    transition: transform 0.2s ease;
 }
 
-#pinnedPostsDropdown {
+#openPinsButton:active {
+    transform: scale(1.05);
+}
+
+.dropdown-menu{
     padding-top: 8px;
     padding-bottom: 0;
     border-radius: 8px;
     background-color: #FFFAEF;
     border-color: #E5E5E5;
+    overflow: hidden;
+    pointer-events: auto;
 }
 
-#pinnedPostsDropdown .dropdown-item:hover {
-    background-color: #FFF2D6;
+.dropdown-header {
+    border-bottom: 1px solid #dee2e6;
+    cursor: default;
+    color: #212529;
 }
 
-#pinnedPostsDropdown .dropdown-item:active {
-    background-color: #FFF2D6;
-    color: black;
+#pinnedPostsDropdown {
+    max-height: 500px;
+    overflow-y: auto;
+    list-style-type: none;
+    padding-left: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+.unpin-btn {
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: auto;
 }

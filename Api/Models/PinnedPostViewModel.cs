@@ -9,4 +9,5 @@ public class PinnedPostViewModel
     public required string CreatedBy { get; set; }
     public Guid CreatedById { get; set; }
     public bool UserHasPhoto { get; set; }
+    public bool isAdmin { get; set; }
 }

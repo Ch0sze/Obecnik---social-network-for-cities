@@ -14,7 +14,7 @@ namespace Application.Api.Controllers;
 public class HomeController(DatabaseContext databaseContext, ILogger<HomeController> logger) : Controller
 {
     [HttpGet]
-    public IActionResult Index(Guid? communityId)
+    public async Task<IActionResult> Index(Guid? communityId)
     {
         var userId = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
@@ -51,7 +51,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-        var adminRole = user.Role == "Admin";
+        var adminRole = user.Role == "UnpaidAdmin";
 
         // Log the values of isCommunityAdmin and adminRole
         logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId,
@@ -105,7 +105,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
 
 
     [HttpGet("load-posts")]
-    public IActionResult LoadPosts(int pageNumber, int pageSize, Guid? communityId)
+    public async Task<IActionResult> LoadPosts(int pageNumber, int pageSize, Guid? communityId)
     {
         var userId = User.GetId();
         var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
@@ -131,7 +131,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-        var adminRole = user?.Role == "Admin";
+        var adminRole = user?.Role == "UnpaidAdmin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
@@ -159,45 +159,49 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
 
         return PartialView("_PostsPartial", posts);
     }
+	
+	[HttpPost("toggle-pin/{postId}")]
+	public async Task<IActionResult> TogglePin(Guid postId)
+	{
+    	var userId = User.GetId();
+    	var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+    
+    	if (user == null)
+        	return Unauthorized();
+    
+    	var post = await databaseContext.Posts.FirstOrDefaultAsync(p => p.Id == postId);
+    
+    	if (post == null)
+        	return NotFound();
+    
+    	// Check if user is admin
+    	var communityId = await databaseContext.UserCommunities
+        	.Where(uc => uc.UserId == userId)
+        	.Select(uc => uc.CommunityId)
+        	.FirstOrDefaultAsync();
+    
+    	var isAdmin = await databaseContext.CommunityAdmins
+        	.AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
+    
+    	if (!isAdmin && user.Role != "UnpaidAdmin")
+        	return Forbid();
+    
+    	// Toggle the pin status
+    	post.IsPinned = !post.IsPinned;
+    	await databaseContext.SaveChangesAsync();
+    
+        return Ok(new { 
+            success = true, 
+            isPinned = post.IsPinned,
+            message = post.IsPinned ? "Post pinned successfully" : "Post unpinned successfully"
+        });
+	}
 
-    [HttpPost("toggle-pin/{postId}")]
-    public async Task<IActionResult> TogglePin(Guid postId)
-    {
-        var userId = User.GetId();
-        var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
-        if (user == null)
-            return Unauthorized();
-
-        var post = await databaseContext.Posts.FirstOrDefaultAsync(p => p.Id == postId);
-
-        if (post == null)
-            return NotFound();
-
-        // Check if user is admin
-        var communityId = await databaseContext.UserCommunities
-            .Where(uc => uc.UserId == userId)
-            .Select(uc => uc.CommunityId)
-            .FirstOrDefaultAsync();
-
-        var isAdmin = await databaseContext.CommunityAdmins
-            .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
-
-        if (!isAdmin && user.Role != "Admin")
-            return Forbid();
-
-        // Toggle the pin status
-        post.IsPinned = !post.IsPinned;
-        await databaseContext.SaveChangesAsync();
-
-        return Ok(new { success = true, isPinned = post.IsPinned });
-    }
-
-    [HttpGet("get-pinned-posts")]
-    public IActionResult GetPinnedPosts(Guid? communityId)
-    {
-        var userId = User.GetId();
-        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+	[HttpGet("get-pinned-posts")]
+	public async Task<IActionResult> GetPinnedPosts(Guid? communityId)
+	{
+    	var userId = User.GetId();
+    	var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
 
         if (user == null)
             return Unauthorized();
@@ -212,10 +216,14 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             ? communityId.Value
             : validCommunityIds.FirstOrDefault();
 
-        var channelId = databaseContext.Channels
-            .Where(c => c.CommunityId == selectedCommunityId)
-            .Select(c => c.Id)
-            .FirstOrDefault();
+    	var channelId = databaseContext.Channels
+        	.Where(c => c.CommunityId == selectedCommunityId)
+        	.Select(c => c.Id)
+        	.FirstOrDefault();
+        
+        var isCommunityAdmin = databaseContext.CommunityAdmins
+            .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
+        var adminRole = user.Role == "UnpaidAdmin";
 
         var pinnedPosts = databaseContext.Posts
             .Include(post => post.User)
@@ -229,9 +237,10 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
                 CreatedAt = post.CreatedAt,
                 CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
                 CreatedById = post.User!.Id,
-                UserHasPhoto = post.User!.Picture != null
-            })
-            .ToList();
+                UserHasPhoto = post.User!.Picture != null,
+                isAdmin = adminRole && isCommunityAdmin
+        	})
+        	.ToList();
 
         return Json(pinnedPosts);
     }
@@ -289,7 +298,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
 
-        var isAdmin = isCommunityAdmin && user?.Role == "Admin";
+        var isAdmin = isCommunityAdmin && user?.Role == "UnpaidAdmin";
         
         // Přemapování na ViewModel
         var postViewModel = new HomeViewModel.Post
@@ -303,6 +312,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             CreatedById = postDo.User.Id,
             IsAdmin = isAdmin,
             Photo = postDo.Photo != null // true pokud má fotku
+            
         };
 
         return PartialView("_OpenedPost", postViewModel);
