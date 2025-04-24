@@ -1,5 +1,5 @@
 ﻿/* Reset button styles */
-.icon-btn-sb, .icon-btn-sb:hover{
+.icon-btn-sb, .icon-btn-sb:hover {
     all: unset;
     display: inline-block;
     background: none;
@@ -8,6 +8,7 @@
     width: auto;
     height: auto;
     cursor: pointer;
+    margin-top: 2px; /* Shift down by 2 pixels */
 }
 
 /* Profile image inside the button */
