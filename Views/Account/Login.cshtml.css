@@ -50,3 +50,17 @@
     color: #F98866 !important;
     text-decoration: none;
 }
+
+/* Pod 576px – mírně zmenšené písmo */
+@media (max-width: 576px) {
+    .login-button {
+        font-size: 0.85rem;
+    }
+}
+
+/* Pod 400px – ještě kompaktnější */
+@media (max-width: 400px) {
+    .login-button {
+        font-size: 0.8rem;
+    }
+}
