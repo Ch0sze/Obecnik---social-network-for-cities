@@ -3,16 +3,26 @@
     ViewData["Title"] = "Přihlášení";
 }
 
-
-<div class="d-flex align-items-center justify-content-center" style="min-height: 100%;">
-    <div style="max-width: 500px; width: 100%;">
+<div class="d-flex align-items-center justify-content-center wrapper">
+    <div class="inner-container">
         <!-- Logo a nadpis mimo kontejner formuláře -->
-        <div class="header-section">
-            <img src="~/image.png" alt="Logo"/>
-            <h2>OBECNÍK</h2>
+        <!-- Logo and heading -->
+        <div class="header-section text-center mb-4">
+            <!-- jen na xs (do 576 px) -->
+            <img src="~/image.png"
+                 class="d-block d-sm-none img-fluid"
+                 style="height:100px; width:auto;"
+                 alt="Logo">
+
+            <!-- od sm (576 px) výš -->
+            <img src="~/image.png"
+                 class="d-none d-sm-block img-fluid"
+                 style="height:171px; width:auto;"
+                 alt="Logo">
+
+            <h2 class="m-0">OBECNÍK</h2>
         </div>
 
-        
         <!-- Kontejner pouze pro formulář -->
         <div class="login-container">
             <form asp-controller="Account" asp-action="LoginSubmit" method="post" novalidate>
@@ -20,54 +30,40 @@
 
                 <!-- Email -->
                 <div class="mb-3">
-                    <label asp-for="Email" class="login-label" style="color: black; font-weight: bold;">Email:</label>
-                    <input asp-for="Email"
-                           class="form-control 
-                            @ViewData.ValidationClass(model => model.Email)"
-                           placeholder="např. jan@novak.cz"
-                           style="background-color: #FAFAFA !important; border: none !important; border-bottom: 1px solid #F98866 !important; border-radius: 0 !important; box-shadow: none !important;"/>
+                    <label asp-for="Email" class="login-label">Email:</label>
+                    <input asp-for="Email" class="form-control @ViewData.ValidationClass(model => model.Email)"
+                           placeholder="např. jan@novak.cz"/>
                     <span asp-validation-for="Email" class="invalid-feedback"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Password" class="login-label"
-                           style="color: black; font-weight: bold;">Heslo:</label>
-                    <div class="d-flex justify-content-between align-items-end">
-                        <!-- Input pro heslo (flexibilní šířka) -->
+                    <label asp-for="Password" class="login-label">Heslo:</label>
+                    <div class="d-flex justify-content-between align-items-end flex-wrap">
                         <div class="flex-grow-1 me-2">
-                            <input asp-for="Password"
-                                   class="form-control @ViewData.ValidationClass(model => model.Password)"
-                                   placeholder="********"
-                                   style="max-width: 300px; background-color: #FAFAFA !important;
-                          border: none !important; border-bottom: 1px solid #F98866 !important;
-                          border-radius: 0 !important; box-shadow: none !important;"/>
+                            <input asp-for="Password" class="form-control @ViewData.ValidationClass(model => model.Password)"
+                                   placeholder="********"/>
                             <span asp-validation-for="Password" class="invalid-feedback"></span>
                         </div>
 
                         @if (TempData["ErrorMessage"] != null)
                         {
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger w-100 mt-2">
                                 @TempData["ErrorMessage"]
                             </div>
                         }
-                        <!-- Tlačítko zarovnané doprava -->
+
                         <button type="submit" class="login-button">
                             Přihlásit se
                         </button>
                     </div>
 
-                    <!-- Sem vložíme větu s odkazem pod Heslo a tlačítko -->
-                    <div class="mt-2 text-center" style="padding-top: 5%;">
-                        <a href="/Account/ForgotPassword" style="color: #F98866; text-decoration: none;">
-                            Zapomněli jste heslo?
-                        </a>
-
+                    <div class="mt-2 text-center">
+                        <a href="/Account/ForgotPassword">Zapomněli jste heslo?</a>
                     </div>
                 </div>
 
             </form>
 
-            <!-- Chybová hláška (pokud je) -->
             @if (!string.IsNullOrWhiteSpace(Model.Message))
             {
                 <div class="alert alert-danger mt-4" role="alert">
@@ -76,10 +72,8 @@
             }
         </div>
 
-        <!-- Odkaz na registraci mimo kontejner formuláře -->
         <div class="mt-4 login-link text-center">
-            Nemáte účet?
-            <a href="/Account/Register">Registrujte se zde</a>
+            Nemáte účet? <a href="/Account/Register">Registrujte se zde</a>
         </div>
     </div>
 </div>
