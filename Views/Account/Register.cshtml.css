@@ -1,35 +1,16 @@
-﻿/* Style for bottom border on input fields */
-
-.register-button {
-    background-color: #F98866;
-    border: none;
-    color: #FFF;
-    padding: 0.5rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 1.1rem;
+﻿/* Wrapper pro odsazení na mobilu */
+.wrapper {
+    padding: 1rem;
 }
 
-.register-button:hover {
-    background-color: #f77755;
+/* Kontejner uprostřed */
+.inner-container {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.register-button:disabled {
-    background-color: #fcb9a6 !important;
-    cursor: not-allowed !important;
-    opacity: 0.9;
-}
-
-.register-container {
-    background-color: #FFFAEF;
-    border: 1px solid #F98866;
-    border-radius: 8px;
-    padding: 2rem;
-    max-width: 75%;
-    min-width: 40%;
-}
-
+/* Header */
 .header-section {
     display: flex;
     justify-content: center;
@@ -37,103 +18,75 @@
     gap: 10px;
     margin-bottom: 1rem;
 }
-
-.header-section img {
-    height: 50px;
+.logo {
+    height: 50px !important;
+    max-width: 100% !important;
+    width: auto !important;
 }
-
 .header-section h2 {
     margin: 0;
+    font-size: 1.75rem;
 }
 
-/* Custom checkbox */
-.form-check-input {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #F98866;
-    border-radius: 4px;
-    background-color: white;
-    appearance: none;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    margin-right: 8px;
-    vertical-align: middle;
+/* Form container */
+.register-container {
+    background-color: #FFFAEF;
+    border: 1px solid #F98866;
+    border-radius: 8px;
+    padding: 2rem;
 }
 
-/* Checkbox when checked */
-.form-check-input:checked {
-    background-color: #F98866;
-    border-color: #F98866;
-
-}
-
-/* White checkmark */
-.form-check-input:checked::before {
-    content: '\2713';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 12px; /* Adjusted size */
-    color: white;
-    font-weight: bold;
-}
-
-/* Label alignment */
-.form-check-label {
-    margin-left: 3px;
-    vertical-align: middle;
-}
-
-.register-link a,
-.register-link a:link,
-.register-link a:visited,
-.register-link a:hover,
-.register-link a:active {
-    color: #F98866 !important;
-    text-decoration: none;
-}
-
-#suggestions {
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    z-index: 9999;
-    max-height: 200px;
-    overflow-y: auto;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-}
-
-#suggestions li {
-    padding: 8px;
-    cursor: pointer;
-}
-
-#suggestions li:hover {
-    background-color: #f0f0f0;
-}
-
-#suggestions:empty {
-    display: none !important;
-}
-
-input:-webkit-autofill {
-    box-shadow: 0 0 0px 1000px white inset !important;
-}
-
-#readonlyInput {
+/* Inputs */
+.register-input {
     background-color: #FAFAFA !important;
     border: none !important;
     border-bottom: 1px solid #F98866 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     outline: none !important;
-    cursor: pointer;
-    display: block;
 }
 
-#searchInput {
-    display: none; /* Initially hidden */
+/* Readonly & search */
+.readonly { cursor: pointer; }
+.search { display: none; }
+.suggestions {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
 }
+
+/* Checkbox custom */
+.form-check-input {
+    width: 20px; height: 20px;
+    border: 2px solid #F98866; border-radius: 4px;
+    appearance: none; position: relative; cursor: pointer;
+    transition: all .2s;
+}
+.form-check-input:checked {
+    background-color: #F98866; border-color: #F98866;
+}
+.form-check-input:checked::before {
+    content: '✓'; position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 12px; color: #fff; font-weight: bold;
+}
+
+/* Submit button */
+.register-button {
+    background-color: #F98866; border: none;
+    color: #FFF; padding: 0.5rem 1.5rem;
+    border-radius: 9999px; font-weight: 600;
+    cursor: pointer; font-size: 1.1rem;
+}
+.register-button:hover { background-color: #f77755; }
+.register-button:disabled {
+    background-color: #fcb9a6 !important; cursor: not-allowed; opacity: 0.9;
+}
+
+/* Links */
+.register-link a { color: #F98866 !important; text-decoration: none; }
