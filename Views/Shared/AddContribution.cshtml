@@ -132,7 +132,7 @@
 
                     // Aktualizace URL
                     const newUrl = new URL(window.location);
-                    newUrl.searchParams.set('postId', postId); // Přidáme postId do URL
+                    newUrl.searchParams.set('openPostId', postId); // Přidáme postId do URL
                     window.history.pushState({ path: newUrl.href }, '', newUrl.href);
 
                     // Otevřít modal
@@ -144,7 +144,7 @@
                         $('body').removeAttr('aria-hidden');
 
                         const originalUrl = new URL(window.location);
-                        originalUrl.searchParams.delete('postId'); // Smažeme postId
+                        originalUrl.searchParams.delete('openPostId'); // Smažeme postId
                         window.history.pushState({ path: originalUrl.href }, '', originalUrl.href);
                     });
                 },
