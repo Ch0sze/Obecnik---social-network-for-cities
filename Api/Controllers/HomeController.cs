@@ -364,4 +364,34 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
     {
         return View("Error");
     }
+    
+    [HttpGet("get-top-petition")]
+    public async Task<IActionResult> GetTopPetition(Guid communityId)
+    {
+        var userId = User.GetId();
+    
+        var channelId = await databaseContext.Channels
+            .Where(c => c.CommunityId == communityId)
+            .Select(c => c.Id)
+            .FirstOrDefaultAsync();
+
+        var topPetition = await databaseContext.Posts
+            .Where(p => p.ChannelId == channelId && p.Type == "Petition")
+            .OrderByDescending(p => databaseContext.PetitionSignatures.Count(sig => sig.PostId == p.Id))
+            .Select(p => new
+            {
+                p.Id,
+                p.Title,
+                p.Description,
+                Signatures = databaseContext.PetitionSignatures.Count(sig => sig.PostId == p.Id)
+            })
+            .FirstOrDefaultAsync();
+
+        if (topPetition == null)
+            return NoContent();
+
+        return Json(topPetition);
+    }
+
+
 }

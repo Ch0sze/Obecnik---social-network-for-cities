@@ -175,7 +175,7 @@
 
         button.addEventListener("click", () => {
             if (!hasSigned) {
-                fetch(`/petitions/${postId}/sign`, {method: "POST"})
+                fetch(`/petitions/${postId}/sign`, { method: "POST" })
                     .then(res => {
                         if (!res.ok) throw new Error("Nepodařilo se podepsat.");
                         hasSigned = true;
@@ -186,13 +186,14 @@
                         updateSignatureCount();
                         loadSignatures(postId);
                         loadComments(postId);
+                        loadTopPetition();
                         enableHoverEffect();
                     })
                     .catch(err => {
                         message.textContent = "Error: " + err.message;
                     });
             } else {
-                fetch(`/petitions/${postId}/unsign`, {method: "POST"})
+                fetch(`/petitions/${postId}/unsign`, { method: "POST" })
                     .then(res => {
                         if (!res.ok) throw new Error("Nepodařilo se zrušit podpis.");
                         hasSigned = false;
@@ -203,12 +204,14 @@
                         updateSignatureCount();
                         loadSignatures(postId);
                         loadComments(postId);
+                        loadTopPetition();
                     })
                     .catch(err => {
                         message.textContent = "Error: " + err.message;
                     });
             }
         });
+
     }
 
     function submitComment(event) {

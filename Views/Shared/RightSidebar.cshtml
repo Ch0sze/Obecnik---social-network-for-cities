@@ -41,10 +41,149 @@
 
     <!-- User Avatars (Dynamic) -->
     <div id="user-list-sb" class="avatar-scroll-sb"></div>
+    <!-- Petition List -->
+    <div id="top-petition-container-wrapper" style="margin-top: auto; padding: 1rem;">
+        <div id="top-petition-container" class="petition-container-sb" style="display:none; cursor: pointer;"></div>
+    </div>
+
 </div>
 
 <!-- Dynamic JavaScript -->
 <script>
+
+    function initializeSidebarPetitionButton(postId) {
+        const button = document.getElementById("sidebar-sign-petition-button");
+
+        if (!button) return;
+
+        let hasSigned = false;
+
+        // Check if user has already signed
+        fetch(`/petitions/${postId}/signatures/me`)
+            .then(res => res.json())
+            .then(signed => {
+                hasSigned = signed;
+                updateButtonState();
+            });
+
+        button.addEventListener('click', () => {
+            if (!hasSigned) {
+                // Sign the petition
+                fetch(`/petitions/${postId}/sign`, { method: "POST" })
+                    .then(res => {
+                        if (!res.ok) throw new Error("Nepodařilo se podepsat.");
+                        hasSigned = true;
+                        updateButtonState();
+                        loadTopPetition();
+                    })
+                    .catch(err => {
+                        alert('Chyba: ' + err.message);
+                    });
+            } else {
+                // Unsign the petition
+                fetch(`/petitions/${postId}/unsign`, { method: "POST" })
+                    .then(res => {
+                        if (!res.ok) throw new Error("Nepodařilo se zrušit podpis.");
+                        hasSigned = false;
+                        updateButtonState();
+                        loadTopPetition();
+                    })
+                    .catch(err => {
+                        alert('Chyba: ' + err.message);
+                    });
+            }
+        });
+
+        button.addEventListener('mouseenter', () => {
+            if (hasSigned) {
+                button.classList.remove('sign-petition-btn-sb');
+                button.classList.add('btn-danger');
+                button.textContent = 'Zrušit podpis';
+            }
+        });
+
+        button.addEventListener('mouseleave', () => {
+            if (hasSigned) {
+                button.classList.remove('btn-danger');
+                button.classList.add('sign-petition-btn-sb');
+                button.textContent = 'Podepsáno';
+            }
+        });
+
+        function updateButtonState() {
+            if (hasSigned) {
+                button.textContent = 'Podepsáno';
+                button.classList.add('sign-petition-btn-sb');
+                button.classList.remove('btn-danger');
+            } else {
+                button.textContent = 'Podepsat';
+                button.classList.add('sign-petition-btn-sb');
+                button.classList.remove('btn-danger');
+            }
+        }
+    }
+
+    function loadTopPetition() {
+        const communityId = getCommunityIdFromUrl();
+        if (!communityId) return;
+
+        fetch(`/get-top-petition?communityId=${communityId}`)
+            .then(response => {
+                if (response.status === 204) {
+                    document.getElementById('top-petition-container').style.display = 'none';
+                    return;
+                }
+                return response.json();
+            })
+            .then(petition => {
+                if (!petition) return;
+                const container = document.getElementById('top-petition-container');
+                container.innerHTML = `
+        <div id="petition-content">
+            <div class="petition-title-sb">${petition.title}</div>
+            <div class="petition-description-sb">${truncate(petition.description, 100)}</div>
+            <div class="petition-signatures-sb">Počet podpisů: ${petition.signatures}</div>
+        </div>
+        <button id="sidebar-sign-petition-button" class="sign-petition-btn-sb">Podepsat</button>
+    `;
+                container.style.display = 'block';
+
+                document.getElementById('petition-content').addEventListener('click', function () {
+                    $('.opened-post-box[data-post-id="' + petition.id + '"]').trigger('click');
+                });
+
+                initializeSidebarPetitionButton(petition.id);
+            })
+
+            .catch(err => {
+                console.error('Failed to load petition:', err);
+                document.getElementById('top-petition-container').style.display = 'none';
+            });
+    }
+
+    function truncate(text, maxLength) {
+        return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+    }
+
+    function signPetition(postId) {
+        fetch(`/petitions/${postId}/sign`, { method: "POST" })
+            .then(response => {
+                if (!response.ok) throw new Error('Nepodařilo se podepsat.');
+                loadTopPetition();
+            })
+            .catch(error => {
+                alert('Chyba: ' + error.message);
+            });
+    }
+
+
+    function getCommunityIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('communityId');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadTopPetition);
+    window.addEventListener('popstate', loadTopPetition);
 
     // Get the user role from claims
     // Razor should resolve the value of the user role properly
@@ -63,7 +202,6 @@
             window.location.href = '/Account';
         }
     });
-
 
     // Redirect to /Account/Logout when "Odhlásit se" is clicked
     const logoutBtn = document.getElementById('logout-btn-sb');

@@ -383,4 +383,60 @@
     gap: 6px; /* small spacing between avatar and name */
 }
 
+.petition-container-sb {
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
 
+.petition-container-sb:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.petition-title-sb {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+}
+
+.petition-description-sb {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.75rem;
+    word-break: break-word;
+}
+
+.petition-signatures-sb {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 0.75rem;
+}
+
+.sign-petition-btn-sb {
+    background-color: #F98866;
+    border: none;
+    color: #FFF;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+.sign-petition-btn-sb:hover {
+    background-color: #f77755;
+}
+.btn-danger{
+    background-color: #D9534F;
+    border: none;
+    color: #FFF;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
