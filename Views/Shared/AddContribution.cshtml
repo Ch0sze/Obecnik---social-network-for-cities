@@ -69,6 +69,7 @@
         let noMorePosts = false;
         let page = 2; // already loaded page 1 on initial load
         let isLoading = false;
+        let originalUrl = window.location.href; 
     
         $(document).ready(function () {
             $(window).scroll(function () {
@@ -130,22 +131,25 @@
                     // Přidat nový modal
                     $('body').append(modalHtml);
 
-                    // Aktualizace URL
+                    // Uložit původní URL před změnou
+                    originalUrl = window.location.href;
+
+                    // Aktualizace URL s novým parametrem openPostId
                     const newUrl = new URL(window.location);
-                    newUrl.searchParams.set('openPostId', postId); // Přidáme postId do URL
+                    newUrl.searchParams.set('openPostId', postId);
                     window.history.pushState({ path: newUrl.href }, '', newUrl.href);
 
                     // Otevřít modal
-                    const modal = new bootstrap.Modal(document.getElementById('openedPostModal'));
+                    const modalElement = document.getElementById('openedPostModal');
+                    const modal = new bootstrap.Modal(modalElement);
                     modal.show();
 
-                    // Po zavření modalu vrátit URL zpět
-                    $('#openedPostModal').on('hidden.bs.modal', function () {
-                        $('body').removeAttr('aria-hidden');
+                    // Uložíme si currentUrl do modalu
+                    $(modalElement).data('original-url', originalUrl);
 
-                        const originalUrl = new URL(window.location);
-                        originalUrl.searchParams.delete('openPostId'); // Smažeme postId
-                        window.history.pushState({ path: originalUrl.href }, '', originalUrl.href);
+                    // Po zavření modalu vrátit URL zpět
+                    $(modalElement).on('hidden.bs.modal', function () {
+                        window.history.replaceState({}, '', originalUrl);
                     });
                 },
                 error: function (xhr, status, error) {
@@ -157,6 +161,13 @@
                     alert('Nepodařilo se načíst příspěvek.');
                 }
             });
+        });
+
+        // Po zavření modalu, vrátíme zpět původní URL (pokud došlo k otevření s URL parametrem)
+        $(document).on('click', '.modal', function () {
+            if (window.location.href.includes('openPostId')) {
+                window.history.replaceState({}, '', originalUrl);
+            }
         });
 
         let postIdToDelete = null;
