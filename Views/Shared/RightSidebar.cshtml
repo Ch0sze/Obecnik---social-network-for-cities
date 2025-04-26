@@ -7,7 +7,7 @@
     <!-- Profile Header (right sidebar-specific) -->
     <div class="profile-header-sb">
         <!-- Group avatar and name -->
-        <div class="profile-info-sb">
+        <div class="profile-info-sb" style="position: relative;">
             <button class="icon-btn-sb" id="user-profile-btn-sb">
                 <img id="imagePreview"
                      src="@Url.Action("GetUserPicture", "Account", new { id = User.GetId() })"
@@ -16,14 +16,15 @@
                      class="profile-image icon-image" />
             </button>
             <span class="text-sb" id="username-sb"></span>
-        </div>
+        
 
         <!-- Dropdown (hidden by default) -->
-        <div id="superadmin-dropdown-sb" class="dropdown-menu-sb" style="display: none;">
-            <button class="dropdown-item-sb" onclick="window.location.href='/Account'">Zobrazit profil</button>
-            <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin'">Zobrazení žádostí</button>
-            <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Users'">Správa uživatelů</button>
-            <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Admins'">Zobrazení platících správců</button>
+            <div id="superadmin-dropdown-sb" class="dropdown-menu-sb" style="display: none; position: absolute;">
+                <button class="dropdown-item-sb" onclick="window.location.href='/Account'">Zobrazit profil</button>
+                <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin'">Zobrazení žádostí</button>
+                <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Users'">Správa uživatelů</button>
+                <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Admins'">Zobrazení platících správců</button>
+            </div>
         </div>
 
         <!-- Logout Button -->
@@ -56,17 +57,13 @@
     // Show the dropdown menu if user is SuperAdmin, otherwise redirect to /Account
     userProfileBtn.addEventListener('click', () => {
         if (userRole === "SuperAdmin") {
-            // If the role is SuperAdmin, show the dropdown menu
             const isVisible = superAdminDropdown.style.display === "block";
-            const rect = userProfileBtn.getBoundingClientRect();
-            superAdminDropdown.style.top = `${rect.bottom + window.scrollY}px`;
-            superAdminDropdown.style.left = `${rect.left + window.scrollX - 30}px`;
             superAdminDropdown.style.display = isVisible ? "none" : "block";
         } else {
-            // Redirect to /Account if the role is not SuperAdmin
             window.location.href = '/Account';
         }
     });
+
 
     // Redirect to /Account/Logout when "Odhlásit se" is clicked
     const logoutBtn = document.getElementById('logout-btn-sb');
