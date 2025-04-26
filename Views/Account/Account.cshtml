@@ -18,6 +18,7 @@
             <img id="imagePreview"
                  src="@Url.Action("GetUserPicture", "Account", new { id = User.GetId() })"
                  alt="Profilový obrázek"
+                 onerror="this.src='/Images/GenericAvatar.png'"
                  class="profile-main-image" />
 
             <h2>Upravit účet</h2>

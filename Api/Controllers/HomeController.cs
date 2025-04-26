@@ -50,7 +50,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
     var isCommunityAdmin = await databaseContext.CommunityAdmins
         .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-    var adminRole = user.Role == "UnpaidAdmin";
+    var adminRole = user.Role == "Admin";
 
     logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId, isCommunityAdmin, adminRole);
 
@@ -120,7 +120,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
         Posts = posts,
         CommunityName = communityName,
         CommunityId = selectedCommunityId,
-        OpenedPost = openedPost // ✨ přidáno
+        OpenedPost = openedPost
     };
 
     var accountViewModel = new AccountViewModel
@@ -167,7 +167,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
-        var adminRole = user?.Role == "UnpaidAdmin";
+        var adminRole = user?.Role == "Admin";
 
         var posts = databaseContext.Posts
             .Include(post => post.User)
@@ -259,7 +259,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
         
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
-        var adminRole = user.Role == "UnpaidAdmin";
+        var adminRole = user.Role == "Admin";
 
         var pinnedPosts = databaseContext.Posts
             .Include(post => post.User)
@@ -335,7 +335,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == communityId);
 
-        var isAdmin = isCommunityAdmin && user?.Role == "UnpaidAdmin";
+        var isAdmin = isCommunityAdmin && user?.Role == "Admin";
 
         // Přemapování na ViewModel
         var postViewModel = new HomeViewModel.Post
@@ -348,10 +348,10 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
             CreatedAt = postDo.CreatedAt,
             CreatedById = postDo.User.Id,
             IsAdmin = isAdmin,
-            Photo = postDo.Photo != null // true pokud má fotku
+            Photo = postDo.Photo != null
         };
 
-        return PartialView("_OpenedPost", postViewModel); // Vrátí jen obsah modalu
+        return PartialView("_OpenedPost", postViewModel);
     }
     [HttpGet("viewpost/{communityId}/{postId}")]
     public IActionResult ViewPost(Guid communityId, Guid postId)
