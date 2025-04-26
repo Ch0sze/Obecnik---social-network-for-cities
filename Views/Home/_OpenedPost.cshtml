@@ -7,9 +7,9 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- Hlavička s křížkem -->
-
                 <!-- Tělo -->
                 <div class="modal-body pt-0">
+                    <button onclick="copyLinkToClipboard()">Zkopírovat odkaz</button>
                     <div class="d-flex flex-column flex-sm-row">
                         <!-- Levý sloupec s obrázkem -->
                         <div class="col-12 col-sm-9 mb-3 mb-sm-0" style="padding-right: 15px;">
@@ -94,6 +94,7 @@
                                         </button>
                                     </div>
                                 }
+
                                 <div id="signaturesList" class="mt-4">
                                     <ul id="signatureUsers" style="list-style: none; padding-left: 0;"></ul>
                                 </div>
@@ -345,4 +346,27 @@
             initializePetitionButton(postId);
         });
     });
+</script>
+<script>
+    function copyLinkToClipboard() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const communityId = urlParams.get('communityId');  // Získání communityId z URL
+        const postId = "@Model.Id";  // Toto je ID příspěvku z modelu
+
+        // Pokud communityId nebo postId není k dispozici, zobrazení chybové zprávy
+        if (!communityId || !postId) {
+            alert("Chybí potřebné parametry pro vytvoření odkazu.");
+            return;
+        }
+        const baseUrl = window.location.origin; // Získá základní URL (např. http://localhost:5096)
+        const url = new URL(baseUrl + `/viewpost/${communityId}/${postId}`);
+        navigator.clipboard.writeText(url.toString())
+            .then(() => {
+                alert("Odkaz na příspěvek zkopírován do schránky.");
+            })
+            .catch(err => {
+                console.error("Clipboard error:", err);
+                alert("Nepodařilo se zkopírovat odkaz.");
+            });
+    }
 </script>

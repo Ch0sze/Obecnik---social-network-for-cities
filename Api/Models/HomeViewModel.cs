@@ -7,6 +7,8 @@ public class HomeViewModel
     public string? CommunityName { get; init; } = string.Empty;
     public required Guid CommunityId { get; set; } 
     public required List<Post> Posts { get; set; }
+    
+    public Post? OpenedPost { get; set; }
 
     public record Post
     {

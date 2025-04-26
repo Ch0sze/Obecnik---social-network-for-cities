@@ -113,7 +113,6 @@
             });
         }
         $(document).on('click', '.opened-post-box', function (e) {
-            // Kontrola, zda nebylo kliknuto na tlačítko pro nastavení příspěvku
             if ($(e.target).closest('.contribution-settings-btn, .dropdown-menu').length > 0) return;
 
             const postId = $(this).data('post-id');
@@ -125,29 +124,35 @@
                 success: function (modalHtml) {
                     console.log('Úspěšně načtený obsah pro příspěvek', postId);
 
-                    // Odstranit starý modal pro příspěvek (pokud existuje)
+                    // Odstranit starý modal
                     $('#openedPostModal').remove();
 
-                    // Přidat nový modal pro příspěvek
+                    // Přidat nový modal
                     $('body').append(modalHtml);
 
-                    // Před otevřením modalu skryj pozadí nebo zamez přístup k jiným prvkům
-                    $('body').attr('aria-hidden', 'true');
+                    // Aktualizace URL
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('postId', postId); // Přidáme postId do URL
+                    window.history.pushState({ path: newUrl.href }, '', newUrl.href);
 
-                    // Otevřít nový modal pro příspěvek
+                    // Otevřít modal
                     const modal = new bootstrap.Modal(document.getElementById('openedPostModal'));
                     modal.show();
 
-                    // Po otevření modalu, když se zavře, zruš "aria-hidden" pro tělo
+                    // Po zavření modalu vrátit URL zpět
                     $('#openedPostModal').on('hidden.bs.modal', function () {
                         $('body').removeAttr('aria-hidden');
+
+                        const originalUrl = new URL(window.location);
+                        originalUrl.searchParams.delete('postId'); // Smažeme postId
+                        window.history.pushState({ path: originalUrl.href }, '', originalUrl.href);
                     });
                 },
                 error: function (xhr, status, error) {
                     console.error('Chyba AJAX požadavku:', error);
-                    if (xhr.status === 401) { 
-                            window.location.href = '/Account/Logout'; 
-                            return; 
+                    if (xhr.status === 401) {
+                        window.location.href = '/Account/Logout';
+                        return;
                     }
                     alert('Nepodařilo se načíst příspěvek.');
                 }

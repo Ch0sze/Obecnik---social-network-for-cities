@@ -20,9 +20,59 @@
     </div>
 </div>
 
-
 <!-- Toggle Button (Placed outside main layout) -->
 <partial name="ToggleButton" />
 @Html.Partial("_AddCommunity")
+
+<!-- Modal for opened post -->
+<div class="modal fade" id="openedPostModal" tabindex="-1" aria-labelledby="openedPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Obsah modalu bude načten dynamicky -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const openPostId = urlParams.get('openPostId');  // Získání openPostId z URL
+        const communityId = urlParams.get('communityId');  // Získání communityId z URL
+
+        // Ošetření, pokud máme otevřený post
+        if (openPostId) {
+            console.log('Otevírám příspěvek s ID:', openPostId);
+
+            $.ajax({
+                url: '/OpenedPost/' + openPostId,  // Tento endpoint by měl vrátit HTML pro modal
+                type: 'GET',
+                success: function(modalHtml) {
+                    // Odstranit starý modal, pokud existuje
+                    $('#openedPostModal').remove();
+
+                    // Přidat nový modal do těla stránky
+                    $('body').append(modalHtml);
+
+                    // Otevřít modal
+                    const modal = new bootstrap.Modal(document.getElementById('openedPostModal'));
+                    modal.show();
+
+                    // Po zavření modalu obnovíme tělo
+                    $('#openedPostModal').on('hidden.bs.modal', function () {
+                        $('body').removeAttr('aria-hidden');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Chyba při načítání příspěvku:', error);
+                    if (xhr.status === 401) {
+                        window.location.href = '/Account/Logout';  // Přesměrování na logout, pokud není autorizován
+                        return;
+                    }
+                    alert('Nepodařilo se načíst příspěvek.');
+                }
+            });
+        }
+    });
+</script>
 
 
