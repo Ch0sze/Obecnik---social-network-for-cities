@@ -1,4 +1,17 @@
-﻿/* Kontejner formuláře */
+﻿/* Obecné wrapper odsazení pro mobil */
+.wrapper {
+    min-height: 100%;
+    padding: 1rem;
+}
+
+/* Vnitřní kontejner s max-šířkou */
+.inner-container {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Kontejner formuláře */
 .login-container {
     background-color: #FFFAEF; /* Světlé krémové pozadí */
     border: 1px solid #F98866;
@@ -15,33 +28,33 @@
     margin-bottom: 1rem;
 }
 
-
 .header-section img {
     height: 50px;
 }
 
 .header-section h2 {
     margin: 0;
+    font-size: 1.75rem;
 }
 
 /* Tlačítko pro přihlášení ve tvaru oválu */
 .login-button {
     background-color: #F98866; /* Oranžová barva pozadí */
-    border: none; /* Bez okraje */
-    color: #FFF; /* Bílý text */
-    padding: 0.5rem 1.5rem; /* Vertikální a horizontální odsazení */
-    border-radius: 9999px; /* Velké zaoblení -> oválný tvar */
-    font-weight: 600; /* Tučnější text */
-    cursor: pointer; /* Kurzor ruky při najetí myší */
-    font-size: 0.95rem; /* Mírně menší písmo (dle potřeby) */
+    border: none;
+    color: #FFF;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
 }
 
 .login-button:hover {
-    background-color: #f77755; /* O něco tmavší odstín při najetí myší */
+    background-color: #f77755;
 }
 
-
-/* Všechny stavy odkazu v .login-link */
+/* Odkazy */
 .login-link a,
 .login-link a:link,
 .login-link a:visited,
@@ -49,4 +62,27 @@
 .login-link a:active {
     color: #F98866 !important;
     text-decoration: none;
+}
+
+/* Základní styl inputů bez inline */
+input.form-control {
+    background-color: #FAFAFA !important;
+    border: none !important;
+    border-bottom: 1px solid #F98866 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Pod 576px – mírně zmenšené písmo */
+@media (max-width: 576px) {
+    .login-button {
+        font-size: 0.85rem;
+    }
+}
+
+/* Pod 400px – ještě kompaktnější */
+@media (max-width: 400px) {
+    .login-button {
+        font-size: 0.8rem;
+    }
 }

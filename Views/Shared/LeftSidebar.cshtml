@@ -4,10 +4,10 @@
 @using System.Web
 
 <div id="leftSidebar" class="sidebar-sb">
-    <div class="logo-container-sb">
-        <img src="~/image.png" alt="Logo">
-        <h4>Obecník</h4>
-    </div>
+        <a href="/" class="logo-container-sb" style="text-decoration: none; cursor: pointer;">
+            <img src="~/image.png" alt="Logo">
+            <h4>Obecník</h4>
+        </a>
 
     <div class="avatar-container-sb" id="user-list-left-sb"></div>
 
@@ -18,7 +18,7 @@
             <button class="icon-btn-sb" id="user-profile-btn-sb2">
                 <i class="bi bi-person"></i>
             </button>
-            <span class="text-sb" id="username-sb2">@User.Identity?.Name</span>
+            <span class="text-sb" id="username-sb2"></span>
             <button class="icon-btn-sb" id="hamburger-menu-btn-sb2">
                 <i class="bi bi-box-arrow-right"></i>
             </button>
@@ -181,6 +181,21 @@
         document.getElementById('hamburger-menu-btn-sb2').addEventListener('click', () => {
             window.location.href = '/Account/Logout';
         });
+
+        const userId = '@User.GetId()';
+        fetch(`/account/users/${userId}/Firstname`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch username. Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('username-sb2').innerText = data.username;
+            })
+            .catch(error => {
+                console.error('Error fetching username:', error);
+            });
 
         fetchCommunities();
         renderNav();

@@ -590,6 +590,42 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
         return File(user.Picture, "image/jpeg");
     }
+    /*[HttpGet("users/{id}/username")]
+    public async Task<IActionResult> GetUsername(Guid id)
+    {
+        if (id == Guid.Empty)
+        {
+            return BadRequest("User ID is empty.");
+        }
 
+        var user = await databaseContext.Users.FindAsync(id);
+    
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        // Combine FirstName and LastName from the user model
+        var fullName = $"{user.Firstname} {user.LastName}".Trim();
+    
+        // Log the fullName to verify it's being generated correctly
+        Console.WriteLine($"Full name generated: {fullName}");
+
+        // Return the full name as part of the response
+        return Ok(new { username = fullName });
+    }*/
+    [HttpGet("users/{id}/Firstname")]
+    public async Task<IActionResult> GetFullName(Guid id)
+    {
+        var user = await databaseContext.Users.FindAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var fullName = $"{user.Firstname} {user.LastName}";
+        return Ok(new { username = fullName });
+    }
+    
 
 }

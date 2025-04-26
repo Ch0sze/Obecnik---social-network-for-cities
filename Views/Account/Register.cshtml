@@ -4,12 +4,23 @@
 }
 
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="margin: 10px">
         <div class="col-12 col-md-8 col-lg-6">
             <!-- Logo and label -->
-            <div class="header-section text-center">
-                <img src="~/image.png" alt="Logo" class="img-fluid" />
-                <h2>OBECNÍK</h2>
+            <div class="header-section text-center mb-4">
+                <!-- jen na xs (do 576 px) -->
+                <img src="~/image.png"
+                     class="d-block d-sm-none img-fluid"
+                     style="height:100px; width:auto;"
+                     alt="Logo">
+
+                <!-- od sm (576 px) výš -->
+                <img src="~/image.png"
+                     class="d-none d-sm-block img-fluid"
+                     style="height:171px; width:auto;"
+                     alt="Logo">
+
+                <h2 class="m-0">OBECNÍK</h2>
             </div>
 
             <!-- Form container -->

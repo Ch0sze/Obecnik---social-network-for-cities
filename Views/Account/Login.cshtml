@@ -4,12 +4,23 @@
 }
 
 
-<div class="d-flex align-items-center justify-content-center" style="min-height: 100%;">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100%; margin: 10px">
     <div style="max-width: 500px; width: 100%;">
         <!-- Logo a nadpis mimo kontejner formuláře -->
-        <div class="header-section">
-            <img src="~/image.png" alt="Logo"/>
-            <h2>OBECNÍK</h2>
+        <div class="header-section text-center mb-4">
+            <!-- jen na xs (do 576 px) -->
+            <img src="~/image.png"
+                 class="d-block d-sm-none img-fluid"
+                 style="height:100px; width:auto;"
+                 alt="Logo">
+
+            <!-- od sm (576 px) výš -->
+            <img src="~/image.png"
+                 class="d-none d-sm-block img-fluid"
+                 style="height:171px; width:auto;"
+                 alt="Logo">
+
+            <h2 class="m-0">OBECNÍK</h2>
         </div>
 
         
@@ -51,9 +62,20 @@
                             </div>
                         }
                         <!-- Tlačítko zarovnané doprava -->
-                        <button type="submit" class="login-button">
-                            Přihlásit se
-                        </button>
+                        <div class="text-end">
+                            <!-- Jen na XS -->
+                            <button type="submit"
+                                    class="login-button btn-sm d-block d-sm-none">
+                                Přihlásit se
+                            </button>
+
+                            <!-- Od SM výš -->
+                            <button type="submit"
+                                    class="login-button btn-lg d-none d-sm-inline-block">
+                                Přihlásit se
+                            </button>
+                        </div>
+
                     </div>
 
                     <!-- Sem vložíme větu s odkazem pod Heslo a tlačítko -->
