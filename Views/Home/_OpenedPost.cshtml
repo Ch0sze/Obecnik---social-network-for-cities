@@ -89,7 +89,7 @@
                                 @if (Model.IsAdmin)
                                 {
                                     <div class="text-end mb-2">
-                                        <button class="download-button" onclick="alert('Stahují se podpisy...')">
+                                        <button class="download-button" data-postid="@Model.Id">
                                             Stáhnout podpisy
                                         </button>
                                     </div>
@@ -106,6 +106,20 @@
         </div>
     </div>
 </div>
+<script>
+    function downloadExcel(postId) {
+        // přesměruje prohlížeč na nový endpoint
+        window.location.href = `/petitions/${postId}/signatures/excel`;
+    }
+
+    document.body.addEventListener('click', function(e) {
+        if (!e.target.matches('.download-button')) return;
+        e.preventDefault();
+        const postId = e.target.getAttribute('data-postid');
+        downloadExcel(postId);
+    });
+</script>
+
 <script>
 
     function initializePetitionButton(postId) {
@@ -346,27 +360,4 @@
             initializePetitionButton(postId);
         });
     });
-</script>
-<script>
-    function copyLinkToClipboard() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const communityId = urlParams.get('communityId');  // Získání communityId z URL
-        const postId = "@Model.Id";  // Toto je ID příspěvku z modelu
-
-        // Pokud communityId nebo postId není k dispozici, zobrazení chybové zprávy
-        if (!communityId || !postId) {
-            alert("Chybí potřebné parametry pro vytvoření odkazu.");
-            return;
-        }
-        const baseUrl = window.location.origin; // Získá základní URL (např. http://localhost:5096)
-        const url = new URL(baseUrl + `/viewpost/${communityId}/${postId}`);
-        navigator.clipboard.writeText(url.toString())
-            .then(() => {
-                alert("Odkaz na příspěvek zkopírován do schránky.");
-            })
-            .catch(err => {
-                console.error("Clipboard error:", err);
-                alert("Nepodařilo se zkopírovat odkaz.");
-            });
-    }
 </script>
