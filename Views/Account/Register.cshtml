@@ -4,23 +4,22 @@
 }
 
 <div class="container">
-    <div class="row justify-content-center" style="margin: 10px">
+    <div class="row align-items-center justify-content-center" style="min-height: 100vh;">
         <div class="col-12 col-md-8 col-lg-6">
             <!-- Logo and label -->
-            <div class="header-section text-center mb-4">
-                <!-- jen na xs (do 576 px) -->
-                <img src="~/image.png"
-                     class="d-block d-sm-none img-fluid"
-                     style="height:100px; width:auto;"
-                     alt="Logo">
-
-                <!-- od sm (576 px) výš -->
-                <img src="~/image.png"
-                     class="d-none d-sm-block img-fluid"
-                     style="height:171px; width:auto;"
-                     alt="Logo">
-
-                <h2 class="m-0">OBECNÍK</h2>
+            <div class="header-section text-center mb-4 mt-4">
+                <!-- For the logo image (desktop) -->
+                <a href="/Landing" class="d-none d-sm-block">
+                    <img src="~/image.png"
+                         class="img-fluid"
+                         style="height:100px; width:auto;"
+                         alt="Logo">
+                </a>
+                
+                <!-- For the OBECNÍK text -->
+                <a href="/Landing" style="text-decoration: none; color: inherit;">
+                    <h2 class="m-0">OBECNÍK</h2>
+                </a>
             </div>
 
             <!-- Form container -->
@@ -148,13 +147,12 @@
                     </div>
                 }
             </div>
+            <div class="mt-4 register-link text-center" style="margin-bottom: 50px">
+                Máte účet?
+                <a href="/Account/Login">Přihlašte se zde</a>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="mt-4 register-link text-center" style="margin-bottom: 50px">
-    Máte účet?
-    <a href="/Account/Login">Přihlašte se zde</a>
 </div>
 
 <script>

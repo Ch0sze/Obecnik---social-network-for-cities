@@ -4,23 +4,22 @@
 }
 
 
-<div class="d-flex align-items-center justify-content-center" style="min-height: 100%; margin: 10px">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
     <div style="max-width: 500px; width: 100%;">
         <!-- Logo a nadpis mimo kontejner formuláře -->
         <div class="header-section text-center mb-4">
-            <!-- jen na xs (do 576 px) -->
-            <img src="~/image.png"
-                 class="d-block d-sm-none img-fluid"
-                 style="height:100px; width:auto;"
-                 alt="Logo">
-
-            <!-- od sm (576 px) výš -->
-            <img src="~/image.png"
-                 class="d-none d-sm-block img-fluid"
-                 style="height:171px; width:auto;"
-                 alt="Logo">
-
-            <h2 class="m-0">OBECNÍK</h2>
+            <!-- For the logo image (mobile) -->
+            <a href="/Landing" class="d-none d-sm-block">
+                <img src="~/image.png" 
+                     class="img-fluid"
+                     style="height:100px; width:auto;"
+                     alt="Logo">
+            </a>
+            
+            <!-- For the OBECNÍK text -->
+            <a href="/Landing" style="text-decoration: none; color: inherit;">
+                <h2 class="m-0">OBECNÍK</h2>
+            </a>
         </div>
 
         

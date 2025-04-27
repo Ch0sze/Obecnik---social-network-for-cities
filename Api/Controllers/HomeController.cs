@@ -220,7 +220,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
     	var isAdmin = await databaseContext.CommunityAdmins
         	.AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
     
-    	if (!isAdmin && user.Role != "UnpaidAdmin")
+    	if (!isAdmin && user.Role != "Admin")
         	return Forbid();
     
     	// Toggle the pin status
