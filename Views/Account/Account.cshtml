@@ -31,21 +31,21 @@
                 <!-- Email -->
                 <div class="mb-3">
                     <label asp-for="AccountViewModel!.Email" class="fw-bold">Email:</label>
-                    <input asp-for="AccountViewModel!.Email" class="form-control"/>
+                    <input asp-for="AccountViewModel!.Email" class="form-control  @ViewData.ValidationClass(model => model.AccountViewModel!.Email)"/>
                     <span asp-validation-for="AccountViewModel!.Email" class="invalid-feedback"></span>
                 </div>
 
                 <!-- Jméno -->
                 <div class="mb-3">
                     <label asp-for="AccountViewModel!.FirstName" class="fw-bold">Jméno:</label>
-                    <input asp-for="AccountViewModel!.FirstName" class="form-control"/>
+                    <input asp-for="AccountViewModel!.FirstName" class="form-control @ViewData.ValidationClass(model => model.AccountViewModel!.FirstName)"/>
                     <span asp-validation-for="AccountViewModel!.FirstName" class="invalid-feedback"></span>
                 </div>
 
                 <!-- Příjmení -->
                 <div class="mb-3">
                     <label asp-for="AccountViewModel!.LastName" class="fw-bold">Příjmení:</label>
-                    <input asp-for="AccountViewModel!.LastName" class="form-control"/>
+                    <input asp-for="AccountViewModel!.LastName" class="form-control  @ViewData.ValidationClass(model => model.AccountViewModel!.LastName)"/>
                     <span asp-validation-for="AccountViewModel!.LastName" class="invalid-feedback"></span>
                 </div>
 
