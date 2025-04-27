@@ -12,8 +12,8 @@ namespace Application.Api.Controllers;
 [Route("/")]
 public class HomeController(DatabaseContext databaseContext, ILogger<HomeController> logger) : Controller
 {
-    [Authorize]
-    [HttpGet]
+[Authorize]
+[HttpGet]
 public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 {
     var userId = User.GetId();

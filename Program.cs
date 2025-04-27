@@ -45,13 +45,23 @@ builder.Services
         
         options.Events.OnRedirectToLogin = context =>
         {
+            // Special handling for post sharing links
+            if (context.Request.Query.ContainsKey("openPostId"))
+            {
+                // Preserve the full URL including query parameters
+                var returnUrl = context.Request.Path + context.Request.QueryString;
+                context.Response.Redirect($"/Account/Login?returnUrl={Uri.EscapeDataString(returnUrl)}");
+                return Task.CompletedTask;
+            }
+            
+            // Default behavior for other cases
             if (context.Request.Path == "/")
             {
                 context.Response.Redirect("/Landing");
             }
             else
             {
-                context.Response.Redirect(context.RedirectUri); // default behavior
+                context.Response.Redirect(context.RedirectUri);
             }
             return Task.CompletedTask;
         };
