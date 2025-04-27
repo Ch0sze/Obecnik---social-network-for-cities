@@ -72,8 +72,19 @@
             var modalInstance = bootstrap.Modal.getInstance(modal);
             if (modalInstance) {
                 modalInstance.hide();
+
+                // Obnovíme scrollování na pozadí, když se modal zavře
+                document.body.style.overflow = ""; // Obnoví scrollování na stránce
+                document.querySelector('.modal-backdrop').remove(); // Odstraní backdrop
             }
         }
+    });
+
+    // Pokud modal zavřeš i jiným způsobem, např. přes tlačítko
+    var modalElement = document.getElementById('createPostModal');
+    modalElement.addEventListener('hidden.bs.modal', function () {
+        document.body.style.overflow = ""; // Obnoví scrollování na stránce
+        document.querySelector('.modal-backdrop').remove(); // Odstraní backdrop
     });
 </script>
 
