@@ -1,57 +1,59 @@
 ﻿<div class="create-post-modal-container">
     <form asp-controller="Posts" asp-action="Create" id="createPostForm" onsubmit="return validateForm()" enctype="multipart/form-data">
-        <div id="createPostModal" class="modal fade" tabindex="-1" data-bs-backdrop="true">
+        <div id="createPostModal" class="modal fade" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <h3 id="postTitleHeader" class="modal-header">Vytvořit příspěvek</h3>
 
-                     <div class="button-group"> 
-                         <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button> 
-                         @*<button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button>*@
-                         <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button> 
-                     </div> 
+                    <div class="button-group">
+                        <button type="button" id="discussionButton" class="type-button active ButtonPopup">Diskuze</button>
+                        @*<button type="button" id="actionButton" class="type-button ButtonPopup">Akce</button>*@
+                        <button type="button" id="petitionButton" class="type-button ButtonPopup">Petice</button>
+                    </div>
 
-                    <input name="Title" type="text" class="input-field" placeholder="O co se jedná?" id="postTitle" maxlength="100" required/>
+                    <input name="Title" type="text" class="input-field" placeholder="O co se jedná?" id="postTitle" maxlength="100" required />
                     <span id="titleError" class="error-message" style="color: red; display: none; font-size: 12px; margin-left: 2px;">Je potřeba napsat předmět.</span>
                     <span id="titleLength" style="font-size: 12px; color: gray; margin-bottom: 12px; margin-left: 2px;">0/100</span>
 
                     <textarea name="Content" class="textarea-field" placeholder="Co se u vás děje?" id="postContent" maxlength="1000" required
-                        style="height: 150px; resize: none;"
-                    ></textarea>
+                              style="height: 150px; resize: none;"></textarea>
                     <span id="contentError" class="error-message" style="color: red; display: none; font-size: 12px; margin-left: 2px;">Je potřeba napsat popis.</span>
                     <span id="contentLength" style="font-size: 12px; color: gray; margin-left: 2px;">0/1000</span>
 
                     <div class="icon-group">
                         <div class="icon-button">
                             <label for="uploadImage" class="icon-label">
-                                <img src="/icons/image_icon.svg" class="icon"/>
+                                <img src="/icons/image_icon.svg" class="icon" />
                             </label>
-                            <input type="file" id="uploadImage" name="Photo" style="display: none;" accept=".png, .jpeg, .jpg"/>
+                            <input type="file" id="uploadImage" name="Photo" style="display: none;" accept=".png, .jpeg, .jpg" />
                         </div>
 
                         <div class="icon-button" id="locationButton" style="display: none;">
-                            <img src="/icons/location_icon.svg" class="icon"/>
+                            <img src="/icons/location_icon.svg" class="icon" />
                         </div>
 
                         <div class="icon-button" id="dateButton" style="display: none;">
-                            <img src="/icons/calendar_icon.svg" class="icon"/>
+                            <img src="/icons/calendar_icon.svg" class="icon" />
                         </div>
                     </div>
-                    <p style="font-size: 12px; color: gray; margin-left: 2px;"> Podporované formáty: .jpg .jpeg .png </p>
+
+                    <p style="font-size: 12px; color: gray; margin-left: 2px;">Podporované formáty: .jpg .jpeg .png</p>
+
                     <div id="actionFields" class="extra-fields" style="display: none;">
-                        <input type="text" id="location" name="location" class="input-field location-field" style="display: none;"/>
-                        <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;"/>
+                        <input type="text" id="location" name="location" class="input-field location-field" style="display: none;" />
+                        <input type="date" id="eventDate" name="eventDate" class="input-field date-field" style="display: none;" />
                     </div>
+
                     <div id="imagePreviewContainer" style="display:none;">
                         <button type="button" id="removeImageButton" class="remove-image">&times;</button>
                         <img id="imagePreview" src="" alt="Image Preview" />
                     </div>
+
                     @{
-                        var communityId = Context.Request.Query["communityId"].ToString();
+                        var communityId = Context.Request.Query.ContainsKey("communityId") ? Context.Request.Query["communityId"].ToString() : "";
                     }
                     <input type="hidden" name="CommunityId" value="@communityId" />
                     <input type="hidden" name="Type" id="postType" value="Discussion" />
-
 
                     <button type="button" class="publish-button ButtonPublish" id="publishPost">Publikovat</button>
                 </div>
@@ -59,6 +61,21 @@
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener('click', function (event) {
+        var modal = document.getElementById('createPostModal');
+        var modalDialog = modal.querySelector('.modal-dialog');
+
+        // Pokud modal je viditelný a klikneš mimo jeho obsah
+        if (modal.classList.contains('show') && !modalDialog.contains(event.target)) {
+            var modalInstance = bootstrap.Modal.getInstance(modal);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        }
+    });
+</script>
 
 <script>
     // validation functions
