@@ -351,6 +351,13 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
             Photo = postDo.Photo != null
         };
 
+        // Nastavení Open Graph metadat
+        ViewData["OgTitle"] = postDo.Title;
+        ViewData["OgDescription"] = postDo.Description; 
+        var ogImage = postDo.Photo != null ? "wwwroot/image.png" : "wwwroot/image.png"; 
+        ViewData["OgImage"] = ogImage;
+        ViewData["OgUrl"] = Url.Action("OpenedPost", "Home", new { id = id }, Request.Scheme);
+
         return PartialView("_OpenedPost", postViewModel);
     }
     [HttpGet("viewpost/{communityId}/{postId}")]

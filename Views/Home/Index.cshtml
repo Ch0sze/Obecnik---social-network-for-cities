@@ -2,7 +2,17 @@
 @{
     ViewData["Title"] = "Hlavní stránka";
 }
+<head>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["OgTitle"]" />
+    <meta property="og:description" content="@ViewData["OgDescription"]" />
+    <meta property="og:image" content="@ViewData["OgImage"]" />
+    <meta property="og:url" content="@ViewData["OgUrl"]" />
 
+    <!-- Standard Meta Tags -->
+    <meta name="description" content="@ViewData["OgDescription"]" />
+    <meta name="robots" content="index, follow" />
+</head>
 <div class="d-flex min-vh-100">
     <!-- Left Sidebar -->
     <div class="bg-warning bg-opacity-25 d-flex flex-column vh-100 position-sticky top-0" id="leftSidebar">
