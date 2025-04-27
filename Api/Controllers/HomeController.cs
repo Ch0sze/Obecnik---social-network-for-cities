@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Api.Controllers;
 
-[Authorize]
 [Route("/")]
 public class HomeController(DatabaseContext databaseContext, ILogger<HomeController> logger) : Controller
 {
+    [Authorize]
     [HttpGet]
 public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 {
@@ -139,7 +139,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
     return View(combinedViewModel);
 }
 
-
+    [Authorize]
     [HttpGet("load-posts")]
     public async Task<IActionResult> LoadPosts(int pageNumber, int pageSize, Guid? communityId)
     {
@@ -196,6 +196,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
         return PartialView("_PostsPartial", posts);
     }
 	
+    [Authorize]
 	[HttpPost("toggle-pin/{postId}")]
 	public async Task<IActionResult> TogglePin(Guid postId)
 	{
@@ -232,7 +233,8 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
             message = post.IsPinned ? "Post pinned successfully" : "Post unpinned successfully"
         });
 	}
-
+    
+    [Authorize]
 	[HttpGet("get-pinned-posts")]
 	public async Task<IActionResult> GetPinnedPosts(Guid? communityId)
 	{
@@ -280,7 +282,8 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 
         return Json(pinnedPosts);
     }
-
+    
+    [Authorize]
     [HttpGet("user-photo/{userId}")]
     public IActionResult GetUserPhoto(Guid userId)
     {
@@ -293,7 +296,8 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 
         return File(user.Picture, "image/jpeg");
     }
-
+    
+    [Authorize]
     [HttpGet("image/{postId}")]
     public IActionResult GetImage(Guid postId)
     {
@@ -303,6 +307,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
         return File(post.Photo, "image/jpeg");
     }
 
+    [Authorize]
     [HttpGet("community/image/{communityId}")]
     public IActionResult GetCommunityImage(Guid communityId)
     {
@@ -312,6 +317,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
         return File(community.Picture, "image/jpeg");
     }
 
+    [Authorize]
     [HttpGet("OpenedPost/{id}")]
     public IActionResult OpenedPost(Guid id)
     {

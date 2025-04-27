@@ -203,7 +203,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Login", "Account");
     }
 
 

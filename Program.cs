@@ -39,9 +39,22 @@ builder.Services
     {
         options.LoginPath = "/Account/Login";
         options.LogoutPath = "/Account/Logout";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         options.SlidingExpiration = true;
         options.AccessDeniedPath = "/Forbidden/";
+        
+        options.Events.OnRedirectToLogin = context =>
+        {
+            if (context.Request.Path == "/")
+            {
+                context.Response.Redirect("/Landing");
+            }
+            else
+            {
+                context.Response.Redirect(context.RedirectUri); // default behavior
+            }
+            return Task.CompletedTask;
+        };
     });
 builder.Services.AddAuthorization();
 
@@ -74,7 +87,7 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}")
+app.MapControllerRoute("default", "{controller=Landing}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 app.Run();
