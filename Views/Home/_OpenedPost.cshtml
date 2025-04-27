@@ -9,7 +9,6 @@
                 <!-- Hlavička s křížkem -->
                 <!-- Tělo -->
                 <div class="modal-body pt-0">
-                    <button onclick="copyLinkToClipboard()">Zkopírovat odkaz</button>
                     <div class="d-flex flex-column flex-sm-row">
                         <!-- Levý sloupec s obrázkem -->
                         <div class="col-12 col-sm-9 mb-3 mb-sm-0" style="padding-right: 15px;">
@@ -44,9 +43,14 @@
                         <!-- Pravý sloupec s textem -->
                         <div class="col-12 col-sm-3" style="margin-top: 10px;">
                             <!-- Zvětšení názvu diskuze/petice, přidání mezery a středění -->
-                            <h5 class="mb-4 fw-bold text-center "
-                                style="font-size: 1.5rem; text-align: center; ">@(Model.IsPetition ? "Petice" : "Diskuze")
-                            </h5> <!-- Zvětšený a středěný text -->
+                            <div class="d-flex justify-content-center align-items-center mb-4">
+                                <h5 class="fw-bold mb-0" style="font-size: 1.5rem;">
+                                    @(Model.IsPetition ? "Petice" : "Diskuze")
+                                </h5>
+                                <button onclick="copyLinkToClipboard()" style="background: none; border: none; margin-left: 10px; cursor: pointer;">
+                                    <img src="~/icons/Share.svg" alt="Sdílet" style="width: 24px; height: 24px;">
+                                </button>
+                            </div>
 
                             <div class="d-flex align-items-center mb-3">
                                 <!-- Ikona s dynamickou velikostí a přidáním mezery -->
