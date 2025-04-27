@@ -47,7 +47,7 @@
                                 	<button type="button" class="dropdown-item update-post-btn"
                                         	data-post-id="@post.Id"
                                         	data-title="@post.Title"
-                                        	data-content="@post.Description"
+                                            data-content="@post.Description"
                                         	data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")">
                                     	Upravit příspěvek
                                 	</button>

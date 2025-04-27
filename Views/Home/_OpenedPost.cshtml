@@ -121,7 +121,19 @@
 </script>
 
 <script>
+    function copyLinkToClipboard() {
+        const link = window.location.href;  // Získání aktuální URL
 
+        // Používáme moderní API pro kopírování do schránky
+        navigator.clipboard.writeText(link)
+            .then(function() {
+                alert("Odkaz byl zkopírován do schránky!"); // Uživatelská zpráva
+            })
+            .catch(function(err) {
+                console.error("Chyba při kopírování odkazu: ", err); // Chyba při kopírování
+                alert("Chyba při kopírování odkazu.");
+            });
+    }
     function initializePetitionButton(postId) {
         const button = document.getElementById("signPetitionButton");
         const message = document.getElementById("signatureMessage");

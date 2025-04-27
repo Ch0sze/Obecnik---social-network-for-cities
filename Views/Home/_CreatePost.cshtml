@@ -96,7 +96,41 @@
         const length = this.value.length;
         document.getElementById('contentLength').textContent = `${length}/1000`;
     });
-    
+    document.addEventListener("DOMContentLoaded", function () {
+        var openModalButton = document.getElementById("openModalButton");
+        var modal = new bootstrap.Modal(document.getElementById("createPostModal"));
+        var discussionButton = document.getElementById("discussionButton");
+        var petitionButton = document.getElementById("petitionButton");
+        var typeButtonGroup = document.querySelector('.button-group');  // Skupina tlačítek pro výběr typu
+
+        if (openModalButton && modal) {
+            openModalButton.addEventListener("click", function () {
+                modal.show();
+                // Pokud se otevírá okno pro úpravu příspěvku, skryj tlačítka pro výběr typu
+                typeButtonGroup.style.display = 'none';  // Skrytí tlačítek pro výběr typu
+            });
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        var modal = new bootstrap.Modal(document.getElementById("createPostModal"));
+        var typeButtonGroup = document.querySelector('.button-group');  // Skupina tlačítek pro výběr typu
+        var openModalButton = document.getElementById("openModalButton");
+
+        // Předpokládejme, že pokud máme v URL nebo v datech ID příspěvku, je to úprava
+        var isEditMode = window.location.search.includes("id=");  // Tady můžeš upravit podmínku, pokud používáš jiný mechanismus
+
+        // Pokud jde o úpravu, schovej tlačítka pro výběr typu
+        if (isEditMode) {
+            typeButtonGroup.style.display = 'none';
+        }
+
+        // Otevření modálního okna (pokud je otevřeno pro úpravu, tlačítka se již skryjí)
+        if (openModalButton && modal) {
+            openModalButton.addEventListener("click", function () {
+                modal.show();
+            });
+        }
+    });
     document.addEventListener("DOMContentLoaded", function () {
         var publishButton = document.getElementById("publishPost");
         var form = document.getElementById("createPostForm");
@@ -113,7 +147,65 @@
             });
         }
     });
-    
+    document.addEventListener("DOMContentLoaded", function () {
+        var updatePostButtons = document.querySelectorAll('.update-post-btn');  // Všechna tlačítka pro úpravu příspěvku
+        var modal = new bootstrap.Modal(document.getElementById("createPostModal"));
+        var typeButtonGroup = document.querySelector('.button-group');  // Skupina tlačítek pro výběr typu
+        var createPostButton = document.getElementById("openModalButton"); // Tlačítko pro otevření modalu pro nový příspěvek
+
+        updatePostButtons.forEach(function(button) {
+            button.addEventListener("click", function () {
+                // Získání informací z data-atributů tlačítka
+                var postId = this.getAttribute("data-post-id");
+                var postTitle = this.getAttribute("data-title");
+                var postContent = this.getAttribute("data-content");
+                var postPhoto = this.getAttribute("data-photo");
+
+                // Naplnění dat do modálního okna pro úpravu
+                document.getElementById("postTitle").value = postTitle;
+                document.getElementById("postContent").value = postContent;
+                document.getElementById("imagePreview").src = postPhoto;  // Pokud je k dispozici fotka
+
+                // Pokud je fotka, zobraz ji
+                if (postPhoto) {
+                    document.getElementById("imagePreviewContainer").style.display = "block";
+                } else {
+                    document.getElementById("imagePreviewContainer").style.display = "none";
+                }
+
+                // Skrytí tlačítek pro výběr typu (diskuze, petice) při úpravě příspěvku
+                if (typeButtonGroup) {
+                    typeButtonGroup.style.display = 'none';  // Skrytí tlačítek pro výběr typu
+                }
+
+                // Otevření modálního okna pro úpravu
+                modal.show();
+            });
+        });
+
+        // Pokud klikneš na tlačítko pro otevření modalu pro vytvoření příspěvku
+        if (createPostButton) {
+            createPostButton.addEventListener("click", function () {
+                // Zobraz tlačítka pro výběr typu při vytváření nového příspěvku
+                if (typeButtonGroup) {
+                    typeButtonGroup.style.display = 'block';  // Zobrazit tlačítka pro výběr typu
+                }
+
+                // Otevření modálního okna pro vytvoření příspěvku
+                modal.show();
+            });
+        }
+
+        // Pokud je potřeba obnovit tlačítka pro výběr typu při zrušení úpravy
+        var cancelButton = document.querySelector('#cancelButton');  // Zkontroluj ID tlačítka pro zrušení
+        if (cancelButton) {
+            cancelButton.addEventListener('click', function() {
+                if (typeButtonGroup) {
+                    typeButtonGroup.style.display = 'block';  // Zobrazit tlačítka pro výběr typu zpět
+                }
+            });
+        }
+    });
     document.addEventListener("DOMContentLoaded", function () {
         var discussionButton = document.getElementById("discussionButton");
         var actionButton = document.getElementById("actionButton");

@@ -106,6 +106,8 @@ public class EditPostController(DatabaseContext databaseContext) : Controller
         post.Title = model.Title;
         post.Description = model.Content;
         
+        
+        
         databaseContext.SaveChanges();
         
         return RedirectToAction("Index", "Home", new { communityId = model.CommunityId });
