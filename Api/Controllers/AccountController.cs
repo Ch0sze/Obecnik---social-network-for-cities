@@ -542,6 +542,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         // Aktualizace údajů uživatele
         userFromDb.Firstname = model.AccountViewModel.FirstName;
         userFromDb.LastName = model.AccountViewModel.LastName;
+        userFromDb.Email = model.AccountViewModel.Email;
         userFromDb.Residence = model.AccountViewModel.Residence;
         userFromDb.PostalCode = model.AccountViewModel.PostalCode;
         
@@ -625,6 +626,14 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         var fullName = $"{user.Firstname} {user.LastName}";
         return Ok(new { username = fullName });
     }
-    
 
+    [HttpGet("isAdminOfCommunity")]
+    public async Task<IActionResult> IsAdminOfCommunity(Guid userId, Guid communityId)
+    {
+        // Check if the user is a direct admin of this community
+        var isCommunityAdmin = await databaseContext.CommunityAdmins
+            .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
+
+        return Ok(isCommunityAdmin);
+    }
 }

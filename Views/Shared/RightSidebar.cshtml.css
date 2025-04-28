@@ -26,4 +26,47 @@
     margin-top: 5px;
 }
 
+/* Username and badge container */
+.profile-info-sb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.username-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Role badge styling */
+.role-badge-sb {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: #6c757d;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 2px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.role-badge-sb.superadmin {
+    background-color: #dc3545;
+}
+
+.role-badge-sb.admin {
+    background-color: #0d6efd;
+}
+
+/* Adjust the username text */
+#username-sb {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
 

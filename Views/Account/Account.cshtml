@@ -27,6 +27,14 @@
 
                 <!-- Skrytý input pro signalizaci odstranění obrázku -->
                 <input type="hidden" id="RemoveImage" name="RemoveImage" value="false"/>
+				
+				<!-- Email -->
+				<div class="mb-3">
+					<label asp-for="AccountViewModel!.Email" class="fw-bold">Email:</label>
+					<input asp-for="AccountViewModel!.Email" class="form-control  @ViewData.ValidationClass(model => model.AccountViewModel!.Email)"/>
+					<span asp-validation-for="AccountViewModel!.Email" class="invalid-feedback"></span>
+				</div>
+
 
                 <!-- Jméno -->
                 <div class="mb-3">

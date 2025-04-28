@@ -15,7 +15,10 @@
                      onerror="this.src='/Images/GenericAvatar.png'"
                      class="profile-image icon-image" />
             </button>
-            <span class="text-sb" id="username-sb"></span>
+            <div class="username-container">
+                <span class="text-sb" id="username-sb"></span>
+                <div id="user-role-badge" class="role-badge-sb" style="display: none;"></div>
+            </div>
         
 
         <!-- Dropdown (hidden by default) -->
@@ -222,21 +225,52 @@
         document.getElementById('petition-signatures-sb').innerText = `${petition.signatures} podpisů`;
     }
     document.addEventListener('DOMContentLoaded', function () {
-        const userId = '@User.GetId()';
-        fetch(`/account/users/${userId}/Firstname`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch username. Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById('username-sb').innerText = data.username;
-            })
-            .catch(error => {
-                console.error('Error fetching username:', error);
-            });
-    });
+            const userId = '@User.GetId()';
+            const communityId = getCommunityIdFromUrl();
+            const roleBadge = document.getElementById('user-role-badge');
+    
+            fetch(`/account/users/${userId}/Firstname`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch username. Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('username-sb').innerText = data.username;
+                    
+                    // Handle role badge display
+                    if (userRole === "SuperAdmin") {
+                        roleBadge.style.display = 'block';
+                        roleBadge.textContent = "SuperAdmin";
+                        roleBadge.classList.add('superadmin');
+                    } 
+                    else if (userRole === "Admin" && communityId) {
+                        // Check if user is admin of this specific community
+                        fetch(`/account/isAdminOfCommunity?userId=${userId}&communityId=${communityId}`)
+                            .then(response => response.json())
+                            .then(isAdmin => {
+                                if (isAdmin) {
+                                    roleBadge.style.display = 'block';
+                                    roleBadge.textContent = "Admin";
+                                    roleBadge.classList.add('admin');
+                                } else {
+                                    roleBadge.style.display = 'none'; // Hide if not admin in this community
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error checking admin status:', error);
+                                roleBadge.style.display = 'none'; // Hide on error
+                            });
+                    } else {
+                        roleBadge.style.display = 'none'; // Hide if not SuperAdmin or Admin
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching username:', error);
+                    roleBadge.style.display = 'none'; // Hide on error
+                });
+        });
     
 </script>
 
