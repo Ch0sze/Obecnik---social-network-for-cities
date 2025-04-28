@@ -25,11 +25,15 @@
     background-color: #F98866;
     border: none;
     color: #FFF;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1.2rem;
     border-radius: 9999px;
     font-weight: 400;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.download-button:hover{
+    background-color: #f77755;
 }
 
 .opened-post-modal-container .modal {

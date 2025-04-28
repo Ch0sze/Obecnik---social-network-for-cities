@@ -47,7 +47,8 @@
                                 <h5 class="fw-bold mb-0" style="font-size: 1.5rem;">
                                     @(Model.IsPetition ? "Petice" : "Diskuze")
                                 </h5>
-                                <button onclick="copyLinkToClipboard()" style="background: none; border: none; margin-left: 10px; cursor: pointer;">
+                                <button onclick="copyLinkToClipboard()"
+                                        style="background: none; border: none; margin-left: 10px; cursor: pointer;">
                                     <img src="~/icons/Share.svg" alt="Sdílet" style="width: 24px; height: 24px;">
                                 </button>
                             </div>
@@ -82,24 +83,24 @@
                             <!-- Zmenšený popis -->
                             @if (Model.IsPetition)
                             {
-                                <div class="text-center mt-4" id="petitionArea">
+                                <div class="text-center" id="petitionArea" style="margin-left: 10px;">
                                     <div id="signatureCount" class="text-muted mb-2" style="font-size: 1.2rem;"></div>
                                     <button id="signPetitionButton" class="sign-petition-button">
                                         Podepsat petici
                                     </button>
                                     <div id="signatureMessage" class="mt-2 text-muted" style="font-size: 0.9rem;"></div>
                                 </div>
-                                <h5 style="margin-top: 20px">Petici již podepsali:</h5>
+                                <h5 style="margin-top: 20px; margin-left: 10px;">Petici již podepsali:</h5>
                                 @if (Model.IsAdmin)
                                 {
-                                    <div class="text-end mb-2">
+                                    <div class="text-center mb-2">
                                         <button class="download-button" data-postid="@Model.Id">
                                             Stáhnout podpisy
                                         </button>
                                     </div>
                                 }
 
-                                <div id="signaturesList" class="mt-4">
+                                <div id="signaturesList" class="mt-4" style="margin-left: 10px; ">
                                     <ul id="signatureUsers" style="list-style: none; padding-left: 0;"></ul>
                                 </div>
                             }
@@ -116,7 +117,7 @@
         window.location.href = `/petitions/${postId}/signatures/excel`;
     }
 
-    document.body.addEventListener('click', function(e) {
+    document.body.addEventListener('click', function (e) {
         if (!e.target.matches('.download-button')) return;
         e.preventDefault();
         const postId = e.target.getAttribute('data-postid');
@@ -130,14 +131,15 @@
 
         // Používáme moderní API pro kopírování do schránky
         navigator.clipboard.writeText(link)
-            .then(function() {
+            .then(function () {
                 alert("Odkaz byl zkopírován do schránky!"); // Uživatelská zpráva
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 console.error("Chyba při kopírování odkazu: ", err); // Chyba při kopírování
                 alert("Chyba při kopírování odkazu.");
             });
     }
+
     function initializePetitionButton(postId) {
         const button = document.getElementById("signPetitionButton");
         const message = document.getElementById("signatureMessage");
@@ -191,7 +193,7 @@
 
         button.addEventListener("click", () => {
             if (!hasSigned) {
-                fetch(`/petitions/${postId}/sign`, { method: "POST" })
+                fetch(`/petitions/${postId}/sign`, {method: "POST"})
                     .then(res => {
                         if (!res.ok) throw new Error("Nepodařilo se podepsat.");
                         hasSigned = true;
@@ -209,7 +211,7 @@
                         message.textContent = "Error: " + err.message;
                     });
             } else {
-                fetch(`/petitions/${postId}/unsign`, { method: "POST" })
+                fetch(`/petitions/${postId}/unsign`, {method: "POST"})
                     .then(res => {
                         if (!res.ok) throw new Error("Nepodařilo se zrušit podpis.");
                         hasSigned = false;
