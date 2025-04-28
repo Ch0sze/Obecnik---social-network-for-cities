@@ -15,7 +15,6 @@
     margin-bottom: 1rem;
 }
 
-
 .header-section img {
     height: 50px;
 }
@@ -40,8 +39,7 @@
     background-color: #f77755; /* O něco tmavší odstín při najetí myší */
 }
 
-
-/* Všechny stavy odkazu v .login-link */
+/* Link stylování */
 .login-link a,
 .login-link a:link,
 .login-link a:visited,
@@ -49,4 +47,11 @@
 .login-link a:active {
     color: #F98866 !important;
     text-decoration: none;
+}
+
+/* --- NEW: Form helper notes under fields --- */
+.form-note {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.25rem;
 }

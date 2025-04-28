@@ -19,9 +19,31 @@ namespace Application.Api.Controllers
             _databaseContext = databaseContext;
         }
 
+        // New version of the method without authorization
+        [HttpGet("requestadminrights")]
+        public IActionResult RequestAdminRightsNoAuth()
+        {
+            // Fetch communities from the database
+            var communities = _databaseContext.Communities.ToList();
+
+            // Fetch admin
+            var user = _databaseContext.Users.FirstOrDefault(u => u.Email == "obecnika@gmail.com");// Assuming ID 1 corresponds to the first created user
+
+            // Create the view model and populate the Communities list and User with ID 1
+            var model = new AdminRequestFormViewModel
+            {
+                Communities = communities, // Add communities to the view model
+                User = user // Add the user with ID 1 to the view model
+            };
+
+            return View("~/Views/Account/RequestAdminRights.cshtml", model);
+        }
+
+        // The existing POST method to create admin requests
         [HttpPost]
         public async Task<IActionResult> CreateAdminRequest(AdminRequestFormViewModel model)
         {
+            Console.WriteLine("CreateAdminRequest POST method is called");
             // Server-side validation
             if (string.IsNullOrWhiteSpace(model.OfficialEmail))
             {
@@ -44,10 +66,12 @@ namespace Application.Api.Controllers
                 return View("~/Views/Account/RequestAdminRights.cshtml", model);
             }
 
-            var userId = User.GetId();
-            var user = _databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+            var user = _databaseContext.Users.FirstOrDefault(u => u.Email == "obecnika@gmail.com");
             if (user == null)
-                return RedirectToAction("Login", "Account");
+            {
+                // If no user found, redirect to the login page or handle accordingly
+                return RedirectToAction("Register", "Account");
+            }
 
             // Use the CommunityId passed from the form
             var communityId = model.CommunityId;
@@ -79,7 +103,13 @@ namespace Application.Api.Controllers
             await _databaseContext.SaveChangesAsync();
 
             // Redirect to a success page or where you need
-            return RedirectToAction("Index", "Home"); // Or another page after successful request
+            var successModel = new AdminRequestSuccessViewModel
+            {
+                OfficialEmail = model.OfficialEmail,
+                CommunityName = community.Name // Assuming "Name" is the name property of your Community
+            };
+            
+            return View("Views/Home/AdminRequestSuccess.cshtml", successModel);
         }
     }
 }

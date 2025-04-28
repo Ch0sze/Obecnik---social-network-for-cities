@@ -1,0 +1,41 @@
+﻿@model Application.Api.Models.AdminRequestSuccessViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Žádost úspěšně odeslána</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body style="background-color: #f2f2f2;">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div style="max-width: 600px; width: 100%;">
+        <div class="header-section text-center mb-4">
+            <img src="~/image.png" alt="Logo" style="max-height: 100px;" />
+            <h2>Žádost o práva správce byla odeslána</h2>
+        </div>
+
+        <div class="bg-white p-4 shadow rounded text-center">
+            <p class="text-success font-weight-bold mb-4">
+                Děkujeme! Vaše žádost byla úspěšně odeslána. Brzy Vás budeme kontaktovat.
+                
+                Pokud ještě ne-existuje účet s vámi zadaným oficiálním e-mailem, bude po scvhálení žádosti vytvořen nový administrátorský účet a na daný e-mail bude zaslán odkaz pro získání hesla.
+                
+                Pokud již existuje účet s vámi zadným oficiálním e-mailem, budou mu po schválení žádosti přiřazena administrátorská práva a budete o tom na daný e-mail informován.
+                
+                Pro kompletní aktivaci vašeho účtu nezapomeňte zaplatit měsíční předplatné. Tuto mužnost naleznete pro rozkliknutí vašeho účtu.
+            </p>
+
+            <p><strong>Oficiální email:</strong> @Model.OfficialEmail</p>
+            <p><strong>Vybraná komunita:</strong> @Model.CommunityName</p>
+
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">Zpět na hlavní stránku</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

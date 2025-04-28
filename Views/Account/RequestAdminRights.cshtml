@@ -9,7 +9,7 @@
         </div>
 
         <!-- Form container -->
-        <div class="bg-white p-4 shadow rounded">
+        <div class="bg-white p-4 shadow rounded login-container">
             <form asp-controller="AdminRequest" asp-action="CreateAdminRequest" method="post">
 
                 <!-- Community -->
@@ -24,13 +24,15 @@
                             </option>
                         }
                     </select>
+                    <div class="form-note">Vyberte komunitu, za kterou žádost podáváte.</div>
                     @Html.ValidationMessageFor(model => model.CommunityId, "", new { @class = "text-danger" })
                 </div>
-                
+
                 <!-- Population -->
                 <div class="mb-3">
                     <label for="population" class="form-label fw-bold">Počet obyvatel:</label>
                     <input type="number" class="form-control" id="population" name="Population" value="@Model.Population" placeholder="Např. 1200" style="background-color: #FAFAFA; border: none; border-bottom: 1px solid #F98866; border-radius: 0;" />
+                    <div class="form-note">V poznámkách uveďte zdroj ohledně počtu obyvatel, nejlépe ze stránek Českého statistického úřadu.</div>
                     @Html.ValidationMessageFor(model => model.Population, "", new { @class = "text-danger" })
                 </div>
 
@@ -38,6 +40,7 @@
                 <div class="mb-3">
                     <label for="email" class="form-label fw-bold">Oficiální e-mail:</label>
                     <input type="email" class="form-control" id="email" name="OfficialEmail" value="@Model.OfficialEmail" placeholder="např. starosta@obec.cz" style="background-color: #FAFAFA; border: none; border-bottom: 1px solid #F98866; border-radius: 0;" />
+                    <div class="form-note">Použijte oficiální obecní e-mailovou adresu, či adresu jiného odpovědného orgánu.</div>
                     @Html.ValidationMessageFor(model => model.OfficialEmail, "", new { @class = "text-danger" })
                 </div>
 
@@ -45,12 +48,14 @@
                 <div class="mb-3">
                     <label for="notes" class="form-label fw-bold">Poznámky:</label>
                     <textarea class="form-control" id="notes" name="Notes" rows="5" placeholder="Zde uveďte důvody a podrobnosti žádosti" style="background-color: #FAFAFA; border: 1px solid #F98866; border-radius: 5px;">@Model.Notes</textarea>
+                    <div class="form-note">Doplňte důvody žádosti a další podpůrné informace.</div>
                     @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
                 </div>
 
                 <!-- Submit Button -->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-warning text-white fw-bold px-4">Odeslat žádost</button>
+                    <button type="submit" class="btn btn-warning text-white fw-bold px-4 login-button">Odeslat žádost</button>
+                    <div class="form-note">Uveďte např. další kontaktní informace.</div>
                 </div>
             </form>
         </div>
