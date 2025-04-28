@@ -12,132 +12,133 @@ namespace Application.Api.Controllers;
 [Route("/")]
 public class HomeController(DatabaseContext databaseContext, ILogger<HomeController> logger) : Controller
 {
-[Authorize]
-[HttpGet]
-public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
-{
-    var userId = User.GetId();
-    var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
-    if (user == null)
-        return RedirectToAction("Login", "Account");
-
-    if (user.Role == "Banned")
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Login", "Account", new { error = "Banned", message = "Váš účet byl zabanován." });
-    }
+        var userId = User.GetId();
+        var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
-    var availableCommunityIds = await databaseContext.UserCommunities
-        .Where(uc => uc.UserId == userId)
-        .Select(uc => uc.CommunityId)
-        .ToListAsync();
+        if (user == null)
+            return RedirectToAction("Login", "Account");
 
-    var selectedCommunityId = communityId.HasValue && availableCommunityIds.Contains(communityId.Value)
-        ? communityId.Value
-        : availableCommunityIds.FirstOrDefault();
-
-    var communityName = await databaseContext.Communities
-        .Where(c => c.Id == selectedCommunityId)
-        .Select(c => c.Name)
-        .FirstOrDefaultAsync() ?? "No Community";
-
-    var channelId = await databaseContext.Channels
-        .Where(c => c.CommunityId == selectedCommunityId)
-        .Select(c => c.Id)
-        .FirstOrDefaultAsync();
-
-    var isCommunityAdmin = await databaseContext.CommunityAdmins
-        .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
-
-    var adminRole = user.Role == "Admin";
-
-    logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId, isCommunityAdmin, adminRole);
-
-    var postsQuery = databaseContext.Posts
-        .Include(post => post.User)
-        .Where(post => post.ChannelId == channelId)
-        .OrderByDescending(post => post.CreatedAt)
-        .Take(10);
-
-    var posts = await postsQuery
-        .Select(post => new HomeViewModel.Post
+        if (user.Role == "Banned")
         {
-            Id = post.Id,
-            Title = post.Title,
-            Description = post.Description,
-            CreatedAt = post.CreatedAt,
-            CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
-            Photo = post.Photo != null,
-            IsAdmin = isCommunityAdmin && adminRole,
-            Type = post.Type,
-            IsPinned = post.IsPinned,
-            CreatedById = post.User!.Id,
-            UserHasPhoto = post.User!.Picture != null,
-            HasUserSigned = databaseContext.PetitionSignatures
-                .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
-        })
-        .ToListAsync();
-
-    // Pokud je openPostId -> načíst i ten otevřený post
-    HomeViewModel.Post? openedPost = null;
-    if (openPostId.HasValue)
-    {
-        var postEntity = await databaseContext.Posts
-            .Include(p => p.User)
-            .FirstOrDefaultAsync(p => p.Id == openPostId.Value);
-
-        if (postEntity != null)
-        {
-            var postCommunityId = await databaseContext.Channels
-                .Where(c => c.Id == postEntity.ChannelId)
-                .Select(c => c.CommunityId)
-                .FirstOrDefaultAsync();
-
-            var isPostCommunityAdmin = await databaseContext.CommunityAdmins
-                .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == postCommunityId);
-
-            openedPost = new HomeViewModel.Post
-            {
-                Id = postEntity.Id,
-                Title = postEntity.Title,
-                Description = postEntity.Description,
-                CreatedAt = postEntity.CreatedAt,
-                CreatedBy = postEntity.User!.Firstname + " " + postEntity.User!.LastName,
-                Photo = postEntity.Photo != null,
-                Type = postEntity.Type,
-                IsAdmin = isPostCommunityAdmin && adminRole,
-                CreatedById = postEntity.User.Id,
-                UserHasPhoto = postEntity.User.Picture != null,
-                HasUserSigned = databaseContext.PetitionSignatures
-                    .Any(sig => sig.PostId == postEntity.Id && sig.UserId == userId)
-            };
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account", new { error = "Banned", message = "Váš účet byl zabanován." });
         }
+
+        var availableCommunityIds = await databaseContext.UserCommunities
+            .Where(uc => uc.UserId == userId)
+            .Select(uc => uc.CommunityId)
+            .ToListAsync();
+
+        var selectedCommunityId = communityId.HasValue && availableCommunityIds.Contains(communityId.Value)
+            ? communityId.Value
+            : availableCommunityIds.FirstOrDefault();
+
+        var communityName = await databaseContext.Communities
+            .Where(c => c.Id == selectedCommunityId)
+            .Select(c => c.Name)
+            .FirstOrDefaultAsync() ?? "No Community";
+
+        var channelId = await databaseContext.Channels
+            .Where(c => c.CommunityId == selectedCommunityId)
+            .Select(c => c.Id)
+            .FirstOrDefaultAsync();
+
+        var isCommunityAdmin = await databaseContext.CommunityAdmins
+            .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
+
+        var adminRole = user.Role == "Admin";
+
+        logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId, isCommunityAdmin,
+            adminRole);
+
+        var postsQuery = databaseContext.Posts
+            .Include(post => post.User)
+            .Where(post => post.ChannelId == channelId)
+            .OrderByDescending(post => post.CreatedAt)
+            .Take(10);
+
+        var posts = await postsQuery
+            .Select(post => new HomeViewModel.Post
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Description = post.Description,
+                CreatedAt = post.CreatedAt,
+                CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
+                Photo = post.Photo != null,
+                IsAdmin = isCommunityAdmin && adminRole,
+                Type = post.Type,
+                IsPinned = post.IsPinned,
+                CreatedById = post.User!.Id,
+                UserHasPhoto = post.User!.Picture != null,
+                HasUserSigned = databaseContext.PetitionSignatures
+                    .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
+            })
+            .ToListAsync();
+
+        // Pokud je openPostId -> načíst i ten otevřený post
+        HomeViewModel.Post? openedPost = null;
+        if (openPostId.HasValue)
+        {
+            var postEntity = await databaseContext.Posts
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.Id == openPostId.Value);
+
+            if (postEntity != null)
+            {
+                var postCommunityId = await databaseContext.Channels
+                    .Where(c => c.Id == postEntity.ChannelId)
+                    .Select(c => c.CommunityId)
+                    .FirstOrDefaultAsync();
+
+                var isPostCommunityAdmin = await databaseContext.CommunityAdmins
+                    .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == postCommunityId);
+
+                openedPost = new HomeViewModel.Post
+                {
+                    Id = postEntity.Id,
+                    Title = postEntity.Title,
+                    Description = postEntity.Description,
+                    CreatedAt = postEntity.CreatedAt,
+                    CreatedBy = postEntity.User!.Firstname + " " + postEntity.User!.LastName,
+                    Photo = postEntity.Photo != null,
+                    Type = postEntity.Type,
+                    IsAdmin = isPostCommunityAdmin && adminRole,
+                    CreatedById = postEntity.User.Id,
+                    UserHasPhoto = postEntity.User.Picture != null,
+                    HasUserSigned = databaseContext.PetitionSignatures
+                        .Any(sig => sig.PostId == postEntity.Id && sig.UserId == userId)
+                };
+            }
+        }
+
+        var homeViewModel = new HomeViewModel
+        {
+            Posts = posts,
+            CommunityName = communityName,
+            CommunityId = selectedCommunityId,
+            OpenedPost = openedPost
+        };
+
+        var accountViewModel = new AccountViewModel
+        {
+            Email = user?.Email ?? string.Empty,
+            Name = $"{user?.Firstname} {user?.LastName}",
+            Hometown = $"{user?.Residence}, {user?.PostalCode}"
+        };
+
+        var combinedViewModel = new CombinedViewModel
+        {
+            AccountViewModel = accountViewModel,
+            HomeViewModel = homeViewModel
+        };
+
+        return View(combinedViewModel);
     }
-
-    var homeViewModel = new HomeViewModel
-    {
-        Posts = posts,
-        CommunityName = communityName,
-        CommunityId = selectedCommunityId,
-        OpenedPost = openedPost
-    };
-
-    var accountViewModel = new AccountViewModel
-    {
-        Email = user?.Email ?? string.Empty,
-        Name = $"{user?.Firstname} {user?.LastName}",
-        Hometown = $"{user?.Residence}, {user?.PostalCode}"
-    };
-
-    var combinedViewModel = new CombinedViewModel
-    {
-        AccountViewModel = accountViewModel,
-        HomeViewModel = homeViewModel
-    };
-
-    return View(combinedViewModel);
-}
 
     [Authorize]
     [HttpGet("load-posts")]
@@ -195,51 +196,52 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 
         return PartialView("_PostsPartial", posts);
     }
-	
+
     [Authorize]
-	[HttpPost("toggle-pin/{postId}")]
-	public async Task<IActionResult> TogglePin(Guid postId)
-	{
-    	var userId = User.GetId();
-    	var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-    
-    	if (user == null)
-        	return Unauthorized();
-    
-    	var post = await databaseContext.Posts.FirstOrDefaultAsync(p => p.Id == postId);
-    
-    	if (post == null)
-        	return NotFound();
-    
-    	// Check if user is admin
-    	var communityId = await databaseContext.UserCommunities
-        	.Where(uc => uc.UserId == userId)
-        	.Select(uc => uc.CommunityId)
-        	.FirstOrDefaultAsync();
-    
-    	var isAdmin = await databaseContext.CommunityAdmins
-        	.AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
-    
-    	if (!isAdmin && user.Role != "Admin")
-        	return Forbid();
-    
-    	// Toggle the pin status
-    	post.IsPinned = !post.IsPinned;
-    	await databaseContext.SaveChangesAsync();
-    
-        return Ok(new { 
-            success = true, 
+    [HttpPost("toggle-pin/{postId}")]
+    public async Task<IActionResult> TogglePin(Guid postId)
+    {
+        var userId = User.GetId();
+        var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user == null)
+            return Unauthorized();
+
+        var post = await databaseContext.Posts.FirstOrDefaultAsync(p => p.Id == postId);
+
+        if (post == null)
+            return NotFound();
+
+        // Check if user is admin
+        var communityId = await databaseContext.UserCommunities
+            .Where(uc => uc.UserId == userId)
+            .Select(uc => uc.CommunityId)
+            .FirstOrDefaultAsync();
+
+        var isAdmin = await databaseContext.CommunityAdmins
+            .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == communityId);
+
+        if (!isAdmin && user.Role != "Admin")
+            return Forbid();
+
+        // Toggle the pin status
+        post.IsPinned = !post.IsPinned;
+        await databaseContext.SaveChangesAsync();
+
+        return Ok(new
+        {
+            success = true,
             isPinned = post.IsPinned,
             message = post.IsPinned ? "Post pinned successfully" : "Post unpinned successfully"
         });
-	}
-    
+    }
+
     [Authorize]
-	[HttpGet("get-pinned-posts")]
-	public async Task<IActionResult> GetPinnedPosts(Guid? communityId)
-	{
-    	var userId = User.GetId();
-    	var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+    [HttpGet("get-pinned-posts")]
+    public async Task<IActionResult> GetPinnedPosts(Guid? communityId)
+    {
+        var userId = User.GetId();
+        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
 
         if (user == null)
             return Unauthorized();
@@ -254,11 +256,11 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
             ? communityId.Value
             : validCommunityIds.FirstOrDefault();
 
-    	var channelId = databaseContext.Channels
-        	.Where(c => c.CommunityId == selectedCommunityId)
-        	.Select(c => c.Id)
-        	.FirstOrDefault();
-        
+        var channelId = databaseContext.Channels
+            .Where(c => c.CommunityId == selectedCommunityId)
+            .Select(c => c.Id)
+            .FirstOrDefault();
+
         var isCommunityAdmin = databaseContext.CommunityAdmins
             .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
         var adminRole = user.Role == "Admin";
@@ -277,12 +279,12 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null,
                 isAdmin = adminRole && isCommunityAdmin
-        	})
-        	.ToList();
+            })
+            .ToList();
 
         return Json(pinnedPosts);
     }
-    
+
     [Authorize]
     [HttpGet("user-photo/{userId}")]
     public IActionResult GetUserPhoto(Guid userId)
@@ -296,7 +298,7 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 
         return File(user.Picture, "image/jpeg");
     }
-    
+
     [Authorize]
     [HttpGet("image/{postId}")]
     public IActionResult GetImage(Guid postId)
@@ -359,13 +361,14 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 
         // Nastavení Open Graph metadat
         ViewData["OgTitle"] = postDo.Title;
-        ViewData["OgDescription"] = postDo.Description; 
-        var ogImage = postDo.Photo != null ? "wwwroot/image.png" : "wwwroot/image.png"; 
+        ViewData["OgDescription"] = postDo.Description;
+        var ogImage = postDo.Photo != null ? "wwwroot/image.png" : "wwwroot/image.png";
         ViewData["OgImage"] = ogImage;
         ViewData["OgUrl"] = Url.Action("OpenedPost", "Home", new { id = id }, Request.Scheme);
 
         return PartialView("_OpenedPost", postViewModel);
     }
+
     [HttpGet("viewpost/{communityId}/{postId}")]
     public IActionResult ViewPost(Guid communityId, Guid postId)
     {
@@ -377,12 +380,12 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
     {
         return View("Error");
     }
-    
+
     [HttpGet("get-top-petition")]
     public async Task<IActionResult> GetTopPetition(Guid communityId)
     {
         var userId = User.GetId();
-    
+
         var channelId = await databaseContext.Channels
             .Where(c => c.CommunityId == communityId)
             .Select(c => c.Id)
@@ -405,6 +408,4 @@ public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
 
         return Json(topPetition);
     }
-
-
 }

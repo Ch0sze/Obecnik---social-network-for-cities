@@ -48,7 +48,7 @@
                         <button type="button" id="removeImageButton" class="remove-image">&times;</button>
                         <img id="imagePreview" src="" alt="Image Preview" />
                     </div>
-
+                    <input type="hidden" name="RemoveImage" id="removeImageFlag" value="false">
                     @{
                         var communityId = Context.Request.Query.ContainsKey("communityId") ? Context.Request.Query["communityId"].ToString() : "";
                     }
@@ -65,27 +65,43 @@
 <script>
     document.addEventListener('click', function (event) {
         var modal = document.getElementById('createPostModal');
+        if (!modal) return; // Safety check
+        
         var modalDialog = modal.querySelector('.modal-dialog');
-
-        // Pokud modal je viditelný a klikneš mimo jeho obsah
+        if (!modalDialog) return; // Safety check
+    
         if (modal.classList.contains('show') && !modalDialog.contains(event.target)) {
             var modalInstance = bootstrap.Modal.getInstance(modal);
             if (modalInstance) {
                 modalInstance.hide();
-
-                // Obnovíme scrollování na pozadí, když se modal zavře
-                document.body.style.overflow = ""; // Obnoví scrollování na stránce
-                document.querySelector('.modal-backdrop').remove(); // Odstraní backdrop
+                
+                // Restore body styles
+                document.body.style.overflow = "";
+                document.body.style.paddingRight = "";
+                
+                // Remove backdrop if it exists (with safety check)
+                var backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop && backdrop.parentNode) {
+                    backdrop.remove();
+                }
             }
         }
     });
-
-    // Pokud modal zavřeš i jiným způsobem, např. přes tlačítko
+    
+    // Update the hidden event listener
     var modalElement = document.getElementById('createPostModal');
-    modalElement.addEventListener('hidden.bs.modal', function () {
-        document.body.style.overflow = ""; // Obnoví scrollování na stránce
-        document.querySelector('.modal-backdrop').remove(); // Odstraní backdrop
-    });
+    if (modalElement) {
+        modalElement.addEventListener('hidden.bs.modal', function () {
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+            
+            // Remove backdrop if it exists (with safety check)
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop && backdrop.parentNode) {
+                backdrop.remove();
+            }
+        });
+    }
 </script>
 
 <script>
@@ -246,8 +262,8 @@
         // Funkce pro změnu nadpisu a placeholderů na základě typu příspěvku
          discussionButton.addEventListener("click", function () {
              document.getElementById("postType").value = "Discussion";
-             postTitleHeader.innerHTML = "Vytvořit diskuzi";
-             postContentTextarea.placeholder = "Co se děje u vás?";
+             postTitleHeader.innerHTML = "Vytvořit příspěvek";
+             postContentTextarea.placeholder = "Co se u vás děje?";
              postTitleInput.placeholder = "O co se jedná?";
              actionFields.style.display = "none";  // Skrýt sekci pro "Akce"
              toggleIcons(false);  // Skryj ikonky pro lokaci a datum
@@ -265,7 +281,7 @@
         //
         petitionButton.addEventListener("click", function () {
             document.getElementById("postType").value = "Petition";
-            postTitleHeader.innerHTML = "Vytvořit petici";
+            postTitleHeader.innerHTML = "Vytvořit příspěvek";
             postContentTextarea.placeholder = "Co chceme jinak?";
             postTitleInput.placeholder = "O co se jedná?";
             actionFields.style.display = "none";  // Skrýt sekci pro "Akce"
@@ -336,7 +352,8 @@
         removeImageButton.addEventListener("click", function () {
             imagePreview.src = "";
             imagePreviewContainer.style.display = "none";
-            imageInput.value = ""; // Resetuje vstup souboru
+            imageInput.value = ""; // Reset file input
+            document.getElementById("removeImageFlag").value = "true"; // Set removal flag
         });
     });
 </script>
