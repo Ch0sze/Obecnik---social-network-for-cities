@@ -542,7 +542,6 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         // Aktualizace údajů uživatele
         userFromDb.Firstname = model.AccountViewModel.FirstName;
         userFromDb.LastName = model.AccountViewModel.LastName;
-        userFromDb.Email = model.AccountViewModel.Email;
         userFromDb.Residence = model.AccountViewModel.Residence;
         userFromDb.PostalCode = model.AccountViewModel.PostalCode;
         

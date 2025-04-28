@@ -27,6 +27,7 @@
                     <div class="d-flex flex-column flex-sm-row align-items-sm-center">
                         <strong class="me-sm-2">@post.CreatedBy</strong>
                         <small class="text-muted">@post.GetFormattedCreatedAt()</small>
+                        <small class="badge text-dark ms-sm-2" style="background-color: #FFF2D6">@(post.IsPetition ? "Petice" : "Diskuze")</small>
                     </div>
                 </div>
                 @if (post.CreatedBy == User.Identity?.Name || post.IsAdmin)
