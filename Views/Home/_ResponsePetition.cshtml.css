@@ -1,0 +1,131 @@
+﻿/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Hidden initially */
+    z-index: 9050; /* Ensure overlay is above other elements */
+}
+
+/* Status Change Modal */
+.status-change-modal-container .modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9050; /* Higher than overlay */
+}
+
+.status-change-modal-container .modal-dialog {
+    max-width: 500px;
+    width: 100%;
+}
+
+.status-change-modal-container .modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.status-change-modal-container .modal-header {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-family: 'Roboto Light', sans-serif;
+}
+
+.status-change-modal-container .textarea-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.status-change-modal-container .modal-footer {
+    text-align: right;
+}
+
+.status-change-modal-container .btn-primary {
+    background-color: #ff926b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 90px;
+    cursor: pointer;
+}
+
+.status-change-modal-container .btn-primary:hover {
+    background-color: #e86f59;
+}
+
+/* Opened Post Modal */
+.opened-post-modal-container .modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9050; /* Higher than overlay */
+}
+
+.opened-post-modal-container .modal-dialog {
+    max-width: 600px;
+    width: 100%;
+}
+
+.opened-post-modal-container .modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.opened-post-modal-container .modal-header {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-family: 'Roboto Light', sans-serif;
+}
+
+.opened-post-modal-container .modal-body {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.opened-post-modal-container .modal-footer {
+    text-align: right;
+}
+
+.opened-post-modal-container .btn-primary {
+    background-color: #ff926b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 90px;
+    cursor: pointer;
+}
+
+.opened-post-modal-container .btn-primary:hover {
+    background-color: #e86f59;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .status-change-modal-container .modal-dialog, .opened-post-modal-container .modal-dialog {
+        margin: 0;
+        width: 90%;
+    }
+}

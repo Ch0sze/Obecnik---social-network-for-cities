@@ -1,0 +1,66 @@
+﻿<div class="status-change-modal-container">
+    <form method="post" asp-action="ChangeStatus">
+        <div id="statusChangeModal" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <h3 class="modal-header">Důvod změny stavu: </h3>
+                    <textarea name="adminComment" class="textarea-field" placeholder="Vložte důvod změny stavu..." required style="height: 150px; resize: none;"></textarea>
+                    <input type="hidden" name="postId" id="modalPostId" />
+                    <input type="hidden" name="status" id="modalStatus" />
+                    <input type="hidden" name="returnUrl" id="modalReturnUrl" />
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Uložit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Overlay that will appear behind the modal, like the openedpost modal -->
+<div id="modalOverlay" class="modal-overlay"></div>
+
+<script>
+    document.addEventListener('click', function (event) {
+        var modal = document.getElementById('statusChangeModal');
+        var overlay = document.getElementById('modalOverlay');
+        if (!modal) return;
+
+        var modalDialog = modal.querySelector('.modal-dialog');
+        if (!modalDialog) return;
+
+        if (modal.classList.contains('show') && !modalDialog.contains(event.target)) {
+            var modalInstance = bootstrap.Modal.getInstance(modal);
+            if (modalInstance) {
+                modalInstance.hide();
+                overlay.classList.remove('show');  // Hide overlay when modal is closed
+                document.body.style.overflow = "";
+                document.body.style.paddingRight = "";
+                var backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop && backdrop.parentNode) {
+                    backdrop.remove();
+                }
+            }
+        }
+    });
+
+    var modalElement = document.getElementById('statusChangeModal');
+    var overlayElement = document.getElementById('modalOverlay');
+
+    if (modalElement) {
+        modalElement.addEventListener('show.bs.modal', function () {
+            overlayElement.classList.add('show');  // Show overlay when modal is shown
+        });
+
+        modalElement.addEventListener('hidden.bs.modal', function () {
+            overlayElement.classList.remove('show');  // Hide overlay when modal is hidden
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop && backdrop.parentNode) {
+                backdrop.remove();
+            }
+        });
+    }
+</script>

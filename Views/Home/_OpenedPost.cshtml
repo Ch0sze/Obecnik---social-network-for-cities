@@ -1,6 +1,7 @@
 ﻿@using OpenQA.Selenium.BiDi.Modules.Script
 @model HomeViewModel.Post
 
+
 <div class="opened-post-modal-container">
     <div class="modal fade" id="openedPostModal" tabindex="-1" aria-labelledby="openedPostModalLabel"
          aria-hidden="true">
@@ -67,33 +68,33 @@
                                     }
                                     @if (Model.CreatedBy == User.Identity?.Name || Model.IsAdmin)
                                     {
-                                           // Proměnná s CSS třídou podle stavu
-                                           var statusClass = st switch
-                                           {
-                                               PetitionStatus.Open      => "btn-status-open",
-                                               PetitionStatus.Closed    => "btn-status-closed",
-                                               PetitionStatus.Completed => "btn-status-completed",
-                                               PetitionStatus.Canceled  => "btn-status-canceled",
-                                               _                        => ""
-                                           };
+                                        // Proměnná s CSS třídou podle stavu
+                                        var statusClass = st switch
+                                        {
+                                            PetitionStatus.Open      => "btn-status-open",
+                                            PetitionStatus.Closed    => "btn-status-closed",
+                                            PetitionStatus.Completed => "btn-status-completed",
+                                            PetitionStatus.Canceled  => "btn-status-canceled",
+                                            _                        => ""
+                                        };
 
-                                           // Text tlačítka
-                                           var statusText = st switch
-                                           {
-                                               PetitionStatus.Open      => "Probíhající",
-                                               PetitionStatus.Closed    => "Úspěšná",
-                                               PetitionStatus.Completed => "Neúspěšná",
-                                               PetitionStatus.Canceled  => "Zrušená",
-                                               _                        => st.ToString()
-                                           };
-                                    <button
-                                        class="btn btn-sm dropdown-toggle @statusClass"
-                                        type="button"
-                                        id="statusDropdownModal"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        @statusText
-                                    </button>
+                                        // Text tlačítka
+                                        var statusText = st switch
+                                        {
+                                            PetitionStatus.Open      => "Probíhající",
+                                            PetitionStatus.Closed    => "Úspěšná",
+                                            PetitionStatus.Completed => "Neúspěšná",
+                                            PetitionStatus.Canceled  => "Zrušená",
+                                            _                        => st.ToString()
+                                        };
+                                        <button
+                                            class="btn btn-sm dropdown-toggle @statusClass"
+                                            type="button"
+                                            id="statusDropdownModal"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            @statusText
+                                        </button>
                                     }
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="statusDropdownModal">
@@ -101,10 +102,12 @@
                                         @if (Model.CreatedBy == User.Identity?.Name && st != PetitionStatus.Canceled && !Model.IsAdmin)
                                         {
                                             <li>
-                                                <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                    <input type="hidden" name="postId" value="@Model.Id"/>
-                                                    <input type="hidden" name="status" value="Canceled"/>
-                                                    <button type="submit" class="dropdown-item">Zrušit petici</button>
+                                                <form asp-action="ChangeStatus" method="post" class="m-0 p-0 change-status-form"
+                                                      data-post-id="@Model.Id" data-status="Canceled">
+                                                    <input type="hidden" name="postId" value="@Model.Id" />
+                                                    <input type="hidden" name="status" value="Canceled" />
+                                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                                    <button type="button" class="dropdown-item trigger-status-change">Zrušit petici</button>
                                                 </form>
                                             </li>
                                         }
@@ -115,12 +118,14 @@
                                             @if (st != PetitionStatus.Closed)
                                             {
                                                 <li>
-                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                        <input type="hidden" name="postId" value="@Model.Id"/>
-                                                        <input type="hidden" name="status" value="Closed"/>
-                                                        <button type="submit" class="dropdown-item">Úspěšná petice
-                                                        </button>
+                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0 change-status-form"
+                                                          data-post-id="@Model.Id" data-status="Closed">
+                                                        <input type="hidden" name="postId" value="@Model.Id" />
+                                                        <input type="hidden" name="status" value="Closed" />
+                                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                                        <button type="button" class="dropdown-item trigger-status-change">Neúspěšná petice</button>
                                                     </form>
+
                                                 </li>
                                             }
 
@@ -128,12 +133,14 @@
                                             @if (st != PetitionStatus.Completed)
                                             {
                                                 <li>
-                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                        <input type="hidden" name="postId" value="@Model.Id"/>
-                                                        <input type="hidden" name="status" value="Completed"/>
-                                                        <button type="submit" class="dropdown-item">Neúspěšná petice
-                                                        </button>
+                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0 change-status-form"
+                                                          data-post-id="@Model.Id" data-status="Completed">
+                                                        <input type="hidden" name="postId" value="@Model.Id" />
+                                                        <input type="hidden" name="status" value="Completed" />
+                                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                                        <button type="button" class="dropdown-item trigger-status-change">Úspěšná petice</button>
                                                     </form>
+
                                                 </li>
                                             }
 
@@ -141,12 +148,14 @@
                                             @if (st != PetitionStatus.Canceled)
                                             {
                                                 <li>
-                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                        <input type="hidden" name="postId" value="@Model.Id"/>
-                                                        <input type="hidden" name="status" value="Canceled"/>
-                                                        <button type="submit" class="dropdown-item">Zrušená petice
-                                                        </button>
+                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0 change-status-form"
+                                                          data-post-id="@Model.Id" data-status="Canceled">
+                                                        <input type="hidden" name="postId" value="@Model.Id" />
+                                                        <input type="hidden" name="status" value="Canceled" />
+                                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                                        <button type="button" class="dropdown-item trigger-status-change">Zrušená petice</button>
                                                     </form>
+
                                                 </li>
                                             }
                                         }
@@ -213,11 +222,23 @@
         </div>
     </div>
 </div>
+@await Html.PartialAsync("_ResponsePetition")
+
 <script>
-    function downloadExcel(postId) {
-        // přesměruje prohlížeč na nový endpoint
-        window.location.href = `/petitions/${postId}/signatures/excel`;
-    }
+    document.querySelectorAll('.trigger-status-change').forEach(button => {
+        button.addEventListener('click', function () {
+            const form = button.closest('form');
+            const postId = form.dataset.postId;
+            const status = form.dataset.status;
+
+            document.getElementById('modalPostId').value = postId;
+            document.getElementById('modalStatus').value = status;
+            document.getElementById('modalReturnUrl').value = window.location.pathname;
+
+            const modal = new bootstrap.Modal(document.getElementById('statusChangeModal'));
+            modal.show();
+        });
+    });
 
     document.body.addEventListener('click', function (e) {
         if (!e.target.matches('.download-button')) return;
@@ -225,9 +246,12 @@
         const postId = e.target.getAttribute('data-postid');
         downloadExcel(postId);
     });
-</script>
-
-<script>
+    
+    function openAdminCommentModal(postId) {
+        document.getElementById('modalPostId').value = postId;
+        const modal = new bootstrap.Modal(document.getElementById('adminCommentModal'));
+        modal.show();
+    }
     function copyLinkToClipboard() {
         const link = window.location.href;  // Získání aktuální URL
 
@@ -358,9 +382,7 @@
                 document.getElementById("commentResponse").innerText = "⚠️ Došlo k chybě: " + error.message;
             });
     }
-
-</script>
-<script>
+    
     function loadComments(postId) {
         console.log("Načítám komentáře pro příspěvek s ID:");  // Debug log, abychom věděli, že funkce je volaná.
 
@@ -448,10 +470,7 @@
                 console.error("Chyba při načítání podpisů:", error);
             });
     }
-
-
-</script>
-<script>
+    
     document.addEventListener("DOMContentLoaded", function () {
         console.log("Dokument byl načten.");  // Log pro potvrzení, že dokument je načten.
 

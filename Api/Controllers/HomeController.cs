@@ -423,6 +423,43 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
     {
         return View("Error");
     }
+    [HttpPost]
+    public async Task<IActionResult> ChangeStatus(Guid postId, PetitionStatus status, string? adminComment, string? returnUrl)
+    {
+        var post = await databaseContext.Posts.FindAsync(postId);
+        if (post == null) return NotFound();
+        
+        if (PetitionStatus.Closed == status)
+        {
+            post.Status = PostStatus.Neúspěšná;
+        }
+        else if (PetitionStatus.Completed == status)
+        {
+            post.Status = PostStatus.Úspěšná;
+        }
+        else
+        {
+            post.Status = PostStatus.Zrušená;
+        }
+
+        if (!string.IsNullOrWhiteSpace(adminComment))
+            post.AdminComment = adminComment;
+
+        await databaseContext.SaveChangesAsync();
+        
+        if (!string.IsNullOrEmpty(returnUrl))
+        {
+            return Redirect(returnUrl);
+        }
+        
+        var communityId = Request.Query["communityId"].ToString();
+        
+        var onlyPetitions = Request.Query["onlyPetitions"].ToString();
+        
+        return RedirectToAction("Index", new { communityId = communityId, onlyPetitions = onlyPetitions });
+    }
+
+
 
     [HttpGet("get-top-petition")]
     public async Task<IActionResult> GetTopPetition(Guid communityId)
