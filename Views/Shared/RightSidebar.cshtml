@@ -1,7 +1,7 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 <!-- Right Sidebar -->
-<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/SidebarStyles.css" asp-append-version="true"/>
 <div class="sidebar-sb right-sidebar-sb">
 
     <!-- Profile Header (right sidebar-specific) -->
@@ -13,20 +13,23 @@
                      src="@Url.Action("GetUserPicture", "Account", new { id = User.GetId() })"
                      alt="Avatar"
                      onerror="this.src='/Images/GenericAvatar.png'"
-                     class="profile-image icon-image" />
+                     class="profile-image icon-image"/>
             </button>
             <div class="username-container">
                 <span class="text-sb" id="username-sb"></span>
                 <div id="user-role-badge" class="role-badge-sb" style="display: none;"></div>
             </div>
-        
 
-        <!-- Dropdown (hidden by default) -->
+
+            <!-- Dropdown (hidden by default) -->
             <div id="superadmin-dropdown-sb" class="dropdown-menu-sb" style="display: none; position: absolute;">
                 <button class="dropdown-item-sb" onclick="window.location.href='/Account'">Zobrazit profil</button>
                 <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin'">Zobrazení žádostí</button>
-                <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Users'">Správa uživatelů</button>
-                <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Admins'">Zobrazení platících správců</button>
+                <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Users'">Správa uživatelů
+                </button>
+                <button class="dropdown-item-sb" onclick="window.location.href='/SuperAdmin/Admins'">Zobrazení platících
+                    správců
+                </button>
             </div>
         </div>
 
@@ -72,7 +75,7 @@
         button.addEventListener('click', () => {
             if (!hasSigned) {
                 // Sign the petition
-                fetch(`/petitions/${postId}/sign`, { method: "POST" })
+                fetch(`/petitions/${postId}/sign`, {method: "POST"})
                     .then(res => {
                         if (!res.ok) throw new Error("Nepodařilo se podepsat.");
                         hasSigned = true;
@@ -84,7 +87,7 @@
                     });
             } else {
                 // Unsign the petition
-                fetch(`/petitions/${postId}/unsign`, { method: "POST" })
+                fetch(`/petitions/${postId}/unsign`, {method: "POST"})
                     .then(res => {
                         if (!res.ok) throw new Error("Nepodařilo se zrušit podpis.");
                         hasSigned = false;
@@ -169,7 +172,7 @@
     }
 
     function signPetition(postId) {
-        fetch(`/petitions/${postId}/sign`, { method: "POST" })
+        fetch(`/petitions/${postId}/sign`, {method: "POST"})
             .then(response => {
                 if (!response.ok) throw new Error('Nepodařilo se podepsat.');
                 loadTopPetition();
@@ -191,7 +194,7 @@
     // Get the user role from claims
     // Razor should resolve the value of the user role properly
     const userRole = '@User.FindFirst(ClaimTypes.Role)?.Value'
-    
+
 
     const userProfileBtn = document.getElementById('user-profile-btn-sb');
     const superAdminDropdown = document.getElementById("superadmin-dropdown-sb");
@@ -217,61 +220,61 @@
     hamburgerMenuBtn.addEventListener('click', function () {
         window.location.href = '/Account/Logout';
     });
-    
+
     // Handle petition rendering (can be enabled later)
     function renderPetition() {
         document.getElementById('petition-title-sb').innerText = petition.title;
         document.getElementById('petition-description-sb').innerText = petition.description;
         document.getElementById('petition-signatures-sb').innerText = `${petition.signatures} podpisů`;
     }
+
     document.addEventListener('DOMContentLoaded', function () {
-            const userId = '@User.GetId()';
-            const communityId = getCommunityIdFromUrl();
-            const roleBadge = document.getElementById('user-role-badge');
-    
-            fetch(`/account/users/${userId}/Firstname`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch username. Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    document.getElementById('username-sb').innerText = data.username;
-                    
-                    // Handle role badge display
-                    if (userRole === "SuperAdmin") {
-                        roleBadge.style.display = 'block';
-                        roleBadge.textContent = "SuperAdmin";
-                        roleBadge.classList.add('superadmin');
-                    } 
-                    else if (userRole === "Admin" && communityId) {
-                        // Check if user is admin of this specific community
-                        fetch(`/account/isAdminOfCommunity?userId=${userId}&communityId=${communityId}`)
-                            .then(response => response.json())
-                            .then(isAdmin => {
-                                if (isAdmin) {
-                                    roleBadge.style.display = 'block';
-                                    roleBadge.textContent = "Admin";
-                                    roleBadge.classList.add('admin');
-                                } else {
-                                    roleBadge.style.display = 'none'; // Hide if not admin in this community
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error checking admin status:', error);
-                                roleBadge.style.display = 'none'; // Hide on error
-                            });
-                    } else {
-                        roleBadge.style.display = 'none'; // Hide if not SuperAdmin or Admin
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching username:', error);
-                    roleBadge.style.display = 'none'; // Hide on error
-                });
-        });
-    
+        const userId = '@User.GetId()';
+        const communityId = getCommunityIdFromUrl();
+        const roleBadge = document.getElementById('user-role-badge');
+
+        fetch(`/account/users/${userId}/Firstname`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch username. Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('username-sb').innerText = data.username;
+
+                // Handle role badge display
+                if (userRole === "SuperAdmin") {
+                    roleBadge.style.display = 'block';
+                    roleBadge.textContent = "SuperAdmin";
+                    roleBadge.classList.add('superadmin');
+                } else if (userRole === "Admin" && communityId) {
+                    // Check if user is admin of this specific community
+                    fetch(`/account/isAdminOfCommunity?userId=${userId}&communityId=${communityId}`)
+                        .then(response => response.json())
+                        .then(isAdmin => {
+                            if (isAdmin) {
+                                roleBadge.style.display = 'block';
+                                roleBadge.textContent = "Admin";
+                                roleBadge.classList.add('admin');
+                            } else {
+                                roleBadge.style.display = 'none'; // Hide if not admin in this community
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error checking admin status:', error);
+                            roleBadge.style.display = 'none'; // Hide on error
+                        });
+                } else {
+                    roleBadge.style.display = 'none'; // Hide if not SuperAdmin or Admin
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching username:', error);
+                roleBadge.style.display = 'none'; // Hide on error
+            });
+    });
+
 </script>
 
 

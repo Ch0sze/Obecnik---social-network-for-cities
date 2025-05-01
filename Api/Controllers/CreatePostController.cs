@@ -4,6 +4,7 @@ using Application.Api.Extensions;
 using Application.Api.Models;
 using Application.Infastructure.Database;
 using Application.Infastructure.Database.Models;
+using Application.Infastructure.Database.Models.Enum;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -107,7 +108,10 @@ public class PostsController(DatabaseContext databaseContext) : Controller
                 Photo = imageData,
                 ChannelId = channelId,
             };
-
+            if (post.Type == "Petition")
+            {
+                post.Status = PostStatus.Otevřená;
+            }
             databaseContext.Posts.Add(post);
         }
 

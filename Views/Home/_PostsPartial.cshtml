@@ -49,6 +49,7 @@
                                 @(st == PetitionStatus.Open ? "Otevřená" : "Uzavřená")
                             </small>
                         }
+                        @if(!post.IsPetition || post.IsAdmin){
                         <div class="dropdown">
                             <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn"
                                     data-bs-toggle="dropdown">
@@ -56,12 +57,12 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-start rounded post-settings shadow-sm">
                                 <form asp-action="Delete">
-                                    @if (post.CreatedBy == User.Identity?.Name || post.IsAdmin) {
+                                    @if ((post.CreatedBy == User.Identity?.Name || post.IsAdmin) & !post.IsPetition) {
                                         <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
                                             Odstranit příspěvek
                                         </button>
                                     }
-                                    @if (post.CreatedBy == User.Identity?.Name) {
+                                    @if (post.CreatedBy == User.Identity?.Name & !post.IsPetition) {
                                         <button type="button" class="dropdown-item update-post-btn"
                                                 data-post-id="@post.Id"
                                                 data-title="@post.Title"
@@ -76,9 +77,11 @@
                                             @(post.IsPinned ? "Odepnout příspěvek" : "Připnout příspěvek")
                                         </button>
                                     }
+                                    
                                 </form>
                             </div>
                         </div>
+                        }
                     </div>
                 }
             </div>
