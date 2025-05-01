@@ -1,6 +1,7 @@
 using Application.Api.Extensions;
 using Application.Api.Models;
 using Application.Infastructure.Database;
+using Application.Infastructure.Database.Models.Enum;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -434,8 +435,14 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             .FirstOrDefaultAsync();
 
         var topPetition = await databaseContext.Posts
-            .Where(p => p.ChannelId == channelId && p.Type == "Petition")
-            .OrderByDescending(p => databaseContext.PetitionSignatures.Count(sig => sig.PostId == p.Id))
+            .Where(p =>
+                    p.ChannelId == channelId &&
+                    p.Type == "Petition" &&
+                    (p.Status == (PostStatus?)PetitionStatus.Open || p.Status == null)
+            )
+            .OrderByDescending(p =>
+                databaseContext.PetitionSignatures.Count(sig => sig.PostId == p.Id)
+            )
             .Select(p => new
             {
                 p.Id,
@@ -450,4 +457,5 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
 
         return Json(topPetition);
     }
+
 }
