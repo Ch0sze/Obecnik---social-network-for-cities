@@ -382,7 +382,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             var newChannel = new ChannelDo
             {
                 Id = Guid.NewGuid(),
-                Name = "Příspěvky",
+                Name = "Obecné",
                 CommunityId = newCommunity.Id,
                 Community = newCommunity
             };
@@ -468,7 +468,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
         // Create the view model and populate the Communities list
         var model = new AdminRequestFormViewModel
         {
-            Communities = communities // Add communities to the view model
+            Communities = communities
         };
 
         return View("RequestAdminRights", model);
@@ -483,7 +483,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
 
         if (user == null || user.Role != "UnpaidAdmin")
         {
-            return RedirectToAction("Index", "Home"); // Only unpaid admins should see this
+            return RedirectToAction("Index", "Home");
         }
 
         // Find approved admin requests by this user

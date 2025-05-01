@@ -14,7 +14,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
 {
     [Authorize]
     [HttpGet]
-    public async Task<IActionResult> Index(Guid? communityId, Guid? openPostId)
+    public async Task<IActionResult> Index(Guid? communityId, Guid? channelId, Guid? openPostId, bool? onlyPetitions)
     {
         var userId = User.GetId();
         var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
@@ -42,24 +42,35 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             .Select(c => c.Name)
             .FirstOrDefaultAsync() ?? "No Community";
 
-        var channelId = await databaseContext.Channels
+        var availableChannelIds = await databaseContext.Channels
             .Where(c => c.CommunityId == selectedCommunityId)
             .Select(c => c.Id)
-            .FirstOrDefaultAsync();
+            .ToListAsync();
+
+        var selectedChannelId = channelId.HasValue && availableChannelIds.Contains(channelId.Value)
+            ? channelId.Value
+            : availableChannelIds.FirstOrDefault();
 
         var isCommunityAdmin = await databaseContext.CommunityAdmins
             .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
         var adminRole = user.Role == "Admin";
 
-        logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId, isCommunityAdmin,
+        logger.LogInformation("User {UserId} is Community Admin: {IsCommunityAdmin}, Admin Role: {AdminRole}", userId,
+            isCommunityAdmin,
             adminRole);
 
         var postsQuery = databaseContext.Posts
             .Include(post => post.User)
-            .Where(post => post.ChannelId == channelId)
+            .Where(post => post.ChannelId == selectedChannelId)
             .OrderByDescending(post => post.CreatedAt)
             .Take(10);
+
+        // Apply filter if 'onlyPetitions' is true
+        if (onlyPetitions.HasValue && onlyPetitions.Value)
+        {
+            postsQuery = postsQuery.Where(post => post.Type == "Petition");
+        }
 
         var posts = await postsQuery
             .Select(post => new HomeViewModel.Post
@@ -80,7 +91,15 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             })
             .ToListAsync();
 
-        // Pokud je openPostId -> načíst i ten otevřený post
+        var channels = await databaseContext.Channels
+            .Where(c => c.CommunityId == selectedCommunityId)
+            .Select(c => new ChannelViewModel
+            {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .ToListAsync();
+
         HomeViewModel.Post? openedPost = null;
         if (openPostId.HasValue)
         {
@@ -121,7 +140,9 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             Posts = posts,
             CommunityName = communityName,
             CommunityId = selectedCommunityId,
-            OpenedPost = openedPost
+            OpenedPost = openedPost,
+            Channels = channels,
+            SelectedChannelId = selectedChannelId
         };
 
         var accountViewModel = new AccountViewModel
@@ -142,37 +163,57 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
 
     [Authorize]
     [HttpGet("load-posts")]
-    public async Task<IActionResult> LoadPosts(int pageNumber, int pageSize, Guid? communityId)
+    public async Task<IActionResult> LoadPosts(int pageNumber, int pageSize, Guid? communityId, Guid? channelId,
+        bool? onlyPetitions)
     {
         var userId = User.GetId();
-        var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
+        var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
         if (user == null)
             return Unauthorized();
 
-        // Verify selected community belongs to user
-        var validCommunityId = databaseContext.UserCommunities
+        var validCommunityIds = await databaseContext.UserCommunities
             .Where(uc => uc.UserId == user.Id)
             .Select(uc => uc.CommunityId)
-            .ToList();
+            .ToListAsync();
 
-        var selectedCommunityId = communityId.HasValue && validCommunityId.Contains(communityId.Value)
+        var selectedCommunityId = communityId.HasValue && validCommunityIds.Contains(communityId.Value)
             ? communityId.Value
-            : validCommunityId.FirstOrDefault();
+            : validCommunityIds.FirstOrDefault();
 
-        var channelId = databaseContext.Channels
+        var availableChannelIds = await databaseContext.Channels
             .Where(c => c.CommunityId == selectedCommunityId)
             .Select(c => c.Id)
-            .FirstOrDefault();
+            .ToListAsync();
 
-        var isCommunityAdmin = databaseContext.CommunityAdmins
-            .Any(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
+        var selectedChannelId = channelId.HasValue && availableChannelIds.Contains(channelId.Value)
+            ? channelId.Value
+            : Guid.Empty;
+
+        if (selectedChannelId == Guid.Empty)
+            return PartialView("_PostsPartial", new List<HomeViewModel.Post>());
+
+        var selectedChannel = await databaseContext.Channels.FirstOrDefaultAsync(c => c.Id == selectedChannelId);
+
+        bool filterPetitionsOnly =
+            onlyPetitions.HasValue && onlyPetitions.Value; // Apply filter from the query parameter
+
+        var isCommunityAdmin = await databaseContext.CommunityAdmins
+            .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
         var adminRole = user?.Role == "Admin";
 
-        var posts = databaseContext.Posts
+        var postsQuery = databaseContext.Posts
             .Include(post => post.User)
-            .Where(post => post.ChannelId == channelId)
+            .Where(post => post.ChannelId == selectedChannelId);
+
+        // Apply filter if 'onlyPetitions' is true
+        if (filterPetitionsOnly)
+        {
+            postsQuery = postsQuery.Where(post => post.Type == "Petition");
+        }
+
+        var posts = await postsQuery
             .OrderByDescending(post => post.CreatedAt)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -192,10 +233,11 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
                 HasUserSigned = databaseContext.PetitionSignatures
                     .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
             })
-            .ToList();
+            .ToListAsync();
 
         return PartialView("_PostsPartial", posts);
     }
+
 
     [Authorize]
     [HttpPost("toggle-pin/{postId}")]

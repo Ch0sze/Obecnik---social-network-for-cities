@@ -9,6 +9,10 @@ public class HomeViewModel
     public required List<Post> Posts { get; set; }
     
     public Post? OpenedPost { get; set; }
+    
+    public List<ChannelViewModel>? Channels { get; set; }
+    public Guid SelectedChannelId { get; set; }
+
 
     public record Post
     {

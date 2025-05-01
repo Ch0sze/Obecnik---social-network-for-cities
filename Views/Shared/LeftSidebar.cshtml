@@ -4,10 +4,10 @@
 @using System.Web
 
 <div id="leftSidebar" class="sidebar-sb">
-        <a href="/" class="logo-container-sb" style="text-decoration: none; cursor: pointer;">
-            <img src="~/image.png" alt="Logo">
-            <h4>Obecník</h4>
-        </a>
+    <a href="/" class="logo-container-sb" style="text-decoration: none; cursor: pointer;">
+        <img src="~/image.png" alt="Logo">
+        <h4>Obecník</h4>
+    </a>
 
     <div class="avatar-container-sb" id="user-list-left-sb"></div>
 
@@ -32,8 +32,30 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const urlParams = new URLSearchParams(window.location.search);
+        let onlyPetitions = urlParams.get('onlyPetitions') === 'true';
         let selectedCommunityId = urlParams.get('communityId');
-        let channels = [{ icon: '', label: 'Obecné', link: '/#', active: false, dot: true }];
+        let selectedChannelId = urlParams.get('channelId');
+
+        // Function to get channels with preserved filter
+        function getChannels() {
+            return [
+                {
+                    icon: '',
+                    label: 'Obecné',
+                    link: `/?communityId=${selectedCommunityId}&onlyPetitions=false`,  // Link for Obecné
+                    active: !onlyPetitions,
+                    dot: !onlyPetitions
+                },
+                {
+                    icon: '',
+                    label: 'Petice',
+                    link: `/?communityId=${selectedCommunityId}&onlyPetitions=true`,  // Link for Petice
+                    active: onlyPetitions,
+                    dot: onlyPetitions
+                }
+            ];
+        }
+
         let communities = [];
 
         async function fetchCommunities() {
@@ -50,7 +72,8 @@
 
                 const isRootPath = window.location.pathname === '/' && !window.location.search && !window.location.hash;
                 if (isRootPath && communities.length > 0) {
-                    window.location.href = `/?communityId=${communities[0].link}`;
+                    // Redirect to the default community if the root path is accessed
+                    window.location.href = `/?communityId=${communities[0].link}&onlyPetitions=${onlyPetitions}`;
                     return;
                 }
 
@@ -60,11 +83,16 @@
             }
         }
 
+        // Handle avatar click to change community
         function onAvatarClick(index) {
             selectedCommunityId = communities[index].link;
-            window.location.href = `/?communityId=${selectedCommunityId}`;
+            // Ensure the current petitions state is preserved
+            channels = getChannels();
+            renderNav();
+            window.location.href = channels[onlyPetitions ? 1 : 0].link;  // Change URL to reload with the updated community and filter
         }
 
+        // Render the avatars in the sidebar
         function renderLeftAvatars() {
             const userList = document.getElementById('user-list-left-sb');
             userList.innerHTML = '';
@@ -74,40 +102,37 @@
 
                 const item = document.createElement('div');
                 item.className = 'user-item-sb';
-
                 item.innerHTML = `
-                    <div class="avatar-btn-container-sb" data-index="${index}">
-                        <button class="avatar-btn-sb">
-                            <img src="${user.image}" alt="${user.name}">
-                        </button>
-                        <span class="text-sb">${user.name}</span>
-                        ${isSelected ? `<span class="dot-sb ms-auto"></span>` : ''}
-                    </div>
-                `;
+                <div class="avatar-btn-container-sb" data-index="${index}">
+                    <button class="avatar-btn-sb">
+                        <img src="${user.image}" alt="${user.name}">
+                    </button>
+                    <span class="text-sb">${user.name}</span>
+                    ${isSelected ? `<span class="dot-sb ms-auto"></span>` : ''}
+                </div>
+            `;
 
                 userList.appendChild(item);
 
                 const container = item.querySelector('.avatar-btn-container-sb');
-
                 container.addEventListener('click', () => {
                     onAvatarClick(index);
                 });
-                container.style.position = 'relative'; // Make container the positioning context
 
+                container.style.position = 'relative';
+
+                // Right-click to show the leave menu
                 container.addEventListener('contextmenu', (e) => {
                     e.preventDefault();
-                    // Remove any existing menus
                     document.querySelectorAll('.leave-menu-sb').forEach(el => el.remove());
 
                     const menu = document.createElement('div');
                     menu.className = 'leave-menu-sb';
                     menu.innerHTML = `<button class="dropdown-item-sb">Opustit komunitu</button>`;
 
-                    // Attach to the same container, with absolute positioning
                     menu.style.position = 'absolute';
                     menu.style.zIndex = 1000;
 
-                    // Position just below the avatar button
                     const avatarBtn = container.querySelector('.avatar-btn-sb');
                     const btnRect = avatarBtn.getBoundingClientRect();
                     const containerRect = container.getBoundingClientRect();
@@ -117,7 +142,6 @@
 
                     container.appendChild(menu);
 
-                    // Leave action
                     menu.querySelector('.dropdown-item-sb').addEventListener('click', async () => {
                         const communityId = communities[index].link;
                         try {
@@ -136,7 +160,6 @@
                         }
                     });
                 });
-
             });
 
             const addBtnContainer = document.createElement('div');
@@ -149,12 +172,20 @@
                 modal.show();
             });
 
-            // Close context menu on outside click
             document.addEventListener('click', () => {
                 document.querySelectorAll('.leave-menu-sb').forEach(el => el.remove());
             });
         }
 
+        // Update the dots when changing channels
+        function updateDot(index) {
+            channels.forEach((c, i) => {
+                c.dot = i === index;
+                c.active = i === index;
+            });
+        }
+
+        // Render the navigation links (Obecné/Petice)
         function renderNav() {
             const navContainer = document.getElementById('nav-links-sb');
             navContainer.innerHTML = '';
@@ -164,13 +195,25 @@
                 div.className = `nav-item-sb${item.active ? ' active-sb' : ''}`;
                 div.dataset.index = index;
                 div.innerHTML = `
-                    <a href="?communityId=${selectedCommunityId}" onclick="updateDot(${index})">
-                        ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
-                        <span class="text-sb">${item.label}</span>
-                        ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
-                    </a>
-                `;
+                <a href="${item.link}" data-index="${index}">
+                    ${item.icon ? `<span class="material-icons me-3">${item.icon}</span>` : '<span class="material-icons me-3" style="opacity: 0;">place</span>'}
+                    <span class="text-sb">${item.label}</span>
+                    ${item.dot ? `<span class="dot-sb ms-auto"></span>` : ''}
+                </a>
+            `;
                 navContainer.appendChild(div);
+
+                div.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default navigation
+
+                    onlyPetitions = index === 1;
+                    channels = getChannels();
+                    updateDot(index);
+                    renderNav();
+
+                    // Trigger the page reload with the new URL
+                    window.location.href = channels[index].link;
+                });
             });
         }
 
@@ -198,9 +241,12 @@
             });
 
         fetchCommunities();
+        channels = getChannels();
         renderNav();
     });
+
 </script>
+
 
 
 
