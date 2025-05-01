@@ -5,8 +5,9 @@ namespace Application.Api.Models;
 public enum PetitionStatus
 {
     Open,
-    Closed
-    // případně další stavy sem
+    Closed,
+    Completed,
+    Canceled
 }
 public class HomeViewModel
 {
@@ -40,10 +41,18 @@ public class HomeViewModel
         public required string Type { get; set; }
         public bool IsPetition => Type.Equals("Petition", StringComparison.OrdinalIgnoreCase);
         public bool IsClosed { get; set; }
+        public bool IsCanceled { get; set; }
+        public bool IsCompleted { get; set; }
         public PetitionStatus? Status
-            => IsPetition
-                ? (IsClosed ? PetitionStatus.Closed : PetitionStatus.Open)
-                : null;
+            => !IsPetition 
+                ? null 
+                : (IsCanceled
+                    ? PetitionStatus.Canceled 
+                    : IsClosed 
+                        ? PetitionStatus.Closed 
+                        : IsCompleted 
+                            ? PetitionStatus.Completed 
+                            : PetitionStatus.Open);
         public bool HasUserSigned { get; set; }
         
         public string GetFormattedCreatedAt()

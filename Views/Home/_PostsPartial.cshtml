@@ -31,7 +31,7 @@
                         <small class="badge text-dark ms-sm-2" style="background-color: #FFF2D6">@(post.IsPetition ? "Petice" : "Diskuze")</small>
                     </div>
                 </div>
-                @if (post.Status.HasValue && !post.IsAdmin)
+                @if (post.Status.HasValue && !post.IsAdmin && post.CreatedBy != User.Identity?.Name)
                 {
                     var st = post.Status.Value;
                     
