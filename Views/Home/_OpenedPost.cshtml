@@ -66,6 +66,12 @@
                                 };
 
                                 <div class="dropdown ms-auto">
+                                    @if (Model.CreatedBy != User.Identity?.Name && !Model.IsAdmin)
+                                    {
+                                        <small class="badge @(st == PetitionStatus.Open ? "bg-success" : "bg-secondary") me-3">
+                                            @(st == PetitionStatus.Open ? "Otevřená" : "Uzavřená")
+                                        </small>
+                                    }
                                     @if (Model.CreatedBy == User.Identity?.Name || Model.IsAdmin)
                                     {
                                         <button
@@ -74,15 +80,15 @@
                                             id="statusDropdownModal"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false">
-                                            @(st == PetitionStatus.Open ? "Probíhá"
-                                            : st == PetitionStatus.Closed ? "Úspěšná"
+                                            @( st == PetitionStatus.Closed ? "Úspěšná"
                                             : st == PetitionStatus.Completed ? "Neúspěšná"
                                             : "Zrušená")
                                         </button>
                                     }
+                                    
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="statusDropdownModal">
                                         @* Vlastník postu může pouze zrušit *@
-                                        @if (Model.CreatedBy == User.Identity?.Name)
+                                        @if (Model.CreatedBy == User.Identity?.Name && st != PetitionStatus.Canceled && !Model.IsAdmin)
                                         {
                                             <li>
                                                 <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
@@ -92,37 +98,44 @@
                                                 </form>
                                             </li>
                                         }
-                                        @* Admin vidí všechny možnosti *@
+                                        @* Admin vidí všechny ostatní stavy kromě toho, co je právě nastavený *@
                                         @if (Model.IsAdmin)
                                         {
-                                            <li>
-                                                <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                    <input type="hidden" name="postId" value="@Model.Id"/>
-                                                    <input type="hidden" name="status" value="Open"/>
-                                                    <button type="submit" class="dropdown-item">Probíhající petice</button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                    <input type="hidden" name="postId" value="@Model.Id"/>
-                                                    <input type="hidden" name="status" value="Closed"/>
-                                                    <button type="submit" class="dropdown-item">Úspěšná petice</button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                    <input type="hidden" name="postId" value="@Model.Id"/>
-                                                    <input type="hidden" name="status" value="Closed"/>
-                                                    <button type="submit" class="dropdown-item">Neúspěšná petice</button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
-                                                    <input type="hidden" name="postId" value="@Model.Id"/>
-                                                    <input type="hidden" name="status" value="Canceled"/>
-                                                    <button type="submit" class="dropdown-item">Zrušená petice</button>
-                                                </form>
-                                            </li>
+                                            @* Úspěšná (Closed) *@
+                                            @if (st != PetitionStatus.Closed)
+                                            {
+                                                <li>
+                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
+                                                        <input type="hidden" name="postId" value="@Model.Id" />
+                                                        <input type="hidden" name="status" value="Closed" />
+                                                        <button type="submit" class="dropdown-item">Úspěšná petice</button>
+                                                    </form>
+                                                </li>
+                                            }
+
+                                            @* Neúspěšná (Completed) *@
+                                            @if (st != PetitionStatus.Completed)
+                                            {
+                                                <li>
+                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
+                                                        <input type="hidden" name="postId" value="@Model.Id" />
+                                                        <input type="hidden" name="status" value="Completed" />
+                                                        <button type="submit" class="dropdown-item">Neúspěšná petice</button>
+                                                    </form>
+                                                </li>
+                                            }
+
+                                            @* Zrušená *@
+                                            @if (st != PetitionStatus.Canceled)
+                                            {
+                                                <li>
+                                                    <form asp-action="ChangeStatus" method="post" class="m-0 p-0">
+                                                        <input type="hidden" name="postId" value="@Model.Id" />
+                                                        <input type="hidden" name="status" value="Canceled" />
+                                                        <button type="submit" class="dropdown-item">Zrušená petice</button>
+                                                    </form>
+                                                </li>
+                                            }
                                         }
                                     </ul>
                                 </div>
@@ -160,7 +173,8 @@
                             {
                                 <div class="text-center" id="petitionArea" style="margin-left: 10px;">
                                     <div id="signatureCount" class="text-muted mb-2" style="font-size: 1.2rem;"></div>
-                                    <button id="signPetitionButton" class="sign-petition-button">
+                                    <button id="signPetitionButton" class="sign-petition-button"  
+                                            @(Model.Status != PetitionStatus.Open ? "disabled" : "")>
                                         Podepsat petici
                                     </button>
                                     <div id="signatureMessage" class="mt-2 text-muted" style="font-size: 0.9rem;"></div>
