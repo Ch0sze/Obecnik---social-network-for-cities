@@ -1,3 +1,5 @@
+using Application.Infastructure.Database.Models.Enum;
+
 namespace Application.Infastructure.Database.Models;
 
 public class PostDo
@@ -13,12 +15,15 @@ public class PostDo
     public int? SignaturesNo { get; init; }
     public bool IsPinned { get; set; } = false;
 
+    public PostStatus? Status { get; set; }
+    public string? AdminComment { get; set; }
     public required Guid CreatedBy { get; init; }
     public required UserDo User { get; init; }
 
     public Guid? ChannelId { get; init; }
 
     public ChannelDo? Channel { get; init; }
+    
 
     public ICollection<CommentDo> Comments { get; init; } = [];
     

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using Application.Api.Extensions;
-using OfficeOpenXml;            // EPPlus
+using OfficeOpenXml; // EPPlus
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Api.Controllers
@@ -27,7 +27,7 @@ namespace Application.Api.Controllers
                 .Any(p => p.PostId == postId && p.UserId == userId);
 
             if (alreadySigned)
-                return BadRequest("Už jste tuto petici podepsal.");
+                return BadRequest("Už jste tuto petici podepsal/a.");
 
             var user = databaseContext.Users.FirstOrDefault(u => u.Id == userId);
             var post = databaseContext.Posts.FirstOrDefault(p => p.Id == postId);
@@ -93,7 +93,7 @@ namespace Application.Api.Controllers
 
             return Ok(hasSigned);
         }
-        
+
         [HttpGet("{postId}/signatures")]
         public IActionResult GetSignatures(Guid postId)
         {
@@ -109,56 +109,57 @@ namespace Application.Api.Controllers
                 .ToList();
 
             return Ok(signatures);
-            }
-            /// <summary>
-            /// Vygeneruje a stáhne skutečný Excel (.xlsx) se sloupci Jméno, Příjmení a prázdným Podpis.
-            /// </summary>
-            [HttpGet("{postId}/signatures/excel")]
-            public IActionResult DownloadSignaturesExcel(Guid postId)
-            {
-                // EPPlus od verze 5 vyžaduje nastavit licenční kontext:
-                ExcelPackage.License.SetNonCommercialOrganization("Obecník");
+        }
+
+        /// <summary>
+        /// Vygeneruje a stáhne skutečný Excel (.xlsx) se sloupci Jméno, Příjmení a prázdným Podpis.
+        /// </summary>
+        [HttpGet("{postId}/signatures/excel")]
+        public IActionResult DownloadSignaturesExcel(Guid postId)
+        {
+            // EPPlus od verze 5 vyžaduje nastavit licenční kontext:
+            ExcelPackage.License.SetNonCommercialOrganization("Obecník");
 
 
-
-                // Načteme z DB jen to, co potřebujeme
-                var sigs = databaseContext.PetitionSignatures
-                    .Where(p => p.PostId == postId)
-                    .OrderBy(p => p.SignedAt)
-                    .Select(p => new {
-                        FullName = p.User.Firstname + " " + p.User.LastName,
-                        SignedAt = p.SignedAt
-                    })
-                    .ToList();
-
-                using var package = new ExcelPackage();
-                var ws = package.Workbook.Worksheets.Add("Podpisy");
-
-                // 1) Hlavička
-                ws.Cells[1, 1].Value = "Jméno";
-                ws.Cells[1, 2].Value = "Příjmení";
-                ws.Cells[1, 3].Value = "Podpis";  // záměrně prázdný sloupec
-
-                // 2) Řádky s daty
-                for (int i = 0; i < sigs.Count; i++)
+            // Načteme z DB jen to, co potřebujeme
+            var sigs = databaseContext.PetitionSignatures
+                .Where(p => p.PostId == postId)
+                .OrderBy(p => p.SignedAt)
+                .Select(p => new
                 {
-                    var row = i + 2;
-                    var parts = sigs[i].FullName?.Split(' ') ?? Array.Empty<string>();
-                    var first = parts.FirstOrDefault() ?? "";
-                    var last  = parts.Length > 1 ? string.Join(" ", parts.Skip(1)) : "";
+                    FullName = p.User.Firstname + " " + p.User.LastName,
+                    SignedAt = p.SignedAt
+                })
+                .ToList();
 
-                    ws.Cells[row, 1].Value = first;
-                    ws.Cells[row, 2].Value = last;
-                    ws.Cells[row, 3].Value = "";  // Podpis necháme prázdný
-                }
+            using var package = new ExcelPackage();
+            var ws = package.Workbook.Worksheets.Add("Podpisy");
 
-                // 3) Připravíme bytes a vrátíme jako soubor
-                var fileBytes = package.GetAsByteArray();
-                return File(
-                    fileBytes,
-                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    "Podpisy_petice.xlsx"
-                );
+            // 1) Hlavička
+            ws.Cells[1, 1].Value = "Jméno";
+            ws.Cells[1, 2].Value = "Příjmení";
+            ws.Cells[1, 3].Value = "Podpis"; // záměrně prázdný sloupec
+
+            // 2) Řádky s daty
+            for (int i = 0; i < sigs.Count; i++)
+            {
+                var row = i + 2;
+                var parts = sigs[i].FullName?.Split(' ') ?? Array.Empty<string>();
+                var first = parts.FirstOrDefault() ?? "";
+                var last = parts.Length > 1 ? string.Join(" ", parts.Skip(1)) : "";
+
+                ws.Cells[row, 1].Value = first;
+                ws.Cells[row, 2].Value = last;
+                ws.Cells[row, 3].Value = ""; // Podpis necháme prázdný
             }
+
+            // 3) Připravíme bytes a vrátíme jako soubor
+            var fileBytes = package.GetAsByteArray();
+            return File(
+                fileBytes,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "Podpisy_petice.xlsx"
+            );
         }
     }
+}

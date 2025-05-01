@@ -12,12 +12,15 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<CommunityAdminDo> CommunityAdmins => Set<CommunityAdminDo>();
     public DbSet<PostDo> Posts => Set<PostDo>();
     public DbSet<CommentDo> Comments => Set<CommentDo>();
-    public DbSet<ApiLoginDo> ApiLogins => Set<ApiLoginDo>();
     public DbSet<AdminRequestDo> AdminRequests => Set<AdminRequestDo>();
     public DbSet<PetitionSignatureDo> PetitionSignatures => Set<PetitionSignatureDo>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        modelBuilder.Entity<PostDo>()
+            .Property(p => p.Status)
+            .HasConversion<string>();
         // PetitionSignature: User <-> Post (Petition)
         modelBuilder.Entity<PetitionSignatureDo>()
             .HasKey(ps => new { ps.UserId, ps.PostId });
