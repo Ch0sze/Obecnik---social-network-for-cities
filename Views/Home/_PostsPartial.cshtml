@@ -2,19 +2,20 @@
 
 @foreach (var post in Model)
 {
-    <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm thepost opened-post-box"
+    <div class="d-flex align-items-start mt-3 p-3 border rounded shadow-sm thepost opened-post-box position-relative"
          data-post-id="@post.Id"
          data-title="@post.Title"
          data-content="@post.Description"
          data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")"
          style="background-color: #ffffff; border-color: #e0e0e0 !important;">
+        
         <div class="flex-grow-1">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center flex-wrap">
                     <div class="d-flex align-items-center me-2" style="height: 30px;">
                         @if (post.UserHasPhoto)
                         {
-                            <img src="@Url.Action("GetUserPhoto", "Home", new { userId = post.CreatedById })" 
+                            <img src="@Url.Action("GetUserPhoto", "Home", new { userId = post.CreatedById })"
                                  alt="Avatar"
                                  style="width: 30px; height: 30px; user-select: none; pointer-events: none; border-radius: 50%; object-fit: cover;" />
                         }
@@ -30,36 +31,53 @@
                         <small class="badge text-dark ms-sm-2" style="background-color: #FFF2D6">@(post.IsPetition ? "Petice" : "Diskuze")</small>
                     </div>
                 </div>
+                @if (post.Status.HasValue && !post.IsAdmin)
+                {
+                    var st = post.Status.Value;
+                    
+                    <small class="badge @(st == PetitionStatus.Open ? "bg-success" : "bg-secondary") me-3">
+                        @(st == PetitionStatus.Open ? "Otevřená" : "Uzavřená")
+                    </small>
+                }
+
                 @if (post.CreatedBy == User.Identity?.Name || post.IsAdmin)
                 {
-                    <div class="ms-auto dropdown">
-                        <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn"
-                                data-bs-toggle="dropdown">
-                            <i class="bi bi-three-dots-vertical"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-start rounded post-settings shadow-sm">
-                            <form asp-action="Delete">
-								@if (post.CreatedBy == User.Identity?.Name || post.IsAdmin){
-                                	<button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
-                                    	Odstranit příspěvek
-                                	</button>
-								}
-								@if (post.CreatedBy == User.Identity?.Name) {
-                                	<button type="button" class="dropdown-item update-post-btn"
-                                        	data-post-id="@post.Id"
-                                        	data-title="@post.Title"
-                                            data-content="@post.Description"
-                                        	data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")">
-                                    	Upravit příspěvek
-                                	</button>
-								}
-								@if (post.IsAdmin) {
-                                	<button type="button" class="dropdown-item pin-post-btn" 
-											data-post-id="@post.Id">
-										@(post.IsPinned ? "Odepnout příspěvek" : "Připnout příspěvek")
-									</button>
-								}
-                            </form>
+                    <div class="ms-auto d-flex align-items-center">
+                        @if (post.Status is PetitionStatus st)
+                        {
+                            <small class="badge @(st == PetitionStatus.Open ? "bg-success" : "bg-secondary") me-2">
+                                @(st == PetitionStatus.Open ? "Otevřená" : "Uzavřená")
+                            </small>
+                        }
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-link p-0 border-0 contribution-settings-btn"
+                                    data-bs-toggle="dropdown">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-start rounded post-settings shadow-sm">
+                                <form asp-action="Delete">
+                                    @if (post.CreatedBy == User.Identity?.Name || post.IsAdmin) {
+                                        <button type="button" class="dropdown-item delete-post-btn" data-post-id="@post.Id">
+                                            Odstranit příspěvek
+                                        </button>
+                                    }
+                                    @if (post.CreatedBy == User.Identity?.Name) {
+                                        <button type="button" class="dropdown-item update-post-btn"
+                                                data-post-id="@post.Id"
+                                                data-title="@post.Title"
+                                                data-content="@post.Description"
+                                                data-photo="@(post.Photo ? Url.Action("GetImage", "Home", new { postId = post.Id }) : "")">
+                                            Upravit příspěvek
+                                        </button>
+                                    }
+                                    @if (post.IsAdmin) {
+                                        <button type="button" class="dropdown-item pin-post-btn"
+                                                data-post-id="@post.Id">
+                                            @(post.IsPinned ? "Odepnout příspěvek" : "Připnout příspěvek")
+                                        </button>
+                                    }
+                                </form>
+                            </div>
                         </div>
                     </div>
                 }
@@ -79,19 +97,19 @@
                          alt="Post image" />
                 </div>
             }
-			<!-- Pokud budou přidané liky a sdílení => předělat na justify-content-between -->
+            <!-- Pokud budou přidané liky a sdílení => předělat na justify-content-between -->
             <div class="d-flex justify-content-end mt-3 pt-1 border-top">
                 <!--<button class="btn btn-sm btn-hover-light">
                     <img src="~/icons/Like.svg" style="width: 18px; height: 18px;"></img>
-					<span class="text-label">To se mi líbí</span>
+                    <span class="text-label">To se mi líbí</span>
                 </button>-->
                 <button class="btn btn-sm btn-hover-light">
-                        <img src="~/icons/Comment.svg" width="18" height="18" class="me-1">
-                        <span class="d-none d-sm-inline">Okomentovat</span>
-                    </button>
+                    <img src="~/icons/Comment.svg" width="18" height="18" class="me-1">
+                    <span class="d-none d-sm-inline">Okomentovat</span>
+                </button>
                 <!--<button class="btn btn-sm btn-hover-light">
                     <img src="~/icons/Share.svg" style="width: 18px; height: 18px;"></img>
-					<span class="text-label">Sdílet</span>
+                    <span class="text-label">Sdílet</span>
                 </button>-->
             </div>
         </div>

@@ -2,6 +2,12 @@
 
 namespace Application.Api.Models;
 
+public enum PetitionStatus
+{
+    Open,
+    Closed
+    // případně další stavy sem
+}
 public class HomeViewModel
 {
     public string? CommunityName { get; init; } = string.Empty;
@@ -33,7 +39,11 @@ public class HomeViewModel
         public bool UserHasPhoto { get; set; }
         public required string Type { get; set; }
         public bool IsPetition => Type.Equals("Petition", StringComparison.OrdinalIgnoreCase);
-        
+        public bool IsClosed { get; set; }
+        public PetitionStatus? Status
+            => IsPetition
+                ? (IsClosed ? PetitionStatus.Closed : PetitionStatus.Open)
+                : null;
         public bool HasUserSigned { get; set; }
         
         public string GetFormattedCreatedAt()
