@@ -1,7 +1,11 @@
 ﻿@using OpenQA.Selenium.BiDi.Modules.Script
 @model HomeViewModel.Post
 
-
+<head>
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:description" content="@Model.Description" />
+    <meta property="og:image" content="@Model.Photo" />
+</head>
 <div class="opened-post-modal-container">
     <div class="modal fade" id="openedPostModal" tabindex="-1" aria-labelledby="openedPostModalLabel"
          aria-hidden="true">
