@@ -54,6 +54,7 @@ public class HomeViewModel
                             ? PetitionStatus.Completed 
                             : PetitionStatus.Open);
         public bool HasUserSigned { get; set; }
+        public Guid CommunityId { get; set; }
         
         public string GetFormattedCreatedAt()
         {

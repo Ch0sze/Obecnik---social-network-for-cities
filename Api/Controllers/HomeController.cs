@@ -231,6 +231,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
                 IsPinned = post.IsPinned,
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null,
+                
                 HasUserSigned = databaseContext.PetitionSignatures
                     .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
             })
@@ -397,6 +398,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             Type = postDo.Type,
             CreatedBy = $"{postDo.User.Firstname} {postDo.User.LastName}" ?? "Neznámý",
             CreatedAt = postDo.CreatedAt,
+            CommunityId = postDo.Channel?.CommunityId ?? Guid.Empty,
             CreatedById = postDo.User.Id,
             IsAdmin = isAdmin,
             Photo = postDo.Photo != null

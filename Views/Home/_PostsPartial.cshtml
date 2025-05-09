@@ -100,21 +100,57 @@
                          alt="Post image" />
                 </div>
             }
-            <!-- Pokud budou přidané liky a sdílení => předělat na justify-content-between -->
             <div class="d-flex justify-content-end mt-3 pt-1 border-top">
-                <!--<button class="btn btn-sm btn-hover-light">
-                    <img src="~/icons/Like.svg" style="width: 18px; height: 18px;"></img>
-                    <span class="text-label">To se mi líbí</span>
-                </button>-->
                 <button class="btn btn-sm btn-hover-light">
                     <img src="~/icons/Comment.svg" width="18" height="18" class="me-1">
                     <span class="d-none d-sm-inline">Okomentovat</span>
                 </button>
-                <!--<button class="btn btn-sm btn-hover-light">
+                <button class="btn btn-sm btn-hover-light share-btn"
+                        data-post-id="@post.Id"
+                        data-community-id="@post.CommunityId">
                     <img src="~/icons/Share.svg" style="width: 18px; height: 18px;"></img>
                     <span class="text-label">Sdílet</span>
-                </button>-->
+                </button>
             </div>
         </div>
     </div>
 }
+
+<!-- Přidaný skript pro zamezení šíření kliknutí z tlačítek -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Zabránit otevření příspěvku jen při kliknutí na tlačítko Sdílet
+        document.querySelectorAll('.btn-hover-light').forEach(function (btn) {
+            const icon = btn.querySelector('img');
+            if (icon && icon.src.includes('Share.svg')) {
+                btn.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                });
+            }
+        });
+
+        // Sdílení odkazu
+        document.querySelectorAll(".share-btn").forEach(function (btn) {
+            btn.addEventListener("click", function (e) {
+                e.stopPropagation();
+
+                const postId = btn.dataset.postId;
+                const urlParams = new URLSearchParams(window.location.search);
+                const communityId = urlParams.get("communityId");
+
+                const shareUrl = `${window.location.origin}/viewpost/${communityId}/${postId}`;
+
+                navigator.clipboard.writeText(shareUrl)
+                    .then(() => {
+                        // Ukázat hlášku jen jednou
+                        if (!btn.classList.contains("alert-shown")) {
+                            alert("Odkaz zkopírován do schránky!");
+                            btn.classList.add("alert-shown");
+                            setTimeout(() => btn.classList.remove("alert-shown"), 1000);
+                        }
+                    })
+                    .catch(err => console.error("Chyba při kopírování:", err));
+            });
+        });
+    });
+</script>
