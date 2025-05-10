@@ -34,9 +34,23 @@
                 @if (post.Status.HasValue && !post.IsAdmin && post.CreatedBy != User.Identity?.Name)
                 {
                     var st = post.Status.Value;
-                    
-                    <small class="badge @(st == PetitionStatus.Open ? "bg-success" : "bg-secondary") me-3">
-                        @(st == PetitionStatus.Open ? "Otevřená" : "Uzavřená")
+
+                    <small class="badge me-3 @(st switch
+                                             {
+                                                 PetitionStatus.Open => "bg-success",
+                                                 PetitionStatus.Completed => "bg-primary",
+                                                 PetitionStatus.Canceled => "bg-danger",
+                                                 PetitionStatus.Closed => "bg-secondary",
+                                                 _ => "bg-secondary"
+                                             })">
+                        @(st switch
+                        {
+                            PetitionStatus.Open => "Otevřená",
+                            PetitionStatus.Completed => "Úspěšná",
+                            PetitionStatus.Canceled => "Zrušená",
+                            PetitionStatus.Closed => "Neúspěšná",
+                            _ => "Neznámý stav"
+                        })
                     </small>
                 }
 
@@ -45,9 +59,24 @@
                     <div class="ms-auto d-flex align-items-center">
                         @if (post.Status is PetitionStatus st)
                         {
-                            <small class="badge @(st == PetitionStatus.Open ? "bg-success" : "bg-secondary") me-2">
-                                @(st == PetitionStatus.Open ? "Otevřená" : "Uzavřená")
+                            <small class="badge me-3 @(st switch
+                                                     {
+                                                         PetitionStatus.Open => "bg-success",
+                                                         PetitionStatus.Completed => "bg-primary",
+                                                         PetitionStatus.Canceled => "bg-danger",
+                                                         PetitionStatus.Closed => "bg-secondary",
+                                                         _ => "bg-secondary"
+                                                     })">
+                                @(st switch
+                                {
+                                    PetitionStatus.Open => "Otevřená",
+                                    PetitionStatus.Completed => "Úspěšná",
+                                    PetitionStatus.Canceled => "Zrušená",
+                                    PetitionStatus.Closed => "Neúspěšná",
+                                    _ => "Neznámý stav"
+                                })
                             </small>
+
                         }
                         @if(!post.IsPetition || post.IsAdmin){
                         <div class="dropdown">

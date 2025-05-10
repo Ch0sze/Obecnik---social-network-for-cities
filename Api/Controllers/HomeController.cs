@@ -84,6 +84,8 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
                 Photo = post.Photo != null,
                 IsAdmin = isCommunityAdmin && adminRole,
                 Type = post.Type,
+                PetStatus = post.Status,
+                StatusReason = post.AdminComment,
                 IsPinned = post.IsPinned,
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null,
@@ -127,6 +129,8 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
                     CreatedBy = postEntity.User!.Firstname + " " + postEntity.User!.LastName,
                     Photo = postEntity.Photo != null,
                     Type = postEntity.Type,
+                    PetStatus = postEntity.Status,
+                    StatusReason = postEntity.AdminComment,
                     IsAdmin = isPostCommunityAdmin && adminRole,
                     CreatedById = postEntity.User.Id,
                     UserHasPhoto = postEntity.User.Picture != null,
@@ -228,6 +232,8 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
                 Photo = post.Photo != null,
                 IsAdmin = isCommunityAdmin && adminRole,
                 Type = post.Type,
+                PetStatus = post.Status,
+                StatusReason = post.AdminComment,
                 IsPinned = post.IsPinned,
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null,
@@ -396,6 +402,8 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             Title = postDo.Title,
             Description = postDo.Description,
             Type = postDo.Type,
+            PetStatus = postDo.Status,
+            StatusReason = postDo.AdminComment,
             CreatedBy = $"{postDo.User.Firstname} {postDo.User.LastName}" ?? "Neznámý",
             CreatedAt = postDo.CreatedAt,
             CommunityId = postDo.Channel?.CommunityId ?? Guid.Empty,
@@ -433,15 +441,15 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         
         if (PetitionStatus.Closed == status)
         {
-            post.Status = PostStatus.Neúspěšná;
+            post.Status = "Neúspěšná";
         }
         else if (PetitionStatus.Completed == status)
         {
-            post.Status = PostStatus.Úspěšná;
+            post.Status = "Úspěšná";
         }
         else
         {
-            post.Status = PostStatus.Zrušená;
+            post.Status = "Zrušená";
         }
 
         if (!string.IsNullOrWhiteSpace(adminComment))
@@ -477,7 +485,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             .Where(p =>
                     p.ChannelId == channelId &&
                     p.Type == "Petition" &&
-                    (p.Status == (PostStatus?)PetitionStatus.Open || p.Status == null)
+                    (p.Status == "Otevřená" || p.Status == null)
             )
             .OrderByDescending(p =>
                 databaseContext.PetitionSignatures.Count(sig => sig.PostId == p.Id)

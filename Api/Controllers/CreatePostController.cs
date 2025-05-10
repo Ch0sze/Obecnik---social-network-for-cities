@@ -110,7 +110,7 @@ public class PostsController(DatabaseContext databaseContext) : Controller
             };
             if (post.Type == "Petition")
             {
-                post.Status = PostStatus.Otevřená;
+                post.Status = "Otevřená";
             }
             databaseContext.Posts.Add(post);
         }

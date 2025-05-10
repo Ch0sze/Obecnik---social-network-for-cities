@@ -43,16 +43,27 @@ public class HomeViewModel
         public bool IsClosed { get; set; }
         public bool IsCanceled { get; set; }
         public bool IsCompleted { get; set; }
+        public string? StatusReason { get; set; }
+
+        public string? PetStatus { get; set; }
         public PetitionStatus? Status
-            => !IsPetition 
-                ? null 
-                : (IsCanceled
-                    ? PetitionStatus.Canceled 
-                    : IsClosed 
-                        ? PetitionStatus.Closed 
-                        : IsCompleted 
-                            ? PetitionStatus.Completed 
-                            : PetitionStatus.Open);
+        {
+            get
+            {
+                if (!IsPetition || string.IsNullOrWhiteSpace(PetStatus))
+                    return null;
+
+                return PetStatus switch
+                {
+                    "Otevřená" => PetitionStatus.Open,
+                    "Neúspěšná" => PetitionStatus.Closed,
+                    "Úspěšná" => PetitionStatus.Completed,
+                    "Zrušená" => PetitionStatus.Canceled,
+                    _ => null
+                };
+            }
+        }
+
         public bool HasUserSigned { get; set; }
         public Guid CommunityId { get; set; }
         
