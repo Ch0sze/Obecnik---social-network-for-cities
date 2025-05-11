@@ -66,6 +66,15 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             .Where(post => post.ChannelId == selectedChannelId)
             .OrderByDescending(post => post.CreatedAt)
             .Take(10);
+        
+        var postIds = await postsQuery.Select(post => post.Id).ToListAsync();
+
+        // Fetch comment counts only for posts in `postIds`
+        var commentCounts = await databaseContext.Comments
+            .Where(c => postIds.Contains(c.PostId)) // Use the postIds from the previous query
+            .GroupBy(c => c.PostId)
+            .Select(g => new { PostId = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(g => g.PostId, g => g.Count);
 
         // Apply filter if 'onlyPetitions' is true
         if (onlyPetitions.HasValue && onlyPetitions.Value)
@@ -90,7 +99,8 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
                 CreatedById = post.User!.Id,
                 UserHasPhoto = post.User!.Picture != null,
                 HasUserSigned = databaseContext.PetitionSignatures
-                    .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
+                    .Any(sig => sig.PostId == post.Id && sig.UserId == userId),
+                CommentCount = commentCounts.ContainsKey(post.Id) ? commentCounts[post.Id] : 0
             })
             .ToListAsync();
 
@@ -173,7 +183,6 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
     {
         var userId = User.GetId();
         var user = await databaseContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
         if (user == null)
             return Unauthorized();
 
@@ -198,52 +207,64 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
         if (selectedChannelId == Guid.Empty)
             return PartialView("_PostsPartial", new List<HomeViewModel.Post>());
 
-        var selectedChannel = await databaseContext.Channels.FirstOrDefaultAsync(c => c.Id == selectedChannelId);
-
-        bool filterPetitionsOnly =
-            onlyPetitions.HasValue && onlyPetitions.Value; // Apply filter from the query parameter
+        bool filterPetitionsOnly = onlyPetitions == true;
 
         var isCommunityAdmin = await databaseContext.CommunityAdmins
             .AnyAsync(ca => ca.UserId == userId && ca.CommunityId == selectedCommunityId);
 
         var adminRole = user?.Role == "Admin";
 
-        var postsQuery = databaseContext.Posts
-            .Include(post => post.User)
-            .Where(post => post.ChannelId == selectedChannelId);
-
-        // Apply filter if 'onlyPetitions' is true
-        if (filterPetitionsOnly)
-        {
-            postsQuery = postsQuery.Where(post => post.Type == "Petition");
-        }
-
-        var posts = await postsQuery
-            .OrderByDescending(post => post.CreatedAt)
+        // Get post IDs in the current page
+        var postPage = await databaseContext.Posts
+            .Where(p => p.ChannelId == selectedChannelId &&
+                        (!filterPetitionsOnly || p.Type == "Petition"))
+            .OrderByDescending(p => p.CreatedAt)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            .Select(post => new HomeViewModel.Post
-            {
-                Id = post.Id,
-                Title = post.Title,
-                Description = post.Description,
-                CreatedAt = post.CreatedAt,
-                CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
-                Photo = post.Photo != null,
-                IsAdmin = isCommunityAdmin && adminRole,
-                Type = post.Type,
-                PetStatus = post.Status,
-                StatusReason = post.AdminComment,
-                IsPinned = post.IsPinned,
-                CreatedById = post.User!.Id,
-                UserHasPhoto = post.User!.Picture != null,
-                
-                HasUserSigned = databaseContext.PetitionSignatures
-                    .Any(sig => sig.PostId == post.Id && sig.UserId == userId)
-            })
+            .Select(p => p.Id)
             .ToListAsync();
 
-        return PartialView("_PostsPartial", posts);
+        // Get posts
+        var posts = await databaseContext.Posts
+            .Include(p => p.User)
+            .Where(p => postPage.Contains(p.Id))
+            .ToListAsync();
+
+        // Get comment counts for those posts
+        var commentCounts = await databaseContext.Comments
+            .Where(c => postPage.Contains(c.PostId))
+            .GroupBy(c => c.PostId)
+            .Select(g => new { PostId = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(g => g.PostId, g => g.Count);
+
+        // Get user signatures for those posts
+        var userSignatures = await databaseContext.PetitionSignatures
+            .Where(sig => postPage.Contains(sig.PostId) && sig.UserId == userId)
+            .Select(sig => sig.PostId)
+            .ToListAsync();
+
+        var result = posts.Select(post => new HomeViewModel.Post
+        {
+            Id = post.Id,
+            Title = post.Title,
+            Description = post.Description,
+            CreatedAt = post.CreatedAt,
+            CreatedBy = post.User!.Firstname + " " + post.User!.LastName,
+            Photo = post.Photo != null,
+            IsAdmin = isCommunityAdmin && adminRole,
+            Type = post.Type,
+            PetStatus = post.Status,
+            StatusReason = post.AdminComment,
+            IsPinned = post.IsPinned,
+            CreatedById = post.User!.Id,
+            UserHasPhoto = post.User!.Picture != null,
+            HasUserSigned = userSignatures.Contains(post.Id),
+            CommentCount = commentCounts.TryGetValue(post.Id, out var count) ? count : 0
+            
+            
+        }).ToList();
+        
+        return PartialView("_PostsPartial", result);
     }
 
 
@@ -409,7 +430,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             CommunityId = postDo.Channel?.CommunityId ?? Guid.Empty,
             CreatedById = postDo.User.Id,
             IsAdmin = isAdmin,
-            Photo = postDo.Photo != null
+            Photo = postDo.Photo != null,
         };
 
         // Nastavení Open Graph metadat
@@ -433,12 +454,14 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
     {
         return View("Error");
     }
+
     [HttpPost]
-    public async Task<IActionResult> ChangeStatus(Guid postId, PetitionStatus status, string? adminComment, string? returnUrl)
+    public async Task<IActionResult> ChangeStatus(Guid postId, PetitionStatus status, string? adminComment,
+        string? returnUrl)
     {
         var post = await databaseContext.Posts.FindAsync(postId);
         if (post == null) return NotFound();
-        
+
         if (PetitionStatus.Closed == status)
         {
             post.Status = "Neúspěšná";
@@ -456,19 +479,18 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             post.AdminComment = adminComment;
 
         await databaseContext.SaveChangesAsync();
-        
+
         if (!string.IsNullOrEmpty(returnUrl))
         {
             return Redirect(returnUrl);
         }
-        
+
         var communityId = Request.Query["communityId"].ToString();
-        
+
         var onlyPetitions = Request.Query["onlyPetitions"].ToString();
-        
+
         return RedirectToAction("Index", new { communityId = communityId, onlyPetitions = onlyPetitions });
     }
-
 
 
     [HttpGet("get-top-petition")]
@@ -483,9 +505,9 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
 
         var topPetition = await databaseContext.Posts
             .Where(p =>
-                    p.ChannelId == channelId &&
-                    p.Type == "Petition" &&
-                    (p.Status == "Otevřená" || p.Status == null)
+                p.ChannelId == channelId &&
+                p.Type == "Petition" &&
+                (p.Status == "Otevřená" || p.Status == null)
             )
             .OrderByDescending(p =>
                 databaseContext.PetitionSignatures.Count(sig => sig.PostId == p.Id)
@@ -504,5 +526,4 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
 
         return Json(topPetition);
     }
-
 }

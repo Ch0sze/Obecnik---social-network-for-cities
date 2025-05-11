@@ -132,7 +132,23 @@
             <div class="d-flex justify-content-end mt-3 pt-1 border-top">
                 <button class="btn btn-sm btn-hover-light">
                     <img src="~/icons/Comment.svg" width="18" height="18" class="me-1">
-                    <span class="d-none d-sm-inline">Okomentovat</span>
+                    <span class="d-none d-sm-inline">
+                        @{
+                            var commentText = post.CommentCount switch
+                            {
+                                0 => "0 komentářů",
+                                1 => "1 komentář",
+                                >= 2 and <= 4 => $"{post.CommentCount} komentáře",
+                                >= 5 => $"{post.CommentCount} komentářů",
+                                _ => "žádné info"
+                            };
+                        }
+                        @commentText
+                    </span>
+                    <span class="d-none d-sm-inline">
+
+                    </span>
+
                 </button>
                 <button class="btn btn-sm btn-hover-light share-btn"
                         data-post-id="@post.Id"
