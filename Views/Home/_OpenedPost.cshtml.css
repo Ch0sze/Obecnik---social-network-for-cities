@@ -55,6 +55,10 @@
     font-size: 1.1rem;
 }
 
+.bottom-fixed-section{
+    padding-bottom:0 !important;
+}
+
 .download-button {
     background-color: #0D6EFD;
     border: none;
@@ -173,6 +177,7 @@
 
 .btn-hover-light {
     margin-top: 8px;
+    padding: 2px 7px 2px 7px;
 }
 
 .btn-hover-light:hover {
@@ -181,7 +186,6 @@
 }
 
 .opened-post-modal-container .send-button {
-    background-color: white !important;
     padding: 0;
     margin-left: 8px;
     cursor: pointer;
@@ -189,12 +193,13 @@
     width: 50px;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    background-color: #fff2d6 !important;
+    border-radius: 10px;
     box-sizing: border-box;
 }
 
 .opened-post-modal-container .send-button:hover {
-    background-color: #fff2d6 !important;
+    background-color: #f98866 !important;
     border-radius: 10px;
 }
 
