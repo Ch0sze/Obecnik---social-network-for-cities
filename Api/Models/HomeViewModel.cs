@@ -38,6 +38,8 @@ public class HomeViewModel
         public bool IsPinned { get; set; }
         public Guid CreatedById { get; set; }
         public bool UserHasPhoto { get; set; }
+
+        public int CommentCount { get; set; }
         public required string Type { get; set; }
         public bool IsPetition => Type.Equals("Petition", StringComparison.OrdinalIgnoreCase);
         public bool IsClosed { get; set; }
