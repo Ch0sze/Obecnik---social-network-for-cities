@@ -93,8 +93,8 @@
 .opened-post-modal-container .modal-content {
     background-color: white;
     padding: 20px;
-    width: 65vw; /* Šířka bude 90% šířky okna */
-    height: 80vh; /* Výška bude 90% výšky okna */ /* Maximální výška na 90% výšky okna */
+    width: 95vw; /* Šířka bude 90% šířky okna */
+    height: 95vh; /* Výška bude 90% výšky okna */ /* Maximální výška na 90% výšky okna */
     border-radius: 8px;
     position: fixed; /* Fixní pozice pro centrální umístění */
     top: 50%; /* Umístí modal na střed vertikálně */
@@ -171,24 +171,31 @@
     width: 100%;
 }
 
+.btn-hover-light {
+    margin-top: 8px;
+}
+
+.btn-hover-light:hover {
+    background-color: #FFF2D6 !important;
+    border-radius: 8px;
+}
+
 .opened-post-modal-container .send-button {
     background-color: white !important;
-    border: 1px solid #ccc;
     padding: 0;
     margin-left: 8px;
     cursor: pointer;
     display: flex;
+    width: 50px;
     align-items: center;
     justify-content: center;
-    height: 40px; /* Shodné s výškou inputu */
-    width: 40px;  /* Čtvercový tvar */
     border-radius: 5px;
     box-sizing: border-box;
-    margin-bottom: 13px;
 }
 
 .opened-post-modal-container .send-button:hover {
-    background-color: #f9f9f9 !important;
+    background-color: #fff2d6 !important;
+    border-radius: 10px;
 }
 
 .opened-post-modal-container .send-icon {
@@ -205,9 +212,7 @@
     justify-content: center;
     align-items: center;
     min-height: 300px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #FFFAEF; /* volitelné – světle šedé pozadí */
+    background-color: #FFF2D6;
 }
 #commentsList {
     word-break: break-word; /* Zamezí překročení šířky */

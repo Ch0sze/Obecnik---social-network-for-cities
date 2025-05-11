@@ -9,24 +9,210 @@
 <div class="opened-post-modal-container">
     <div class="modal fade" id="openedPostModal" tabindex="-1" aria-labelledby="openedPostModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
-                <!-- Hlavička s křížkem -->
-                <!-- Tělo -->
-                <div class="modal-body pt-0">
-                    <div class="d-flex flex-column flex-sm-row">
-                        <!-- Levý sloupec s obrázkem -->
-                        <div class="col-12 col-sm-9 mb-3 mb-sm-0" style="padding-right: 15px;">
-                            <!-- Levý sloupec na 75% (col-sm-9) -->
+                <div class="modal-body p-0 h-100">
+                    <div class="row g-0 h-100">
+                        <!-- Left Column - Image (70%) -->
+                        <div class="image-wrapper col-lg-7 h-100">
                             @if (Model.Photo)
                             {
-                                <div class="image-wrapper">
+                                <div class="h-100 w-100 d-flex align-items-center justify-content-center">
                                     <img src="@Url.Action("GetImage", "Home", new { postId = Model.Id })"
-                                         alt="Post image" class="img-fluid"/>
+                                         alt="Post image" 
+                                         class="h-100 w-auto" 
+                                         style="object-fit: contain; max-width: 100%;"/>
                                 </div>
                             }
+                        </div>
+                        
+                        <!-- Right Column - Content (30%) -->
+                        <div class="col-lg-5 h-100 d-flex flex-column">
+                            <!-- Header section (fixed height) -->
+                            <div class="border-bottom">
+                                <!-- User info and close button -->
+                                <div class="p-3 d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <img src="@("/user-photo/" + Model.CreatedById)"
+                                             alt="Avatar"
+                                             onerror="this.src='/Images/GenericAvatar.png'"
+                                             style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; 
+                                             margin-right: 10px"/>
+                                        <div>
+                                            <strong style="font-size: 16px;">@Model.CreatedBy</strong>
+                                            <small class="d-block text-muted" style="font-size: 13px;">@Model.GetFormattedCreatedAt()</small>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                
+                                <!-- Post title and description -->
+                                <div class="px-3 pb-1">
+                                    <h4 class="fw-bold mb-2" style="word-break: break-word;">@Model.Title</h4>
+                                    <p style="font-size: 16px; word-break: break-word; margin-bottom: 15px;">@Model.Description</p>
+                                    
+                                    <!-- Share button -->
+                                    <div class="mb-2 mt-2 d-flex justify-content-end border-top">
+                                        <button onclick="copyLinkToClipboard()" class="btn btn-sm btn-hover-light share-btn">
+                                            <img src="~/icons/Share.svg" alt="Sdílet" style="width: 18px; height: 18px; margin-right: 5px;">
+                                            <span class="text-label">Sdílet</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Comment input (fixed position) -->
+                                    <form id="commentForm" onsubmit="submitComment(event)" class="pt-2">
+                                        <div class="input-group">
+                                            <input name="Content" type="text" class="form-control"
+                                                   placeholder="Přidejte komentář" id="commentContent" maxlength="500"
+                                                   required/>
+                                            <input type="hidden" name="PostId" value="@Model.Id"/>
+                                            <button type="submit" class="send-button btn btn-primary">
+                                                <img src="~/icons/send.svg" alt="Odeslat" class="send-icon"/>
+                                            </button>
+                                        </div>
+                                        <small id="titleLength" class="text-muted">limit 500 znaků</small>
+                                        <div id="commentResponse" class="mt-2" style="font-size: 0.85rem;"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <!-- Scrollable comments section -->
+                            <div class="flex-grow-1 overflow-auto p-3">
+                                <!-- Comments list (scrollable) -->
+                                <div id="commentsList"></div>
+                                <!-- Post type and status -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    @* <h5 class="fw-bold mb-0" style="font-size: 1.2rem;"> *@
+                                    @*     @(Model.IsPetition ? "Petice" : "Diskuze") *@
+                                    @* </h5> *@
+                                    @if (Model.Status is PetitionStatus st)
+                                    {
+                                        if (Model.CreatedBy == User.Identity?.Name && !Model.IsAdmin && st != PetitionStatus.Canceled || Model.IsAdmin)
+                                        {
+                                            <div class="dropdown">
+                                                @{
+                                                    var statusClass = st switch
+                                                    {
+                                                        PetitionStatus.Open => "btn-status-open",
+                                                        PetitionStatus.Closed => "btn-status-closed",
+                                                        PetitionStatus.Completed => "btn-status-completed",
+                                                        PetitionStatus.Canceled => "btn-status-canceled",
+                                                        _ => ""
+                                                        };
 
-                            <div class="my-3">
+                                                    var statusText = st switch
+                                                    {
+                                                        PetitionStatus.Open => "Probíhající",
+                                                        PetitionStatus.Closed => "Neúspěšná",
+                                                        PetitionStatus.Completed => "Úspěšná",
+                                                        PetitionStatus.Canceled => "Zrušená",
+                                                        _ => st.ToString()
+                                                        };
+                                                }
+                                                <button class="btn btn-sm dropdown-toggle @statusClass"
+                                                        type="button" id="statusDropdownModal"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                    @statusText
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="statusDropdownModal">
+                                                    @if (Model.CreatedBy == User.Identity?.Name && !Model.IsAdmin && st != PetitionStatus.Canceled)
+                                                    {
+                                                        <li>
+                                                            <form asp-action="ChangeStatus" method="post"
+                                                                  class="m-0 p-0 change-status-form"
+                                                                  data-post-id="@Model.Id" data-status="Canceled">
+                                                                <input type="hidden" name="postId" value="@Model.Id"/>
+                                                                <input type="hidden" name="status" value="Canceled"/>
+                                                                <input type="hidden" name="returnUrl"
+                                                                       value="@Context.Request.Path"/>
+                                                                <button type="button"
+                                                                        class="dropdown-item trigger-status-change">Zrušit
+                                                                    petici
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    }
+                                                    @if (Model.IsAdmin)
+                                                    {
+                                                        @if (st != PetitionStatus.Closed)
+                                                        {
+                                                            <li>
+                                                                <form asp-action="ChangeStatus" method="post"
+                                                                      class="m-0 p-0 change-status-form"
+                                                                      data-post-id="@Model.Id" data-status="Closed">
+                                                                    <input type="hidden" name="postId" value="@Model.Id"/>
+                                                                    <input type="hidden" name="status" value="Closed"/>
+                                                                    <input type="hidden" name="returnUrl"
+                                                                           value="@Context.Request.Path"/>
+                                                                    <button type="button"
+                                                                            class="dropdown-item trigger-status-change">
+                                                                        Neúspěšná petice
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        }
+                                                        @if (st != PetitionStatus.Completed)
+                                                        {
+                                                            <li>
+                                                                <form asp-action="ChangeStatus" method="post"
+                                                                      class="m-0 p-0 change-status-form"
+                                                                      data-post-id="@Model.Id" data-status="Completed">
+                                                                    <input type="hidden" name="postId" value="@Model.Id"/>
+                                                                    <input type="hidden" name="status" value="Completed"/>
+                                                                    <input type="hidden" name="returnUrl"
+                                                                           value="@Context.Request.Path"/>
+                                                                    <button type="button"
+                                                                            class="dropdown-item trigger-status-change">Úspěšná
+                                                                        petice
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        }
+                                                        @if (st != PetitionStatus.Canceled)
+                                                        {
+                                                            <li>
+                                                                <form asp-action="ChangeStatus" method="post"
+                                                                      class="m-0 p-0 change-status-form"
+                                                                      data-post-id="@Model.Id" data-status="Canceled">
+                                                                    <input type="hidden" name="postId" value="@Model.Id"/>
+                                                                    <input type="hidden" name="status" value="Canceled"/>
+                                                                    <input type="hidden" name="returnUrl"
+                                                                           value="@Context.Request.Path"/>
+                                                                    <button type="button"
+                                                                            class="dropdown-item trigger-status-change">Zrušená
+                                                                        petice
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <small class="badge @(st switch
+                                                                {
+                                                                    PetitionStatus.Open => "bg-success",
+                                                                    PetitionStatus.Completed => "bg-primary",
+                                                                    PetitionStatus.Canceled => "bg-danger",
+                                                                    PetitionStatus.Closed => "bg-secondary",
+                                                                    _ => "bg-secondary"
+                                                                    })">
+                                                @(st switch
+                                                {
+                                                    PetitionStatus.Open => "Otevřená",
+                                                    PetitionStatus.Completed => "Úspěšná",
+                                                    PetitionStatus.Canceled => "Zrušená",
+                                                    PetitionStatus.Closed => "Neúspěšná",
+                                                    _ => "Neznámý stav"
+                                                    })
+                                            </small>
+                                        }
+                                    }
+                                </div>
+
+                                <!-- Status reason if exists -->
                                 @if (!string.IsNullOrWhiteSpace(Model.StatusReason))
                                 {
                                     <div class="mb-3">
@@ -37,230 +223,34 @@
                                         </div>
                                     </div>
                                 }
-                                <form id="commentForm" onsubmit="submitComment(event)"
-                                      class="d-flex align-items-center comment-wrapper">
-                                    <input name="Content" type="text" class="input-field"
-                                           placeholder="Přidejte komentář" id="commentContent" maxlength="500"
-                                           required/>
-                                    <input type="hidden" name="PostId" value="@Model.Id"/>
-                                    <button type="submit" class="send-button">
-                                        <img src="~/icons/send.svg" alt="Odeslat" class="send-icon"/>
-                                    </button>
-                                </form>
-                                <span id="titleLength"
-                                      style="font-size: 12px; color: gray; margin-bottom: 12px; margin-left: 2px;">limit 500 znaků</span>
-                                <div id="commentResponse" style="margin-top: 8px; font-size: 0.85rem;"></div>
-                                <div id="commentsList" class="mt-4">
-                                    <!-- Sem se načtou komentáře -->
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Pravý sloupec s textem -->
-                        <div class="col-12 col-sm-3" style="margin-top: 10px;">
-                            <!-- Zvětšení názvu diskuze/petice, přidání mezery a středění -->
-                            <div class="d-flex justify-content-center align-items-center mb-4">
-                                <h5 class="fw-bold mb-0" style="font-size: 1.5rem;">
-                                    @(Model.IsPetition ? "Petice" : "Diskuze")
-                                </h5>
-                                <button onclick="copyLinkToClipboard()"
-                                        style="background: none; border: none; margin-left: 10px; cursor: pointer;">
-                                    <img src="~/icons/Share.svg" alt="Sdílet" style="width: 24px; height: 24px;">
-                                </button>
-                            </div>
-
-                            @if (Model.Status is PetitionStatus st)
-                            {
-                                var canOwnerChangeStatus = Model.CreatedBy == User.Identity?.Name && !Model.IsAdmin && st != PetitionStatus.Canceled;
-                                var canAdminChangeStatus = Model.IsAdmin;
-
-                                if (canOwnerChangeStatus || canAdminChangeStatus)
+                                <!-- Petition section if applicable -->
+                                @if (Model.IsPetition)
                                 {
-                                    <div class="dropdown ms-auto">
-                                        @{
-                                            var statusClass = st switch
-                                            {
-                                                PetitionStatus.Open => "btn-status-open",
-                                                PetitionStatus.Closed => "btn-status-closed",
-                                                PetitionStatus.Completed => "btn-status-completed",
-                                                PetitionStatus.Canceled => "btn-status-canceled",
-                                                _ => ""
-                                            };
-
-                                            var statusText = st switch
-                                            {
-                                                PetitionStatus.Open => "Probíhající",
-                                                PetitionStatus.Closed => "Neúspěšná",
-                                                PetitionStatus.Completed => "Úspěšná",
-                                                PetitionStatus.Canceled => "Zrušená",
-                                                _ => st.ToString()
-                                            };
-                                        }
-
-                                        <button
-                                            class="btn btn-sm dropdown-toggle @statusClass"
-                                            type="button"
-                                            id="statusDropdownModal"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            @statusText
+                                    <div class="mb-4" id="petitionArea">
+                                        <div id="signatureCount" class="text-muted mb-2" style="font-size: 1.2rem;"></div>
+                                        <button id="signPetitionButton" class="btn btn-primary w-100"
+                                                @(Model.Status != PetitionStatus.Open ? "disabled" : "")>
+                                            Podepsat petici
                                         </button>
+                                        <div id="signatureMessage" class="mt-2 text-muted text-center" style="font-size: 0.9rem;"></div>
+                                    </div>
 
-                                        <ul class="dropdown-menu dropdown-menu-end"
-                                            aria-labelledby="statusDropdownModal">
-                                            @if (canOwnerChangeStatus)
-                                            {
-                                                <li>
-                                                    <form asp-action="ChangeStatus" method="post"
-                                                          class="m-0 p-0 change-status-form"
-                                                          data-post-id="@Model.Id" data-status="Canceled">
-                                                        <input type="hidden" name="postId" value="@Model.Id"/>
-                                                        <input type="hidden" name="status" value="Canceled"/>
-                                                        <input type="hidden" name="returnUrl"
-                                                               value="@Context.Request.Path"/>
-                                                        <button type="button"
-                                                                class="dropdown-item trigger-status-change">Zrušit
-                                                            petici
-                                                        </button>
-                                                    </form>
-                                                </li>
-                                            }
+                                    @if (Model.IsAdmin)
+                                    {
+                                        <div class="text-center mb-3">
+                                            <button class="btn btn-outline-secondary download-button" data-postid="@Model.Id">
+                                                Stáhnout podpisy
+                                            </button>
+                                        </div>
+                                    }
 
-                                            @if (canAdminChangeStatus)
-                                            {
-                                                @if (st != PetitionStatus.Closed)
-                                                {
-                                                    <li>
-                                                        <form asp-action="ChangeStatus" method="post"
-                                                              class="m-0 p-0 change-status-form"
-                                                              data-post-id="@Model.Id" data-status="Closed">
-                                                            <input type="hidden" name="postId" value="@Model.Id"/>
-                                                            <input type="hidden" name="status" value="Closed"/>
-                                                            <input type="hidden" name="returnUrl"
-                                                                   value="@Context.Request.Path"/>
-                                                            <button type="button"
-                                                                    class="dropdown-item trigger-status-change">
-                                                                Neúspěšná petice
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                }
-
-                                                @if (st != PetitionStatus.Completed)
-                                                {
-                                                    <li>
-                                                        <form asp-action="ChangeStatus" method="post"
-                                                              class="m-0 p-0 change-status-form"
-                                                              data-post-id="@Model.Id" data-status="Completed">
-                                                            <input type="hidden" name="postId" value="@Model.Id"/>
-                                                            <input type="hidden" name="status" value="Completed"/>
-                                                            <input type="hidden" name="returnUrl"
-                                                                   value="@Context.Request.Path"/>
-                                                            <button type="button"
-                                                                    class="dropdown-item trigger-status-change">Úspěšná
-                                                                petice
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                }
-
-                                                @if (st != PetitionStatus.Canceled)
-                                                {
-                                                    <li>
-                                                        <form asp-action="ChangeStatus" method="post"
-                                                              class="m-0 p-0 change-status-form"
-                                                              data-post-id="@Model.Id" data-status="Canceled">
-                                                            <input type="hidden" name="postId" value="@Model.Id"/>
-                                                            <input type="hidden" name="status" value="Canceled"/>
-                                                            <input type="hidden" name="returnUrl"
-                                                                   value="@Context.Request.Path"/>
-                                                            <button type="button"
-                                                                    class="dropdown-item trigger-status-change">Zrušená
-                                                                petice
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                }
-                                            }
-                                        </ul>
+                                    <h5 class="mb-3">Petici již podepsali:</h5>
+                                    <div id="signaturesList" class="mb-3">
+                                        <ul id="signatureUsers" class="list-unstyled"></ul>
                                     </div>
                                 }
-                                else
-                                {
-                                    // For users not allowed to change anything (like owner + canceled), just show static status badge
-                                    <small class="badge me-3 @(st switch
-                                                             {
-                                                                 PetitionStatus.Open => "bg-success",
-                                                                 PetitionStatus.Completed => "bg-primary",
-                                                                 PetitionStatus.Canceled => "bg-danger",
-                                                                 PetitionStatus.Closed => "bg-secondary",
-                                                                 _ => "bg-secondary"
-                                                             })">
-                                        @(st switch
-                                        {
-                                            PetitionStatus.Open => "Otevřená",
-                                            PetitionStatus.Completed => "Úspěšná",
-                                            PetitionStatus.Canceled => "Zrušená",
-                                            PetitionStatus.Closed => "Neúspěšná",
-                                            _ => "Neznámý stav"
-                                        })
-                                    </small>
-                                }
-                            }
-
-
-                            <div class="d-flex align-items-center mb-3">
-                                <!-- Ikona s dynamickou velikostí a přidáním mezery -->
-                                <img src="@("/user-photo/" + Model.CreatedById)"
-                                     alt="Avatar"
-                                     onerror="this.src='/Images/GenericAvatar.png'"
-                                     style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; 
-                                     pointer-events: none; user-select: none; margin-right: 10px"/>
-                                <!-- Změna velikosti ikony -->
-
-                                <div class="d-flex flex-column mt-4">
-                                    <div class="d-flex align-items-center">
-                                        <strong style="font-size: 16px;">@Model.CreatedBy</strong>
-                                        <!-- Zmenšený text pro autora -->
-                                        <!-- Zmenšený text pro datum -->
-                                    </div>
-                                    <small class="ms-2 text-muted"
-                                           style="font-size: 13px;word-break: break-word;">@Model.GetFormattedCreatedAt()</small>
-                                </div>
                             </div>
-
-                            <!-- Titulek příspěvku -->
-                            <h4 class="fw-bold mb-3"
-                                style="word-break: break-word; margin-left: 10px;">@Model.Title</h4>
-                            <!-- Zmenšený titulek příspěvku -->
-
-                            <!-- Popis příspěvku -->
-                            <p style="font-size: 16px; word-break: break-word; margin-left: 10px;">@Model.Description</p>
-                            <!-- Zmenšený popis -->
-                            @if (Model.IsPetition)
-                            {
-                                <div class="text-center" id="petitionArea" style="margin-left: 10px;">
-                                    <div id="signatureCount" class="text-muted mb-2" style="font-size: 1.2rem;"></div>
-                                    <button id="signPetitionButton" class="sign-petition-button"
-                                            @(Model.Status != PetitionStatus.Open ? "disabled" : "")>
-                                        Podepsat petici
-                                    </button>
-                                    <div id="signatureMessage" class="mt-2 text-muted" style="font-size: 0.9rem;"></div>
-                                </div>
-                                <h5 style="margin-top: 20px; margin-left: 10px;">Petici již podepsali:</h5>
-                                @if (Model.IsAdmin)
-                                {
-                                    <div class="text-center mb-2">
-                                        <button class="download-button" data-postid="@Model.Id">
-                                            Stáhnout podpisy
-                                        </button>
-                                    </div>
-                                }
-
-                                <div id="signaturesList" class="mt-4" style="margin-left: 10px; ">
-                                    <ul id="signatureUsers" style="list-style: none; padding-left: 0;"></ul>
-                                </div>
-                            }
                         </div>
                     </div>
                 </div>
@@ -336,7 +326,7 @@
 
             button.addEventListener("mouseenter", () => {
                 if (hasSigned) {
-                    button.classList.remove("sign-petition-button");
+                    button.classList.remove("btn-primary");
                     button.classList.add("btn-danger");
                     button.textContent = "Zrušit podpis";
                 }
@@ -345,7 +335,7 @@
             button.addEventListener("mouseleave", () => {
                 if (hasSigned) {
                     button.classList.remove("btn-danger");
-                    button.classList.add("sign-petition-button");
+                    button.classList.add("btn-primary");
                     button.textContent = "Podepsáno";
                 }
             });
@@ -361,7 +351,7 @@
                 hasSigned = signed;
                 if (hasSigned) {
                     button.textContent = "Podepsáno";
-                    button.classList.add("sign-petition-button");
+                    button.classList.add("btn-primary");
                     enableHoverEffect();
                 }
             });
@@ -375,7 +365,7 @@
                         button.textContent = "Podepsáno";
                         message.textContent = "Děkujeme za Váš podpis!";
                         button.classList.remove("btn-danger");
-                        button.classList.add("sign-petition-button");
+                        button.classList.add("btn-primary");
                         updateSignatureCount();
                         loadSignatures(postId);
                         loadComments(postId);
@@ -391,8 +381,8 @@
                         if (!res.ok) throw new Error("Nepodařilo se zrušit podpis.");
                         hasSigned = false;
                         button.textContent = "Podepsat petici";
-                        button.classList.remove("btn-danger", "sign-petition-button");
-                        button.classList.add("sign-petition-button");
+                        button.classList.remove("btn-danger");
+                        button.classList.add("btn-primary");
                         message.textContent = "Podpis zrušen.";
                         updateSignatureCount();
                         loadSignatures(postId);
