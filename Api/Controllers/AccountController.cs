@@ -85,6 +85,7 @@ public class AccountController(DatabaseContext databaseContext, IEmailService em
             PostalCode = user.PostalCode ?? string.Empty,
             Picture = user.Picture,
             Role = user.Role,
+            AdminRoleExpiresAt = user.AdminRoleExpiresAt
         };
     }
 

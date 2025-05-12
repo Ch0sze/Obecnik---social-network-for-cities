@@ -62,10 +62,10 @@ namespace Application.Api.Controllers
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             Currency = "czk",
-                            UnitAmount = (long)(totalAmount * 100), // Stripe uses smallest currency unit
+                            UnitAmount = (long)(totalAmount * 100 * 12), // 12-krát původní cena kvůli přechodu na roční
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
-                                Name = "Měsíční administrátorská práva",
+                                Name = "Roční administrátorská práva",
                                 Description = $"Za {totalPopulation} obyvatel"
                             },
                         },
@@ -93,7 +93,7 @@ namespace Application.Api.Controllers
                 return RedirectToAction("Login", "Account");
 
             user.Role = "Admin";
-            user.AdminRoleExpiresAt = DateTime.UtcNow.AddMonths(1);
+            user.AdminRoleExpiresAt = DateTime.UtcNow.AddYears(1);
 
             await _db.SaveChangesAsync();
 
