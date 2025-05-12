@@ -25,4 +25,5 @@ public record AccountViewModel
     
     public byte[]? Picture { get; set; } = null;
     public string? Role { get; set; } = string.Empty;
+    public DateTime? AdminRoleExpiresAt { get; set; }
 }

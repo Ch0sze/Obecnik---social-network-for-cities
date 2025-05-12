@@ -68,6 +68,10 @@
                         Zaplatit za práva
                     </a>
                 }
+                else if (Model.AccountViewModel?.Role == "Admin")
+                {
+                    <p class="fw-bold">Platnost administrátorských práv do: @Model.AccountViewModel.AdminRoleExpiresAt?.ToString("dd.MM.yyyy")</p>
+                }
             </div>
         </div>
         
