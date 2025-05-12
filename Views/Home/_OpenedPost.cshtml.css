@@ -54,6 +54,9 @@
     cursor: pointer;
     font-size: 1.1rem;
 }
+.sign-petition-button:hover{
+    background-color: #f87a53;
+}
 
 .bottom-fixed-section{
     padding-bottom:0 !important;

@@ -36,7 +36,7 @@
                 Ještě tady nic není, buďte první kdo něco přispěje! :)
             </div>
         }
-        @foreach (var post in Model.Take(10))
+        @foreach (var post in Model.Take(30))
         {
             <partial name="_PostsPartial" model="new List<HomeViewModel.Post> { post }"/>
         }
@@ -66,53 +66,52 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        let noMorePosts = false;
-        let page = 2; // already loaded page 1 on initial load
-        let isLoading = false;
-        let originalUrl = window.location.href; 
-    
-        $(document).ready(function () {
-            $(window).scroll(function () {
-                if (!isLoading && !noMorePosts && $(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
-                    isLoading = true;
-                    loadMorePosts(page);
-                    page++;
-                }
-            });
-        });
-    
-        function loadMorePosts(pageNumber) {
-            $('#loading').show();
-            $.ajax({
-                url: '/load-posts',
-                type: 'GET',
-                data: {
-                    pageNumber: pageNumber,
-                    pageSize: 10
-                },
-                success: function (result) {
-                    if ($.trim(result)) {
-                        $('#contributionsContainer').append(result);
-                        isLoading = false;
-                    } else {
-                        console.log("No more posts.");
-                        noMorePosts = true;
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Chyba AJAX požadavku:', error);
-                    if (xhr.status === 401) { 
-                            window.location.href = '/Account/Logout'; 
-                            return; 
-                    }
-                    alert('Nepodařilo se načíst další příspěvky.');
-                },
-                complete: function () {
-                    $('#loading').hide();
-                    isLoading = false;
-                }            
-            });
-        }
+        // let noMorePosts = false;
+        // let page = 2; // already loaded page 1 on initial load
+        // let isLoading = false;
+        // let originalUrl = window.location.href; 
+        //
+        // $(window).scroll(function () {
+        //     if (!isLoading && !noMorePosts && $(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
+        //         isLoading = true;
+        //         loadMorePosts(page);
+        //         page++;
+        //     }
+        // });
+        //
+        // function loadMorePosts(pageNumber) {
+        //     $('#loading').show();
+        //     $.ajax({
+        //         url: '/load-posts',
+        //         type: 'GET',
+        //         data: {
+        //             pageNumber: pageNumber,
+        //             pageSize: 10
+        //         },
+        //         success: function (result) {
+        //             console.log(result);
+        //             if ($.trim(result)) {
+        //                 $('#contributionsContainer').append(result);
+        //                 isLoading = false;
+        //             } else {
+        //                 console.log("No more posts.");
+        //                 noMorePosts = true;
+        //             }
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error('Chyba AJAX požadavku:', error);
+        //             if (xhr.status === 401) { 
+        //                     window.location.href = '/Account/Logout'; 
+        //                     return; 
+        //             }
+        //             alert('Nepodařilo se načíst další příspěvky.');
+        //         },
+        //         complete: function () {
+        //             $('#loading').hide();
+        //             isLoading = false;
+        //         }            
+        //     });
+        // }
         $(document).on('click', '.opened-post-box', function (e) {
             if ($(e.target).closest('.contribution-settings-btn, .dropdown-menu').length > 0) return;
 

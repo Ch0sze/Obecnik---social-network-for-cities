@@ -65,7 +65,7 @@ public class HomeController(DatabaseContext databaseContext, ILogger<HomeControl
             .Include(post => post.User)
             .Where(post => post.ChannelId == selectedChannelId)
             .OrderByDescending(post => post.CreatedAt)
-            .Take(10);
+            .Take(30);
         
         var postIds = await postsQuery.Select(post => post.Id).ToListAsync();
 
