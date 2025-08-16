@@ -13,4 +13,5 @@
 <img width="2560" height="1224" alt="obecník2" src="https://github.com/user-attachments/assets/b5cf351f-a73a-44ee-964e-d973e97909da" />
 
 ## Opened post
-<img width="2560" height="1224" alt="obecník2" src="https://github.com/user-attachments/assets/00c58ae6-dd59-45ab-97b1-36b082c1f4ac" />
+<img width="2560" height="1224" alt="obecník3" src="https://github.com/user-attachments/assets/d5401d5a-2a4b-4154-a9c5-856e42f6e6dd" />
+
